@@ -1,3 +1,3 @@
-export { useAuthStore } from './useAuthstore'
+export { useAuthStore } from './useAuthStore'
 export { useThemeStore } from './useThemeStore'
 export { useUIStore } from './useUIStore'
