@@ -20,11 +20,11 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
             <Button asChild size="sm" variant="ghost">
               <Link to="/">Home</Link>
             </Button>
-            <Button size="sm" variant="ghost">
-              Agenda
+            <Button asChild size="sm" variant="ghost">
+              <Link to="/agenda">Agenda</Link>
             </Button>
-            <Button size="sm" variant="ghost">
-              Berita
+            <Button asChild size="sm" variant="ghost">
+              <Link to="/berita">Berita</Link>
             </Button>
             <Button asChild size="sm" variant="outline">
               <Link to="/auth">Login</Link>

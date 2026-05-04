@@ -1,6 +1,8 @@
 import type { ReactNode } from "react"
 import { Link } from "react-router-dom"
 
+import { Button } from "@/components/ui/button"
+
 interface AuthLayoutProps {
   children?: ReactNode
 }
@@ -19,8 +21,11 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         </div>
 
         {children ?? (
-          <div className="rounded-lg border border-dashed border-emerald-300 bg-emerald-50 p-6 text-center text-sm text-emerald-700">
-            Konten form login/register.
+          <div className="space-y-4 rounded-lg border border-dashed border-emerald-300 bg-emerald-50 p-6 text-center text-sm text-emerald-700">
+            <p>Konten form login/register.</p>
+            <Button asChild className="bg-emerald-600 text-white hover:bg-emerald-700">
+              <Link to="/admin/kas">Masuk ke Manajemen Kas</Link>
+            </Button>
           </div>
         )}
 

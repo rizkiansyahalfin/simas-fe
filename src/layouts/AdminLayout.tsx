@@ -17,18 +17,18 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           </Link>
 
           <nav className="space-y-1">
-            <Button className="w-full justify-start text-white hover:bg-emerald-600 hover:text-white" variant="ghost">
+            <Link
+              className="block rounded-lg px-3 py-2 text-sm font-medium text-white hover:bg-emerald-600"
+              to="/admin"
+            >
               Dashboard
-            </Button>
-            <Button className="w-full justify-start text-white hover:bg-emerald-600 hover:text-white" variant="ghost">
-              Data Masjid
-            </Button>
-            <Button className="w-full justify-start text-white hover:bg-emerald-600 hover:text-white" variant="ghost">
-              Agenda
-            </Button>
-            <Button className="w-full justify-start text-white hover:bg-emerald-600 hover:text-white" variant="ghost">
-              Keuangan
-            </Button>
+            </Link>
+            <Link
+              className="block rounded-lg bg-emerald-600 px-3 py-2 text-sm font-medium text-white"
+              to="/admin/kas"
+            >
+              Manajemen Kas
+            </Link>
           </nav>
         </aside>
 
@@ -38,9 +38,14 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
               Admin Dashboard
             </h1>
 
-            <Button asChild size="sm" variant="outline">
-              <Link to="/auth">Logout</Link>
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button asChild size="sm" variant="outline">
+                <Link to="/admin/kas">Manajemen Kas</Link>
+              </Button>
+              <Button asChild size="sm" variant="outline">
+                <Link to="/auth">Logout</Link>
+              </Button>
+            </div>
           </header>
 
           <main className="flex-1 p-6">
