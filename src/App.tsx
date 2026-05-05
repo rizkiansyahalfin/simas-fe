@@ -1,17 +1,28 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import Login from "./pages/auth/Login";
+import { Routes, Route } from "react-router-dom";
+
+// Import Layouts
 import AdminLayout from "./layouts/AdminLayout";
+import PublicLayout from "./layouts/PublicLayout"; // Tambahan baru
+
+// Import Pages
+import Login from "./pages/auth/Login";
+import Home from "./pages/public/Home"; // Tambahan baru
 
 export default function App() {
   return (
     <Routes>
-      {/* Redirect root ke login */}
-      <Route path="/" element={<Navigate to="/login" replace />} />
+      {/* 1. Halaman Utama (Public) */}
+      {/* Sekarang root "/" nampilin Home, bukan lempar ke Login lagi */}
+      <Route path="/" element={
+        <PublicLayout>
+          <Home />
+        </PublicLayout>
+      } />
       
-      {/* Halaman Login */}
+      {/* 2. Halaman Login */}
       <Route path="/login" element={<Login />} />
       
-      {/* Halaman Admin */}
+      {/* 3. Halaman Admin (RBAC Sidebar yang kemaren lu kerjain) */}
       <Route path="/admin/*" element={
         <AdminLayout>
           <div className="p-10 text-center">
