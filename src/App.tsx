@@ -1,5 +1,4 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { useAuthStore } from '@/stores'
 
 // Layouts
 import AdminLayout from '@/layouts/AdminLayout'
@@ -9,6 +8,11 @@ import PublicLayout from '@/layouts/PublicLayout'
 // Pages
 import Login from '@/pages/auth/Login'
 import ManajemenKasPage from '@/pages/admin/ManajemenKasPage'
+import JadwalSholatPage from '@/pages/public/jadwalSholat'
+
+// Auth
+import { useAuthStore } from '@/stores'
+import { ProtectedRoute } from '@/components/ProtectedRoute'
 
 function App() {
   const { isAuthenticated } = useAuthStore()
@@ -19,53 +23,33 @@ function App() {
       {/* ROOT */}
       <Route
         path="/"
-        element={
-          isAuthenticated
-            ? <Navigate to="/admin" replace />
-            : <Navigate to="/login" replace />
-        }
-      />
-
-      {/* AUTH */}
-      <Route
-        path="/login"
-        element={
-          isAuthenticated
-            ? <Navigate to="/admin" replace />
-            : (
-              <AuthLayout>
-                <Login />
-              </AuthLayout>
-            )
-        }
+        element={<PublicLayout />}
       />
 
       {/* PUBLIC */}
       <Route
         path="/agenda"
-        element={
-          <PublicLayout>
-            <div className="rounded-lg border border-emerald-200 bg-white p-6 shadow-sm">
-              <h1 className="text-2xl font-semibold">Agenda</h1>
-              <p className="text-sm text-slate-500 mt-2">
-                Area konten halaman agenda.
-              </p>
-            </div>
-          </PublicLayout>
-        }
+        element={<PublicLayout>Agenda Page</PublicLayout>}
       />
-
       <Route
         path="/berita"
+        element={<PublicLayout>Berita Page</PublicLayout>}
+      />
+      <Route
+        path="/jadwal-shalat"
+        element={<PublicLayout><JadwalSholatPage /></PublicLayout>}
+      />
+      {/* AUTH */}
+      <Route
+        path="/login"
         element={
-          <PublicLayout>
-            <div className="rounded-lg border border-emerald-200 bg-white p-6 shadow-sm">
-              <h1 className="text-2xl font-semibold">Berita</h1>
-              <p className="text-sm text-slate-500 mt-2">
-                Area konten halaman berita.
-              </p>
-            </div>
-          </PublicLayout>
+          isAuthenticated ? (
+            <Navigate to="/admin" replace />
+          ) : (
+            <AuthLayout>
+              <Login />
+            </AuthLayout>
+          )
         }
       />
 
@@ -73,33 +57,20 @@ function App() {
       <Route
         path="/admin"
         element={
-          isAuthenticated
-            ? (
-              <AdminLayout>
-                <div className="p-10 text-center">
-                  <h2 className="text-2xl font-bold">
-                    Selamat Datang di Dashboard SIMAS
-                  </h2>
-                  <p className="text-gray-500 mt-2">
-                    Pilih menu di samping untuk mulai mengelola masjid.
-                  </p>
-                </div>
-              </AdminLayout>
-            )
-            : <Navigate to="/login" replace />
+          <ProtectedRoute>
+            <AdminLayout />
+          </ProtectedRoute>
         }
       />
 
       <Route
         path="/admin/kas"
         element={
-          isAuthenticated
-            ? (
-              <AdminLayout>
-                <ManajemenKasPage />
-              </AdminLayout>
-            )
-            : <Navigate to="/login" replace />
+          <ProtectedRoute>
+            <AdminLayout>
+              <ManajemenKasPage />
+            </AdminLayout>
+          </ProtectedRoute>
         }
       />
 
