@@ -60,7 +60,6 @@ export const useUpdateUser = () => {
   })
 }
 
-// DELETE - Hapus user
 export const useDeleteUser = () => {
   const queryClient = useQueryClient()
 
