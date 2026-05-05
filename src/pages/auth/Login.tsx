@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Eye, EyeOff, AlertCircle, Mail, Lock } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import Button from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '@/stores'
