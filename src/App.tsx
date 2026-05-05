@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuthStore } from "@/stores";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 // Layouts
 import AdminLayout from "@/layouts/AdminLayout";
@@ -64,7 +65,7 @@ function App() {
 			<Route
 				path='/admin'
 				element={
-					isAuthenticated ? (
+					<ProtectedRoute>
 						<AdminLayout>
 							<div className='p-10 text-center'>
 								<h2 className='text-2xl font-bold'>Selamat Datang di Dashboard SIMAS</h2>
@@ -73,22 +74,18 @@ function App() {
 								</p>
 							</div>
 						</AdminLayout>
-					) : (
-						<Navigate to='/login' replace />
-					)
+					</ProtectedRoute>
 				}
 			/>
 
 			<Route
 				path='/admin/kas'
 				element={
-					isAuthenticated ? (
+					<ProtectedRoute>
 						<AdminLayout>
 							<ManajemenKasPage />
 						</AdminLayout>
-					) : (
-						<Navigate to='/login' replace />
-					)
+					</ProtectedRoute>
 				}
 			/>
 
