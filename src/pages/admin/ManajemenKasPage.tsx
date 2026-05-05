@@ -1,0 +1,255 @@
+import { useMemo, useState } from "react"
+import type { FormEvent } from "react"
+
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+
+type TransactionType = "pemasukan" | "pengeluaran"
+
+interface Transaction {
+  id: number
+  date: string
+  description: string
+  type: TransactionType
+  amount: number
+}
+
+const initialTransactions: Transaction[] = [
+  {
+    id: 1,
+    date: "2026-05-01",
+    description: "Infak Jumat",
+    type: "pemasukan",
+    amount: 1250000,
+  },
+  {
+    id: 2,
+    date: "2026-05-02",
+    description: "Pembelian alat kebersihan",
+    type: "pengeluaran",
+    amount: 275000,
+  },
+  {
+    id: 3,
+    date: "2026-05-03",
+    description: "Donasi jamaah",
+    type: "pemasukan",
+    amount: 800000,
+  },
+]
+
+const currencyFormatter = new Intl.NumberFormat("id-ID", {
+  currency: "IDR",
+  maximumFractionDigits: 0,
+  style: "currency",
+})
+
+export default function ManajemenKasPage() {
+  const [transactions, setTransactions] =
+    useState<Transaction[]>(initialTransactions)
+  const [date, setDate] = useState("")
+  const [description, setDescription] = useState("")
+  const [type, setType] = useState<TransactionType>("pemasukan")
+  const [amount, setAmount] = useState("")
+
+  const summary = useMemo(() => {
+    return transactions.reduce(
+      (total, transaction) => {
+        if (transaction.type === "pemasukan") {
+          total.income += transaction.amount
+        } else {
+          total.expense += transaction.amount
+        }
+
+        total.balance = total.income - total.expense
+        return total
+      },
+      { balance: 0, expense: 0, income: 0 }
+    )
+  }, [transactions])
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    const numericAmount = Number(amount)
+
+    if (!date || !description || !numericAmount) {
+      return
+    }
+
+    setTransactions((currentTransactions) => [
+      {
+        amount: numericAmount,
+        date,
+        description,
+        id: Date.now(),
+        type,
+      },
+      ...currentTransactions,
+    ])
+
+    setDate("")
+    setDescription("")
+    setType("pemasukan")
+    setAmount("")
+  }
+
+  return (
+    <section className="space-y-6">
+      <div>
+        <h2 className="m-0 text-2xl font-semibold tracking-normal text-slate-900">
+          Manajemen Kas
+        </h2>
+        <p className="mt-2 text-sm text-slate-500">
+          Catat transaksi pemasukan dan pengeluaran kas masjid.
+        </p>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-3">
+        <div className="rounded-lg border border-emerald-200 bg-white p-4 shadow-sm">
+          <p className="text-sm text-slate-500">Total Pemasukan</p>
+          <p className="mt-2 text-xl font-semibold text-emerald-700">
+            {currencyFormatter.format(summary.income)}
+          </p>
+        </div>
+        <div className="rounded-lg border border-emerald-200 bg-white p-4 shadow-sm">
+          <p className="text-sm text-slate-500">Total Pengeluaran</p>
+          <p className="mt-2 text-xl font-semibold text-red-600">
+            {currencyFormatter.format(summary.expense)}
+          </p>
+        </div>
+        <div className="rounded-lg border border-emerald-200 bg-white p-4 shadow-sm">
+          <p className="text-sm text-slate-500">Saldo Akhir</p>
+          <p className="mt-2 text-xl font-semibold text-slate-900">
+            {currencyFormatter.format(summary.balance)}
+          </p>
+        </div>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
+        <form
+          className="space-y-4 rounded-lg border border-emerald-200 bg-white p-5 shadow-sm"
+          onSubmit={handleSubmit}
+        >
+          <div>
+            <h3 className="m-0 text-lg font-semibold tracking-normal text-slate-900">
+              Form Transaksi
+            </h3>
+            <p className="mt-1 text-sm text-slate-500">
+              Tambahkan data pemasukan atau pengeluaran.
+            </p>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="transaction-date">Tanggal</Label>
+            <Input
+              id="transaction-date"
+              onChange={(event) => setDate(event.target.value)}
+              type="date"
+              value={date}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="transaction-description">Keterangan</Label>
+            <Input
+              id="transaction-description"
+              onChange={(event) => setDescription(event.target.value)}
+              placeholder="Contoh: Infak Jumat"
+              value={description}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="transaction-type">Jenis Transaksi</Label>
+            <select
+              className="h-8 w-full rounded-lg border border-input bg-white px-2.5 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+              id="transaction-type"
+              onChange={(event) =>
+                setType(event.target.value as TransactionType)
+              }
+              value={type}
+            >
+              <option value="pemasukan">Pemasukan</option>
+              <option value="pengeluaran">Pengeluaran</option>
+            </select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="transaction-amount">Nominal</Label>
+            <Input
+              id="transaction-amount"
+              min="1"
+              onChange={(event) => setAmount(event.target.value)}
+              placeholder="Contoh: 500000"
+              type="number"
+              value={amount}
+            />
+          </div>
+
+          <Button className="w-full bg-emerald-600 text-white hover:bg-emerald-700">
+            Simpan Transaksi
+          </Button>
+        </form>
+
+        <div className="overflow-hidden rounded-lg border border-emerald-200 bg-white shadow-sm">
+          <div className="border-b border-emerald-100 p-5">
+            <h3 className="m-0 text-lg font-semibold tracking-normal text-slate-900">
+              Tabel Transaksi
+            </h3>
+            <p className="mt-1 text-sm text-slate-500">
+              Daftar transaksi kas terbaru.
+            </p>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[720px] text-left text-sm">
+              <thead className="bg-emerald-50 text-slate-600">
+                <tr>
+                  <th className="px-4 py-3 font-medium">Tanggal</th>
+                  <th className="px-4 py-3 font-medium">Keterangan</th>
+                  <th className="px-4 py-3 font-medium">Jenis</th>
+                  <th className="px-4 py-3 text-right font-medium">Nominal</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {transactions.map((transaction) => (
+                  <tr key={transaction.id}>
+                    <td className="px-4 py-3 text-slate-600">
+                      {transaction.date}
+                    </td>
+                    <td className="px-4 py-3 font-medium text-slate-900">
+                      {transaction.description}
+                    </td>
+                    <td className="px-4 py-3">
+                      <Badge
+                        className={
+                          transaction.type === "pemasukan"
+                            ? "bg-emerald-100 text-emerald-700"
+                            : "bg-red-100 text-red-700"
+                        }
+                      >
+                        {transaction.type}
+                      </Badge>
+                    </td>
+                    <td
+                      className={`px-4 py-3 text-right font-semibold ${
+                        transaction.type === "pemasukan"
+                          ? "text-emerald-700"
+                          : "text-red-600"
+                      }`}
+                    >
+                      {currencyFormatter.format(transaction.amount)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

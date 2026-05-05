@@ -28,53 +28,63 @@ const MENU_ITEMS = [
   { title: "Pengaturan", icon: Settings, resource: "pengaturan", path: "/admin/pengaturan" },
 ];
 
+interface SidebarContentProps {
+  menuItems: typeof MENU_ITEMS;
+  activePath: string;
+  onPathChange: (path: string) => void;
+}
+
+const SidebarContent = ({ menuItems, activePath, onPathChange }: SidebarContentProps) => (
+  <div className="flex flex-col h-full bg-white border-r">
+    <div className="h-16 flex items-center px-6 border-b">
+      <span className="text-2xl mr-2">🕌</span>
+      <span className="text-xl font-bold tracking-tight text-gray-900">SIMAS</span>
+    </div>
+
+    <nav className="flex-1 overflow-y-auto py-4">
+      <ul className="space-y-1 px-3">
+        {menuItems.map((item) => {
+          const isActive = activePath === item.path;
+          return (
+            <li key={item.title}>
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onPathChange(item.path);
+                }}
+                className={`flex items-center px-3 py-2.5 rounded-md transition-colors ${
+                  isActive 
+                    ? "bg-emerald-50 text-simas-primary font-bold border-l-4 border-simas-primary" 
+                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                }`}
+              >
+                <item.icon className={`h-5 w-5 mr-3 ${isActive ? "text-simas-primary" : "text-gray-500"}`} />
+                {item.title}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  </div>
+);
+
 export default function AdminLayout({ children }: { children?: React.ReactNode }) {
   const [activeRole] = useState<Role>("superadmin"); 
   const [activePath, setActivePath] = useState("/admin"); 
 
   const filteredMenu = MENU_ITEMS.filter(item => canAccess(activeRole, item.resource));
 
-  const SidebarContent = () => (
-    <div className="flex flex-col h-full bg-white border-r">
-      <div className="h-16 flex items-center px-6 border-b">
-        <span className="text-2xl mr-2">🕌</span>
-        <span className="text-xl font-bold tracking-tight text-gray-900">SIMAS</span>
-      </div>
-
-      <nav className="flex-1 overflow-y-auto py-4">
-        <ul className="space-y-1 px-3">
-          {filteredMenu.map((item) => {
-            const isActive = activePath === item.path;
-            return (
-              <li key={item.title}>
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setActivePath(item.path);
-                  }}
-                  className={`flex items-center px-3 py-2.5 rounded-md transition-colors ${
-                    isActive 
-                      ? "bg-emerald-50 text-simas-primary font-bold border-l-4 border-simas-primary" 
-                      : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-                  }`}
-                >
-                  <item.icon className={`h-5 w-5 mr-3 ${isActive ? "text-simas-primary" : "text-gray-500"}`} />
-                  {item.title}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-    </div>
-  );
-
   return (
     <div className="min-h-screen bg-simas-bg-admin flex">
       {/* Sidebar Desktop */}
       <aside className="hidden md:block w-64 fixed inset-y-0 z-50">
-        <SidebarContent />
+        <SidebarContent 
+          menuItems={filteredMenu} 
+          activePath={activePath} 
+          onPathChange={setActivePath} 
+        />
       </aside>
 
       {/* Main Content Wrapper */}
@@ -90,7 +100,11 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="p-0 w-64">
-                <SidebarContent />
+                <SidebarContent 
+                  menuItems={filteredMenu} 
+                  activePath={activePath} 
+                  onPathChange={setActivePath} 
+                />
               </SheetContent>
             </Sheet>
 
@@ -98,6 +112,7 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
               {filteredMenu.find(m => m.path === activePath)?.title || "Dashboard"}
             </h1>
           </div>
+
 
           <div className="flex items-center space-x-4">
             <Button variant="ghost" size="icon" className="relative">
