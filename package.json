@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --open",
+    "dev:chrome": "powershell -NoProfile -Command \"Start-Job -ScriptBlock { Start-Sleep -Seconds 2; Start-Process chrome 'http://localhost:5173' } | Out-Null; vite --host 127.0.0.1\"",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
