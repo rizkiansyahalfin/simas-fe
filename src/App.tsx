@@ -1,12 +1,13 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Login from "./pages/auth/Login";
 import AdminLayout from "./layouts/AdminLayout";
+import HomePage from "./pages/public/HomePage";
 
 export default function App() {
   return (
     <Routes>
-      {/* Redirect root ke login */}
-      <Route path="/" element={<Navigate to="/login" replace />} />
+      {/* Homepage publik */}
+      <Route path="/" element={<HomePage />} />
       
       {/* Halaman Login */}
       <Route path="/login" element={<Login />} />
