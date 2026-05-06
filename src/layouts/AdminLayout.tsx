@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
 	LayoutDashboard,
 	Wallet,
@@ -41,11 +42,9 @@ const MENU_ITEMS = [
 function SidebarContent({
 	filteredMenu,
 	activePath,
-	setActivePath,
 }: {
 	filteredMenu: typeof MENU_ITEMS;
 	activePath: string;
-	setActivePath: (path: string) => void;
 }) {
 	return (
 		<div className='flex flex-col h-full bg-white border-r'>
@@ -60,12 +59,8 @@ function SidebarContent({
 						const isActive = activePath === item.path;
 						return (
 							<li key={item.title}>
-								<a
-									href='#'
-									onClick={(e) => {
-										e.preventDefault();
-										setActivePath(item.path);
-									}}
+								<Link
+									to={item.path}
 									className={`flex items-center px-3 py-2.5 rounded-md transition-colors ${
 										isActive
 											? "bg-emerald-50 text-simas-primary font-bold border-l-4 border-simas-primary"
@@ -76,7 +71,7 @@ function SidebarContent({
 										className={`h-5 w-5 mr-3 ${isActive ? "text-simas-primary" : "text-gray-500"}`}
 									/>
 									{item.title}
-								</a>
+								</Link>
 							</li>
 						);
 					})}
@@ -88,16 +83,17 @@ function SidebarContent({
 
 export default function AdminLayout({ children }: { children?: React.ReactNode }) {
 	const [activeRole] = useState<Role>("superadmin");
-	const [activePath, setActivePath] = useState("/admin");
+	const location = useLocation();
 
 	const filteredMenu = MENU_ITEMS.filter((item) => canAccess(activeRole, item.resource));
+	const activePath = location.pathname;
 	const pageTitle = filteredMenu.find((m) => m.path === activePath)?.title || "Dashboard";
 
 	return (
 		<div className='fixed inset-0 overflow-auto flex bg-simas-bg-admin'>
 			{/* Sidebar Desktop */}
 			<aside className='hidden md:flex md:w-64 shrink-0 flex-col h-full'>
-				<SidebarContent filteredMenu={filteredMenu} activePath={activePath} setActivePath={setActivePath} />
+				<SidebarContent filteredMenu={filteredMenu} activePath={activePath} />
 			</aside>
 
 			{/* Content Area */}
@@ -116,7 +112,6 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
 								<SidebarContent
 									filteredMenu={filteredMenu}
 									activePath={activePath}
-									setActivePath={setActivePath}
 								/>
 							</SheetContent>
 						</Sheet>

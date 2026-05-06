@@ -8,6 +8,7 @@ import PublicLayout from "@/layouts/PublicLayout";
 
 // Pages
 import Login from "@/pages/auth/Login";
+import DonasiMasukPage from "@/pages/admin/DonasiMasukPage";
 import ManajemenKasPage from "@/pages/admin/ManajemenKasPage";
 
 function App() {
@@ -72,6 +73,19 @@ function App() {
 									Pilih menu di samping untuk mulai mengelola masjid.
 								</p>
 							</div>
+						</AdminLayout>
+					) : (
+						<Navigate to='/login' replace />
+					)
+				}
+			/>
+
+			<Route
+				path='/admin/donasi'
+				element={
+					isAuthenticated ? (
+						<AdminLayout>
+							<DonasiMasukPage />
 						</AdminLayout>
 					) : (
 						<Navigate to='/login' replace />
