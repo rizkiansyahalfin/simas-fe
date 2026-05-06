@@ -13,6 +13,7 @@ import JadwalSholatPage from '@/pages/public/jadwalSholat'
 // Auth
 import { useAuthStore } from '@/stores'
 import { ProtectedRoute } from '@/components/ProtectedRoute'
+import DonationPage from './publicDonation/DonationPage'
 
 function App() {
   const { isAuthenticated } = useAuthStore()
@@ -22,7 +23,8 @@ function App() {
 
       {/* PUBLIC */}
       <Route path="/" element={<PublicLayout />} />
-
+      <Route path="/donation" element={<DonationPage />} />
+      
       <Route
         path="/agenda"
         element={<PublicLayout>Agenda Page</PublicLayout>}
