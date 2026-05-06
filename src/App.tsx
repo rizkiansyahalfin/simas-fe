@@ -3,7 +3,6 @@ import LoginPage from './auth/LoginPage'
 import ProtectedRoute from './auth/ProtectedRoute'
 import ArticlesPage from './articles/pages/ArticlesPage'
 
-
 function Dashboard() {
   return <div>Dashboard</div>
 }
@@ -18,16 +17,11 @@ export default function App() {
       <Route path="/login" element={<LoginPage />} />
 
       {/* Protected area */}
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <AdminLayout />
-          </ProtectedRoute>
-        }
-      >
-        <Route index element={<Dashboard />} />
-        <Route path="admin/articles" element={<ArticlesPage />} />
+      <Route element={<ProtectedRoute />}>
+        <Route element={<AdminLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="admin/articles" element={<ArticlesPage />} />
+        </Route>
       </Route>
     </Routes>
   )
