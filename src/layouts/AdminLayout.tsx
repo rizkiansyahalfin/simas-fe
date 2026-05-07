@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
 	LayoutDashboard,
 	Wallet,
@@ -24,7 +23,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { canAccess } from "@/lib/rbac";
-import type { Role } from "@/lib/rbac";
+import { useAuthStore } from "@/stores";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const MENU_ITEMS = [
 	{ title: "Dashboard", icon: LayoutDashboard, resource: "dashboard", path: "/admin" },
@@ -40,17 +40,24 @@ const MENU_ITEMS = [
 function SidebarContent({
 	filteredMenu,
 	activePath,
-	setActivePath,
+	onNavigate,
 }: {
 	filteredMenu: typeof MENU_ITEMS;
 	activePath: string;
-	setActivePath: (path: string) => void;
+	onNavigate: (path: string) => void;
 }) {
 	return (
 		<div className='flex flex-col h-full bg-white border-r'>
 			<div className='h-16 flex items-center px-6 border-b shrink-0'>
-				<span className='text-2xl mr-2'>🕌</span>
-				<span className='text-xl font-bold tracking-tight text-gray-900'>SIMAS</span>
+				<button
+					type='button'
+					onClick={() => onNavigate("/admin")}
+					className='flex items-center rounded-md text-left transition-colors hover:text-simas-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-simas-primary/40'
+					aria-label='Ke dashboard admin'
+				>
+					<span className='text-2xl mr-2'>🕌</span>
+					<span className='text-xl font-bold tracking-tight text-gray-900'>SIMAS</span>
+				</button>
 			</div>
 
 			<nav className='flex-1 overflow-y-auto py-4'>
@@ -63,7 +70,7 @@ function SidebarContent({
 									href='#'
 									onClick={(e) => {
 										e.preventDefault();
-										setActivePath(item.path);
+										onNavigate(item.path);
 									}}
 									className={`flex items-center px-3 py-2.5 rounded-md transition-colors ${
 										isActive
@@ -86,17 +93,26 @@ function SidebarContent({
 }
 
 export default function AdminLayout({ children }: { children?: React.ReactNode }) {
-	const [activeRole] = useState<Role>("superadmin");
-	const [activePath, setActivePath] = useState("/admin");
+	const { user, role, logout } = useAuthStore();
+	const location = useLocation();
+	const navigate = useNavigate();
+	const activePath = location.pathname;
+	const initials = user?.name
+		.split(" ")
+		.map((name) => name[0])
+		.join("")
+		.slice(0, 2)
+		.toUpperCase() || "AD";
 
-	const filteredMenu = MENU_ITEMS.filter((item) => canAccess(activeRole, item.resource));
+	const filteredMenu = role ? MENU_ITEMS.filter((item) => canAccess(role, item.resource)) : [];
 	const pageTitle = filteredMenu.find((m) => m.path === activePath)?.title || "Dashboard";
+	const handleNavigate = (path: string) => navigate(path);
 
 	return (
 		<div className='fixed inset-0 overflow-auto flex bg-simas-bg-admin'>
 			{/* Sidebar Desktop */}
 			<aside className='hidden md:flex md:w-64 shrink-0 flex-col h-full'>
-				<SidebarContent filteredMenu={filteredMenu} activePath={activePath} setActivePath={setActivePath} />
+				<SidebarContent filteredMenu={filteredMenu} activePath={activePath} onNavigate={handleNavigate} />
 			</aside>
 
 			{/* Content Area */}
@@ -115,7 +131,7 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
 								<SidebarContent
 									filteredMenu={filteredMenu}
 									activePath={activePath}
-									setActivePath={setActivePath}
+									onNavigate={handleNavigate}
 								/>
 							</SheetContent>
 						</Sheet>
@@ -135,17 +151,17 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
 						{/* User Menu */}
 						<DropdownMenu>
 							<DropdownMenuTrigger asChild>
-								<Button variant='ghost' className='flex items-center gap-2 px-2 hover:bg-gray-100'>
+								<Button type='button' variant='ghost' className='flex items-center gap-2 px-2 hover:bg-gray-100'>
 									<Avatar className='h-8 w-8'>
 										<AvatarFallback className='text-white bg-simas-primary font-medium text-xs'>
-											TM
+											{initials}
 										</AvatarFallback>
 									</Avatar>
 									<div className='hidden sm:block text-left'>
 										<p className='text-sm font-medium text-gray-700 leading-none'>
-											Tsaqif Muwaffaq
+											{user?.name ?? "Admin SIMAS"}
 										</p>
-										<p className='text-xs text-gray-500 mt-0.5 capitalize'>{activeRole}</p>
+										<p className='text-xs text-gray-500 mt-0.5 capitalize'>{role ?? "admin"}</p>
 									</div>
 								</Button>
 							</DropdownMenuTrigger>
@@ -153,7 +169,10 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
 								<DropdownMenuLabel>Akun Saya</DropdownMenuLabel>
 								<DropdownMenuSeparator />
 								<DropdownMenuItem>Pengaturan Akun</DropdownMenuItem>
-								<DropdownMenuItem className='text-red-600 focus:bg-red-50 focus:text-red-700'>
+								<DropdownMenuItem
+									className='text-red-600 focus:bg-red-50 focus:text-red-700'
+									onClick={() => logout({ redirectTo: "/login" })}
+								>
 									Keluar
 								</DropdownMenuItem>
 							</DropdownMenuContent>

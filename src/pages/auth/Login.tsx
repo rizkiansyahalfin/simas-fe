@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Eye, EyeOff, AlertCircle, Mail, Lock } from 'lucide-react'
 import Button from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useAuthStore } from '@/stores'
 import IslamicPattern from '@/components/login/IslamicPattern'
 import MosqueIllustration from '@/components/login/MosqueIllustration'
@@ -18,7 +18,8 @@ export default function Login() {
   const [showError, setShowError] = useState(false)
   const [loading, setLoading] = useState(false)
   const { setAuth } = useAuthStore()
-  const navigate = useNavigate()
+  const location = useLocation()
+  const redirectPath = (location.state as { from?: string } | null)?.from ?? '/admin'
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -28,13 +29,16 @@ export default function Login() {
 
     // dummy login logic
     if (email === 'admin@simas.com' && password === '123456') {
-      setAuth('dummy-token', {
-        id: '1',
-        name: 'Admin SIMAS',
-        email,
+      setAuth({
+        token: 'dummy-token',
+        user: {
+          id: '1',
+          name: 'Admin SIMAS',
+          email,
+          role: 'superadmin',
+        },
+        redirectTo: redirectPath,
       })
-
-      navigate('/admin') // redirect
     } else {
       setShowError(true)
     }
