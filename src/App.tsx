@@ -1,89 +1,114 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate } from "react-router-dom";
 
 // Layouts
-import AdminLayout from "@/layouts/AdminLayout"
-import AuthLayout from "@/layouts/AuthLayout"
-import PublicLayout from "@/layouts/PublicLayout"
+import AdminLayout from "@/layouts/AdminLayout";
+import AuthLayout from "@/layouts/AuthLayout";
+import PublicLayout from "@/layouts/PublicLayout";
 
 // Pages
-import Login from '@/pages/auth/Login'
-import ManajemenKasPage from '@/pages/admin/ManajemenKasPage'
-import JadwalSholatPage from '@/pages/public/jadwalSholat'
+import Login from "@/pages/auth/Login";
+import ManajemenKasPage from "@/pages/admin/ManajemenKasPage";
+import JadwalSholatPage from "@/pages/public/jadwalSholat";
+import KegiatanPage from "@/pages/admin/KegiatanPage";
 
 // Auth
-import { useAuthStore } from '@/stores'
-import { ProtectedRoute } from '@/components/ProtectedRoute'
+import { useAuthStore } from "@/stores";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 function App() {
-  const { isAuthenticated } = useAuthStore()
+	const { isAuthenticated } = useAuthStore();
 
-  return (
-    <Routes>
+	return (
+		<Routes>
+			{/* PUBLIC */}
+			<Route path='/' element={<PublicLayout />} />
 
-      {/* PUBLIC */}
-      <Route path="/" element={<PublicLayout />} />
+			<Route
+				path='/agenda'
+				element={
+					<PublicLayout>
+						Agenda Page
+					</PublicLayout>
+				}
+			/>
 
-      <Route
-        path="/agenda"
-        element={<PublicLayout>Agenda Page</PublicLayout>}
-      />
+			<Route
+				path='/berita'
+				element={
+					<PublicLayout>
+						Berita Page
+					</PublicLayout>
+				}
+			/>
 
-      <Route
-        path="/berita"
-        element={<PublicLayout>Berita Page</PublicLayout>}
-      />
+			<Route
+				path='/jadwal-shalat'
+				element={
+					<PublicLayout>
+						<JadwalSholatPage />
+					</PublicLayout>
+				}
+			/>
 
-      <Route
-        path="/jadwal-shalat"
-        element={
-          <PublicLayout>
-            <JadwalSholatPage />
-          </PublicLayout>
-        }
-      />
+			{/* LOGIN */}
+			<Route
+				path='/login'
+				element={
+					isAuthenticated ? (
+						<Navigate to='/admin' replace />
+					) : (
+						<AuthLayout>
+							<Login />
+						</AuthLayout>
+					)
+				}
+			/>
 
-      {/* LOGIN */}
-      <Route
-        path="/login"
-        element={
-          isAuthenticated
-            ? <Navigate to="/admin" replace />
-            : (
-              <AuthLayout>
-                <Login />
-              </AuthLayout>
-            )
-        }
-      />
+			{/* ADMIN DASHBOARD */}
+			<Route
+				path='/admin'
+				element={
+					<ProtectedRoute>
+						<AdminLayout>
+							<div className='p-6'>
+								Dashboard
+							</div>
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
 
-      {/* ADMIN (PROTECTED) */}
-      <Route
-        path="/admin"
-        element={
-          <ProtectedRoute>
-            <AdminLayout>
-              <div className="p-6">Dashboard</div>
-            </AdminLayout>
-          </ProtectedRoute>
-        }
-      />
+			{/* MANAJEMEN KAS */}
+			<Route
+				path='/admin/kas'
+				element={
+					<ProtectedRoute>
+						<AdminLayout>
+							<ManajemenKasPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
 
-      <Route
-        path="/admin/kas"
-        element={
-          <ProtectedRoute>
-            <AdminLayout>
-              <ManajemenKasPage />
-            </AdminLayout>
-          </ProtectedRoute>
-        }
-      />
+			{/* KEGIATAN */}
+			<Route
+				path='/admin/kegiatan'
+				element={
+					<ProtectedRoute>
+						<AdminLayout>
+							<KegiatanPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
 
-      {/* FALLBACK */}
-      <Route path="*" element={<Navigate to="/" replace />} />
-
-    </Routes>
-  )
+			{/* FALLBACK */}
+			<Route
+				path='*'
+				element={<Navigate to='/' replace />}
+			/>
+		</Routes>
+	);
 }
 
-export default App
+export default App;
