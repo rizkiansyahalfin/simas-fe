@@ -13,6 +13,7 @@ import JadwalSholatPage from "@/pages/public/jadwalSholat";
 // Auth & Protected Route
 import { useAuthStore } from "@/stores";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import FinanceSummaryWidget from "@/finance/FinanceSummeryWidget";
 
 function App() {
 	const { isAuthenticated } = useAuthStore();
@@ -31,6 +32,15 @@ function App() {
 				element={
 					<PublicLayout>
 						<JadwalSholatPage />
+					</PublicLayout>
+				}
+			/>
+
+			<Route
+				path='/finance-summary'
+				element={
+					<PublicLayout>
+						<FinanceSummaryWidget />
 					</PublicLayout>
 				}
 			/>
