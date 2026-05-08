@@ -1,5 +1,3 @@
-
-
 export type Role = 'superadmin' | 'bendahara' | 'admin kegiatan' | 'admin inventaris';
 
 export const canAccess = (role: Role, resource: string) => {
