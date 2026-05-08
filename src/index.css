@@ -2,7 +2,14 @@
 
 @theme {
   --color-simas-primary: #10b981;
+  --color-simas-primary-dark: #059669;
   --color-simas-bg-admin: #f8fafc;
+  --color-simas-bg-public: #f0fdf4;
   --radius-simas-admin: 0.75rem;
 }
 
+@layer base {
+  body {
+    @apply bg-white text-gray-900;
+  }
+}
