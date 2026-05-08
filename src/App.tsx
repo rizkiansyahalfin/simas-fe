@@ -9,6 +9,7 @@ import PublicLayout from "@/layouts/PublicLayout";
 import Home from "@/pages/public/Home";
 import Articles from "@/pages/public/Articles";
 import ArticleDetail from "@/pages/public/ArticleDetail";
+import Events from "@/pages/public/Events"; // dari HEAD
 import JadwalSholatPage from "@/pages/public/jadwalSholat";
 
 // Pages – Admin
@@ -35,7 +36,14 @@ function App() {
 				}
 			/>
 
-			<Route path='/agenda' element={<PublicLayout>Agenda Page</PublicLayout>} />
+			<Route
+				path='/agenda'
+				element={
+					<PublicLayout>
+						<Events />
+					</PublicLayout>
+				}
+			/>
 
 			<Route path='/berita' element={<PublicLayout>Berita Page</PublicLayout>} />
 

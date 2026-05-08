@@ -10,8 +10,9 @@ import {
 	Bell,
 	Menu,
 } from "lucide-react";
+
 import Button from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
 	DropdownMenu,
@@ -98,11 +99,13 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
 	const navigate = useNavigate();
 	const activePath = location.pathname;
 	const initials = user?.name
-		.split(" ")
-		.map((name) => name[0])
-		.join("")
-		.slice(0, 2)
-		.toUpperCase() || "AD";
+		? user.name
+				.split(" ")
+				.map((name) => name[0])
+				.join("")
+				.slice(0, 2)
+				.toUpperCase()
+		: "AD";
 
 	const filteredMenu = role ? MENU_ITEMS.filter((item) => canAccess(role, item.resource)) : [];
 	const pageTitle = filteredMenu.find((m) => m.path === activePath)?.title || "Dashboard";
@@ -128,6 +131,7 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
 								</Button>
 							</SheetTrigger>
 							<SheetContent side='left' className='p-0 w-64'>
+								<SheetTitle className='sr-only'>Menu Navigasi</SheetTitle>
 								<SidebarContent
 									filteredMenu={filteredMenu}
 									activePath={activePath}
@@ -151,7 +155,11 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
 						{/* User Menu */}
 						<DropdownMenu>
 							<DropdownMenuTrigger asChild>
-								<Button type='button' variant='ghost' className='flex items-center gap-2 px-2 hover:bg-gray-100'>
+								<Button
+									type='button'
+									variant='ghost'
+									className='flex items-center gap-2 px-2 hover:bg-gray-100'
+								>
 									<Avatar className='h-8 w-8'>
 										<AvatarFallback className='text-white bg-simas-primary font-medium text-xs'>
 											{initials}
