@@ -1,112 +1,198 @@
-import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import {
+  LayoutDashboard,
+  Wallet,
+  HeartHandshake,
+  FileText,
+  CalendarDays,
+  Archive,
+  Users,
+  Settings,
+  Bell,
+  Menu,
+} from "lucide-react";
 
-export default function PublicLayout({ children }: { children: React.ReactNode }) {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation(); // Mendeteksi path url saat ini
+import Button from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-  // Efek glassmorphism saat layar di-scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+import { canAccess } from "@/lib/rbac";
+import { useAuthStore } from "@/stores";
+import { useLocation, useNavigate } from "react-router-dom";
 
-  // Data menu navigasi
-  const navLinks = [
-    { name: "Beranda", path: "/" },
-    { name: "Agenda", path: "/agenda" },
-    { name: "Artikel", path: "/artikel" },
-  ];
+const MENU_ITEMS = [
+  { title: "Dashboard", icon: LayoutDashboard, resource: "dashboard", path: "/admin" },
+  { title: "Keuangan", icon: Wallet, resource: "keuangan", path: "/admin/keuangan" },
+  { title: "Donasi", icon: HeartHandshake, resource: "donasi", path: "/admin/donasi" },
+  { title: "Artikel", icon: FileText, resource: "artikel", path: "/admin/artikel" },
+  { title: "Kegiatan", icon: CalendarDays, resource: "kegiatan", path: "/admin/kegiatan" },
+  { title: "Inventaris", icon: Archive, resource: "inventaris", path: "/admin/inventaris" },
+  { title: "Jamaah", icon: Users, resource: "jamaah", path: "/admin/jamaah" },
+  { title: "Pengaturan", icon: Settings, resource: "pengaturan", path: "/admin/pengaturan" },
+];
 
+function SidebarContent({
+  filteredMenu,
+  activePath,
+  onNavigate,
+}: {
+  filteredMenu: typeof MENU_ITEMS;
+  activePath: string;
+  onNavigate: (path: string) => void;
+}) {
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 font-sans selection:bg-emerald-200 selection:text-emerald-900">
-      
-      {/* Navbar Premium */}
-      <header 
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-          isScrolled 
-            ? "bg-white/85 backdrop-blur-lg shadow-[0_4px_30px_rgb(0,0,0,0.03)] border-b border-gray-100 py-3" 
-            : "bg-transparent py-5 md:py-6"
-        }`}
-      >
-        <div className="container mx-auto px-4 md:px-8 flex items-center justify-between max-w-7xl">
-          
-          {/* Logo Area */}
-          <Link to="/" className="flex items-center space-x-3 group">
-            <div className={`flex items-center justify-center rounded-xl transition-all duration-300 ${isScrolled ? 'w-10 h-10 bg-emerald-50' : 'w-12 h-12 bg-white shadow-sm border border-emerald-50'}`}>
-              <span className="text-2xl drop-shadow-sm group-hover:scale-110 transition-transform">🕌</span>
-            </div>
-            <span className="text-2xl font-extrabold text-simas-primary tracking-tight">SIMAS</span>
-          </Link>
-          
-          {/* Menu Navigasi Tengah */}
-          <nav className="hidden md:flex items-center space-x-1 bg-white/60 backdrop-blur-md px-1.5 py-1.5 rounded-full border border-gray-200/60 shadow-sm">
-            {navLinks.map((link) => {
-              const isActive = location.pathname === link.path;
-              return (
-                <Link 
-                  key={link.name}
-                  to={link.path} 
-                  className={`relative px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 ${
-                    isActive 
-                      ? "text-white shadow-md shadow-emerald-500/25" 
-                      : "text-gray-500 hover:text-simas-primary hover:bg-emerald-50/50"
+    <div className="flex flex-col h-full bg-white border-r">
+      <div className="h-16 flex items-center px-6 border-b shrink-0">
+        <button
+          type="button"
+          onClick={() => onNavigate("/admin")}
+          className="flex items-center rounded-md text-left transition-colors hover:text-simas-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-simas-primary/40"
+          aria-label="Ke dashboard admin"
+        >
+          <span className="text-2xl mr-2">🕌</span>
+          <span className="text-xl font-bold tracking-tight text-gray-900">SIMAS</span>
+        </button>
+      </div>
+
+      <nav className="flex-1 overflow-y-auto py-4">
+        <ul className="space-y-1 px-3">
+          {filteredMenu.map((item) => {
+            const isActive = activePath === item.path;
+            return (
+              <li key={item.title}>
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate(item.path);
+                  }}
+                  className={`flex items-center px-3 py-2.5 rounded-md transition-colors ${
+                    isActive
+                      ? "bg-emerald-50 text-simas-primary font-bold border-l-4 border-simas-primary"
+                      : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                   }`}
                 >
-                  {/* Background hijau untuk menu yang aktif */}
-                  {isActive && (
-                    <div className="absolute inset-0 bg-simas-primary rounded-full -z-10"></div>
-                  )}
-                  {link.name}
-                </Link>
-              );
-            })}
-          </nav>
+                  <item.icon
+                    className={`h-5 w-5 mr-3 ${isActive ? "text-simas-primary" : "text-gray-500"}`}
+                  />
+                  {item.title}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </div>
+  );
+}
 
-          {/* Action Button */}
-          <div>
-            <Link to="/login">
-              <Button 
-                className={`font-bold rounded-xl transition-all duration-300 border-0 ${
-                  isScrolled 
-                    ? "bg-emerald-100 text-simas-primary hover:bg-simas-primary hover:text-white shadow-none hover:shadow-lg hover:shadow-emerald-500/30"
-                    : "bg-white text-simas-primary shadow-sm hover:shadow-md hover:-translate-y-0.5"
-                }`}
-              >
-                Login Pengurus
-              </Button>
-            </Link>
+export default function AdminLayout({ children }: { children?: React.ReactNode }) {
+  const { user, role, logout } = useAuthStore();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const activePath = location.pathname;
+  const initials = user?.name
+    ? user.name
+        .split(" ")
+        .map((name) => name[0])
+        .join("")
+        .slice(0, 2)
+        .toUpperCase()
+    : "AD";
+
+  const filteredMenu = role ? MENU_ITEMS.filter((item) => canAccess(role, item.resource)) : [];
+  const pageTitle = filteredMenu.find((m) => m.path === activePath)?.title || "Dashboard";
+  const handleNavigate = (path: string) => navigate(path);
+
+  return (
+    <div className="fixed inset-0 overflow-auto flex bg-simas-bg-admin">
+      {/* Sidebar Desktop */}
+      <aside className="hidden md:flex md:w-64 shrink-0 flex-col h-full">
+        <SidebarContent filteredMenu={filteredMenu} activePath={activePath} onNavigate={handleNavigate} />
+      </aside>
+
+      {/* Content Area */}
+      <div className="flex-1 flex flex-col min-w-0 overflow-auto">
+        {/* Topbar */}
+        <header className="h-16 bg-white border-b flex items-center justify-between px-4 sm:px-6 shrink-0 sticky top-0 z-40">
+          <div className="flex items-center gap-2">
+            {/* Mobile Menu */}
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="md:hidden">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="p-0 w-64">
+                <SheetTitle className="sr-only">Menu Navigasi</SheetTitle>
+                <SidebarContent
+                  filteredMenu={filteredMenu}
+                  activePath={activePath}
+                  onNavigate={handleNavigate}
+                />
+              </SheetContent>
+            </Sheet>
+
+            <h1 className="text-xl font-semibold text-gray-800" style={{ margin: 0 }}>
+              {pageTitle}
+            </h1>
           </div>
-        </div>
-      </header>
 
-      {/* Konten Utama */}
-      <main className="flex-1 pt-24 md:pt-28">
-        {children}
-      </main>
+          <div className="flex items-center gap-3">
+            {/* Notifications */}
+            <Button variant="ghost" size="icon" className="relative">
+              <Bell className="h-5 w-5 text-gray-600" />
+              <span className="absolute top-2 right-2 h-2 w-2 bg-red-500 rounded-full border border-white" />
+            </Button>
 
-      {/* Footer Premium */}
-      <footer className="bg-[#0f172a] border-t border-slate-800 text-slate-400 py-12 md:py-16 text-center relative overflow-hidden">
-        {/* Glow effect di background footer */}
-        <div className="absolute top-0 left-1/2 w-full max-w-2xl h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-900/20 via-[#0f172a] to-[#0f172a] -translate-x-1/2"></div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="w-14 h-14 bg-slate-800/80 backdrop-blur-sm rounded-2xl mx-auto flex items-center justify-center mb-6 border border-slate-700/50 shadow-inner">
-            <span className="text-3xl opacity-90">🕌</span>
+            {/* User Menu */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button type="button" variant="ghost" className="flex items-center gap-2 px-2 hover:bg-gray-100">
+                  <Avatar className="h-8 w-8">
+                    <AvatarFallback className="text-white bg-simas-primary font-medium text-xs">
+                      {initials}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="hidden sm:block text-left">
+                    <p className="text-sm font-medium text-gray-700 leading-none">
+                      {user?.name ?? "Admin SIMAS"}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-0.5 capitalize">{role ?? "admin"}</p>
+                  </div>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56 mt-1">
+                <DropdownMenuLabel>Akun Saya</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Pengaturan Akun</DropdownMenuItem>
+                <DropdownMenuItem
+                  className="text-red-600 focus:bg-red-50 focus:text-red-700"
+                  onClick={() => logout({ redirectTo: "/login" })}
+                >
+                  Keluar
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
-          <h3 className="mb-3 text-white font-extrabold text-2xl tracking-wide">
-            SIMAS
-          </h3>
-          <p className="text-sm font-medium text-slate-500 max-w-md mx-auto leading-relaxed">
-            &copy; {new Date().getFullYear()} Sistem Informasi Masjid. <br className="hidden sm:block" /> All rights reserved.
-          </p>
-        </div>
-      </footer>
-      
+        </header>
+
+        {/* Main Content */}
+        <main className="flex-1 p-6">
+          {children ?? (
+            <div className="border-2 border-dashed border-gray-300 rounded-xl h-96 flex items-center justify-center text-gray-400">
+              Konten halaman "{pageTitle}" akan tampil di sini
+            </div>
+          )}
+        </main>
+      </div>
     </div>
   );
 }
