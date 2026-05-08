@@ -5,12 +5,18 @@ import AdminLayout from "@/layouts/AdminLayout";
 import AuthLayout from "@/layouts/AuthLayout";
 import PublicLayout from "@/layouts/PublicLayout";
 
-// Pages
-import Login from "@/pages/auth/Login";
-import ManajemenKasPage from "@/pages/admin/ManajemenKasPage";
+// Pages – Publik
+import Home from "@/pages/public/Home";
+import Articles from "@/pages/public/Articles";
+import ArticleDetail from "@/pages/public/ArticleDetail";
 import JadwalSholatPage from "@/pages/public/jadwalSholat";
 
-// Auth & Protected Route
+// Pages – Admin
+import ManajemenKasPage from "@/pages/admin/ManajemenKasPage";
+import PrayerConfig from "@/pages/admin/PrayerConfig";
+
+// Auth
+import Login from "@/pages/auth/Login";
 import { useAuthStore } from "@/stores";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 
@@ -20,7 +26,14 @@ function App() {
 	return (
 		<Routes>
 			{/* ── PUBLIC ── */}
-			<Route path='/' element={<PublicLayout />} />
+			<Route
+				path='/'
+				element={
+					<PublicLayout>
+						<Home />
+					</PublicLayout>
+				}
+			/>
 
 			<Route path='/agenda' element={<PublicLayout>Agenda Page</PublicLayout>} />
 
@@ -31,6 +44,24 @@ function App() {
 				element={
 					<PublicLayout>
 						<JadwalSholatPage />
+					</PublicLayout>
+				}
+			/>
+
+			<Route
+				path='/artikel'
+				element={
+					<PublicLayout>
+						<Articles />
+					</PublicLayout>
+				}
+			/>
+
+			<Route
+				path='/artikel/:id'
+				element={
+					<PublicLayout>
+						<ArticleDetail />
 					</PublicLayout>
 				}
 			/>
@@ -67,6 +98,17 @@ function App() {
 					<ProtectedRoute>
 						<AdminLayout>
 							<ManajemenKasPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
+				path='/admin/pengaturan/jadwal-shalat'
+				element={
+					<ProtectedRoute>
+						<AdminLayout>
+							<PrayerConfig />
 						</AdminLayout>
 					</ProtectedRoute>
 				}
