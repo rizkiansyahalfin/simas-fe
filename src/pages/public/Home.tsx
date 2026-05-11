@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import  Button  from "@/components/ui/button";
 import { ArrowRight, BookOpen, Users, Target } from "lucide-react";
 
 export default function Home() {
