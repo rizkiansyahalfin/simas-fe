@@ -14,6 +14,7 @@ import JadwalSholatPage from "@/pages/public/jadwalSholat";
 
 // Pages – Admin
 import ManajemenKasPage from "@/pages/admin/ManajemenKasPage";
+import InventoryListPage from "@/pages/admin/InventoryListPage";
 import PrayerConfig from "@/pages/admin/PrayerConfig";
 
 // Auth
@@ -106,6 +107,17 @@ function App() {
 					<ProtectedRoute>
 						<AdminLayout>
 							<ManajemenKasPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
+				path='/admin/inventaris'
+				element={
+					<ProtectedRoute>
+						<AdminLayout>
+							<InventoryListPage />
 						</AdminLayout>
 					</ProtectedRoute>
 				}
