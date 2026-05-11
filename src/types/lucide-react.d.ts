@@ -13,7 +13,9 @@ declare module 'lucide-react' {
   export const Bell: LucideIcon
   export const CalendarDays: LucideIcon
   export const CheckIcon: LucideIcon
+  export const ChevronDownIcon: LucideIcon
   export const ChevronRightIcon: LucideIcon
+  export const ClipboardPenIcon: LucideIcon
   export const Clock: LucideIcon
   export const Eye: LucideIcon
   export const EyeOff: LucideIcon
@@ -24,6 +26,7 @@ declare module 'lucide-react' {
   export const Mail: LucideIcon
   export const MapPin: LucideIcon
   export const Menu: LucideIcon
+  export const PlusIcon: LucideIcon
   export const Settings: LucideIcon
   export const Users: LucideIcon
   export const Wallet: LucideIcon

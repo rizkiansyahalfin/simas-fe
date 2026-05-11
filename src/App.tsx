@@ -20,6 +20,8 @@ import PrayerConfig from "@/pages/admin/PrayerConfig";
 import Login from "@/pages/auth/Login";
 import { useAuthStore } from "@/stores";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import InventoryLoansPage from "./inventoryLoans/pages/InventoryLoansPage";
+import CongregationPage from "./congregation/pages/CongregationPage";
 
 function App() {
 	const { isAuthenticated } = useAuthStore();
@@ -121,6 +123,30 @@ function App() {
 					</ProtectedRoute>
 				}
 			/>
+
+			<Route
+				path="/admin/inventory-loans"
+				element={
+					<ProtectedRoute>
+						<AdminLayout>
+							<InventoryLoansPage/>
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			>
+			</Route>
+
+			<Route
+				path="/admin/congregation"
+				element={
+					<ProtectedRoute>
+						<AdminLayout>
+							<CongregationPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			>
+			</Route>
 
 			{/* ── FALLBACK ── */}
 			<Route path='*' element={<Navigate to='/' replace />} />
