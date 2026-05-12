@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import {
-  Search, Download, MoreVertical, X, ExternalLink,
-  Phone, Calendar, Tag, CheckCircle2, XCircle, Clock,
-  ChevronLeft, ChevronRight, Eye,
+  Search, Download, MoreVertical,
+  CheckCircle2,
+  ChevronLeft, ChevronRight,
   Wallet, Users, AlertCircle
 } from 'lucide-react'
 import { Input } from '@/components/ui/input'
