@@ -21,6 +21,7 @@ import VerifyDonasi from "@/pages/admin/verifyDonasi";
 import Login from "@/pages/auth/Login";
 import { useAuthStore } from "@/stores";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import MustahikPage from "./mustahik/pages/MustahikPage";
 
 function App() {
 	const { isAuthenticated } = useAuthStore();
@@ -129,6 +130,17 @@ function App() {
 					<ProtectedRoute>
 						<AdminLayout>
 							<VerifyDonasi />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
+				path='/admin/mustahik'
+				element={
+					<ProtectedRoute>
+						<AdminLayout>
+							<MustahikPage />
 						</AdminLayout>
 					</ProtectedRoute>
 				}
