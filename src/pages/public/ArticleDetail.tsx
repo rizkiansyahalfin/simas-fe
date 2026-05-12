@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, Calendar, User } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Button  from "@/components/ui/button";
 
 // 1. Tambahkan property 'content', 'quote', dan 'subheading' agar tiap artikel punya isi beda
 const DUMMY_ARTICLES = [
