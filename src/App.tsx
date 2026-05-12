@@ -16,6 +16,7 @@ import JadwalSholatPage from "@/pages/public/jadwalSholat";
 import ManajemenKasPage from "@/pages/admin/ManajemenKasPage";
 import PrayerConfig from "@/pages/admin/PrayerConfig";
 import VerifyDonasi from "@/pages/admin/verifyDonasi";
+import { ForbiddenPage, NotFoundPage, ServerErrorPage } from "@/pages/error/ErrorPage";
 
 // Auth
 import Login from "@/pages/auth/Login";
@@ -89,11 +90,14 @@ function App() {
 				}
 			/>
 
+			<Route path='/403' element={<ForbiddenPage />} />
+			<Route path='/500' element={<ServerErrorPage />} />
+
 			{/* ── ADMIN (PROTECTED) ── */}
 			<Route
 				path='/admin'
 				element={
-					<ProtectedRoute>
+					<ProtectedRoute resource='dashboard'>
 						<AdminLayout>
 							<div className='p-6'>Dashboard</div>
 						</AdminLayout>
@@ -104,7 +108,7 @@ function App() {
 			<Route
 				path='/admin/kas'
 				element={
-					<ProtectedRoute>
+					<ProtectedRoute resource='keuangan'>
 						<AdminLayout>
 							<ManajemenKasPage />
 						</AdminLayout>
@@ -115,7 +119,7 @@ function App() {
 			<Route
 				path='/admin/pengaturan/jadwal-shalat'
 				element={
-					<ProtectedRoute>
+					<ProtectedRoute resource='pengaturan'>
 						<AdminLayout>
 							<PrayerConfig />
 						</AdminLayout>
@@ -126,7 +130,7 @@ function App() {
 			<Route
 				path='/admin/donasi'
 				element={
-					<ProtectedRoute>
+					<ProtectedRoute resource='donasi'>
 						<AdminLayout>
 							<VerifyDonasi />
 						</AdminLayout>
@@ -135,7 +139,7 @@ function App() {
 			/>
 
 			{/* ── FALLBACK ── */}
-			<Route path='*' element={<Navigate to='/' replace />} />
+			<Route path='*' element={<NotFoundPage />} />
 		</Routes>
 	);
 }
