@@ -112,17 +112,17 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
 	const handleNavigate = (path: string) => navigate(path);
 
 	return (
-		<div className='fixed inset-0 overflow-auto flex bg-simas-bg-admin'>
+		<div className='fixed inset-0 flex overflow-hidden bg-simas-bg-admin'>
 			{/* Sidebar Desktop */}
 			<aside className='hidden md:flex md:w-64 shrink-0 flex-col h-full'>
 				<SidebarContent filteredMenu={filteredMenu} activePath={activePath} onNavigate={handleNavigate} />
 			</aside>
 
 			{/* Content Area */}
-			<div className='flex-1 flex flex-col min-w-0 overflow-auto'>
+			<div className='flex min-w-0 flex-1 flex-col overflow-auto'>
 				{/* Topbar */}
-				<header className='h-16 bg-white border-b flex items-center justify-between px-4 sm:px-6 shrink-0 sticky top-0 z-40'>
-					<div className='flex items-center gap-2'>
+				<header className='sticky top-0 z-40 flex h-16 shrink-0 items-center justify-between gap-3 border-b bg-white px-3 sm:px-6'>
+					<div className='flex min-w-0 items-center gap-2'>
 						{/* Mobile Menu */}
 						<Sheet>
 							<SheetTrigger asChild>
@@ -140,12 +140,12 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
 							</SheetContent>
 						</Sheet>
 
-						<h1 className='text-xl font-semibold text-gray-800' style={{ margin: 0 }}>
+						<h1 className='truncate text-lg font-semibold text-gray-800 sm:text-xl' style={{ margin: 0 }}>
 							{pageTitle}
 						</h1>
 					</div>
 
-					<div className='flex items-center gap-3'>
+					<div className='flex shrink-0 items-center gap-1.5 sm:gap-3'>
 						{/* Notifications */}
 						<Button variant='ghost' size='icon' className='relative'>
 							<Bell className='h-5 w-5 text-gray-600' />
@@ -189,7 +189,7 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
 				</header>
 
 				{/* Main Content */}
-				<main className='flex-1 p-6'>
+				<main className='min-w-0 flex-1 overflow-x-hidden p-4 sm:p-6'>
 					{children ?? (
 						<div className='border-2 border-dashed border-gray-300 rounded-xl h-96 flex items-center justify-center text-gray-400'>
 							Konten halaman "{pageTitle}" akan tampil di sini

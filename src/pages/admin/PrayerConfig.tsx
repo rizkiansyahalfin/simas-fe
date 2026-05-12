@@ -22,15 +22,15 @@ export default function PrayerConfig() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto font-sans">
+    <div className="mx-auto max-w-4xl font-sans">
       
       {/* Header Section */}
-      <div className="mb-10 flex flex-col sm:flex-row sm:items-center gap-5">
+      <div className="mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-center sm:gap-5">
         <div className="w-16 h-16 bg-gradient-to-br from-emerald-100 to-emerald-50 rounded-2xl flex items-center justify-center shadow-inner border border-emerald-100/50 shrink-0">
           <MapPin className="h-8 w-8 text-simas-primary" />
         </div>
         <div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-800 tracking-tight mb-2">
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-800 tracking-tight mb-2">
             Konfigurasi Lokasi
           </h1>
           <p className="text-slate-500 font-medium max-w-xl text-sm sm:text-base leading-relaxed">
@@ -40,7 +40,7 @@ export default function PrayerConfig() {
       </div>
 
       {/* Form Card Container */}
-      <div className="bg-white p-6 sm:p-10 md:p-12 rounded-[2rem] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden">
+      <div className="bg-white p-5 sm:p-10 md:p-12 rounded-3xl sm:rounded-[2rem] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden">
         
         {/* Dekorasi Background Halus di dalam Card */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 opacity-60 pointer-events-none"></div>
@@ -68,7 +68,7 @@ export default function PrayerConfig() {
           <div className="w-full h-px bg-slate-100"></div>
 
           {/* Input Koordinat Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
             <div className="space-y-3">
               <Label htmlFor="lat" className="text-slate-700 font-bold text-base">Latitude (Garis Lintang)</Label>
               <Input

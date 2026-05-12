@@ -37,13 +37,13 @@ export default function JadwalSholatPage() {
     <div className="space-y-6">
 
       {/* HEADER */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-600 to-emerald-800 p-6 text-white shadow-lg">
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-600 to-emerald-800 p-4 text-white shadow-lg sm:p-6">
 
-        <div className="flex justify-between items-start">
-          <div>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+          <div className="min-w-0">
             <div className="flex items-center gap-2 mb-1">
               <MapPin className="w-4 h-4 text-emerald-200" />
-              <h2 className="text-lg font-semibold">
+              <h2 className="text-base font-semibold sm:text-lg">
                 Jakarta Selatan, DKI Jakarta
               </h2>
             </div>
@@ -56,7 +56,7 @@ export default function JadwalSholatPage() {
             </p>
           </div>
 
-          <div className="text-right text-xs">
+          <div className="text-left text-xs sm:text-right">
             <p className="text-emerald-200">METODE</p>
             <p className="font-semibold">Kemenag RI</p>
           </div>
@@ -78,7 +78,7 @@ export default function JadwalSholatPage() {
 <div>
   <h3 className="font-semibold mb-3">Jadwal Hari Ini</h3>
 
-  <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
     {jadwal.map((item) => (
       <div
         key={item.name}
@@ -103,7 +103,8 @@ export default function JadwalSholatPage() {
   <h3 className="font-semibold mb-3">Jadwal Mingguan</h3>
 
   <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-    <table className="w-full text-sm">
+    <div className="overflow-x-auto">
+    <table className="w-full min-w-[640px] text-sm">
 
       {/* HEADER */}
       <thead className="bg-gray-50 text-gray-600 text-xs uppercase">
@@ -142,11 +143,12 @@ export default function JadwalSholatPage() {
       </tbody>
 
     </table>
+    </div>
   </div>
 </div>
 
       {/* JUMAT CARD */}
-      <div className="rounded-sm bg-gradient-to-r from-yellow-100 to-yellow-50 p-6 flex flex-col md:flex-row gap-6 items-center shadow-sm">
+      <div className="rounded-sm bg-gradient-to-r from-yellow-100 to-yellow-50 p-4 sm:p-6 flex flex-col md:flex-row gap-6 items-center shadow-sm">
 
         <div className="flex-1">
         </div>

@@ -60,22 +60,22 @@ export default function VerifyPanel({
       <aside className="slide-panel">
 
         {/* Header */}
-        <div className="flex items-start justify-between px-6 pt-6 pb-5 border-b border-gray-100">
-          <div>
+        <div className="flex flex-col gap-4 border-b border-gray-100 px-4 pb-5 pt-6 sm:flex-row sm:items-start sm:justify-between sm:px-6">
+          <div className="min-w-0">
             <p className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-1">
               {d.id}
             </p>
 
-            <h2 className="text-xl font-black text-gray-900">
+            <h2 className="break-words text-xl font-black text-gray-900">
               {d.nama}
             </h2>
 
-            <p className="text-2xl font-black text-simas-primary-dark mt-1">
+            <p className="break-words text-2xl font-black text-simas-primary-dark mt-1">
               {formatRupiah(d.nominal)}
             </p>
           </div>
 
-          <div className="flex items-center gap-2 mt-1">
+          <div className="flex items-center justify-between gap-2 sm:mt-1 sm:justify-start">
 
             <span className={s.badge}>
               <span className={s.dot} />
@@ -93,9 +93,9 @@ export default function VerifyPanel({
         </div>
 
         {/* Body */}
-        <div className="flex-1 overflow-y-auto px-6 py-5 space-y-4">
+        <div className="flex-1 overflow-y-auto px-4 py-5 space-y-4 sm:px-6">
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
 
             <div className="card-inner">
               <div className="flex items-center gap-1.5 mb-2">
@@ -213,7 +213,7 @@ export default function VerifyPanel({
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-5 border-t border-gray-100 space-y-3">
+        <div className="border-t border-gray-100 px-4 py-5 space-y-3 sm:px-6">
 
           {d.status === 'menunggu' ? (
             <>

@@ -63,7 +63,7 @@ export default function ArticleDetail() {
   }
 
   return (
-    <div className="relative min-h-screen bg-slate-50/30 py-12 md:py-20 font-sans">
+    <div className="relative min-h-screen overflow-hidden bg-slate-50/30 py-10 sm:py-12 md:py-20 font-sans">
       <div className="absolute top-0 left-1/2 w-full max-w-4xl h-72 bg-emerald-100/20 rounded-full blur-3xl -translate-x-1/2 -z-10"></div>
       
       <div className="container mx-auto px-4 max-w-4xl relative z-10">
@@ -92,12 +92,12 @@ export default function ArticleDetail() {
             </span>
           </div>
 
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight">
             {article.title}
           </h1>
         </div>
 
-        <div className="w-full aspect-[16/10] md:aspect-[21/9] rounded-[2rem] overflow-hidden bg-gray-100 mb-12 shadow-[0_20px_50px_rgb(0,0,0,0.05)] border border-gray-100 relative group">
+        <div className="w-full aspect-[16/10] md:aspect-[21/9] rounded-3xl md:rounded-[2rem] overflow-hidden bg-gray-100 mb-10 md:mb-12 shadow-[0_20px_50px_rgb(0,0,0,0.05)] border border-gray-100 relative group">
           <img 
             src={article.imageUrl} 
             alt={article.title} 
@@ -105,7 +105,7 @@ export default function ArticleDetail() {
           />
         </div>
 
-        <div className="max-w-3xl mx-auto space-y-8 text-gray-600 text-lg md:text-xl leading-relaxed md:leading-loose">
+        <div className="max-w-3xl mx-auto space-y-8 text-gray-600 text-base sm:text-lg md:text-xl leading-relaxed md:leading-loose">
           
           {/* Paragraf pertama dinamis dengan Drop Cap */}
           <p className="first-letter:text-5xl first-letter:md:text-6xl first-letter:font-extrabold first-letter:text-simas-primary first-letter:mr-2 first-letter:float-left first-letter:leading-none">
@@ -113,7 +113,7 @@ export default function ArticleDetail() {
           </p>
           
           {/* Blockquote dinamis */}
-          <blockquote className="border-l-4 border-simas-primary bg-emerald-50/50 p-6 md:p-8 rounded-r-2xl text-gray-800 italic my-10 relative overflow-hidden">
+          <blockquote className="border-l-4 border-simas-primary bg-emerald-50/50 p-5 sm:p-6 md:p-8 rounded-r-2xl text-gray-800 italic my-10 relative overflow-hidden">
             <div className="absolute top-[-10px] left-2 text-7xl text-emerald-200 opacity-50 font-serif">"</div>
             <p className="relative z-10 text-xl md:text-2xl font-medium leading-snug">
               {article.quote}

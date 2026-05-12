@@ -31,7 +31,7 @@ const DUMMY_ARTICLES = [
 
 export default function Articles() {
   return (
-    <div className="relative min-h-screen bg-slate-50/30 py-16 md:py-24 font-sans">
+    <div className="relative min-h-screen overflow-hidden bg-slate-50/30 py-12 sm:py-16 md:py-24 font-sans">
       {/* Dekorasi Background Halus */}
       <div className="absolute top-0 left-1/2 w-full max-w-3xl h-64 bg-emerald-100/30 rounded-full blur-3xl -translate-x-1/2 -z-10"></div>
       
@@ -43,7 +43,7 @@ export default function Articles() {
             <Newspaper className="w-4 h-4" />
             Pusat Informasi
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">Berita & Artikel</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">Berita & Artikel</h1>
           <p className="text-lg md:text-xl text-gray-500 font-medium max-w-2xl">
             Informasi terbaru, inspirasi islami, dan laporan kegiatan seputar masjid.
           </p>
@@ -67,7 +67,7 @@ export default function Articles() {
                 </div>
                 
                 {/* Content Container */}
-                <div className="p-7 md:p-8 flex flex-col flex-1 relative bg-white">
+                <div className="p-5 sm:p-7 md:p-8 flex flex-col flex-1 relative bg-white">
                   
                   {/* Meta Data (Tanggal & Penulis) */}
                   <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-gray-500 mb-4">

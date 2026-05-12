@@ -43,7 +43,7 @@ export default function Login() {
   };
 
   return (
-		<div className='fixed inset-0 flex bg-white'>
+		<div className='flex min-h-screen bg-white'>
 			{/* ══════════ KOLOM KIRI – BRANDING ══════════ */}
 			<aside className='hidden md:flex md:w-[45%] bg-simas-primary relative flex-col justify-center items-center text-white p-10 overflow-hidden'>
 				{/* Dekorasi Background */}
@@ -78,8 +78,8 @@ export default function Login() {
 			</aside>
 
 			{/* ══════════ KOLOM KANAN – FORM ══════════ */}
-			<main className='w-full md:w-[55%] flex items-center justify-center p-6 sm:p-12 relative'>
-				<div className='w-full max-w-md bg-white p-8 sm:p-10 rounded-3xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.05)] border border-gray-100 space-y-8 z-10'>
+			<main className='relative flex w-full items-center justify-center p-4 py-8 sm:p-12 md:w-[55%]'>
+				<div className='z-10 w-full max-w-md space-y-6 rounded-3xl border border-gray-100 bg-white p-6 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.05)] sm:space-y-8 sm:p-10'>
 					{/* Header */}
 					<div className='text-center md:text-left space-y-3'>
 						{/* Logo mobile */}
@@ -99,7 +99,7 @@ export default function Login() {
 					)}
 
 					{/* Form */}
-					<form onSubmit={handleSubmit} className='space-y-6 mt-8'>
+					<form onSubmit={handleSubmit} className='mt-8 space-y-5 sm:space-y-6'>
 						{/* Email */}
 						<div className='space-y-2.5'>
 							<label htmlFor='email' className='text-gray-700 font-semibold'>

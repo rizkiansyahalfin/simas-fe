@@ -96,7 +96,7 @@ export default function ManajemenKasPage() {
   }
 
   return (
-    <section className="space-y-6">
+    <section className="min-w-0 space-y-6">
       <div>
         <h2 className="m-0 text-2xl font-semibold tracking-normal text-slate-900">
           Manajemen Kas
@@ -109,25 +109,25 @@ export default function ManajemenKasPage() {
       <div className="grid gap-4 md:grid-cols-3">
         <div className="rounded-lg border border-emerald-200 bg-white p-4 shadow-sm">
           <p className="text-sm text-slate-500">Total Pemasukan</p>
-          <p className="mt-2 text-xl font-semibold text-emerald-700">
+          <p className="mt-2 break-words text-xl font-semibold text-emerald-700">
             {currencyFormatter.format(summary.income)}
           </p>
         </div>
         <div className="rounded-lg border border-emerald-200 bg-white p-4 shadow-sm">
           <p className="text-sm text-slate-500">Total Pengeluaran</p>
-          <p className="mt-2 text-xl font-semibold text-red-600">
+          <p className="mt-2 break-words text-xl font-semibold text-red-600">
             {currencyFormatter.format(summary.expense)}
           </p>
         </div>
         <div className="rounded-lg border border-emerald-200 bg-white p-4 shadow-sm">
           <p className="text-sm text-slate-500">Saldo Akhir</p>
-          <p className="mt-2 text-xl font-semibold text-slate-900">
+          <p className="mt-2 break-words text-xl font-semibold text-slate-900">
             {currencyFormatter.format(summary.balance)}
           </p>
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
+      <div className="grid min-w-0 gap-6 lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)]">
         <form
           className="space-y-4 rounded-lg border border-emerald-200 bg-white p-5 shadow-sm"
           onSubmit={handleSubmit}

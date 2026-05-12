@@ -95,7 +95,7 @@ function App() {
 				element={
 					<ProtectedRoute>
 						<AdminLayout>
-							<div className='p-6'>Dashboard</div>
+							<div className='p-4 sm:p-6'>Dashboard</div>
 						</AdminLayout>
 					</ProtectedRoute>
 				}

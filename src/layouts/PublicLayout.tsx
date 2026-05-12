@@ -1,198 +1,106 @@
-import {
-  LayoutDashboard,
-  Wallet,
-  HeartHandshake,
-  FileText,
-  CalendarDays,
-  Archive,
-  Users,
-  Settings,
-  Bell,
-  Menu,
-} from "lucide-react";
+import type { ReactNode } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { CalendarDays, FileText, Home, Menu, MoonStar } from "lucide-react";
 
 import Button from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
-import { canAccess } from "@/lib/rbac";
-import { useAuthStore } from "@/stores";
-import { useLocation, useNavigate } from "react-router-dom";
-
-const MENU_ITEMS = [
-  { title: "Dashboard", icon: LayoutDashboard, resource: "dashboard", path: "/admin" },
-  { title: "Keuangan", icon: Wallet, resource: "keuangan", path: "/admin/keuangan" },
-  { title: "Donasi", icon: HeartHandshake, resource: "donasi", path: "/admin/donasi" },
-  { title: "Artikel", icon: FileText, resource: "artikel", path: "/admin/artikel" },
-  { title: "Kegiatan", icon: CalendarDays, resource: "kegiatan", path: "/admin/kegiatan" },
-  { title: "Inventaris", icon: Archive, resource: "inventaris", path: "/admin/inventaris" },
-  { title: "Jamaah", icon: Users, resource: "jamaah", path: "/admin/jamaah" },
-  { title: "Pengaturan", icon: Settings, resource: "pengaturan", path: "/admin/pengaturan" },
+const NAV_ITEMS = [
+  { title: "Beranda", path: "/", icon: Home },
+  { title: "Agenda", path: "/agenda", icon: CalendarDays },
+  { title: "Jadwal Shalat", path: "/jadwal-shalat", icon: MoonStar },
+  { title: "Artikel", path: "/artikel", icon: FileText },
 ];
 
-function SidebarContent({
-  filteredMenu,
-  activePath,
-  onNavigate,
-}: {
-  filteredMenu: typeof MENU_ITEMS;
-  activePath: string;
-  onNavigate: (path: string) => void;
-}) {
+function PublicNav({ onNavigate }: { onNavigate?: () => void }) {
   return (
-    <div className="flex flex-col h-full bg-white border-r">
-      <div className="h-16 flex items-center px-6 border-b shrink-0">
-        <button
-          type="button"
-          onClick={() => onNavigate("/admin")}
-          className="flex items-center rounded-md text-left transition-colors hover:text-simas-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-simas-primary/40"
-          aria-label="Ke dashboard admin"
+    <nav className="flex flex-col gap-1 md:flex-row md:items-center md:gap-1">
+      {NAV_ITEMS.map((item) => (
+        <NavLink
+          key={item.path}
+          to={item.path}
+          end={item.path === "/"}
+          onClick={onNavigate}
+          className={({ isActive }) =>
+            [
+              "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition-colors md:gap-2 md:py-2",
+              isActive
+                ? "bg-emerald-50 text-simas-primary"
+                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+            ].join(" ")
+          }
         >
-          <span className="text-2xl mr-2">🕌</span>
-          <span className="text-xl font-bold tracking-tight text-gray-900">SIMAS</span>
-        </button>
-      </div>
-
-      <nav className="flex-1 overflow-y-auto py-4">
-        <ul className="space-y-1 px-3">
-          {filteredMenu.map((item) => {
-            const isActive = activePath === item.path;
-            return (
-              <li key={item.title}>
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onNavigate(item.path);
-                  }}
-                  className={`flex items-center px-3 py-2.5 rounded-md transition-colors ${
-                    isActive
-                      ? "bg-emerald-50 text-simas-primary font-bold border-l-4 border-simas-primary"
-                      : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-                  }`}
-                >
-                  <item.icon
-                    className={`h-5 w-5 mr-3 ${isActive ? "text-simas-primary" : "text-gray-500"}`}
-                  />
-                  {item.title}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-    </div>
+          <item.icon className="size-4 shrink-0" />
+          {item.title}
+        </NavLink>
+      ))}
+    </nav>
   );
 }
 
-export default function AdminLayout({ children }: { children?: React.ReactNode }) {
-  const { user, role, logout } = useAuthStore();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const activePath = location.pathname;
-  const initials = user?.name
-    ? user.name
-        .split(" ")
-        .map((name) => name[0])
-        .join("")
-        .slice(0, 2)
-        .toUpperCase()
-    : "AD";
-
-  const filteredMenu = role ? MENU_ITEMS.filter((item) => canAccess(role, item.resource)) : [];
-  const pageTitle = filteredMenu.find((m) => m.path === activePath)?.title || "Dashboard";
-  const handleNavigate = (path: string) => navigate(path);
-
+export default function PublicLayout({ children }: { children?: ReactNode }) {
   return (
-    <div className="fixed inset-0 overflow-auto flex bg-simas-bg-admin">
-      {/* Sidebar Desktop */}
-      <aside className="hidden md:flex md:w-64 shrink-0 flex-col h-full">
-        <SidebarContent filteredMenu={filteredMenu} activePath={activePath} onNavigate={handleNavigate} />
-      </aside>
+    <div className="min-h-screen overflow-x-hidden bg-white font-sans text-gray-900">
+      <header className="sticky top-0 z-40 border-b border-gray-100 bg-white/95 backdrop-blur">
+        <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          <Link
+            to="/"
+            className="flex min-w-0 items-center gap-2 rounded-xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-simas-primary/40"
+            aria-label="Ke beranda SIMAS"
+          >
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-xl">
+              🕌
+            </span>
+            <span className="truncate text-lg font-black tracking-tight text-gray-900">SIMAS</span>
+          </Link>
 
-      {/* Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-auto">
-        {/* Topbar */}
-        <header className="h-16 bg-white border-b flex items-center justify-between px-4 sm:px-6 shrink-0 sticky top-0 z-40">
-          <div className="flex items-center gap-2">
-            {/* Mobile Menu */}
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="md:hidden">
-                  <Menu className="h-5 w-5" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="p-0 w-64">
-                <SheetTitle className="sr-only">Menu Navigasi</SheetTitle>
-                <SidebarContent
-                  filteredMenu={filteredMenu}
-                  activePath={activePath}
-                  onNavigate={handleNavigate}
-                />
-              </SheetContent>
-            </Sheet>
-
-            <h1 className="text-xl font-semibold text-gray-800" style={{ margin: 0 }}>
-              {pageTitle}
-            </h1>
+          <div className="hidden md:block">
+            <PublicNav />
           </div>
 
-          <div className="flex items-center gap-3">
-            {/* Notifications */}
-            <Button variant="ghost" size="icon" className="relative">
-              <Bell className="h-5 w-5 text-gray-600" />
-              <span className="absolute top-2 right-2 h-2 w-2 bg-red-500 rounded-full border border-white" />
+          <div className="hidden md:flex">
+            <Button asChild className="bg-simas-primary px-4 font-bold text-white hover:bg-emerald-700">
+              <Link to="/login">Masuk Admin</Link>
             </Button>
-
-            {/* User Menu */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button type="button" variant="ghost" className="flex items-center gap-2 px-2 hover:bg-gray-100">
-                  <Avatar className="h-8 w-8">
-                    <AvatarFallback className="text-white bg-simas-primary font-medium text-xs">
-                      {initials}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="hidden sm:block text-left">
-                    <p className="text-sm font-medium text-gray-700 leading-none">
-                      {user?.name ?? "Admin SIMAS"}
-                    </p>
-                    <p className="text-xs text-gray-500 mt-0.5 capitalize">{role ?? "admin"}</p>
-                  </div>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 mt-1">
-                <DropdownMenuLabel>Akun Saya</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Pengaturan Akun</DropdownMenuItem>
-                <DropdownMenuItem
-                  className="text-red-600 focus:bg-red-50 focus:text-red-700"
-                  onClick={() => logout({ redirectTo: "/login" })}
-                >
-                  Keluar
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
           </div>
-        </header>
 
-        {/* Main Content */}
-        <main className="flex-1 p-6">
-          {children ?? (
-            <div className="border-2 border-dashed border-gray-300 rounded-xl h-96 flex items-center justify-center text-gray-400">
-              Konten halaman "{pageTitle}" akan tampil di sini
-            </div>
-          )}
-        </main>
-      </div>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="md:hidden" aria-label="Buka menu">
+                <Menu className="size-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[min(20rem,calc(100vw-2rem))] p-0">
+              <SheetTitle className="sr-only">Menu publik</SheetTitle>
+              <div className="flex h-full flex-col">
+                <div className="flex h-16 items-center gap-2 border-b border-gray-100 px-4">
+                  <span className="flex size-9 items-center justify-center rounded-xl bg-emerald-50 text-xl">
+                    🕌
+                  </span>
+                  <span className="text-lg font-black tracking-tight text-gray-900">SIMAS</span>
+                </div>
+                <div className="flex-1 px-3 py-4">
+                  <PublicNav />
+                </div>
+                <div className="border-t border-gray-100 p-4">
+                  <Button asChild className="h-11 w-full bg-simas-primary font-bold text-white hover:bg-emerald-700">
+                    <Link to="/login">Masuk Admin</Link>
+                  </Button>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </header>
+
+      <main className="min-w-0">{children}</main>
+
+      <footer className="border-t border-gray-100 bg-white">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-6 text-sm text-gray-500 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
+          <p className="font-semibold text-gray-700">SIMAS - Sistem Informasi Masjid</p>
+          <p>Portal kegiatan, artikel, dan jadwal shalat masjid.</p>
+        </div>
+      </footer>
     </div>
   );
 }

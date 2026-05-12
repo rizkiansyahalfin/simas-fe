@@ -80,9 +80,10 @@
     font-size: 16px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 
-  body { @apply bg-white text-gray-900; }
+  body { @apply bg-white text-gray-900; overflow-x: hidden; }
 
   h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; }
 
@@ -267,7 +268,7 @@
   }
 
   /* ── Stat card (admin) ── */
-  .stat-card  { @apply bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex items-center gap-4 transition-shadow hover:shadow-md; }
+  .stat-card  { @apply bg-white rounded-2xl border border-gray-100 shadow-sm p-4 sm:p-5 flex items-center gap-4 transition-shadow hover:shadow-md; }
   .icon-wrap  { @apply size-12 rounded-2xl flex items-center justify-center shrink-0; }
   .icon-wrap-green  { @apply bg-emerald-50  text-simas-primary-dark; }
   .icon-wrap-amber  { @apply bg-amber-50    text-amber-600; }
@@ -337,4 +338,10 @@
 
   /* ── Geo pattern overlay ── */
   .geo-overlay { @apply absolute inset-0 w-full h-full pointer-events-none; }
+}
+
+@media (max-width: 640px) {
+  .slide-panel {
+    max-width: 100vw;
+  }
 }

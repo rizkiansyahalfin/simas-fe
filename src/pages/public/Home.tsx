@@ -5,17 +5,17 @@ export default function Home() {
   return (
     <div className="w-full font-sans">
       {/* 1. HERO SECTION */}
-      <section id="beranda" className="relative bg-simas-primary text-white py-24 md:py-36 overflow-hidden">
+      <section id="beranda" className="relative bg-simas-primary text-white py-16 sm:py-20 md:py-28 lg:py-36 overflow-hidden">
         {/* Dekorasi Background: Pola Grid dan Efek Glow */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff1a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff1a_1px,transparent_1px)] bg-[size:32px_32px] opacity-30"></div>
         <div className="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 right-0 w-[30rem] h-[30rem] bg-emerald-900/20 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
+        <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-emerald-900/20 blur-3xl translate-x-1/3 translate-y-1/3 sm:h-[30rem] sm:w-[30rem]"></div>
         
         <div className="container mx-auto px-4 md:px-8 relative z-10 text-center">
           <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-sm font-medium tracking-wide">
             ✨ Selamat Datang di Portal SIMAS
           </div>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 tracking-tight drop-shadow-md">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 tracking-tight drop-shadow-md">
             Selamat Datang di <br className="hidden md:block" /> Masjid Kami
           </h1>
           <p className="text-lg md:text-xl text-emerald-50 mb-10 max-w-2xl mx-auto leading-relaxed drop-shadow-sm font-medium">
@@ -33,7 +33,7 @@ export default function Home() {
       </section>
 
       {/* 2. PROFIL MASJID SECTION */}
-      <section id="profil" className="py-24 md:py-32 bg-white relative">
+      <section id="profil" className="py-16 sm:py-20 md:py-32 bg-white relative overflow-hidden">
         {/* Ornamen latar belakang samar */}
         <div className="absolute left-0 top-20 w-64 h-64 bg-emerald-50 rounded-full blur-3xl -z-10 opacity-60"></div>
 
@@ -41,9 +41,9 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
             
             {/* Bagian Gambar dengan Efek Bingkai Tumpuk */}
-            <div className="w-full lg:w-1/2 relative">
+            <div className="w-full lg:w-1/2 relative px-1 sm:px-0">
               {/* Bingkai dekoratif di belakang */}
-              <div className="absolute -inset-4 md:-inset-6 bg-emerald-100/60 rounded-[2.5rem] transform -rotate-3 transition-transform hover:rotate-0 duration-500"></div>
+              <div className="absolute -inset-2 sm:-inset-4 md:-inset-6 bg-emerald-100/60 rounded-[2rem] sm:rounded-[2.5rem] transform -rotate-3 transition-transform hover:rotate-0 duration-500"></div>
               
               <div className="relative w-full aspect-[4/3] bg-gray-50 rounded-3xl flex items-center justify-center border border-gray-100 shadow-2xl shadow-emerald-900/5 overflow-hidden group">
                 <img 
@@ -102,7 +102,7 @@ export default function Home() {
       </section>
 
       {/* 3. VISI MISI SECTION */}
-      <section id="visi-misi" className="py-24 md:py-32 bg-slate-50/50 relative">
+      <section id="visi-misi" className="py-16 sm:py-20 md:py-32 bg-slate-50/50 relative">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
         
         <div className="container mx-auto px-4 md:px-8">
@@ -115,19 +115,19 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
             {/* Card Visi */}
-            <div className="group bg-white p-8 md:p-12 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-emerald-200 hover:shadow-[0_20px_40px_rgb(16,185,129,0.1)] transition-all duration-300 hover:-translate-y-2">
+            <div className="group bg-white p-6 sm:p-8 md:p-12 rounded-[1.5rem] sm:rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-emerald-200 hover:shadow-[0_20px_40px_rgb(16,185,129,0.1)] transition-all duration-300 hover:-translate-y-2">
               <div className="w-16 h-16 bg-gradient-to-br from-emerald-100 to-emerald-50 text-simas-primary rounded-2xl flex items-center justify-center mb-8 shadow-inner group-hover:scale-110 transition-transform duration-300">
                 <Target className="h-8 w-8" />
               </div>
               <h3 className="text-3xl font-bold text-gray-900 mb-6 tracking-tight">Visi Kami</h3>
-              <p className="text-gray-600 text-xl leading-relaxed italic relative z-10">
+              <p className="text-gray-600 text-lg sm:text-xl leading-relaxed italic relative z-10">
                 <span className="text-emerald-200 text-5xl absolute -top-4 -left-4 -z-10">"</span>
                 Menjadi masjid teladan yang makmur, mandiri, dan menjadi pusat peradaban umat yang membawa rahmat bagi alam semesta.
               </p>
             </div>
 
             {/* Card Misi */}
-            <div className="group bg-white p-8 md:p-12 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-emerald-200 hover:shadow-[0_20px_40px_rgb(16,185,129,0.1)] transition-all duration-300 hover:-translate-y-2">
+            <div className="group bg-white p-6 sm:p-8 md:p-12 rounded-[1.5rem] sm:rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-emerald-200 hover:shadow-[0_20px_40px_rgb(16,185,129,0.1)] transition-all duration-300 hover:-translate-y-2">
               <div className="w-16 h-16 bg-gradient-to-br from-emerald-100 to-emerald-50 text-simas-primary rounded-2xl flex items-center justify-center mb-8 shadow-inner group-hover:scale-110 transition-transform duration-300">
                 <BookOpen className="h-8 w-8" />
               </div>

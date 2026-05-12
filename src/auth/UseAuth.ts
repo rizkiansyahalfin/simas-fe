@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import api from '../lib/axios'
 import { useAuthStore } from '../stores'
+import type { Role } from '@/lib/rbac'
 
 
 interface LoginCredentials {
@@ -21,6 +22,7 @@ interface AuthResponse {
     id: string
     name: string
     email: string
+    role?: Role
   }
 }
 
@@ -35,9 +37,9 @@ export const useLogin = () => {
       return data
     },
     onSuccess: (data) => {
-      setAuth(data.token, data.user)
+      setAuth({ token: data.token, user: { ...data.user, role: data.user.role ?? 'superadmin' } })
       // Delay agar success state sempat tampil di UI
-      setTimeout(() => navigate('/dashboard'), 1200)
+      setTimeout(() => navigate('/admin'), 1200)
     },
   })
 }
@@ -53,8 +55,8 @@ export const useRegister = () => {
       return data
     },
     onSuccess: (data) => {
-      setAuth(data.token, data.user)
-      setTimeout(() => navigate('/dashboard'), 1200)
+      setAuth({ token: data.token, user: { ...data.user, role: data.user.role ?? 'superadmin' } })
+      setTimeout(() => navigate('/admin'), 1200)
     },
   })
 }

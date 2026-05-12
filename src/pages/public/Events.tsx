@@ -39,7 +39,7 @@ const DUMMY_EVENTS = [
 
 export default function Events() {
   return (
-    <div className="relative min-h-screen bg-slate-50/50 py-16 md:py-24 overflow-hidden font-sans">
+    <div className="relative min-h-screen bg-slate-50/50 py-12 sm:py-16 md:py-24 overflow-hidden font-sans">
       {/* Dekorasi Background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:32px_32px] opacity-30"></div>
       <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-100/40 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3"></div>
@@ -51,7 +51,7 @@ export default function Events() {
             <CalendarIcon className="w-4 h-4" />
             Jadwal & Agenda
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">Agenda Kegiatan</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">Agenda Kegiatan</h1>
           <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto font-medium">
             Ikuti berbagai kajian keislaman dan kegiatan sosial yang diselenggarakan di lingkungan masjid kita.
           </p>
@@ -62,7 +62,7 @@ export default function Events() {
           {DUMMY_EVENTS.map((event) => (
             <div 
               key={event.id} 
-              className="group bg-white rounded-3xl border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(16,185,129,0.08)] hover:border-emerald-200 transition-all duration-300 hover:-translate-y-1 p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center relative cursor-pointer overflow-hidden"
+              className="group bg-white rounded-3xl border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(16,185,129,0.08)] hover:border-emerald-200 transition-all duration-300 hover:-translate-y-1 p-5 sm:p-6 md:p-8 flex flex-col md:flex-row gap-5 sm:gap-6 md:gap-8 items-start md:items-center relative cursor-pointer overflow-hidden"
             >
               {/* Ornamen Transparan di dalam Card */}
               <div className="absolute -right-10 -bottom-10 opacity-0 group-hover:opacity-5 transition-opacity duration-500 transform group-hover:scale-150">
@@ -70,7 +70,7 @@ export default function Events() {
               </div>
 
               {/* Tanggal Box (Kiri) */}
-              <div className="bg-gradient-to-b from-emerald-50 to-emerald-100/50 border border-emerald-100/80 rounded-2xl p-5 flex flex-col items-center justify-center min-w-[110px] shrink-0 text-simas-primary shadow-inner group-hover:scale-105 group-hover:shadow-emerald-200/50 transition-all duration-300">
+              <div className="bg-gradient-to-b from-emerald-50 to-emerald-100/50 border border-emerald-100/80 rounded-2xl p-4 sm:p-5 flex min-w-24 flex-row items-center justify-center gap-2 shrink-0 text-simas-primary shadow-inner group-hover:scale-105 group-hover:shadow-emerald-200/50 transition-all duration-300 sm:min-w-[110px] sm:flex-col sm:gap-0">
                 <span className="text-4xl font-extrabold">{event.date}</span>
                 <span className="text-sm font-bold uppercase tracking-widest mt-1">{event.month}</span>
               </div>
@@ -86,7 +86,7 @@ export default function Events() {
                 </div>
                 
                 {/* Judul Agenda */}
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight group-hover:text-simas-primary transition-colors duration-300 pr-8">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 leading-tight group-hover:text-simas-primary transition-colors duration-300 md:pr-8">
                   {event.title}
                 </h3>
                 
