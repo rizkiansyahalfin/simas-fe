@@ -1,7 +1,8 @@
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import api from '../lib/axios'
-import { useAuthStore } from '../stores'
+import { useAuthStore } from '../stores/useAuthStore'
+import { type Role } from '@/lib/rbac'
 
 
 interface LoginCredentials {
@@ -21,6 +22,7 @@ interface AuthResponse {
     id: string
     name: string
     email: string
+    role: Role
   }
 }
 
@@ -35,7 +37,10 @@ export const useLogin = () => {
       return data
     },
     onSuccess: (data) => {
-      setAuth(data.token, data.user)
+      setAuth({
+        token: data.token,
+        user: data.user,
+      })
       // Delay agar success state sempat tampil di UI
       setTimeout(() => navigate('/dashboard'), 1200)
     },
@@ -53,7 +58,10 @@ export const useRegister = () => {
       return data
     },
     onSuccess: (data) => {
-      setAuth(data.token, data.user)
+      setAuth({
+        token: data.token,
+        user: data.user,
+      })
       setTimeout(() => navigate('/dashboard'), 1200)
     },
   })
