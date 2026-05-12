@@ -16,6 +16,7 @@ import JadwalSholatPage from "@/pages/public/jadwalSholat";
 import ManajemenKasPage from "@/pages/admin/ManajemenKasPage";
 import PrayerConfig from "@/pages/admin/PrayerConfig";
 import VerifyDonasi from "@/pages/admin/verifyDonasi";
+import LaporanPage from "@/pages/admin/LaporanPage";
 
 // Auth
 import Login from "@/pages/auth/Login";
@@ -129,6 +130,17 @@ function App() {
 					<ProtectedRoute>
 						<AdminLayout>
 							<VerifyDonasi />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
+				path='/admin/laporan'
+				element={
+					<ProtectedRoute>
+						<AdminLayout>
+							<LaporanPage />
 						</AdminLayout>
 					</ProtectedRoute>
 				}

@@ -3,6 +3,7 @@ import {
 	Wallet,
 	HeartHandshake,
 	FileText,
+	FileSpreadsheet,
 	CalendarDays,
 	Archive,
 	Users,
@@ -29,8 +30,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const MENU_ITEMS = [
 	{ title: "Dashboard", icon: LayoutDashboard, resource: "dashboard", path: "/admin" },
-	{ title: "Keuangan", icon: Wallet, resource: "keuangan", path: "/admin/keuangan" },
+	{ title: "Keuangan", icon: Wallet, resource: "keuangan", path: "/admin/kas" },
 	{ title: "Donasi", icon: HeartHandshake, resource: "donasi", path: "/admin/donasi" },
+	{ title: "Laporan", icon: FileSpreadsheet, resource: "laporan", path: "/admin/laporan" },
 	{ title: "Artikel", icon: FileText, resource: "artikel", path: "/admin/artikel" },
 	{ title: "Kegiatan", icon: CalendarDays, resource: "kegiatan", path: "/admin/kegiatan" },
 	{ title: "Inventaris", icon: Archive, resource: "inventaris", path: "/admin/inventaris" },
