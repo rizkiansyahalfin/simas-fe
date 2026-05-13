@@ -1,8 +1,9 @@
 import { useMemo, useState } from "react";
 import { Calendar, FileSpreadsheet, FileText, HeartHandshake, TrendingUp, Wallet } from "lucide-react";
 
-import Button from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import EmptyState from "@/skeleton/states/EmptyState";
 
 type ReportRow = {
 	id: string;
@@ -307,8 +308,11 @@ export default function LaporanPage() {
 						<tbody>
 							{rows.length === 0 ? (
 								<tr>
-									<td colSpan={5} className='px-6 py-14 text-center text-sm font-semibold text-gray-300'>
-										Tidak ada transaksi pada periode ini
+									<td colSpan={5} className='p-6'>
+										<EmptyState
+											title='Tidak ada transaksi'
+											description='Tidak ada transaksi pada periode laporan yang dipilih.'
+										/>
 									</td>
 								</tr>
 							) : (
