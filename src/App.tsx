@@ -2,15 +2,15 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 // Layouts
 import AdminLayout from "@/layouts/AdminLayout";
-import AuthLayout from "@/layouts/AuthLayout";
+import AuthLayout from "@/layouts/AuthLayout"; // ditambahkan karena dipakai di /login
 import PublicLayout from "@/layouts/PublicLayout";
 
-// Pages – Publik
-import Home from "@/pages/public/Home";
-import Articles from "@/pages/public/Articles";
-import ArticleDetail from "@/pages/public/ArticleDetail";
-import Events from "@/pages/public/Events"; // dari HEAD
-import JadwalSholatPage from "@/pages/public/jadwalSholat";
+// Import Pages (Public)
+import Home from "./pages/public/Home";
+import Articles from "./pages/public/Articles";
+import ArticleDetail from "./pages/public/ArticleDetail";
+import Events from "./pages/public/Events";
+import JadwalSholatPage from "./pages/public/JadwalSholatPage"; // asumsi ada, jika belum buat sementara
 
 // Pages – Admin
 import ManajemenKasPage from "@/pages/admin/ManajemenKasPage";
