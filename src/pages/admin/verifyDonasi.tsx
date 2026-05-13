@@ -6,7 +6,7 @@ import {
   Wallet, Users, AlertCircle
 } from 'lucide-react'
 import { Input } from '@/components/ui/input'
-import  Button  from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 import type { Donasi, Status } from '@/types/donation'
 import VerifyPanel from '@/components/donation/verifyPanel'
 import { SEED } from '@/data/donationSeed'

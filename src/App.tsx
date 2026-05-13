@@ -22,6 +22,8 @@ import { ForbiddenPage, NotFoundPage, ServerErrorPage } from "@/pages/error/Erro
 import Login from "@/pages/auth/Login";
 import { useAuthStore } from "@/stores";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import InventoryLoansPage from "./inventoryLoans/pages/InventoryLoansPage";
+import CongregationPage from "./congregation/pages/CongregationPage";
 
 function App() {
 	const { isAuthenticated } = useAuthStore();
@@ -133,6 +135,28 @@ function App() {
 					<ProtectedRoute resource='donasi'>
 						<AdminLayout>
 							<VerifyDonasi />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
+				path='/admin/inventory-loans'
+				element={
+					<ProtectedRoute resource='inventory'>
+						<AdminLayout>
+							<InventoryLoansPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
+				path='/admin/congregation'
+				element={
+					<ProtectedRoute resource='jamaah'>
+						<AdminLayout>
+							<CongregationPage />
 						</AdminLayout>
 					</ProtectedRoute>
 				}
