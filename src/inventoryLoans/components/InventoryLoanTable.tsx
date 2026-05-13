@@ -1,6 +1,7 @@
 // InventoryLoanTable.tsx
 
 import type { InventoryLoan } from '../typesInventoryLoans'
+import EmptyState from '@/skeleton/states/EmptyState'
 import LoanStatusBadge from './LoanStatusBadge'
 
 
@@ -90,8 +91,11 @@ export default function InventoryLoanTable({
       </div>
 
       {data.length === 0 && (
-        <div className="px-5 py-12 text-center text-sm text-slate-500">
-          Belum ada peminjaman inventaris.
+        <div className="p-5">
+          <EmptyState
+            title="Belum ada peminjaman"
+            description="Transaksi peminjaman inventaris yang dicatat akan muncul di sini."
+          />
         </div>
       )}
     </div>
