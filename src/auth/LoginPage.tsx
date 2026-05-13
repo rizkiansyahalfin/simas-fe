@@ -148,7 +148,13 @@ const LoginPage = () => {
 
   const showSuccess = loginSuccess || regSuccess
   const successName = loginData?.user?.name ?? regData?.user?.name ?? ''
-  const apiMsg = (err: unknown) => (err as any)?.response?.data?.message ?? null
+  const apiMsg = (err: unknown) => {
+    if (err && typeof err === 'object' && 'response' in err) {
+      const axiosErr = err as { response?: { data?: { message?: string } } };
+      return axiosErr.response?.data?.message ?? null;
+    }
+    return null;
+  }
 
   return (
     <main className="w-full flex flex-col md:flex-row min-h-screen">

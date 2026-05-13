@@ -2,7 +2,7 @@ import type { LucideIcon } from "lucide-react";
 import { ArrowLeft, Home, RefreshCcw, SearchX, ServerCrash, ShieldAlert } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
-import Button from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 
 type ErrorPageProps = {
 	code: string;
