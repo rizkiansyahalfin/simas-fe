@@ -25,6 +25,7 @@ import { useAuthStore } from "@/stores";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import InventoryLoansPage from "./inventoryLoans/pages/InventoryLoansPage";
 import CongregationPage from "./congregation/pages/CongregationPage";
+import MustahikPage from "./mustahik/pages/MustahikPage";
 
 function App() {
     const { isAuthenticated } = useAuthStore();
@@ -158,6 +159,17 @@ function App() {
                     <ProtectedRoute resource='jamaah'>
                         <AdminLayout>
                             <CongregationPage />
+                        </AdminLayout>
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path='/admin/mustahik'
+                element={
+                    <ProtectedRoute resource='jamaah'>
+                        <AdminLayout>
+                            <MustahikPage />
                         </AdminLayout>
                     </ProtectedRoute>
                 }
