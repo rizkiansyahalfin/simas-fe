@@ -106,7 +106,7 @@ export default function ArticleDetail() {
 					</h1>
 				</div>
 
-				<div className='w-full aspect-[16/10] md:aspect-[21/9] rounded-[2rem] overflow-hidden bg-gray-100 mb-12 shadow-[0_20px_50px_rgb(0,0,0,0.05)] border border-gray-100 relative group'>
+				<div className='w-full aspect-16/10 md:aspect-21/9 rounded-4xl overflow-hidden bg-gray-100 mb-12 shadow-[0_20px_50px_rgb(0,0,0,0.05)] border border-gray-100 relative group'>
 					<img
 						src={article.imageUrl}
 						alt={article.title}

@@ -10,7 +10,7 @@ import Home from "./pages/public/Home";
 import Articles from "./pages/public/Articles";
 import ArticleDetail from "./pages/public/ArticleDetail";
 import Events from "./pages/public/Events";
-import JadwalSholatPage from "./pages/public/JadwalSholatPage"; // asumsi ada, jika belum buat sementara
+import JadwalSholatPage from "./pages/public/jadwalSholat"; // sesuai nama file jadwalSholat.tsx
 
 // Pages – Admin
 import ManajemenKasPage from "@/pages/admin/ManajemenKasPage";
