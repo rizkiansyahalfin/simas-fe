@@ -1,15 +1,340 @@
 @import "tailwindcss";
+@import "@fontsource-variable/geist";
 
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════ */
 @theme {
-  --color-simas-primary: #10b981;
+  --font-sans:    'Geist Variable', system-ui, sans-serif;
+  --font-heading: 'Geist Variable', system-ui, sans-serif;
+
+  /* Brand */
+  --color-simas-primary:      #10b981;
   --color-simas-primary-dark: #059669;
-  --color-simas-bg-admin: #f8fafc;
+  --color-simas-primary-deep: #047857;
+  --color-simas-accent:       #b45309;
+  --color-simas-accent-light: #fef3c7;
+
+  /* Surfaces */
+  --color-simas-bg-admin:  #f8fafc;
   --color-simas-bg-public: #f0fdf4;
+
+  /* Radius */
   --radius-simas-admin: 0.75rem;
+
+  /* Emerald scale */
+  --color-emerald-50:  #ecfdf5;
+  --color-emerald-100: #d1fae5;
+  --color-emerald-200: #a7f3d0;
+  --color-emerald-300: #6ee7b7;
+  --color-emerald-400: #34d399;
+  --color-emerald-500: #10b981;
+  --color-emerald-600: #059669;
+  --color-emerald-700: #047857;
+  --color-emerald-800: #065f46;
+  --color-emerald-900: #064e3b;
+  --color-emerald-950: #022c22;
+
+  /* Fonts */
+  --font-sans:    'Geist Variable', system-ui, sans-serif;
+  --font-heading: 'Geist Variable', system-ui, sans-serif;
+ 
+  /* Brand */
+  --color-simas-primary:      #10b981;
+  --color-simas-primary-dark: #059669;
+  --color-simas-primary-deep: #047857;
+  --color-simas-accent:       #b45309;
+  --color-simas-accent-light: #fef3c7;
+ 
+  /* Backgrounds */
+  --color-simas-bg-admin:  #f8fafc;
+  --color-simas-bg-public: #f0fdf4;
+ 
+  /* Radius */
+  --radius-simas-admin: 0.75rem;
+ 
+  /* Emerald scale */
+  --color-emerald-50:  #ecfdf5;
+  --color-emerald-100: #d1fae5;
+  --color-emerald-200: #a7f3d0;
+  --color-emerald-300: #6ee7b7;
+  --color-emerald-400: #34d399;
+  --color-emerald-500: #10b981;
+  --color-emerald-600: #059669;
+  --color-emerald-700: #047857;
+  --color-emerald-800: #065f46;
+  --color-emerald-900: #064e3b;
+  --color-emerald-950: #022c22;
+
+  
 }
 
+/* ═══════════════════════════════════════════
+   BASE
+═══════════════════════════════════════════ */
 @layer base {
-  body {
-    @apply bg-white text-gray-900;
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
   }
+
+  body { @apply bg-white text-gray-900; }
+
+  h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; }
+
+  #root { min-height: 100svh; display: flex; flex-direction: column; }
+}
+
+/* ═══════════════════════════════════════════
+   COMPONENTS
+═══════════════════════════════════════════ */
+@layer components {
+
+  /* ── Buttons ── */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-5 h-11 rounded-xl
+           text-sm font-bold text-white cursor-pointer border-0
+           transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+    background: linear-gradient(135deg, #10b981, #059669);
+    box-shadow: 0 4px 14px rgb(16 185 129 / 0.28);
+  }
+  .btn-primary:hover { opacity: 0.92; }
+
+  .btn-primary-full {
+    @apply flex w-full items-center justify-center gap-2 h-12 rounded-xl
+           text-sm font-bold text-white cursor-pointer border-0
+           transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed;
+    background: linear-gradient(135deg, #10b981, #059669);
+    box-shadow: 0 6px 20px rgb(16 185 129 / 0.32);
+  }
+  .btn-primary-full:hover { opacity: 0.92; }
+
+  .btn-verify {
+    @apply flex w-full items-center justify-center gap-2 h-12 rounded-2xl
+           text-sm font-bold text-white cursor-pointer border-0 transition-opacity;
+    background: linear-gradient(135deg, #10b981, #059669);
+    box-shadow: 0 4px 16px rgb(16 185 129 / 0.3);
+  }
+  .btn-verify:hover { opacity: 0.9; }
+
+  .btn-reject {
+    @apply flex w-full items-center justify-center gap-2 h-12 rounded-2xl
+           text-sm font-bold text-red-600 bg-transparent
+           border-2 border-red-200 cursor-pointer transition-colors;
+  }
+  .btn-reject:hover { @apply bg-red-50 border-red-300; }
+
+  .btn-outline-sm {
+    @apply flex items-center gap-2 text-sm font-semibold px-4 py-2
+           rounded-full border border-emerald-200 text-simas-primary
+           bg-transparent cursor-pointer transition-colors;
+  }
+  .btn-outline-sm:hover { @apply bg-emerald-50; }
+
+  /* ── Cards ── */
+  .card       { @apply bg-white rounded-3xl border border-gray-100 shadow-sm; }
+  .card-sm    { @apply bg-white rounded-2xl border border-gray-100 shadow-sm; }
+  .card-inner { @apply bg-gray-50 rounded-2xl p-4; }
+
+  /* ── Hero banner (gradient green) ── */
+  .hero-banner {
+    @apply relative rounded-3xl overflow-hidden text-white;
+    background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+  }
+
+  /* ── Form header (mint gradient) ── */
+  .form-header {
+    @apply relative px-7 pt-6 pb-5 border-b border-gray-50 overflow-hidden;
+    background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+  }
+
+  /* ── Form header icon ── */
+  .form-header-icon {
+    @apply size-10 rounded-xl flex items-center justify-center shadow-sm text-white;
+    background: linear-gradient(135deg, #10b981, #059669);
+  }
+
+  /* ── Nominal preset button ── */
+  .preset-btn {
+    @apply py-2.5 rounded-xl text-sm font-semibold border-2 border-transparent
+           bg-gray-50 text-gray-600 cursor-pointer transition-all
+           hover:border-simas-primary hover:text-simas-primary hover:bg-emerald-50;
+  }
+  .preset-btn.selected {
+    @apply text-white border-simas-primary scale-[1.03];
+    background: linear-gradient(135deg, #10b981, #059669);
+    box-shadow: 0 4px 14px rgb(16 185 129 / 0.3);
+  }
+
+  /* ── Rp badge inside input ── */
+  .rp-badge {
+    @apply absolute left-3 top-1/2 -translate-y-1/2
+           bg-simas-primary text-white text-xs font-bold px-2 py-1 rounded-lg;
+  }
+
+  /* ── Kategori dropdown trigger ── */
+  .kat-trigger {
+    @apply w-full h-14 px-4 rounded-xl border-2 border-transparent bg-gray-50
+           flex items-center justify-between text-sm font-medium cursor-pointer
+           transition-all hover:border-emerald-200;
+  }
+  .kat-trigger.open { @apply border-simas-primary bg-white shadow-sm; }
+
+  /* ── Upload area ── */
+  .upload-area {
+    @apply w-full h-28 rounded-xl border-2 border-dashed border-gray-200
+           bg-gray-50 flex flex-col items-center justify-center gap-2
+           text-gray-400 cursor-pointer transition-all
+           hover:border-simas-primary hover:bg-emerald-50 hover:text-simas-primary;
+  }
+  .upload-icon {
+    @apply size-10 rounded-xl bg-gray-100 flex items-center justify-center
+           transition-colors group-hover:bg-emerald-100;
+  }
+  .upload-success {
+    @apply flex items-center justify-between p-4 rounded-xl
+           border-2 border-emerald-200 bg-emerald-50;
+  }
+  .upload-success-icon {
+    @apply size-9 rounded-xl bg-simas-primary flex items-center justify-center;
+  }
+  .upload-remove-btn {
+    @apply size-7 rounded-full bg-white flex items-center justify-center
+           text-gray-400 shadow-sm cursor-pointer transition-colors
+           hover:text-red-500 hover:bg-red-50;
+  }
+
+  /* ── Info box (amber) ── */
+  .info-box {
+    @apply flex gap-3 p-4 rounded-2xl border border-amber-100 bg-simas-accent-light;
+  }
+  .info-box-icon {
+    @apply size-8 rounded-xl bg-amber-100 flex items-center justify-center shrink-0;
+  }
+
+  /* ── Payment tabs ── */
+  .pay-tab {
+    @apply flex-1 flex items-center justify-center gap-2 py-4
+           text-sm font-semibold border-b-2 border-transparent
+           text-gray-400 cursor-pointer transition-all hover:text-gray-600;
+  }
+  .pay-tab.active { @apply text-simas-primary border-simas-primary bg-emerald-50/50; }
+
+  /* ── Bank card ── */
+  .bank-card {
+    @apply rounded-2xl border border-gray-100 overflow-hidden
+           cursor-pointer transition-all hover:border-emerald-200 hover:shadow-md;
+  }
+  .bank-strip-bsi { @apply h-1.5 bg-simas-primary-dark; }
+  .bank-strip-bca { @apply h-1.5 bg-blue-700; }
+  .bank-strip-mdr { @apply h-1.5 bg-amber-500; }
+  .bank-logo      {
+    @apply size-11 rounded-xl flex items-center justify-center
+           text-white font-black text-xs shrink-0 shadow-sm;
+  }
+  .bank-logo-bsi  { @apply bg-simas-primary-dark; }
+  .bank-logo-bca  { @apply bg-blue-700; }
+  .bank-logo-mdr  { @apply bg-amber-500; }
+
+  /* ── Copy button ── */
+  .copy-btn {
+    @apply flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full
+           font-semibold bg-gray-100 text-gray-500 cursor-pointer transition-all
+           hover:bg-emerald-50 hover:text-simas-primary;
+  }
+  .copy-btn.copied { @apply bg-emerald-100 text-emerald-700; }
+
+  /* ── Progress card (dark green) ── */
+  .progress-card {
+    @apply relative rounded-3xl overflow-hidden text-white p-6;
+    background: linear-gradient(145deg, #059669, #047857);
+  }
+  .progress-track { @apply h-2 rounded-full overflow-hidden bg-white/15; }
+  .progress-fill  { @apply h-full rounded-full transition-all duration-500; }
+  .progress-fill-green  { @apply bg-emerald-300; }
+  .progress-fill-yellow { @apply bg-yellow-300; }
+  .progress-fill-blue   { @apply bg-blue-300; }
+
+  /* ── Success screen ── */
+  .success-icon {
+    @apply size-20 rounded-full flex items-center justify-center mx-auto mb-5;
+    background: linear-gradient(135deg, #10b981, #059669);
+    box-shadow: 0 12px 32px rgb(16 185 129 / 0.35);
+  }
+
+  /* ── Stat card (admin) ── */
+  .stat-card  { @apply bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex items-center gap-4 transition-shadow hover:shadow-md; }
+  .icon-wrap  { @apply size-12 rounded-2xl flex items-center justify-center shrink-0; }
+  .icon-wrap-green  { @apply bg-emerald-50  text-simas-primary-dark; }
+  .icon-wrap-amber  { @apply bg-amber-50    text-amber-600; }
+  .icon-wrap-blue   { @apply bg-sky-50      text-sky-600; }
+  .icon-wrap-purple { @apply bg-violet-50   text-violet-600; }
+
+  /* ── Badge / status ── */
+  .badge      { @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold; }
+  .badge-dot  { @apply size-1.5 rounded-full shrink-0; }
+  .badge-waiting  { @apply bg-amber-50   text-amber-700; }
+  .dot-waiting    { @apply bg-amber-400; }
+  .badge-ok       { @apply bg-emerald-50 text-emerald-700; }
+  .dot-ok         { @apply bg-emerald-500; }
+  .badge-rejected { @apply bg-red-50     text-red-600; }
+  .dot-rejected   { @apply bg-red-500; }
+
+  /* ── Category / general pill ── */
+  .pill { @apply inline-flex items-center px-2.5 py-0.5 rounded-lg text-xs font-bold bg-emerald-50 text-emerald-700; }
+
+  /* ── Table ── */
+  .tbl-header {
+    @apply grid px-6 py-3 bg-gray-50 border-b border-gray-100;
+    grid-template-columns: 3.5rem 6.5rem 1fr 7rem 7rem 5rem 7rem 2.5rem;
+  }
+  .tbl-row {
+    @apply grid px-6 py-4 items-center border-b border-gray-50 cursor-pointer transition-colors last:border-0;
+    grid-template-columns: 3.5rem 6.5rem 1fr 7rem 7rem 5rem 7rem 2.5rem;
+  }
+  .tbl-row:hover  { @apply bg-emerald-50/50; }
+  .tbl-th         { @apply text-xs font-bold text-gray-400 uppercase tracking-wider; }
+
+  /* ── Avatar ── */
+  .avatar { @apply size-8 rounded-full flex items-center justify-center text-white text-xs font-black shrink-0; }
+
+  /* ── Nominal text ── */
+  .nominal { @apply text-sm font-black text-simas-primary-dark; }
+
+  /* ── Filter tabs ── */
+  .filter-group { @apply flex items-center gap-1 bg-gray-50 border border-gray-100 rounded-xl p-1; }
+  .filter-tab   { @apply px-2.5 py-1 rounded-lg text-xs font-semibold text-gray-500 border-0 bg-transparent cursor-pointer transition-all hover:text-gray-800; }
+  .filter-tab.active { @apply text-white; background: #10b981; box-shadow: 0 1px 4px rgb(16 185 129 / 0.3); }
+
+  /* ── Pagination ── */
+  .page-btn { @apply size-8 rounded-xl border border-gray-200 bg-white text-sm font-bold text-gray-500 flex items-center justify-center cursor-pointer transition-all hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed; }
+  .page-btn.active { @apply text-white border-transparent; background: linear-gradient(135deg, #10b981, #059669); }
+
+  /* ── Slide-over panel ── */
+  .panel-backdrop { @apply fixed inset-0 bg-black/30 backdrop-blur-sm z-40; }
+  .slide-panel {
+    @apply fixed right-0 top-0 h-full w-full bg-white z-50 flex flex-col;
+    max-width: 26rem;
+    box-shadow: -8px 0 48px rgb(0 0 0 / 0.12);
+    animation: slidePanel 0.25s ease;
+  }
+  @keyframes slidePanel {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(0); }
+  }
+
+  /* ── QRIS wrapper ── */
+  .qris-glow {
+    @apply absolute inset-0 rounded-2xl blur-xl scale-110 bg-simas-primary/20;
+  }
+  .qris-card {
+    @apply relative bg-white rounded-2xl p-4 shadow-md border border-emerald-100;
+  }
+
+  /* ── Geo pattern overlay ── */
+  .geo-overlay { @apply absolute inset-0 w-full h-full pointer-events-none; }
 }
