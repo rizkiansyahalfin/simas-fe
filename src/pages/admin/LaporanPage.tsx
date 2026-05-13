@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Calendar, FileSpreadsheet, FileText, HeartHandshake, TrendingUp, Wallet } from "lucide-react";
 
-import Button from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 type ReportRow = {
