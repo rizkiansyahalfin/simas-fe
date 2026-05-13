@@ -1,5 +1,6 @@
 
 import type { Mustahik } from '../mustahikTypes'
+import { maskNik } from '@/skeleton/lib/mask'
 import MustahikStatusBadge from './MustahikStatusBadge'
 
 interface Props {
@@ -35,7 +36,7 @@ export default function MustahikTable({
                   </p>
 
                   <p className="text-sm text-muted-foreground">
-                    {item.nik}
+                    {maskNik(item.nik)}
                   </p>
                 </div>
               </td>

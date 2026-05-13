@@ -3,35 +3,60 @@ import {
   useArticles,
   useDeleteArticle,
 } from '../hooks/useArticles'
+import EmptyState from '@/skeleton/states/EmptyState'
+import ErrorState from '@/skeleton/states/ErrorState'
+import PageSectionSkeleton from '@/skeleton/states/PageSectionSkeleton'
 
 export default function ArticlesPage() {
-  const { data, isLoading } = useArticles()
+  const {
+    data,
+    isError,
+    isLoading,
+    refetch,
+  } = useArticles()
   const deleteArticle = useDeleteArticle()
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <PageSectionSkeleton rows={5} />
+
+  if (isError) {
+    return (
+      <ErrorState
+        title="Artikel gagal dimuat"
+        description="Silakan coba muat ulang data artikel."
+        onRetry={() => refetch()}
+      />
+    )
+  }
 
   return (
     <div className="p-6 space-y-4">
       <h1 className="text-xl font-bold">Manajemen Artikel</h1>
 
-      {data?.map((a) => (
-        <div
-          key={a.id}
-          className="border p-4 flex justify-between"
-        >
-          <div>
-            <h2>{a.title}</h2>
-            <p>{a.status}</p>
-          </div>
-
-          <button
-            onClick={() => deleteArticle.mutate(a.id)}
-            className="text-red-500"
+      {data?.length ? (
+        data.map((a) => (
+          <div
+            key={a.id}
+            className="border p-4 flex justify-between"
           >
-            Hapus
-          </button>
-        </div>
-      ))}
+            <div>
+              <h2>{a.title}</h2>
+              <p>{a.status}</p>
+            </div>
+
+            <button
+              onClick={() => deleteArticle.mutate(a.id)}
+              className="text-red-500"
+            >
+              Hapus
+            </button>
+          </div>
+        ))
+      ) : (
+        <EmptyState
+          title="Belum ada artikel"
+          description="Artikel yang dibuat akan tampil di halaman ini."
+        />
+      )}
     </div>
   )
 }

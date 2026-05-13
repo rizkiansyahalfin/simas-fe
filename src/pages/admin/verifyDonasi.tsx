@@ -11,6 +11,7 @@ import type { Donasi, Status } from '@/types/donation'
 import VerifyPanel from '@/components/donation/verifyPanel'
 import { SEED } from '@/data/donationSeed'
 import { STATUS_CFG } from '@/data/donationSeed'
+import EmptyState from '@/skeleton/states/EmptyState'
 
 const fmt = (n: number) => 'Rp ' + n.toLocaleString('id-ID')
 
@@ -127,9 +128,11 @@ export default function AdminDonasiPage() {
 
         {/* Rows */}
         {rows.length === 0 ? (
-          <div className="py-16 flex flex-col items-center gap-2 text-gray-300">
-            <Search className="size-10"/>
-            <p className="text-sm font-semibold">Tidak ada data ditemukan</p>
+          <div className="p-6">
+            <EmptyState
+              title="Tidak ada data ditemukan"
+              description="Coba ubah kata kunci pencarian atau filter status donasi."
+            />
           </div>
         ) : rows.map(d => {
           const s = STATUS_CFG[d.status]
