@@ -17,6 +17,7 @@ import ManajemenKasPage from "@/pages/admin/ManajemenKasPage";
 import PrayerConfig from "@/pages/admin/PrayerConfig";
 import VerifyDonasi from "@/pages/admin/verifyDonasi";
 import InventoryForm from "@/pages/admin/InventoryForm";
+import ZisDistributionForm from "@/pages/admin/ZisDistributionForm";
 import { ForbiddenPage, NotFoundPage, ServerErrorPage } from "@/pages/error/ErrorPage";
 
 // Auth
@@ -170,6 +171,17 @@ function App() {
                     <ProtectedRoute resource='jamaah'>
                         <AdminLayout>
                             <MustahikPage />
+                        </AdminLayout>
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path='/admin/zis/distribusi'
+                element={
+                    <ProtectedRoute resource='keuangan'>
+                        <AdminLayout>
+                            <ZisDistributionForm />
                         </AdminLayout>
                     </ProtectedRoute>
                 }
