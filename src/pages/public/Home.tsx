@@ -7,9 +7,9 @@ export default function Home() {
       {/* 1. HERO SECTION */}
       <section id="beranda" className="relative bg-simas-primary text-white py-24 md:py-36 overflow-hidden">
         {/* Dekorasi Background: Pola Grid dan Efek Glow */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff1a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff1a_1px,transparent_1px)] bg-[size:32px_32px] opacity-30"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff1a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff1a_1px,transparent_1px)] bg-size-[32px_32px] opacity-30"></div>
         <div className="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 right-0 w-[30rem] h-[30rem] bg-emerald-900/20 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
+        <div className="absolute bottom-0 right-0 w-120 h-120 bg-emerald-900/20 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
         
         <div className="container mx-auto px-4 md:px-8 relative z-10 text-center">
           <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-sm font-medium tracking-wide">
@@ -43,15 +43,15 @@ export default function Home() {
             {/* Bagian Gambar dengan Efek Bingkai Tumpuk */}
             <div className="w-full lg:w-1/2 relative">
               {/* Bingkai dekoratif di belakang */}
-              <div className="absolute -inset-4 md:-inset-6 bg-emerald-100/60 rounded-[2.5rem] transform -rotate-3 transition-transform hover:rotate-0 duration-500"></div>
+              <div className="absolute -inset-4 md:-inset-6 bg-emerald-100/60 rounded-4xl transform -rotate-3 transition-transform hover:rotate-0 duration-500"></div>
               
-              <div className="relative w-full aspect-[4/3] bg-gray-50 rounded-3xl flex items-center justify-center border border-gray-100 shadow-2xl shadow-emerald-900/5 overflow-hidden group">
+              <div className="relative w-full aspect-4/3 bg-gray-50 rounded-3xl flex items-center justify-center border border-gray-100 shadow-2xl shadow-emerald-900/5 overflow-hidden group">
                 <img 
                   src="https://images.unsplash.com/photo-1564769625905-50e93615e769?q=80&w=1000&auto=format&fit=crop" 
                   alt="Profil Masjid" 
                   className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent"></div>
                 <div className="text-center relative z-10 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                   <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-2xl mx-auto flex items-center justify-center border border-white/30 shadow-lg mb-4">
                     <span className="text-4xl drop-shadow-md">🕌</span>
@@ -103,7 +103,7 @@ export default function Home() {
 
       {/* 3. VISI MISI SECTION */}
       <section id="visi-misi" className="py-24 md:py-32 bg-slate-50/50 relative">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
+        <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-gray-200 to-transparent"></div>
         
         <div className="container mx-auto px-4 md:px-8">
           <div className="text-center mb-16 md:mb-20">
@@ -115,8 +115,8 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
             {/* Card Visi */}
-            <div className="group bg-white p-8 md:p-12 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-emerald-200 hover:shadow-[0_20px_40px_rgb(16,185,129,0.1)] transition-all duration-300 hover:-translate-y-2">
-              <div className="w-16 h-16 bg-gradient-to-br from-emerald-100 to-emerald-50 text-simas-primary rounded-2xl flex items-center justify-center mb-8 shadow-inner group-hover:scale-110 transition-transform duration-300">
+            <div className="group bg-white p-8 md:p-12 rounded-4xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-emerald-200 hover:shadow-[0_20px_40px_rgb(16,185,129,0.1)] transition-all duration-300 hover:-translate-y-2">
+              <div className="w-16 h-16 bg-linear-to-br from-emerald-100 to-emerald-50 text-simas-primary rounded-2xl flex items-center justify-center mb-8 shadow-inner group-hover:scale-110 transition-transform duration-300">
                 <Target className="h-8 w-8" />
               </div>
               <h3 className="text-3xl font-bold text-gray-900 mb-6 tracking-tight">Visi Kami</h3>
@@ -127,8 +127,8 @@ export default function Home() {
             </div>
 
             {/* Card Misi */}
-            <div className="group bg-white p-8 md:p-12 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-emerald-200 hover:shadow-[0_20px_40px_rgb(16,185,129,0.1)] transition-all duration-300 hover:-translate-y-2">
-              <div className="w-16 h-16 bg-gradient-to-br from-emerald-100 to-emerald-50 text-simas-primary rounded-2xl flex items-center justify-center mb-8 shadow-inner group-hover:scale-110 transition-transform duration-300">
+            <div className="group bg-white p-8 md:p-12 rounded-4xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-emerald-200 hover:shadow-[0_20px_40px_rgb(16,185,129,0.1)] transition-all duration-300 hover:-translate-y-2">
+              <div className="w-16 h-16 bg-linear-to-br from-emerald-100 to-emerald-50 text-simas-primary rounded-2xl flex items-center justify-center mb-8 shadow-inner group-hover:scale-110 transition-transform duration-300">
                 <BookOpen className="h-8 w-8" />
               </div>
               <h3 className="text-3xl font-bold text-gray-900 mb-6 tracking-tight">Misi Kami</h3>

@@ -24,9 +24,9 @@ export default function ZisManagement() {
     <div className="max-w-7xl mx-auto space-y-8 font-sans">
       
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 bg-white p-6 sm:p-8 rounded-[2rem] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 bg-white p-6 sm:p-8 rounded-4xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
         <div className="flex items-center gap-5">
-          <div className="w-16 h-16 bg-gradient-to-br from-emerald-100 to-emerald-50 rounded-2xl flex items-center justify-center shadow-inner border border-emerald-100/50 shrink-0">
+          <div className="w-16 h-16 bg-linear-to-br from-emerald-100 to-emerald-50 rounded-2xl flex items-center justify-center shadow-inner border border-emerald-100/50 shrink-0">
             <Wallet className="h-8 w-8 text-simas-primary" />
           </div>
           <div>
@@ -53,7 +53,7 @@ export default function ZisManagement() {
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Card Saldo */}
-        <div className="bg-white p-6 sm:p-8 rounded-[2rem] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-transform duration-300 flex items-center gap-5 relative overflow-hidden group">
+        <div className="bg-white p-6 sm:p-8 rounded-4xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-transform duration-300 flex items-center gap-5 relative overflow-hidden group">
           <div className="absolute -right-4 -top-4 w-24 h-24 bg-blue-50 rounded-full blur-2xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
           <div className="w-14 h-14 bg-blue-50 border border-blue-100 text-blue-600 rounded-2xl flex items-center justify-center shrink-0 relative z-10">
             <Wallet className="h-7 w-7" />
@@ -65,7 +65,7 @@ export default function ZisManagement() {
         </div>
         
         {/* Card Pemasukan */}
-        <div className="bg-white p-6 sm:p-8 rounded-[2rem] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-transform duration-300 flex items-center gap-5 relative overflow-hidden group">
+        <div className="bg-white p-6 sm:p-8 rounded-4xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-transform duration-300 flex items-center gap-5 relative overflow-hidden group">
           <div className="absolute -right-4 -top-4 w-24 h-24 bg-emerald-50 rounded-full blur-2xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
           <div className="w-14 h-14 bg-emerald-50 border border-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center shrink-0 relative z-10">
             <ArrowDownCircle className="h-7 w-7" />
@@ -77,7 +77,7 @@ export default function ZisManagement() {
         </div>
 
         {/* Card Penyaluran */}
-        <div className="bg-white p-6 sm:p-8 rounded-[2rem] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-transform duration-300 flex items-center gap-5 relative overflow-hidden group">
+        <div className="bg-white p-6 sm:p-8 rounded-4xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-transform duration-300 flex items-center gap-5 relative overflow-hidden group">
           <div className="absolute -right-4 -top-4 w-24 h-24 bg-rose-50 rounded-full blur-2xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
           <div className="w-14 h-14 bg-rose-50 border border-rose-100 text-rose-600 rounded-2xl flex items-center justify-center shrink-0 relative z-10">
             <ArrowUpCircle className="h-7 w-7" />
@@ -91,7 +91,7 @@ export default function ZisManagement() {
 
       {/* Form Input Transaksi (Muncul kalau tombol Tambah Transaksi diklik) */}
       {showForm && (
-        <div className="bg-white p-6 sm:p-10 rounded-[2rem] border border-emerald-100/60 shadow-xl shadow-slate-200/40 relative overflow-hidden animate-in fade-in zoom-in-95 duration-300">
+        <div className="bg-white p-6 sm:p-10 rounded-4xl border border-emerald-100/60 shadow-xl shadow-slate-200/40 relative overflow-hidden animate-in fade-in zoom-in-95 duration-300">
           <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 opacity-50 pointer-events-none"></div>
           
           <h3 className="text-xl font-extrabold text-slate-800 mb-8 flex items-center gap-3">
@@ -161,7 +161,7 @@ export default function ZisManagement() {
       )}
 
       {/* Table Section */}
-      <div className="bg-white rounded-[2rem] border border-slate-100 overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+      <div className="bg-white rounded-4xl border border-slate-100 overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
         <div className="p-6 md:px-8 md:py-6 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
           <h3 className="text-lg font-extrabold text-slate-800">Riwayat Transaksi Terbaru</h3>
         </div>
