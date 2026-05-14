@@ -13,6 +13,7 @@ import Events from "@/pages/public/Events";
 import JadwalSholatPage from "@/pages/public/jadwalSholat";
 
 // Pages – Admin
+import DonasiMasukPage from "@/pages/admin/DonasiMasukPage";
 import ManajemenKasPage from "@/pages/admin/ManajemenKasPage";
 import PrayerConfig from "@/pages/admin/PrayerConfig";
 import VerifyDonasi from "@/pages/admin/verifyDonasi";
@@ -112,6 +113,17 @@ function App() {
 			/>
 
 			<Route
+				path='/admin/donasi'
+				element={
+					<ProtectedRoute resource='donasi'>
+						<AdminLayout>
+							<DonasiMasukPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
 				path='/admin/kas'
 				element={
 					<ProtectedRoute resource='keuangan'>
@@ -134,7 +146,7 @@ function App() {
 			/>
 
 			<Route
-				path='/admin/donasi'
+				path='/admin/verify-donasi'
 				element={
 					<ProtectedRoute resource='donasi'>
 						<AdminLayout>
