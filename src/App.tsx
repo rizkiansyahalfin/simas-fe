@@ -15,6 +15,7 @@ import JadwalSholatPage from "@/pages/public/jadwalSholat";
 // Pages – Admin
 import DonasiMasukPage from "@/pages/admin/DonasiMasukPage";
 import ManajemenKasPage from "@/pages/admin/ManajemenKasPage";
+import InventoryListPage from "@/pages/admin/InventoryListPage";
 import PrayerConfig from "@/pages/admin/PrayerConfig";
 import VerifyDonasi from "@/pages/admin/verifyDonasi";
 import InventoryForm from "@/pages/admin/InventoryForm";
@@ -130,6 +131,17 @@ function App() {
 					<ProtectedRoute resource='keuangan'>
 						<AdminLayout>
 							<ManajemenKasPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
+				path='/admin/inventaris'
+				element={
+					<ProtectedRoute>
+						<AdminLayout>
+							<InventoryListPage />
 						</AdminLayout>
 					</ProtectedRoute>
 				}

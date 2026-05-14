@@ -4,7 +4,6 @@ import api from '../lib/axios'
 import { useAuthStore } from '../stores'
 import type { Role } from '@/lib/rbac'
 
-
 interface LoginCredentials {
   email: string
   password: string
@@ -26,10 +25,16 @@ interface AuthResponse {
   }
 }
 
+function withDefaultRole(user: AuthResponse['user']) {
+  return {
+    ...user,
+    role: user.role ?? ('superadmin' as Role),
+  }
+}
+
 // POST - Login
 export const useLogin = () => {
   const { setAuth } = useAuthStore()
-  const navigate = useNavigate()
 
   return useMutation({
     mutationFn: async (credentials: LoginCredentials) => {
@@ -37,12 +42,14 @@ export const useLogin = () => {
       return data
     },
     onSuccess: (data) => {
-      setAuth({
-        token: data.token,
-        user: { ...data.user, role: data.user.role ?? 'superadmin' },
-      })
       // Delay agar success state sempat tampil di UI
-      setTimeout(() => navigate('/admin'), 1200)
+      setTimeout(() => {
+        setAuth({
+          token: data.token,
+          user: withDefaultRole(data.user),
+          redirectTo: '/admin',
+        })
+      }, 1200)
     },
   })
 }
@@ -50,7 +57,6 @@ export const useLogin = () => {
 // POST - Register
 export const useRegister = () => {
   const { setAuth } = useAuthStore()
-  const navigate = useNavigate()
 
   return useMutation({
     mutationFn: async (credentials: RegisterCredentials) => {
@@ -58,11 +64,13 @@ export const useRegister = () => {
       return data
     },
     onSuccess: (data) => {
-      setAuth({
-        token: data.token,
-        user: { ...data.user, role: data.user.role ?? 'superadmin' },
-      })
-      setTimeout(() => navigate('/admin'), 1200)
+      setTimeout(() => {
+        setAuth({
+          token: data.token,
+          user: withDefaultRole(data.user),
+          redirectTo: '/admin',
+        })
+      }, 1200)
     },
   })
 }
