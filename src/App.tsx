@@ -6,7 +6,7 @@ import AuthLayout from "@/layouts/AuthLayout";
 import PublicLayout from "@/layouts/PublicLayout";
 
 // Pages – Publik
-import Home from "@/pages/public/Home";
+import HomePage from "@/pages/public/HomePage";
 import Articles from "@/pages/public/Articles";
 import ArticleDetail from "@/pages/public/ArticleDetail";
 import Events from "@/pages/public/Events";
@@ -39,7 +39,7 @@ function App() {
 				path='/'
 				element={
 					<PublicLayout>
-						<Home />
+						<HomePage />
 					</PublicLayout>
 				}
 			/>
