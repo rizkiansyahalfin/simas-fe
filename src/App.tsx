@@ -28,6 +28,7 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 import InventoryLoansPage from "./inventoryLoans/pages/InventoryLoansPage";
 import CongregationPage from "./congregation/pages/CongregationPage";
 import MustahikPage from "./mustahik/pages/MustahikPage";
+import FinanceSummaryWidget from "@/finance/FinanceSummeryWidget";
 
 function App() {
 	const { isAuthenticated } = useAuthStore();
@@ -64,6 +65,7 @@ function App() {
 				}
 			/>
 
+			{/* Artikel */}
 			<Route
 				path='/artikel'
 				element={
@@ -78,6 +80,16 @@ function App() {
 				element={
 					<PublicLayout>
 						<ArticleDetail />
+					</PublicLayout>
+				}
+			/>
+
+			{/* Finance Summary */}
+			<Route
+				path='/finance-summary'
+				element={
+					<PublicLayout>
+						<FinanceSummaryWidget />
 					</PublicLayout>
 				}
 			/>
