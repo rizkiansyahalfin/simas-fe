@@ -11,11 +11,11 @@ import Articles from "@/pages/public/Articles";
 import ArticleDetail from "@/pages/public/ArticleDetail";
 import Events from "@/pages/public/Events";
 import JadwalSholatPage from "@/pages/public/jadwalSholat";
+import DonationPage from "./publicDonation/DonationPage";
 
 // Pages – Admin
 import DonasiMasukPage from "@/pages/admin/DonasiMasukPage";
 import ManajemenKasPage from "@/pages/admin/ManajemenKasPage";
-import InventoryListPage from "@/pages/admin/InventoryListPage";
 import PrayerConfig from "@/pages/admin/PrayerConfig";
 import VerifyDonasi from "@/pages/admin/verifyDonasi";
 import InventoryForm from "@/pages/admin/InventoryForm";
@@ -43,6 +43,15 @@ function App() {
 				element={
 					<PublicLayout>
 						<Home />
+					</PublicLayout>
+				}
+			/>
+
+			<Route
+				path='/donation'
+				element={
+					<PublicLayout>
+						<DonationPage />
 					</PublicLayout>
 				}
 			/>
@@ -131,17 +140,6 @@ function App() {
 					<ProtectedRoute resource='keuangan'>
 						<AdminLayout>
 							<ManajemenKasPage />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
-
-			<Route
-				path='/admin/inventaris'
-				element={
-					<ProtectedRoute>
-						<AdminLayout>
-							<InventoryListPage />
 						</AdminLayout>
 					</ProtectedRoute>
 				}
