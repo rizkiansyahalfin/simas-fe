@@ -29,9 +29,9 @@ export default function MustahikPage() {
     <div className="max-w-7xl mx-auto space-y-8 font-sans">
       
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 bg-white p-6 sm:p-8 rounded-[2rem] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 bg-white p-6 sm:p-8 rounded-4xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
         <div className="flex items-center gap-5">
-          <div className="w-16 h-16 bg-gradient-to-br from-emerald-100 to-emerald-50 rounded-2xl flex items-center justify-center shadow-inner border border-emerald-100/50 shrink-0">
+          <div className="w-16 h-16 bg-linear-to-br from-emerald-100 to-emerald-50 rounded-2xl flex items-center justify-center shadow-inner border border-emerald-100/50 shrink-0">
             <Users className="h-8 w-8 text-simas-primary" />
           </div>
           <div>
@@ -50,7 +50,7 @@ export default function MustahikPage() {
       </div>
 
       {/* Filter & Search Bar */}
-      <div className="bg-white p-5 rounded-[1.5rem] border border-slate-100 shadow-[0_4px_20px_rgb(0,0,0,0.02)] flex flex-col md:flex-row gap-4">
+      <div className="bg-white p-5 rounded-3xl border border-slate-100 shadow-[0_4px_20px_rgb(0,0,0,0.02)] flex flex-col md:flex-row gap-4">
         <div className="relative flex-1">
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
             <Search className="h-5 w-5 text-slate-400" />
@@ -77,7 +77,7 @@ export default function MustahikPage() {
       </div>
 
       {/* Table Data */}
-      <div className="bg-white rounded-[2rem] border border-slate-100 overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+      <div className="bg-white rounded-4xl border border-slate-100 overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>

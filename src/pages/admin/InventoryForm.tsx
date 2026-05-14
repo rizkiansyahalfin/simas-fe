@@ -84,7 +84,7 @@ export default function InventoryForm() {
 
       {/* Header Section */}
       <div className="mb-8 flex flex-col sm:flex-row sm:items-center gap-5">
-        <div className="w-16 h-16 bg-gradient-to-br from-emerald-100 to-emerald-50 rounded-2xl flex items-center justify-center shadow-inner border border-emerald-100/50 shrink-0">
+        <div className="w-16 h-16 bg-linear-to-br from-emerald-100 to-emerald-50 rounded-2xl flex items-center justify-center shadow-inner border border-emerald-100/50 shrink-0">
           <Box className="h-8 w-8 text-simas-primary" />
         </div>
         <div>
@@ -106,7 +106,7 @@ export default function InventoryForm() {
       )}
 
       {/* Card Form Premium */}
-      <div className="bg-white p-6 sm:p-10 md:p-12 rounded-[2rem] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden">
+      <div className="bg-white p-6 sm:p-10 md:p-12 rounded-4xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden">
         
         {/* Dekorasi Background Halus di dalam Card */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 opacity-60 pointer-events-none"></div>
