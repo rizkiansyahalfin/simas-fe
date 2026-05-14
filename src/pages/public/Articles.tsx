@@ -53,17 +53,17 @@ export default function Articles() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
           {DUMMY_ARTICLES.map((article) => (
             <Link to={`/artikel/${article.id}`} key={article.id} className="group flex">
-              <div className="bg-white rounded-[2rem] overflow-hidden shadow-[0_4px_20px_rgb(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_20px_40px_rgb(16,185,129,0.08)] hover:border-emerald-200 transition-all duration-500 hover:-translate-y-2 w-full flex flex-col">
+              <div className="bg-white rounded-4xl overflow-hidden shadow-[0_4px_20px_rgb(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_20px_40px_rgb(16,185,129,0.08)] hover:border-emerald-200 transition-all duration-500 hover:-translate-y-2 w-full flex flex-col">
                 
                 {/* Image Container */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-100">
+                <div className="relative aspect-16/10 w-full overflow-hidden bg-gray-100">
                   <img 
                     src={article.imageUrl} 
                     alt={article.title} 
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                   />
                   {/* Gradient Overlay saat Hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
                 
                 {/* Content Container */}

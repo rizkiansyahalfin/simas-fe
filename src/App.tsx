@@ -16,6 +16,7 @@ import DonationPage from "./publicDonation/DonationPage";
 // Pages – Admin
 import DonasiMasukPage from "@/pages/admin/DonasiMasukPage";
 import ManajemenKasPage from "@/pages/admin/ManajemenKasPage";
+import InventoryListPage from "@/pages/admin/InventoryListPage";
 import PrayerConfig from "@/pages/admin/PrayerConfig";
 import VerifyDonasi from "@/pages/admin/verifyDonasi";
 import InventoryForm from "@/pages/admin/InventoryForm";
@@ -178,10 +179,43 @@ function App() {
 				}
 			/>
 
+			{/* ARTIKEL ADMIN */}
+			<Route
+				path='/admin/artikel'
+				element={
+					<ProtectedRoute resource='artikel'>
+						<AdminLayout>
+							<div className='p-6'>Manajemen Artikel (Halaman dalam pengembangan)</div>
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			{/* INVENTARIS */}
+			<Route
+				path='/admin/inventaris'
+				element={
+					<ProtectedRoute resource='inventaris'>
+						<AdminLayout>
+							<InventoryListPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+			<Route
+				path='/admin/inventaris/tambah'
+				element={
+					<ProtectedRoute resource='inventaris'>
+						<AdminLayout>
+							<InventoryForm />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
 			<Route
 				path='/admin/inventory-loans'
 				element={
-					<ProtectedRoute resource='inventory'>
+					<ProtectedRoute resource='inventaris'>
 						<AdminLayout>
 							<InventoryLoansPage />
 						</AdminLayout>
@@ -189,6 +223,17 @@ function App() {
 				}
 			/>
 
+			{/* JAMAAH */}
+			<Route
+				path='/admin/jamaah'
+				element={
+					<ProtectedRoute resource='jamaah'>
+						<AdminLayout>
+							<CongregationPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
 			<Route
 				path='/admin/congregation'
 				element={
@@ -199,7 +244,6 @@ function App() {
 					</ProtectedRoute>
 				}
 			/>
-
 			<Route
 				path='/admin/mustahik'
 				element={
@@ -217,18 +261,6 @@ function App() {
 					<ProtectedRoute resource='keuangan'>
 						<AdminLayout>
 							<ZisDistributionForm />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
-
-			{/* 👇 RUTE INVENTARIS BARU 👇 */}
-			<Route
-				path='/admin/inventaris/tambah'
-				element={
-					<ProtectedRoute resource='inventory'>
-						<AdminLayout>
-							<InventoryForm />
 						</AdminLayout>
 					</ProtectedRoute>
 				}
