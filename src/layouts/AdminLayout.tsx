@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 import { Link, useLocation } from "react-router-dom";
+=======
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+
+>>>>>>> 9a5c571be8feb856ec7b6e12657421c97f7040a1
 import {
 	LayoutDashboard,
 	Wallet,
@@ -13,9 +19,25 @@ import {
 	Menu,
 } from "lucide-react";
 
+<<<<<<< HEAD
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+=======
+import Button from "@/components/ui/button";
+
+import {
+	Sheet,
+	SheetContent,
+	SheetTrigger,
+} from "@/components/ui/sheet";
+
+import {
+	Avatar,
+	AvatarFallback,
+} from "@/components/ui/avatar";
+
+>>>>>>> 9a5c571be8feb856ec7b6e12657421c97f7040a1
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -29,6 +51,7 @@ import { canAccess } from "@/lib/rbac";
 import { useAuthStore } from "@/stores";
 
 const MENU_ITEMS = [
+<<<<<<< HEAD
 	{ title: "Dashboard", icon: LayoutDashboard, resource: "dashboard", path: "/admin" },
 	{ title: "Keuangan", icon: Wallet, resource: "keuangan", path: "/admin/kas" },
 	{ title: "Donasi", icon: HeartHandshake, resource: "donasi", path: "/admin/donasi" },
@@ -38,6 +61,56 @@ const MENU_ITEMS = [
 	{ title: "Inventaris", icon: Archive, resource: "inventaris", path: "/admin/inventaris" },
 	{ title: "Jamaah", icon: Users, resource: "jamaah", path: "/admin/jamaah" },
 	{ title: "Pengaturan", icon: Settings, resource: "pengaturan", path: "/admin/pengaturan" },
+=======
+	{
+		title: "Dashboard",
+		icon: LayoutDashboard,
+		resource: "dashboard",
+		path: "/admin",
+	},
+	{
+		title: "Keuangan",
+		icon: Wallet,
+		resource: "keuangan",
+		path: "/admin/kas",
+	},
+	{
+		title: "Donasi",
+		icon: HeartHandshake,
+		resource: "donasi",
+		path: "/admin/donasi",
+	},
+	{
+		title: "Artikel",
+		icon: FileText,
+		resource: "artikel",
+		path: "/admin/artikel",
+	},
+	{
+		title: "Kegiatan",
+		icon: CalendarDays,
+		resource: "kegiatan",
+		path: "/admin/kegiatan",
+	},
+	{
+		title: "Inventaris",
+		icon: Archive,
+		resource: "inventaris",
+		path: "/admin/inventaris",
+	},
+	{
+		title: "Jamaah",
+		icon: Users,
+		resource: "jamaah",
+		path: "/admin/jamaah",
+	},
+	{
+		title: "Pengaturan",
+		icon: Settings,
+		resource: "pengaturan",
+		path: "/admin/pengaturan",
+	},
+>>>>>>> 9a5c571be8feb856ec7b6e12657421c97f7040a1
 ];
 
 function SidebarContent({
@@ -50,6 +123,7 @@ function SidebarContent({
 	return (
 		<div className='flex flex-col h-full bg-white border-r'>
 			<div className='h-16 flex items-center px-6 border-b shrink-0'>
+<<<<<<< HEAD
 				<Link
 					to='/admin'
 					className='flex items-center rounded-md text-left transition-colors hover:text-simas-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-simas-primary/40'
@@ -58,12 +132,20 @@ function SidebarContent({
 					<span className='text-2xl mr-2'>🕌</span>
 					<span className='text-xl font-bold tracking-tight text-gray-900'>SIMAS</span>
 				</Link>
+=======
+				<span className='text-2xl mr-2'>🕌</span>
+
+				<span className='text-xl font-bold tracking-tight text-gray-900'>
+					SIMAS
+				</span>
+>>>>>>> 9a5c571be8feb856ec7b6e12657421c97f7040a1
 			</div>
 
 			<nav className='flex-1 overflow-y-auto py-4'>
 				<ul className='space-y-1 px-3'>
 					{filteredMenu.map((item) => {
 						const isActive = activePath === item.path;
+
 						return (
 							<li key={item.title}>
 								<Link
@@ -75,8 +157,13 @@ function SidebarContent({
 									}`}
 								>
 									<item.icon
-										className={`h-5 w-5 mr-3 ${isActive ? "text-simas-primary" : "text-gray-500"}`}
+										className={`h-5 w-5 mr-3 ${
+											isActive
+												? "text-simas-primary"
+												: "text-gray-500"
+										}`}
 									/>
+
 									{item.title}
 								</Link>
 							</li>
@@ -88,6 +175,7 @@ function SidebarContent({
 	);
 }
 
+<<<<<<< HEAD
 export default function AdminLayout({ children }: { children?: React.ReactNode }) {
 	const { user, role, logout } = useAuthStore();
 	const location = useLocation();
@@ -104,26 +192,58 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
 
 	const filteredMenu = role ? MENU_ITEMS.filter((item) => canAccess(role, item.resource)) : [];
 	const pageTitle = filteredMenu.find((m) => m.path === activePath)?.title || "Dashboard";
+=======
+export default function AdminLayout({
+	children,
+}: {
+	children?: React.ReactNode;
+}) {
+	const [activeRole] = useState<Role>("superadmin");
+
+	const location = useLocation();
+
+	const activePath = location.pathname;
+
+	const filteredMenu = MENU_ITEMS.filter((item) =>
+		canAccess(activeRole, item.resource)
+	);
+
+	const pageTitle =
+		filteredMenu.find((m) => m.path === activePath)?.title ||
+		"Dashboard";
+>>>>>>> 9a5c571be8feb856ec7b6e12657421c97f7040a1
 
 	return (
 		<div className='fixed inset-0 overflow-auto flex bg-simas-bg-admin'>
 			{/* Sidebar Desktop */}
 			<aside className='hidden md:flex md:w-64 shrink-0 flex-col h-full'>
+<<<<<<< HEAD
 				<SidebarContent filteredMenu={filteredMenu} activePath={activePath} />
+=======
+				<SidebarContent
+					filteredMenu={filteredMenu}
+					activePath={activePath}
+				/>
+>>>>>>> 9a5c571be8feb856ec7b6e12657421c97f7040a1
 			</aside>
 
-			{/* Content Area */}
+			{/* Content */}
 			<div className='flex-1 flex flex-col min-w-0 overflow-auto'>
-				{/* Topbar */}
+				{/* Header */}
 				<header className='h-16 bg-white border-b flex items-center justify-between px-4 sm:px-6 shrink-0 sticky top-0 z-40'>
 					<div className='flex items-center gap-2'>
 						{/* Mobile Menu */}
 						<Sheet>
 							<SheetTrigger asChild>
-								<Button variant='ghost' size='icon' className='md:hidden'>
+								<Button
+									variant='ghost'
+									size='icon'
+									className='md:hidden'
+								>
 									<Menu className='h-5 w-5' />
 								</Button>
 							</SheetTrigger>
+
 							<SheetContent side='left' className='p-0 w-64'>
 								<SheetTitle className='sr-only'>Menu Navigasi</SheetTitle>
 								<SidebarContent
@@ -133,23 +253,34 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
 							</SheetContent>
 						</Sheet>
 
-						<h1 className='text-xl font-semibold text-gray-800' style={{ margin: 0 }}>
+						<h1
+							className='text-xl font-semibold text-gray-800'
+							style={{ margin: 0 }}
+						>
 							{pageTitle}
 						</h1>
 					</div>
 
 					<div className='flex items-center gap-3'>
 						{/* Notifications */}
-						<Button variant='ghost' size='icon' className='relative'>
+						<Button
+							variant='ghost'
+							size='icon'
+							className='relative'
+						>
 							<Bell className='h-5 w-5 text-gray-600' />
+
 							<span className='absolute top-2 right-2 h-2 w-2 bg-red-500 rounded-full border border-white' />
 						</Button>
 
-						{/* User Menu */}
+						{/* User */}
 						<DropdownMenu>
 							<DropdownMenuTrigger asChild>
 								<Button
+<<<<<<< HEAD
 									type='button'
+=======
+>>>>>>> 9a5c571be8feb856ec7b6e12657421c97f7040a1
 									variant='ghost'
 									className='flex items-center gap-2 px-2 hover:bg-gray-100'
 								>
@@ -158,22 +289,46 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
 											{initials}
 										</AvatarFallback>
 									</Avatar>
+
 									<div className='hidden sm:block text-left'>
 										<p className='text-sm font-medium text-gray-700 leading-none'>
 											{user?.name ?? "Admin SIMAS"}
 										</p>
+<<<<<<< HEAD
 										<p className='text-xs text-gray-500 mt-0.5 capitalize'>{role ?? "admin"}</p>
+=======
+
+										<p className='text-xs text-gray-500 mt-0.5 capitalize'>
+											{activeRole}
+										</p>
+>>>>>>> 9a5c571be8feb856ec7b6e12657421c97f7040a1
 									</div>
 								</Button>
 							</DropdownMenuTrigger>
-							<DropdownMenuContent align='end' className='w-56 mt-1'>
-								<DropdownMenuLabel>Akun Saya</DropdownMenuLabel>
+
+							<DropdownMenuContent
+								align='end'
+								className='w-56 mt-1'
+							>
+								<DropdownMenuLabel>
+									Akun Saya
+								</DropdownMenuLabel>
+
 								<DropdownMenuSeparator />
+<<<<<<< HEAD
 								<DropdownMenuItem>Pengaturan Akun</DropdownMenuItem>
 								<DropdownMenuItem
 									className='text-red-600 focus:bg-red-50 focus:text-red-700'
 									onClick={() => logout({ redirectTo: "/login" })}
 								>
+=======
+
+								<DropdownMenuItem>
+									Pengaturan Akun
+								</DropdownMenuItem>
+
+								<DropdownMenuItem className='text-red-600 focus:bg-red-50 focus:text-red-700'>
+>>>>>>> 9a5c571be8feb856ec7b6e12657421c97f7040a1
 									Keluar
 								</DropdownMenuItem>
 							</DropdownMenuContent>
@@ -181,7 +336,7 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
 					</div>
 				</header>
 
-				{/* Main Content */}
+				{/* Main */}
 				<main className='flex-1 p-6'>
 					{children ?? (
 						<div className='border-2 border-dashed border-gray-300 rounded-xl h-96 flex items-center justify-center text-gray-400'>

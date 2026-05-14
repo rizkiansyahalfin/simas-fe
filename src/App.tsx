@@ -20,6 +20,7 @@ import VerifyDonasi from "@/pages/admin/verifyDonasi";
 import InventoryForm from "@/pages/admin/InventoryForm";
 import LaporanPage from "@/pages/admin/LaporanPage";
 import ZisDistributionForm from "@/pages/admin/ZisDistributionForm";
+import KegiatanPage from "@/pages/admin/KegiatanPage";
 import { ForbiddenPage, NotFoundPage, ServerErrorPage } from "@/pages/error/ErrorPage";
 
 // Auth
@@ -218,6 +219,17 @@ function App() {
 					<ProtectedRoute resource='inventory'>
 						<AdminLayout>
 							<InventoryForm />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
+				path='/admin/kegiatan'
+				element={
+					<ProtectedRoute resource='kegiatan'>
+						<AdminLayout>
+							<KegiatanPage />
 						</AdminLayout>
 					</ProtectedRoute>
 				}
