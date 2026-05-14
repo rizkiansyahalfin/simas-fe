@@ -32,7 +32,7 @@ export default function InventoryForm() {
   };
 
   const validateForm = () => {
-    let newErrors: Record<string, string> = {};
+    const newErrors: Record<string, string> = {};
 
     if (!formData.nama_barang.trim()) {
       newErrors.nama_barang = "Nama barang wajib diisi.";

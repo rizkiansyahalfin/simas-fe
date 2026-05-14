@@ -59,7 +59,7 @@ export default function MustahikPage() {
             placeholder="Cari nama mustahik..." 
             className="h-12 pl-12 rounded-xl bg-slate-50/50 border-slate-200 focus-visible:ring-simas-primary/20 focus-visible:border-simas-primary transition-all text-base text-slate-800 font-medium"
             value={searchTerm}
-           onChange={(e: any) => setSearchTerm(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
           />
         </div>
         

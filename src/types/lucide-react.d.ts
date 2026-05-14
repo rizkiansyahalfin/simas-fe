@@ -14,6 +14,7 @@ declare module 'lucide-react' {
   export const ArrowUpCircle: LucideIcon
   export const Bell: LucideIcon
   export const BookOpen: LucideIcon
+  export const Box: LucideIcon
   export const Calendar: LucideIcon
   export const CalendarDays: LucideIcon
   export const Check: LucideIcon
@@ -35,6 +36,7 @@ declare module 'lucide-react' {
   export const FileText: LucideIcon
   export const Globe: LucideIcon
   export const HeartHandshake: LucideIcon
+  export const History: LucideIcon
   export const Home: LucideIcon
   export const Inbox: LucideIcon
   export const LayoutDashboard: LucideIcon
@@ -42,12 +44,14 @@ declare module 'lucide-react' {
   export const Lock: LucideIcon
   export const LogOut: LucideIcon
   export const Mail: LucideIcon
+  export const MailCheck: LucideIcon
   export const MapPin: LucideIcon
   export const Menu: LucideIcon
   export const Moon: LucideIcon
   export const MoreVertical: LucideIcon
   export const Newspaper: LucideIcon
   export const PanelLeft: LucideIcon
+  export const Pencil: LucideIcon
   export const Phone: LucideIcon
   export const Plus: LucideIcon
   export const PlusIcon: LucideIcon
@@ -61,6 +65,7 @@ declare module 'lucide-react' {
   export const Sun: LucideIcon
   export const Tag: LucideIcon
   export const Target: LucideIcon
+  export const Trash2: LucideIcon
   export const TrendingUp: LucideIcon
   export const User: LucideIcon
   export const Users: LucideIcon
