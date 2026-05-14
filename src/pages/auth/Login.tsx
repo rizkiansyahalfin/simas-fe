@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useLocation } from "react-router-dom";
 import { useAuthStore } from "@/stores";
+import api from "@/lib/axios";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -11,6 +12,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const { setAuth } = useAuthStore();
   const location = useLocation();
@@ -20,26 +22,29 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setShowError(false);
+    setErrorMessage("");
 
-    await new Promise((r) => setTimeout(r, 1000));
+    try {
+      const response = await api.post("/auth/login", { email, password });
+      const { data } = response.data;
 
-    // dummy login logic
-    if (email === "admin@simas.com" && password === "123456") {
       setAuth({
-        token: "dummy-token",
-        user: {
-          id: "1",
-          name: "Admin SIMAS",
-          email,
-          role: "superadmin",
-        },
+        token: data.token,
+        user: data.user,
         redirectTo: redirectPath,
       });
-    } else {
+    } catch (error) {
+      console.error("Login error:", error);
       setShowError(true);
+      setErrorMessage(
+        error.response?.data?.error_code || 
+        error.response?.data?.message || 
+        "Terjadi kesalahan saat login. Pastikan email dan password benar."
+      );
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -94,7 +99,7 @@ export default function Login() {
 					{showError && (
 						<div className='flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-600 bg-red-50 border border-red-200'>
 							<AlertCircle className='size-4 shrink-0' />
-							Email atau password yang Anda masukkan salah.
+							{errorMessage || "Email atau password yang Anda masukkan salah."}
 						</div>
 					)}
 
