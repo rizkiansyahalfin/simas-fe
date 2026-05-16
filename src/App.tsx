@@ -24,6 +24,7 @@ import LaporanPage from "@/pages/admin/LaporanPage";
 import ZisDistributionForm from "@/pages/admin/ZisDistributionForm";
 import KegiatanPage from "@/pages/admin/KegiatanPage";
 import { ForbiddenPage, NotFoundPage, ServerErrorPage } from "@/pages/error/ErrorPage";
+import ZisManagement from "@/pages/admin/ZisManagement";
 
 // Auth
 import Login from "@/pages/auth/Login";
@@ -254,6 +255,18 @@ function App() {
 					</ProtectedRoute>
 				}
 			/>
+
+			{/* RUTE MANAJEMEN ZIS */}
+            <Route
+                path='/admin/zis'
+                element={
+                    <ProtectedRoute>
+                        <AdminLayout>
+                            <ZisManagement />
+                        </AdminLayout>
+                    </ProtectedRoute>
+                }
+            />
 
 			<Route
 				path='/admin/zis/distribusi'
