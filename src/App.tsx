@@ -19,6 +19,7 @@ import ManajemenKasPage from "@/pages/admin/ManajemenKasPage";
 import InventoryListPage from "@/pages/admin/InventoryListPage";
 import PrayerConfig from "@/pages/admin/PrayerConfig";
 import VerifyDonasi from "@/pages/admin/verifyDonasi";
+import JadwalSholatJumat from "@/pages/admin/JadwalSholatJumat"; 
 import InventoryForm from "@/pages/admin/InventoryForm";
 import LaporanPage from "@/pages/admin/LaporanPage";
 import ZisDistributionForm from "@/pages/admin/ZisDistributionForm";
@@ -169,6 +170,17 @@ function App() {
 				}
 			/>
 
+			<Route
+				path='/admin/kegiatan'
+				element={
+					<ProtectedRoute>
+						<AdminLayout>
+							<JadwalSholatJumat />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+			
 			<Route
 				path='/admin/laporan'
 				element={
