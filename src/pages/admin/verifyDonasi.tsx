@@ -12,6 +12,7 @@ import VerifyPanel from '@/components/donation/verifyPanel'
 import { SEED } from '@/data/donationSeed'
 import { STATUS_CFG } from '@/data/donationSeed'
 
+
 const fmt = (n: number) => 'Rp ' + n.toLocaleString('id-ID')
 
 

@@ -100,7 +100,7 @@ const LeftPanel = () => (
           className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 transition-all duration-700"
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9hfp9AnJjLlTSA48Yh_2u3LJhz1xdKlbtByfs7m1OTzQY34PHh9Sb8EJfZweDZrQVH8ORGHOp2F2g1pToQBKJt6gcBk_MyDbmpaf9Hx9Wkk-baSeYxYFZhuuF3iBUMapMR5wyQz1ztHDkClqHj1aukM2JEHPPeHFFF_iyPtRrKIKML034UQO_RktrdAoM_AbOSYBoXgClpx4gAN3uW0yEKqD5oAT50850plpt4wPtAOa0GPVSCkHwZ1BoDvUnJ4KF-1mLTqhJmnM"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-primary/80 to-transparent" />
       </div>
     </div>
     <div className="font-label-md opacity-60">© 2024 Pengurus Masjid Community. All Rights Reserved.</div>
@@ -148,7 +148,13 @@ const LoginPage = () => {
 
   const showSuccess = loginSuccess || regSuccess
   const successName = loginData?.user?.name ?? regData?.user?.name ?? ''
-  const apiMsg = (err: unknown) => (err as any)?.response?.data?.message ?? null
+  const apiMsg = (err: unknown) => {
+    if (err && typeof err === 'object' && 'response' in err) {
+      const axiosErr = err as { response?: { data?: { message?: string } } };
+      return axiosErr.response?.data?.message ?? null;
+    }
+    return null;
+  }
 
   return (
     <main className="w-full flex flex-col md:flex-row min-h-screen">

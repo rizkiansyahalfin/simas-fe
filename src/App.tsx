@@ -9,19 +9,31 @@ import PublicLayout from "@/layouts/PublicLayout";
 import Home from "@/pages/public/Home";
 import Articles from "@/pages/public/Articles";
 import ArticleDetail from "@/pages/public/ArticleDetail";
-import Events from "@/pages/public/Events"; // dari HEAD
+import Events from "@/pages/public/Events";
 import JadwalSholatPage from "@/pages/public/jadwalSholat";
+import DonationPage from "./publicDonation/DonationPage";
 
 // Pages – Admin
+import DonasiMasukPage from "@/pages/admin/DonasiMasukPage";
 import ManajemenKasPage from "@/pages/admin/ManajemenKasPage";
+import InventoryListPage from "@/pages/admin/InventoryListPage";
 import PrayerConfig from "@/pages/admin/PrayerConfig";
 import VerifyDonasi from "@/pages/admin/verifyDonasi";
 import JadwalSholatJumat from "@/pages/admin/JadwalSholatJumat"; 
+import InventoryForm from "@/pages/admin/InventoryForm";
+import LaporanPage from "@/pages/admin/LaporanPage";
+import ZisDistributionForm from "@/pages/admin/ZisDistributionForm";
+import KegiatanPage from "@/pages/admin/KegiatanPage";
+import { ForbiddenPage, NotFoundPage, ServerErrorPage } from "@/pages/error/ErrorPage";
+import ZisManagement from "@/pages/admin/ZisManagement";
 
 // Auth
 import Login from "@/pages/auth/Login";
 import { useAuthStore } from "@/stores";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import InventoryLoansPage from "./inventoryLoans/pages/InventoryLoansPage";
+import CongregationPage from "./congregation/pages/CongregationPage";
+import MustahikPage from "./mustahik/pages/MustahikPage";
 
 function App() {
 	const { isAuthenticated } = useAuthStore();
@@ -34,6 +46,15 @@ function App() {
 				element={
 					<PublicLayout>
 						<Home />
+					</PublicLayout>
+				}
+			/>
+
+			<Route
+				path='/donation'
+				element={
+					<PublicLayout>
+						<DonationPage />
 					</PublicLayout>
 				}
 			/>
@@ -90,11 +111,14 @@ function App() {
 				}
 			/>
 
+			<Route path='/403' element={<ForbiddenPage />} />
+			<Route path='/500' element={<ServerErrorPage />} />
+
 			{/* ── ADMIN (PROTECTED) ── */}
 			<Route
 				path='/admin'
 				element={
-					<ProtectedRoute>
+					<ProtectedRoute resource='dashboard'>
 						<AdminLayout>
 							<div className='p-6'>Dashboard</div>
 						</AdminLayout>
@@ -103,9 +127,20 @@ function App() {
 			/>
 
 			<Route
+				path='/admin/donasi'
+				element={
+					<ProtectedRoute resource='donasi'>
+						<AdminLayout>
+							<DonasiMasukPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
 				path='/admin/kas'
 				element={
-					<ProtectedRoute>
+					<ProtectedRoute resource='keuangan'>
 						<AdminLayout>
 							<ManajemenKasPage />
 						</AdminLayout>
@@ -116,7 +151,7 @@ function App() {
 			<Route
 				path='/admin/pengaturan/jadwal-shalat'
 				element={
-					<ProtectedRoute>
+					<ProtectedRoute resource='pengaturan'>
 						<AdminLayout>
 							<PrayerConfig />
 						</AdminLayout>
@@ -125,9 +160,9 @@ function App() {
 			/>
 
 			<Route
-				path='/admin/donasi'
+				path='/admin/verify-donasi'
 				element={
-					<ProtectedRoute>
+					<ProtectedRoute resource='donasi'>
 						<AdminLayout>
 							<VerifyDonasi />
 						</AdminLayout>
@@ -145,9 +180,130 @@ function App() {
 					</ProtectedRoute>
 				}
 			/>
+			
+			<Route
+				path='/admin/laporan'
+				element={
+					<ProtectedRoute resource='laporan'>
+						<AdminLayout>
+							<LaporanPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			{/* ARTIKEL ADMIN */}
+			<Route
+				path='/admin/artikel'
+				element={
+					<ProtectedRoute resource='artikel'>
+						<AdminLayout>
+							<div className='p-6'>Manajemen Artikel (Halaman dalam pengembangan)</div>
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			{/* INVENTARIS */}
+			<Route
+				path='/admin/inventaris'
+				element={
+					<ProtectedRoute resource='inventaris'>
+						<AdminLayout>
+							<InventoryListPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+			<Route
+				path='/admin/inventaris/tambah'
+				element={
+					<ProtectedRoute resource='inventaris'>
+						<AdminLayout>
+							<InventoryForm />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+			<Route
+				path='/admin/inventory-loans'
+				element={
+					<ProtectedRoute resource='inventaris'>
+						<AdminLayout>
+							<InventoryLoansPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			{/* JAMAAH */}
+			<Route
+				path='/admin/jamaah'
+				element={
+					<ProtectedRoute resource='jamaah'>
+						<AdminLayout>
+							<CongregationPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+			<Route
+				path='/admin/congregation'
+				element={
+					<ProtectedRoute resource='jamaah'>
+						<AdminLayout>
+							<CongregationPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+			<Route
+				path='/admin/mustahik'
+				element={
+					<ProtectedRoute resource='jamaah'>
+						<AdminLayout>
+							<MustahikPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			{/* RUTE MANAJEMEN ZIS */}
+            <Route
+                path='/admin/zis'
+                element={
+                    <ProtectedRoute>
+                        <AdminLayout>
+                            <ZisManagement />
+                        </AdminLayout>
+                    </ProtectedRoute>
+                }
+            />
+
+			<Route
+				path='/admin/zis/distribusi'
+				element={
+					<ProtectedRoute resource='keuangan'>
+						<AdminLayout>
+							<ZisDistributionForm />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
+				path='/admin/kegiatan'
+				element={
+					<ProtectedRoute resource='kegiatan'>
+						<AdminLayout>
+							<KegiatanPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
 
 			{/* ── FALLBACK ── */}
-			<Route path='*' element={<Navigate to='/' replace />} />
+			<Route path='*' element={<NotFoundPage />} />
 		</Routes>
 	);
 }

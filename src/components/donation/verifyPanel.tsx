@@ -11,7 +11,7 @@ import {
   Eye
 } from 'lucide-react'
 
-import Button from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 
 import { STATUS_CFG } from '@/data/donationSeed'
 import { formatRupiah } from '@/utils/formatRupiah'

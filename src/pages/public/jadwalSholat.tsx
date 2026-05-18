@@ -37,7 +37,7 @@ export default function JadwalSholatPage() {
     <div className="space-y-6">
 
       {/* HEADER */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-600 to-emerald-800 p-6 text-white shadow-lg">
+      <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-emerald-600 to-emerald-800 p-6 text-white shadow-lg">
 
         <div className="flex justify-between items-start">
           <div>
@@ -146,7 +146,7 @@ export default function JadwalSholatPage() {
 </div>
 
       {/* JUMAT CARD */}
-      <div className="rounded-sm bg-gradient-to-r from-yellow-100 to-yellow-50 p-6 flex flex-col md:flex-row gap-6 items-center shadow-sm">
+      <div className="rounded-sm bg-linear-to-r from-yellow-100 to-yellow-50 p-6 flex flex-col md:flex-row gap-6 items-center shadow-sm">
 
         <div className="flex-1">
         </div>

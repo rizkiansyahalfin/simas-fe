@@ -1,8 +1,10 @@
+import { Link, useLocation } from "react-router-dom";
 import {
 	LayoutDashboard,
 	Wallet,
 	HeartHandshake,
 	FileText,
+	FileSpreadsheet,
 	CalendarDays,
 	Archive,
 	Users,
@@ -11,7 +13,7 @@ import {
 	Menu,
 } from "lucide-react";
 
-import Button from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -25,12 +27,12 @@ import {
 
 import { canAccess } from "@/lib/rbac";
 import { useAuthStore } from "@/stores";
-import { useLocation, useNavigate } from "react-router-dom";
 
 const MENU_ITEMS = [
 	{ title: "Dashboard", icon: LayoutDashboard, resource: "dashboard", path: "/admin" },
-	{ title: "Keuangan", icon: Wallet, resource: "keuangan", path: "/admin/keuangan" },
+	{ title: "Keuangan", icon: Wallet, resource: "keuangan", path: "/admin/kas" },
 	{ title: "Donasi", icon: HeartHandshake, resource: "donasi", path: "/admin/donasi" },
+	{ title: "Laporan", icon: FileSpreadsheet, resource: "laporan", path: "/admin/laporan" },
 	{ title: "Artikel", icon: FileText, resource: "artikel", path: "/admin/artikel" },
 	{ title: "Kegiatan", icon: CalendarDays, resource: "kegiatan", path: "/admin/kegiatan" },
 	{ title: "Inventaris", icon: Archive, resource: "inventaris", path: "/admin/inventaris" },
@@ -41,24 +43,21 @@ const MENU_ITEMS = [
 function SidebarContent({
 	filteredMenu,
 	activePath,
-	onNavigate,
 }: {
 	filteredMenu: typeof MENU_ITEMS;
 	activePath: string;
-	onNavigate: (path: string) => void;
 }) {
 	return (
 		<div className='flex flex-col h-full bg-white border-r'>
 			<div className='h-16 flex items-center px-6 border-b shrink-0'>
-				<button
-					type='button'
-					onClick={() => onNavigate("/admin")}
+				<Link
+					to='/admin'
 					className='flex items-center rounded-md text-left transition-colors hover:text-simas-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-simas-primary/40'
 					aria-label='Ke dashboard admin'
 				>
 					<span className='text-2xl mr-2'>🕌</span>
 					<span className='text-xl font-bold tracking-tight text-gray-900'>SIMAS</span>
-				</button>
+				</Link>
 			</div>
 
 			<nav className='flex-1 overflow-y-auto py-4'>
@@ -67,12 +66,8 @@ function SidebarContent({
 						const isActive = activePath === item.path;
 						return (
 							<li key={item.title}>
-								<a
-									href='#'
-									onClick={(e) => {
-										e.preventDefault();
-										onNavigate(item.path);
-									}}
+								<Link
+									to={item.path}
 									className={`flex items-center px-3 py-2.5 rounded-md transition-colors ${
 										isActive
 											? "bg-emerald-50 text-simas-primary font-bold border-l-4 border-simas-primary"
@@ -83,7 +78,7 @@ function SidebarContent({
 										className={`h-5 w-5 mr-3 ${isActive ? "text-simas-primary" : "text-gray-500"}`}
 									/>
 									{item.title}
-								</a>
+								</Link>
 							</li>
 						);
 					})}
@@ -96,12 +91,12 @@ function SidebarContent({
 export default function AdminLayout({ children }: { children?: React.ReactNode }) {
 	const { user, role, logout } = useAuthStore();
 	const location = useLocation();
-	const navigate = useNavigate();
 	const activePath = location.pathname;
+	
 	const initials = user?.name
 		? user.name
 				.split(" ")
-				.map((name) => name[0])
+				.map((name: string) => name[0])
 				.join("")
 				.slice(0, 2)
 				.toUpperCase()
@@ -109,13 +104,12 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
 
 	const filteredMenu = role ? MENU_ITEMS.filter((item) => canAccess(role, item.resource)) : [];
 	const pageTitle = filteredMenu.find((m) => m.path === activePath)?.title || "Dashboard";
-	const handleNavigate = (path: string) => navigate(path);
 
 	return (
 		<div className='fixed inset-0 overflow-auto flex bg-simas-bg-admin'>
 			{/* Sidebar Desktop */}
 			<aside className='hidden md:flex md:w-64 shrink-0 flex-col h-full'>
-				<SidebarContent filteredMenu={filteredMenu} activePath={activePath} onNavigate={handleNavigate} />
+				<SidebarContent filteredMenu={filteredMenu} activePath={activePath} />
 			</aside>
 
 			{/* Content Area */}
@@ -135,7 +129,6 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
 								<SidebarContent
 									filteredMenu={filteredMenu}
 									activePath={activePath}
-									onNavigate={handleNavigate}
 								/>
 							</SheetContent>
 						</Sheet>

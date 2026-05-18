@@ -3,10 +3,21 @@ import { useState } from 'react'
 import ArticleEditor from './ArticelEditor'
 
 
-export default function ArticleForm({ initialData, onSubmit }: any) {
+type ArticleStatus = 'draft' | 'published'
+
+interface ArticleFormProps {
+  initialData?: {
+    title?: string
+    content?: string
+    status?: ArticleStatus
+  }
+  onSubmit: (data: { title: string; content: string; status: ArticleStatus }) => void
+}
+
+export default function ArticleForm({ initialData, onSubmit }: ArticleFormProps) {
   const [title, setTitle] = useState(initialData?.title || '')
   const [content, setContent] = useState(initialData?.content || '')
-  const [status, setStatus] = useState<'draft' | 'published'>(
+  const [status, setStatus] = useState<ArticleStatus>(
     initialData?.status || 'draft'
   )
 
@@ -29,7 +40,7 @@ export default function ArticleForm({ initialData, onSubmit }: any) {
 
       <select
         value={status}
-        onChange={(e) => setStatus(e.target.value as any)}
+        onChange={(e) => setStatus(e.target.value as ArticleStatus)}
         className="border p-2"
       >
         <option value="draft">Draft</option>
