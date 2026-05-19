@@ -38,7 +38,7 @@ const MENU_ITEMS = [
 	{ title: "Kegiatan", icon: CalendarDays, resource: "kegiatan", path: "/admin/kegiatan" },
 	{ title: "Inventaris", icon: Archive, resource: "inventaris", path: "/admin/inventaris" },
 	{ title: "Jamaah", icon: Users, resource: "jamaah", path: "/admin/jamaah" },
-	{ title: "Pengaturan", icon: Settings, resource: "pengaturan", path: "/admin/pengaturan" },
+	{ title: "Pengaturan", icon: Settings, resource: "profil-masjid", path: "/admin/pengaturan" },
 ];
 
 function SidebarContent({

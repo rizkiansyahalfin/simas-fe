@@ -26,6 +26,9 @@ export const canAccess = (role: Role, resource: string) => {
     case 'pengaturan': // Asumsi semua role bisa buka Pengaturan Akun mereka sendiri
       return true;
 
+    case 'profil-masjid':
+      return false;
+
     default:
       return false;
   }
