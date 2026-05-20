@@ -11,15 +11,23 @@ import Articles from "@/pages/public/Articles";
 import ArticleDetail from "@/pages/public/ArticleDetail";
 import Events from "@/pages/public/Events";
 import JadwalSholatPage from "@/pages/public/jadwalSholat";
+import DonationPage from "./publicDonation/DonationPage";
 
 // Pages – Admin
+import DonasiMasukPage from "@/pages/admin/DonasiMasukPage";
 import ManajemenKasPage from "@/pages/admin/ManajemenKasPage";
+import InventoryListPage from "@/pages/admin/InventoryListPage";
 import PrayerConfig from "@/pages/admin/PrayerConfig";
+import MosqueProfileSettings from "@/pages/admin/MosqueProfileSettings";
 import VerifyDonasi from "@/pages/admin/verifyDonasi";
+import JadwalSholatJumat from "@/pages/admin/JadwalSholatJumat"; 
 import InventoryForm from "@/pages/admin/InventoryForm";
 import LaporanPage from "@/pages/admin/LaporanPage";
 import ZisDistributionForm from "@/pages/admin/ZisDistributionForm";
+import KegiatanPage from "@/pages/admin/KegiatanPage";
 import { ForbiddenPage, NotFoundPage, ServerErrorPage } from "@/pages/error/ErrorPage";
+import ZisManagement from "@/pages/admin/ZisManagement";
+import UserManagementPage from "./pages/admin/UserManagement";
 
 // Auth
 import Login from "@/pages/auth/Login";
@@ -40,6 +48,15 @@ function App() {
 				element={
 					<PublicLayout>
 						<Home />
+					</PublicLayout>
+				}
+			/>
+
+			<Route
+				path='/donation'
+				element={
+					<PublicLayout>
+						<DonationPage />
 					</PublicLayout>
 				}
 			/>
@@ -112,6 +129,17 @@ function App() {
 			/>
 
 			<Route
+				path='/admin/donasi'
+				element={
+					<ProtectedRoute resource='donasi'>
+						<AdminLayout>
+							<DonasiMasukPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
 				path='/admin/kas'
 				element={
 					<ProtectedRoute resource='keuangan'>
@@ -134,7 +162,18 @@ function App() {
 			/>
 
 			<Route
-				path='/admin/donasi'
+				path='/admin/pengaturan'
+				element={
+					<ProtectedRoute resource='profil-masjid'>
+						<AdminLayout>
+							<MosqueProfileSettings />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
+				path='/admin/verify-donasi'
 				element={
 					<ProtectedRoute resource='donasi'>
 						<AdminLayout>
@@ -144,6 +183,17 @@ function App() {
 				}
 			/>
 
+			<Route
+				path='/admin/kegiatan'
+				element={
+					<ProtectedRoute>
+						<AdminLayout>
+							<JadwalSholatJumat />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+			
 			<Route
 				path='/admin/laporan'
 				element={
@@ -155,10 +205,43 @@ function App() {
 				}
 			/>
 
+			{/* ARTIKEL ADMIN */}
+			<Route
+				path='/admin/artikel'
+				element={
+					<ProtectedRoute resource='artikel'>
+						<AdminLayout>
+							<div className='p-6'>Manajemen Artikel (Halaman dalam pengembangan)</div>
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			{/* INVENTARIS */}
+			<Route
+				path='/admin/inventaris'
+				element={
+					<ProtectedRoute resource='inventaris'>
+						<AdminLayout>
+							<InventoryListPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+			<Route
+				path='/admin/inventaris/tambah'
+				element={
+					<ProtectedRoute resource='inventaris'>
+						<AdminLayout>
+							<InventoryForm />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
 			<Route
 				path='/admin/inventory-loans'
 				element={
-					<ProtectedRoute resource='inventory'>
+					<ProtectedRoute resource='inventaris'>
 						<AdminLayout>
 							<InventoryLoansPage />
 						</AdminLayout>
@@ -166,6 +249,17 @@ function App() {
 				}
 			/>
 
+			{/* JAMAAH */}
+			<Route
+				path='/admin/jamaah'
+				element={
+					<ProtectedRoute resource='jamaah'>
+						<AdminLayout>
+							<CongregationPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
 			<Route
 				path='/admin/congregation'
 				element={
@@ -176,7 +270,6 @@ function App() {
 					</ProtectedRoute>
 				}
 			/>
-
 			<Route
 				path='/admin/mustahik'
 				element={
@@ -187,6 +280,18 @@ function App() {
 					</ProtectedRoute>
 				}
 			/>
+
+			{/* RUTE MANAJEMEN ZIS */}
+            <Route
+                path='/admin/zis'
+                element={
+                    <ProtectedRoute>
+                        <AdminLayout>
+                            <ZisManagement />
+                        </AdminLayout>
+                    </ProtectedRoute>
+                }
+            />
 
 			<Route
 				path='/admin/zis/distribusi'
@@ -199,13 +304,23 @@ function App() {
 				}
 			/>
 
-			{/* 👇 RUTE INVENTARIS BARU 👇 */}
 			<Route
-				path='/admin/inventaris/tambah'
+				path='/admin/kegiatan'
 				element={
-					<ProtectedRoute resource='inventory'>
+					<ProtectedRoute resource='kegiatan'>
 						<AdminLayout>
-							<InventoryForm />
+							<KegiatanPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
+				path='/admin/pengurus'
+				element={
+					<ProtectedRoute resource='pengurus'>
+						<AdminLayout>
+							<UserManagementPage />
 						</AdminLayout>
 					</ProtectedRoute>
 				}

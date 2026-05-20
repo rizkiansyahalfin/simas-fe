@@ -3,17 +3,33 @@
 
 /* ═══════════════════════════════════════════
    DESIGN TOKENS
-═══════════════════════════════════════════ */
+   ═══════════════════════════════════════════ */
 @theme {
   --font-sans:    'Geist Variable', system-ui, sans-serif;
   --font-heading: 'Geist Variable', system-ui, sans-serif;
 
-  /* Brand */
+  /* Brand Colors */
   --color-simas-primary:      #10b981;
   --color-simas-primary-dark: #059669;
   --color-simas-primary-deep: #047857;
   --color-simas-accent:       #b45309;
   --color-simas-accent-light: #fef3c7;
+
+  /* UI Base Colors (Shadcn/ui style) */
+  --color-background: #f8fafc;
+  --color-foreground: #0f172a;
+  --color-card: #ffffff;
+  --color-card-foreground: #0f172a;
+  --color-primary: #10b981;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #f1f5f9;
+  --color-secondary-foreground: #0f172a;
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #64748b;
+  --color-border: #e2e8f0;
+  --color-input: #cbd5e1;
+  --color-ring: #10b981;
+  --color-destructive: #dc2626;
 
   /* Surfaces */
   --color-simas-bg-admin:  #f8fafc;
@@ -34,44 +50,11 @@
   --color-emerald-800: #065f46;
   --color-emerald-900: #064e3b;
   --color-emerald-950: #022c22;
-
-  /* Fonts */
-  --font-sans:    'Geist Variable', system-ui, sans-serif;
-  --font-heading: 'Geist Variable', system-ui, sans-serif;
- 
-  /* Brand */
-  --color-simas-primary:      #10b981;
-  --color-simas-primary-dark: #059669;
-  --color-simas-primary-deep: #047857;
-  --color-simas-accent:       #b45309;
-  --color-simas-accent-light: #fef3c7;
- 
-  /* Backgrounds */
-  --color-simas-bg-admin:  #f8fafc;
-  --color-simas-bg-public: #f0fdf4;
- 
-  /* Radius */
-  --radius-simas-admin: 0.75rem;
- 
-  /* Emerald scale */
-  --color-emerald-50:  #ecfdf5;
-  --color-emerald-100: #d1fae5;
-  --color-emerald-200: #a7f3d0;
-  --color-emerald-300: #6ee7b7;
-  --color-emerald-400: #34d399;
-  --color-emerald-500: #10b981;
-  --color-emerald-600: #059669;
-  --color-emerald-700: #047857;
-  --color-emerald-800: #065f46;
-  --color-emerald-900: #064e3b;
-  --color-emerald-950: #022c22;
-
-  
 }
 
 /* ═══════════════════════════════════════════
    BASE
-═══════════════════════════════════════════ */
+   ═══════════════════════════════════════════ */
 @layer base {
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -91,7 +74,7 @@
 
 /* ═══════════════════════════════════════════
    COMPONENTS
-═══════════════════════════════════════════ */
+   ═══════════════════════════════════════════ */
 @layer components {
 
   /* ── Buttons ── */
@@ -314,6 +297,158 @@
   .page-btn { @apply size-8 rounded-xl border border-gray-200 bg-white text-sm font-bold text-gray-500 flex items-center justify-center cursor-pointer transition-all hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed; }
   .page-btn.active { @apply text-white border-transparent; background: linear-gradient(135deg, #10b981, #059669); }
 
+  /* ── Table columns (5-col) ── */
+  .um-tbl-header {
+    @apply grid px-6 py-3 bg-gray-50 border-b border-gray-100;
+    grid-template-columns: 2fr 1.1fr 1.3fr 1fr 7rem;
+  }
+  .um-tbl-row {
+    @apply grid px-6 py-4 items-center border-b border-gray-50
+           transition-colors last:border-0;
+    grid-template-columns: 2fr 1.1fr 1.3fr 1fr 7rem;
+  }
+  .um-tbl-row:hover { @apply bg-emerald-50/40; }
+
+  /* ── Role filter tabs ── */
+  .um-role-tab {
+    @apply flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold
+           border border-gray-200 bg-white text-gray-500
+           cursor-pointer transition-all hover:border-simas-primary hover:text-simas-primary;
+  }
+  .um-role-tab-active { @apply border-simas-primary text-simas-primary bg-emerald-50; }
+  .um-role-tab-count {
+    @apply text-xs font-black px-1.5 py-0.5 rounded-full
+           bg-gray-100 text-gray-500 min-w-[1.25rem] text-center;
+  }
+  .um-role-tab-count-active { @apply bg-simas-primary text-white; }
+
+  /* ── Role badges ── */
+  .um-badge-superadmin { @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-black bg-violet-100 text-violet-700; }
+  .um-badge-bendahara  { @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-black bg-sky-100 text-sky-700; }
+  .um-badge-sekretaris { @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-black bg-emerald-100 text-emerald-700; }
+  .um-badge-operator   { @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-black bg-amber-100 text-amber-700; }
+
+  /* ── Status badges ── */
+  .um-status-aktif    { @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700; }
+  .um-status-nonaktif { @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-gray-100 text-gray-500; }
+
+  /* ── Delete button ── */
+  .um-del-btn {
+    @apply size-8 rounded-xl flex items-center justify-center
+           text-gray-400 bg-gray-50 cursor-pointer transition-colors
+           hover:bg-red-50 hover:text-red-500;
+  }
+
+  /* ── Modal (center dialog) ── */
+  .um-modal {
+    @apply fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+           w-full bg-white z-50 rounded-3xl overflow-hidden;
+    max-width: 36rem;
+    max-height: 92vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 64px rgb(0 0 0 / 0.18);
+    animation: slidePanel 0.2s ease;
+  }
+
+   /* ── User management form ── */
+  .um-form {
+    @apply px-6 py-6 space-y-5;
+  }
+
+  .um-field {
+    @apply space-y-2;
+  }
+
+  .um-label {
+    @apply block text-sm font-bold text-gray-700;
+  }
+
+  .um-input {
+    @apply h-12 rounded-2xl border-2 border-gray-200 bg-gray-50
+           px-4 text-sm text-gray-800
+           transition-all outline-none;
+
+    @apply focus:border-simas-primary focus:bg-white focus:ring-4 focus:ring-emerald-100;
+  }
+
+  .um-select-trigger {
+    @apply w-full h-12 px-4 rounded-2xl border-2 border-gray-200
+           bg-gray-50 flex items-center justify-between
+           text-sm transition-all cursor-pointer;
+  }
+
+  .um-select-trigger.open {
+    @apply border-simas-primary bg-white ring-4 ring-emerald-100;
+  }
+
+  .um-select-menu {
+    @apply absolute z-30 mt-1 w-full overflow-hidden
+           rounded-2xl border border-gray-100 bg-white shadow-2xl gap-1;
+  }
+
+  .um-select-item {
+    @apply w-full px-4 py-3 flex items-start justify-between
+           text-left transition-colors cursor-pointer;
+  }
+
+  .um-select-item:hover {
+    @apply bg-gray-50;
+  }
+
+  .um-select-item-active {
+    @apply bg-emerald-50;
+  }
+
+  .um-select-title {
+    @apply text-sm font-bold text-gray-800;
+  }
+
+  .um-select-desc {
+    @apply text-xs text-gray-400 mt-0.5;
+  }
+
+  .um-password-wrap {
+    @apply relative flex-1;
+  }
+
+  .um-password-toggle {
+    @apply absolute right-2 top-0
+           size-8 rounded-xl flex items-center justify-center
+           bg-gray-100 text-gray-400
+           transition-colors cursor-pointer;
+  }
+
+  .um-password-toggle:hover {
+    @apply bg-gray-200 text-gray-600;
+  }
+
+  .um-footer {
+    @apply px-6 pb-6 pt-2 flex gap-3;
+  }
+
+  /* ── Generate password button ── */
+  .um-gen-btn {
+    @apply flex items-center gap-1.5 h-11 px-3 rounded-xl shrink-0
+           border-2 border-gray-200 bg-gray-50 text-xs font-bold text-gray-600
+           cursor-pointer transition-colors whitespace-nowrap
+           hover:border-simas-primary hover:text-simas-primary hover:bg-emerald-50;
+  }
+
+  /* ── Checkbox row ── */
+  .um-checkbox-row { @apply flex items-center gap-3 cursor-pointer; }
+  .um-checkbox {
+    @apply size-5 rounded-md border-2 border-gray-300 flex items-center justify-center
+           shrink-0 transition-all cursor-pointer;
+  }
+  .um-checkbox-on { @apply border-simas-primary bg-simas-primary; }
+  .jumat-confirm {
+  @apply fixed left-1/2 top-1/2 z-50 w-full max-w-sm
+         -translate-x-1/2 -translate-y-1/2
+         rounded-3xl bg-white p-6;
+  
+  box-shadow: 0 24px 64px rgb(0 0 0 / 0.18);
+  }
+
   /* ── Slide-over panel ── */
   .panel-backdrop { @apply fixed inset-0 bg-black/30 backdrop-blur-sm z-40; }
   .slide-panel {
@@ -337,4 +472,124 @@
 
   /* ── Geo pattern overlay ── */
   .geo-overlay { @apply absolute inset-0 w-full h-full pointer-events-none; }
+
+  
+  /* ── Jadwal card ── */
+  .jumat-card {
+    @apply bg-white rounded-2xl border border-gray-100 p-5
+           shadow-sm transition-all hover:shadow-md;
+  }
+  .jumat-card-highlight {
+    @apply border-simas-primary/30 shadow-md;
+    box-shadow: 0 4px 24px rgb(16 185 129 / 0.1);
+  }
+ 
+  /* ── Card date & label ── */
+  .jumat-minggu-label {
+    @apply text-xs font-bold text-gray-400 tracking-widest uppercase mb-1;
+  }
+  .jumat-card-date {
+    @apply text-lg font-black text-gray-900 leading-tight;
+  }
+ 
+  /* ── Action buttons on card ── */
+  .jumat-action-btn {
+    @apply size-7 rounded-lg bg-gray-100 flex items-center justify-center
+           text-gray-400 cursor-pointer transition-colors
+           hover:bg-emerald-100 hover:text-simas-primary;
+  }
+  .jumat-action-delete {
+    @apply hover:bg-red-50 hover:text-red-500;
+  }
+ 
+  /* ── Role row ── */
+  .jumat-role-icon {
+    @apply size-8 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0;
+  }
+  .jumat-role-label {
+    @apply text-xs font-bold text-gray-400 tracking-widest uppercase;
+  }
+  .jumat-role-name {
+    @apply text-sm font-bold text-gray-800;
+  }
+  .jumat-role-empty {
+    @apply text-gray-300;
+  }
+ 
+  /* ── Tema box ── */
+  .jumat-tema-box {
+    @apply bg-emerald-50/60 rounded-xl p-3 mb-3;
+  }
+ 
+  /* ── Fill jadwal button ── */
+  .jumat-fill-btn {
+    @apply w-full flex items-center justify-center gap-1.5 h-9 rounded-xl
+           border-2 border-dashed border-emerald-200 text-xs font-bold
+           text-simas-primary bg-transparent cursor-pointer transition-colors
+           hover:bg-emerald-50;
+  }
+ 
+  /* ── Add new card ── */
+  .jumat-add-card {
+    @apply bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 p-5
+           flex flex-col items-center justify-center gap-2 min-h-[220px]
+           cursor-pointer transition-all
+           hover:border-simas-primary hover:bg-emerald-50/40;
+  }
+  .jumat-add-icon {
+    @apply size-12 rounded-2xl bg-emerald-50 flex items-center justify-center mb-1
+           transition-colors group-hover:bg-emerald-100;
+  }
+ 
+  /* ── Bulan selector button ── */
+  .jumat-bulan-btn {
+    @apply flex items-center gap-2 h-10 px-4 rounded-xl border border-gray-200
+           bg-white text-sm font-semibold text-gray-700 cursor-pointer
+           transition-colors hover:border-simas-primary hover:text-simas-primary;
+  }
+ 
+  /* ── Banner (dark green gradient) ── */
+  .jumat-banner {
+    @apply relative rounded-3xl overflow-hidden text-white;
+    background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+  }
+ 
+  /* ── Modal (centered dialog) ── */
+  .jumat-modal {
+    @apply fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+           w-full bg-white z-50 flex flex-col rounded-3xl overflow-hidden;
+    max-width: 28rem;
+    max-height: 90vh;
+    box-shadow: 0 24px 64px rgb(0 0 0 / 0.18);
+    animation: slidePanel 0.2s ease;
+  }
+ 
+  /* ── Form input inside modal ── */
+  .jumat-label {
+    @apply block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5;
+  }
+  .jumat-input {
+    @apply h-11 rounded-xl border-gray-200 bg-gray-50 text-sm
+           focus:bg-white focus:border-simas-primary focus-visible:ring-0 transition-colors;
+  }
+ 
+  /* ── Status pill buttons in modal ── */
+  .jumat-status-btn {
+    @apply flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold
+           border-2 border-gray-100 bg-gray-50 text-gray-500
+           cursor-pointer transition-all hover:border-simas-primary hover:text-simas-primary;
+  }
+  .jumat-status-btn-active {
+    @apply border-simas-primary text-simas-primary bg-emerald-50;
+  }
+ 
+  /* ── Delete confirm dialog ── */
+  .jumat-confirm {
+    @apply fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+           w-full bg-white z-50 rounded-3xl p-6;
+    max-width: 20rem;
+    box-shadow: 0 24px 64px rgb(0 0 0 / 0.2);
+    animation: slidePanel 0.2s ease;
+  }
 }
+
