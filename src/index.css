@@ -297,6 +297,158 @@
   .page-btn { @apply size-8 rounded-xl border border-gray-200 bg-white text-sm font-bold text-gray-500 flex items-center justify-center cursor-pointer transition-all hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed; }
   .page-btn.active { @apply text-white border-transparent; background: linear-gradient(135deg, #10b981, #059669); }
 
+  /* ── Table columns (5-col) ── */
+  .um-tbl-header {
+    @apply grid px-6 py-3 bg-gray-50 border-b border-gray-100;
+    grid-template-columns: 2fr 1.1fr 1.3fr 1fr 7rem;
+  }
+  .um-tbl-row {
+    @apply grid px-6 py-4 items-center border-b border-gray-50
+           transition-colors last:border-0;
+    grid-template-columns: 2fr 1.1fr 1.3fr 1fr 7rem;
+  }
+  .um-tbl-row:hover { @apply bg-emerald-50/40; }
+
+  /* ── Role filter tabs ── */
+  .um-role-tab {
+    @apply flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold
+           border border-gray-200 bg-white text-gray-500
+           cursor-pointer transition-all hover:border-simas-primary hover:text-simas-primary;
+  }
+  .um-role-tab-active { @apply border-simas-primary text-simas-primary bg-emerald-50; }
+  .um-role-tab-count {
+    @apply text-xs font-black px-1.5 py-0.5 rounded-full
+           bg-gray-100 text-gray-500 min-w-[1.25rem] text-center;
+  }
+  .um-role-tab-count-active { @apply bg-simas-primary text-white; }
+
+  /* ── Role badges ── */
+  .um-badge-superadmin { @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-black bg-violet-100 text-violet-700; }
+  .um-badge-bendahara  { @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-black bg-sky-100 text-sky-700; }
+  .um-badge-sekretaris { @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-black bg-emerald-100 text-emerald-700; }
+  .um-badge-operator   { @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-black bg-amber-100 text-amber-700; }
+
+  /* ── Status badges ── */
+  .um-status-aktif    { @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700; }
+  .um-status-nonaktif { @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-gray-100 text-gray-500; }
+
+  /* ── Delete button ── */
+  .um-del-btn {
+    @apply size-8 rounded-xl flex items-center justify-center
+           text-gray-400 bg-gray-50 cursor-pointer transition-colors
+           hover:bg-red-50 hover:text-red-500;
+  }
+
+  /* ── Modal (center dialog) ── */
+  .um-modal {
+    @apply fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+           w-full bg-white z-50 rounded-3xl overflow-hidden;
+    max-width: 36rem;
+    max-height: 92vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 64px rgb(0 0 0 / 0.18);
+    animation: slidePanel 0.2s ease;
+  }
+
+   /* ── User management form ── */
+  .um-form {
+    @apply px-6 py-6 space-y-5;
+  }
+
+  .um-field {
+    @apply space-y-2;
+  }
+
+  .um-label {
+    @apply block text-sm font-bold text-gray-700;
+  }
+
+  .um-input {
+    @apply h-12 rounded-2xl border-2 border-gray-200 bg-gray-50
+           px-4 text-sm text-gray-800
+           transition-all outline-none;
+
+    @apply focus:border-simas-primary focus:bg-white focus:ring-4 focus:ring-emerald-100;
+  }
+
+  .um-select-trigger {
+    @apply w-full h-12 px-4 rounded-2xl border-2 border-gray-200
+           bg-gray-50 flex items-center justify-between
+           text-sm transition-all cursor-pointer;
+  }
+
+  .um-select-trigger.open {
+    @apply border-simas-primary bg-white ring-4 ring-emerald-100;
+  }
+
+  .um-select-menu {
+    @apply absolute z-30 mt-1 w-full overflow-hidden
+           rounded-2xl border border-gray-100 bg-white shadow-2xl gap-1;
+  }
+
+  .um-select-item {
+    @apply w-full px-4 py-3 flex items-start justify-between
+           text-left transition-colors cursor-pointer;
+  }
+
+  .um-select-item:hover {
+    @apply bg-gray-50;
+  }
+
+  .um-select-item-active {
+    @apply bg-emerald-50;
+  }
+
+  .um-select-title {
+    @apply text-sm font-bold text-gray-800;
+  }
+
+  .um-select-desc {
+    @apply text-xs text-gray-400 mt-0.5;
+  }
+
+  .um-password-wrap {
+    @apply relative flex-1;
+  }
+
+  .um-password-toggle {
+    @apply absolute right-2 top-0
+           size-8 rounded-xl flex items-center justify-center
+           bg-gray-100 text-gray-400
+           transition-colors cursor-pointer;
+  }
+
+  .um-password-toggle:hover {
+    @apply bg-gray-200 text-gray-600;
+  }
+
+  .um-footer {
+    @apply px-6 pb-6 pt-2 flex gap-3;
+  }
+
+  /* ── Generate password button ── */
+  .um-gen-btn {
+    @apply flex items-center gap-1.5 h-11 px-3 rounded-xl shrink-0
+           border-2 border-gray-200 bg-gray-50 text-xs font-bold text-gray-600
+           cursor-pointer transition-colors whitespace-nowrap
+           hover:border-simas-primary hover:text-simas-primary hover:bg-emerald-50;
+  }
+
+  /* ── Checkbox row ── */
+  .um-checkbox-row { @apply flex items-center gap-3 cursor-pointer; }
+  .um-checkbox {
+    @apply size-5 rounded-md border-2 border-gray-300 flex items-center justify-center
+           shrink-0 transition-all cursor-pointer;
+  }
+  .um-checkbox-on { @apply border-simas-primary bg-simas-primary; }
+  .jumat-confirm {
+  @apply fixed left-1/2 top-1/2 z-50 w-full max-w-sm
+         -translate-x-1/2 -translate-y-1/2
+         rounded-3xl bg-white p-6;
+  
+  box-shadow: 0 24px 64px rgb(0 0 0 / 0.18);
+  }
+
   /* ── Slide-over panel ── */
   .panel-backdrop { @apply fixed inset-0 bg-black/30 backdrop-blur-sm z-40; }
   .slide-panel {
@@ -321,6 +473,7 @@
   /* ── Geo pattern overlay ── */
   .geo-overlay { @apply absolute inset-0 w-full h-full pointer-events-none; }
 
+  
   /* ── Jadwal card ── */
   .jumat-card {
     @apply bg-white rounded-2xl border border-gray-100 p-5

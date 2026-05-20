@@ -31,6 +31,7 @@ import { useAuthStore } from "@/stores";
 const MENU_ITEMS = [
 	{ title: "Dashboard", icon: LayoutDashboard, resource: "dashboard", path: "/admin" },
 	{ title: "Keuangan", icon: Wallet, resource: "keuangan", path: "/admin/kas" },
+	{ title: "Pengurus", icon: Users, resource: "pengurus", path: "/admin/pengurus" },
 	{ title: "Donasi", icon: HeartHandshake, resource: "donasi", path: "/admin/donasi" },
 	{ title: "Laporan", icon: FileSpreadsheet, resource: "laporan", path: "/admin/laporan" },
 	{ title: "Artikel", icon: FileText, resource: "artikel", path: "/admin/artikel" },
