@@ -36,6 +36,7 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 import InventoryLoansPage from "./inventoryLoans/pages/InventoryLoansPage";
 import CongregationPage from "./congregation/pages/CongregationPage";
 import MustahikPage from "./mustahik/pages/MustahikPage";
+import AdminGalleryPage from "./gallery/pages/AdminGalleryPage";
 
 function App() {
 	const { isAuthenticated } = useAuthStore();
@@ -321,6 +322,17 @@ function App() {
 					<ProtectedRoute resource='pengurus'>
 						<AdminLayout>
 							<UserManagementPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
+				path='/admin/gallery'
+				element={
+					<ProtectedRoute resource='gallery'>
+						<AdminLayout>
+							<AdminGalleryPage />
 						</AdminLayout>
 					</ProtectedRoute>
 				}
