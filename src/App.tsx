@@ -28,6 +28,7 @@ import KegiatanPage from "@/pages/admin/KegiatanPage";
 import { ForbiddenPage, NotFoundPage, ServerErrorPage } from "@/pages/error/ErrorPage";
 import ZisManagement from "@/pages/admin/ZisManagement";
 import UserManagementPage from "./pages/admin/UserManagement";
+import DashboardPage from "@/pages/admin/DashboardPage";
 
 // Auth
 import Login from "@/pages/auth/Login";
@@ -123,7 +124,7 @@ function App() {
 				element={
 					<ProtectedRoute resource='dashboard'>
 						<AdminLayout>
-							<div className='p-6'>Dashboard</div>
+							<DashboardPage />
 						</AdminLayout>
 					</ProtectedRoute>
 				}
@@ -337,6 +338,8 @@ function App() {
 					</ProtectedRoute>
 				}
 			/>
+
+			
 
 			{/* ── FALLBACK ── */}
 			<Route path='*' element={<NotFoundPage />} />
