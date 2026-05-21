@@ -37,6 +37,8 @@ import InventoryLoansPage from "./inventoryLoans/pages/InventoryLoansPage";
 import CongregationPage from "./congregation/pages/CongregationPage";
 import MustahikPage from "./mustahik/pages/MustahikPage";
 import AdminGalleryPage from "./gallery/pages/AdminGalleryPage";
+import CampaignListPage from "./campaigns/pages/CampaignListPage";
+import CampaignDetailPage from "./campaigns/pages/CampaignDetailPage";
 
 function App() {
 	const { isAuthenticated } = useAuthStore();
@@ -99,6 +101,20 @@ function App() {
 					</PublicLayout>
 				}
 			/>
+
+			<Route 
+				path="/campaigns" 
+				element={
+					<PublicLayout>
+						<CampaignListPage />
+					</PublicLayout>} />
+					
+			<Route 
+				path="/campaigns/:id" 
+				element={
+					<PublicLayout>
+						<CampaignDetailPage />
+					</PublicLayout>} />
 
 			{/* ── LOGIN ── */}
 			<Route

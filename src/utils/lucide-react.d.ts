@@ -12,6 +12,7 @@ declare module 'lucide-react' {
   export const Trash2: React.FC<any>
   export const Pencil: React.FC<any>
   export const AlertTriangle: React.FC<any>
+  export const Inbox: React.FC<Any>
 
   const content: any
   export default content
