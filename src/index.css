@@ -591,5 +591,24 @@
     box-shadow: 0 24px 64px rgb(0 0 0 / 0.2);
     animation: slidePanel 0.2s ease;
   }
+
+  /* Trend badges */
+  .db-trend-up   { @apply text-xs font-bold text-emerald-600; }
+  .db-trend-down { @apply text-xs font-bold text-red-500; }
+ 
+  /* Legend dot (chart) */
+  .db-legend-dot { @apply size-2.5 rounded-full shrink-0 inline-block; }
+ 
+  /* Recharts custom tooltip */
+  .db-tooltip {
+    @apply bg-white border border-gray-100 rounded-2xl p-3 shadow-xl text-xs;
+  }
+  .db-tooltip-label { @apply font-bold text-gray-700 mb-2; }
+  .db-tooltip-row   { @apply flex items-center gap-2 mb-1; }
+  .db-tooltip-dot   { @apply size-2 rounded-full shrink-0 bg-gray-300; }
+ 
+  /* Progress bar 50% (Jadwal Jumat) */
+  .db-progress-half { @apply w-1/2; }
+ 
 }
 
