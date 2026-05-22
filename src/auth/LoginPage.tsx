@@ -149,13 +149,24 @@ const LoginPage = () => {
 
   const showSuccess = loginSuccess || regSuccess
   const successName = loginData?.user?.name ?? regData?.user?.name ?? ''
+  const KNOWN_ERRORS: Record<string, string> = {
+    INVALID_CREDENTIALS: 'Email atau password yang Anda masukkan salah.',
+    ACCOUNT_DISABLED: 'Akun Anda telah dinonaktifkan. Hubungi admin pusat.',
+    ACCOUNT_LOCKED: 'Akun Anda terkunci karena terlalu banyak percobaan gagal.',
+    EMAIL_NOT_FOUND: 'Email tidak terdaftar. Silakan hubungi admin pusat.',
+    TOKEN_EXPIRED: 'Sesi Anda telah berakhir. Silakan login ulang.',
+  }
+
   const apiMsg = (err: unknown) => {
     if (isRateLimited(err)) {
       return 'Terlalu banyak percobaan login. Silakan coba lagi beberapa saat lagi.'
     }
     if (err && typeof err === 'object' && 'response' in err) {
-      const axiosErr = err as { response?: { data?: { message?: string } } }
-      return axiosErr.response?.data?.message ?? null
+      const body = (err as { response: { data?: Record<string, unknown> } }).response?.data
+      if (body?.error_code && typeof body.error_code === 'string') {
+        return KNOWN_ERRORS[body.error_code] ?? body.message as string | undefined ?? null
+      }
+      return (body?.message as string | undefined) ?? null
     }
     return null
   }

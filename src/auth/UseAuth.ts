@@ -15,17 +15,25 @@ interface RegisterCredentials {
   password: string
 }
 
-interface AuthResponse {
-  token: string
-  user: {
-    id: string
-    name: string
-    email: string
-    role?: Role
-  }
+interface AuthUser {
+  id: string
+  name: string
+  email: string
+  username?: string
+  role?: Role
 }
 
-function withDefaultRole(user: AuthResponse['user']) {
+interface AuthResponse {
+  token: string
+  user: AuthUser
+}
+
+interface AuthApiResponse {
+  success: boolean
+  data: AuthResponse
+}
+
+function withDefaultRole(user: AuthUser) {
   return {
     ...user,
     role: user.role ?? ('superadmin' as Role),
@@ -38,15 +46,14 @@ export const useLogin = () => {
 
   return useMutation({
     mutationFn: async (credentials: LoginCredentials) => {
-      const { data } = await api.post<AuthResponse>('/api/auth/login', credentials)
-      return data
+      const { data: res } = await api.post<AuthApiResponse>('/api/auth/login', credentials)
+      return res.data
     },
-    onSuccess: (data) => {
-      // Delay agar success state sempat tampil di UI
+    onSuccess: (payload) => {
       setTimeout(() => {
         setAuth({
-          token: data.token,
-          user: withDefaultRole(data.user),
+          token: payload.token,
+          user: withDefaultRole(payload.user),
           redirectTo: '/admin',
         })
       }, 1200)
@@ -60,14 +67,14 @@ export const useRegister = () => {
 
   return useMutation({
     mutationFn: async (credentials: RegisterCredentials) => {
-      const { data } = await api.post<AuthResponse>('/api/auth/register', credentials)
-      return data
+      const { data: res } = await api.post<AuthApiResponse>('/api/auth/register', credentials)
+      return res.data
     },
-    onSuccess: (data) => {
+    onSuccess: (payload) => {
       setTimeout(() => {
         setAuth({
-          token: data.token,
-          user: withDefaultRole(data.user),
+          token: payload.token,
+          user: withDefaultRole(payload.user),
           redirectTo: '/admin',
         })
       }, 1200)
