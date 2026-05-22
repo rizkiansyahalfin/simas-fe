@@ -1,7 +1,6 @@
 // src/features/gallery/components/UploadDropzone.tsx
 
-import { Upload }
-from 'lucide-react'
+import { Upload } from 'lucide-react'
 
 export default function UploadDropzone() {
   return (

@@ -1,16 +1,14 @@
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
-import {
-	Building2,
-	Globe,
-	ImagePlus,
-	Mail,
-	MapPin,
-	Phone,
-	Save,
-	Trash2,
-	UserRound,
-} from "lucide-react";
+import { Building2 } from "lucide-react";
+import { Globe } from "lucide-react";
+import { ImagePlus } from "lucide-react";
+import { Mail } from "lucide-react";
+import { MapPin } from "lucide-react";
+import { Phone } from "lucide-react";
+import { Save } from "lucide-react";
+import { Trash2 } from "lucide-react";
+import { UserRound } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

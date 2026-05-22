@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Save, HeartHandshake, FileText, Link as LinkIcon } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import { Save } from "lucide-react";
+import { HeartHandshake } from "lucide-react";
+import { FileText } from "lucide-react";
+import { LinkIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

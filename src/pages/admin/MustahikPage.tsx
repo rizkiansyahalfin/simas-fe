@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Users, Search, Plus, History, HeartHandshake } from "lucide-react";
+import { Users } from "lucide-react";
+import { Search } from "lucide-react";
+import { Plus } from "lucide-react";
+import { History } from "lucide-react";
+import { HeartHandshake } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

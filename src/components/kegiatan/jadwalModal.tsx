@@ -1,5 +1,10 @@
 import { useState } from "react"
-import { Check, Mic, Users, Volume2, BookOpen, X } from "lucide-react"
+import { Check } from 'lucide-react'
+import { Mic } from 'lucide-react'
+import { Users } from 'lucide-react'
+import { Volume2 } from 'lucide-react'
+import { BookOpen } from 'lucide-react'
+import { X } from 'lucide-react'
 import type { JadwalJumat } from "@/types/kegiatan"
 import { STATUS_CFG } from "@/data/kegiatanSeed"
 import Button from "@/components/ui/button"

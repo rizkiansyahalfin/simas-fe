@@ -1,10 +1,8 @@
 import { useMemo, useState } from "react";
-import {
-	CalendarDays,
-	MapPin,
-	Pencil,
-	Trash2,
-} from "lucide-react";
+import { CalendarDays } from "lucide-react";
+import { MapPin } from "lucide-react";
+import { Pencil } from "lucide-react";
+import { Trash2 } from "lucide-react";
 
 import Button from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

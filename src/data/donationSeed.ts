@@ -1,8 +1,6 @@
-import {
-  Clock,
-  CheckCircle2,
-  XCircle
-} from 'lucide-react'
+import { Clock } from 'lucide-react'
+import { CheckCircle2 } from 'lucide-react'
+import { XCircle } from 'lucide-react'
 
 import type { Donasi } from '@/types/donation'
 

@@ -1,15 +1,13 @@
-import {
-  LayoutDashboard,
-  Wallet,
-  HeartHandshake,
-  FileText,
-  CalendarDays,
-  Archive,
-  Users,
-  Settings,
-  Bell,
-  Menu,
-} from "lucide-react";
+import { LayoutDashboard } from "lucide-react";
+import { Wallet } from "lucide-react";
+import { HeartHandshake } from "lucide-react";
+import { FileText } from "lucide-react";
+import { CalendarDays } from "lucide-react";
+import { Archive } from "lucide-react";
+import { Users } from "lucide-react";
+import { Settings } from "lucide-react";
+import { Bell } from "lucide-react";
+import { Menu } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";

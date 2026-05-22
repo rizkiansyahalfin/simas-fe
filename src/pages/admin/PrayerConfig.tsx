@@ -2,7 +2,9 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { MapPin, Save, Globe } from "lucide-react";
+import { MapPin } from "lucide-react";
+import { Save } from "lucide-react";
+import { Globe } from "lucide-react";
 
 export default function PrayerConfig() {
 	// State dummy untuk koordinat, nanti bisa disambungin ke API

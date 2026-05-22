@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { Eye, EyeOff, AlertCircle, Mail, Lock } from "lucide-react";
+import { Eye } from "lucide-react";
+import { EyeOff } from "lucide-react";
+import { AlertCircle } from "lucide-react";
+import { Mail } from "lucide-react";
+import { Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useLocation } from "react-router-dom";

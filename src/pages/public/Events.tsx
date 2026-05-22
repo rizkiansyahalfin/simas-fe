@@ -1,4 +1,8 @@
-import { Calendar as CalendarIcon, Clock, MapPin, User, ChevronRight } from "lucide-react";
+import { CalendarIcon } from "lucide-react";
+import { Clock } from "lucide-react";
+import { MapPin } from "lucide-react";
+import { User } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 // Data Dummy Agenda Kegiatan
 const DUMMY_EVENTS = [

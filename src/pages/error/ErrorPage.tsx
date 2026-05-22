@@ -1,5 +1,10 @@
 import type { LucideIcon } from "lucide-react";
-import { ArrowLeft, Home, RefreshCcw, SearchX, ServerCrash, ShieldAlert } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import { Home } from "lucide-react";
+import { RefreshCcw } from "lucide-react";
+import { SearchX } from "lucide-react";
+import { ServerCrash } from "lucide-react";
+import { ShieldAlert } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";

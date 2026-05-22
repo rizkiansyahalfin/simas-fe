@@ -1,5 +1,10 @@
 import { useMemo, useState } from "react";
-import { Calendar, FileSpreadsheet, FileText, HeartHandshake, TrendingUp, Wallet } from "lucide-react";
+import { Calendar } from "lucide-react";
+import { FileSpreadsheet } from "lucide-react";
+import { FileText } from "lucide-react";
+import { HeartHandshake } from "lucide-react";
+import { TrendingUp } from "lucide-react";
+import { Wallet } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

@@ -9,7 +9,8 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { ChevronDownIcon, ClipboardPenIcon } from 'lucide-react'
+import { ChevronDownIcon } from 'lucide-react'
+import { ClipboardPenIcon } from 'lucide-react'
 
 interface Props {
   open: boolean

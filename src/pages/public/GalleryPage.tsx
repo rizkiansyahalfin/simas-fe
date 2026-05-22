@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { X, ZoomIn } from "lucide-react";
+import { X } from "lucide-react";
+import { ZoomIn } from "lucide-react";
 
 const DUMMY_GALLERY = [
   { id: 1, title: "Kajian Rutin Ahad Pagi", url: "https://images.unsplash.com/photo-1576057845347-160a2bd7152b?w=600&h=800&fit=crop" }, // Udah diganti

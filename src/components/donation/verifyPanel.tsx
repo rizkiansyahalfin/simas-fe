@@ -1,15 +1,13 @@
 import { useState } from 'react'
 
-import {
-  X,
-  ExternalLink,
-  Phone,
-  Calendar,
-  Tag,
-  CheckCircle2,
-  XCircle,
-  Eye
-} from 'lucide-react'
+import { X } from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
+import { Phone } from 'lucide-react'
+import { Calendar } from 'lucide-react'
+import { Tag } from 'lucide-react'
+import { CheckCircle2 } from 'lucide-react'
+import { XCircle } from 'lucide-react'
+import { Eye } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 

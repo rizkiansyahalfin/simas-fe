@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
-import { Calendar, User, Newspaper, ArrowRight } from "lucide-react";
+import { Calendar } from "lucide-react";
+import { User } from "lucide-react";
+import { Newspaper } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 // Data dummy sementara
 const DUMMY_ARTICLES = [

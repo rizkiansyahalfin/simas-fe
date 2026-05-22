@@ -1,8 +1,13 @@
 import { useState } from 'react'
-import {
-  Plus, ChevronDown, Check, Calendar, Download, Info, Trash2,
-  ChevronLeft, ChevronRight
-} from 'lucide-react'
+import { Plus } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
+import { Check } from 'lucide-react'
+import { Calendar } from 'lucide-react'
+import { Download } from 'lucide-react'
+import { Info } from 'lucide-react'
+import { Trash2 } from 'lucide-react'
+import { ChevronLeft } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import Button from '@/components/ui/button'
 import { type JadwalJumat } from '@/types/kegiatan'
 import { SEED } from '@/data/kegiatanSeed'

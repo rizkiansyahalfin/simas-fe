@@ -2,7 +2,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Wallet, ArrowDownCircle, ArrowUpCircle, Plus, X, Save } from "lucide-react";
+import { Wallet } from "lucide-react";
+import { ArrowDownCircle } from "lucide-react";
+import { ArrowUpCircle } from "lucide-react";
+import { Plus } from "lucide-react";
+import { X } from "lucide-react";
+import { Save } from "lucide-react";
 
 // Data Dummy Transaksi ZIS
 const DUMMY_ZIS = [

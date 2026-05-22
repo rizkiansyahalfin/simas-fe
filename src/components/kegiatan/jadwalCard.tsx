@@ -1,8 +1,12 @@
 import  Button  from "@/components/ui/button"
-import { Pencil, Trash2, Plus } from "lucide-react"
+import { Pencil } from 'lucide-react'
+import { Trash2 } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import { type JadwalJumat } from "@/types/kegiatan"
 import { STATUS_CFG } from "@/data/kegiatanSeed"
-import { Mic, Users, Volume2 } from "lucide-react"
+import { Mic } from 'lucide-react'
+import { Users } from 'lucide-react'
+import { Volume2 } from 'lucide-react'
 
 function RoleIcon({ role }: { role: 'khatib' | 'imam' | 'muadzin' }) {
   const map = { khatib: Mic, imam: Users, muadzin: Volume2 }

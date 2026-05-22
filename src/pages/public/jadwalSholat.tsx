@@ -1,4 +1,5 @@
-import { MapPin, Clock } from 'lucide-react'
+import { MapPin } from 'lucide-react'
+import { Clock } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 export default function JadwalSholatPage() {

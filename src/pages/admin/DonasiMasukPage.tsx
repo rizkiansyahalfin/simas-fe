@@ -1,6 +1,8 @@
 import { useState } from "react"
 import type { FormEvent } from "react"
-import { ArrowRight, HeartHandshake, MailCheck } from "lucide-react"
+import { ArrowRight } from "lucide-react"
+import { HeartHandshake } from "lucide-react"
+import { MailCheck } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"

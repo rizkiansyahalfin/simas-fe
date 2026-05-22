@@ -4,10 +4,12 @@ import {
     XAxis, YAxis, CartesianGrid, Tooltip,
     ResponsiveContainer,
 } from 'recharts'
-import {
-    TrendingUp, TrendingDown, Wallet,
-    CalendarDays, ArrowRight, Clock,
-} from 'lucide-react'
+import { TrendingUp } from 'lucide-react'
+import { TrendingDown } from 'lucide-react'
+import { Wallet } from 'lucide-react'
+import { CalendarDays } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { Clock } from 'lucide-react'
 import { KPI, KEUANGAN, PIE_DATA, PIE_COLORS, AKTIVITAS } from '@/data/dashboardData'
 
 /* ─── Data ─── */

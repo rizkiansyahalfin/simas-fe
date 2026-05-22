@@ -1,9 +1,7 @@
 // src/features/gallery/components/GalleryCard.tsx
 
-import {
-  Pencil,
-  Trash2,
-} from 'lucide-react'
+import { Pencil } from 'lucide-react'
+import { Trash2 } from 'lucide-react'
 
 import { Button }
 from '@/components/ui/button'
