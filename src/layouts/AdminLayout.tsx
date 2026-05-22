@@ -27,6 +27,7 @@ import {
 
 import { canAccess } from "@/lib/rbac";
 import { useAuthStore } from "@/stores";
+import NotificationBell from "@/components/NotificationBell";
 
 const MENU_ITEMS = [
 	{ title: "Dashboard", icon: LayoutDashboard, resource: "dashboard", path: "/admin" },
@@ -141,10 +142,7 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
 
 					<div className='flex items-center gap-3'>
 						{/* Notifications */}
-						<Button variant='ghost' size='icon' className='relative'>
-							<Bell className='h-5 w-5 text-gray-600' />
-							<span className='absolute top-2 right-2 h-2 w-2 bg-red-500 rounded-full border border-white' />
-						</Button>
+						<NotificationBell />
 
 						{/* User Menu */}
 						<DropdownMenu>
