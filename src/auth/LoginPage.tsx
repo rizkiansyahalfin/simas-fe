@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { useLogin, useRegister } from './UseAuth';
+import { useLogin, useRegister } from './UseAuth'
+import { isRateLimited } from '../lib/axios'
 
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -149,11 +150,14 @@ const LoginPage = () => {
   const showSuccess = loginSuccess || regSuccess
   const successName = loginData?.user?.name ?? regData?.user?.name ?? ''
   const apiMsg = (err: unknown) => {
-    if (err && typeof err === 'object' && 'response' in err) {
-      const axiosErr = err as { response?: { data?: { message?: string } } };
-      return axiosErr.response?.data?.message ?? null;
+    if (isRateLimited(err)) {
+      return 'Terlalu banyak percobaan login. Silakan coba lagi beberapa saat lagi.'
     }
-    return null;
+    if (err && typeof err === 'object' && 'response' in err) {
+      const axiosErr = err as { response?: { data?: { message?: string } } }
+      return axiosErr.response?.data?.message ?? null
+    }
+    return null
   }
 
   return (

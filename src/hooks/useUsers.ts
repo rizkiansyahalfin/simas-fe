@@ -12,7 +12,7 @@ export const useUsers = () => {
   return useQuery({
     queryKey: ['users'],
     queryFn: async () => {
-      const { data } = await api.get<User[]>('/users')
+      const { data } = await api.get<User[]>('/api/users')
       return data
     },
   })
@@ -23,7 +23,7 @@ export const useUser = (userId: string) => {
   return useQuery({
     queryKey: ['user', userId],
     queryFn: async () => {
-      const { data } = await api.get<User>(`/users/${userId}`)
+      const { data } = await api.get<User>(`/api/users/${userId}`)
       return data
     },
     enabled: !!userId, 
@@ -36,7 +36,7 @@ export const useCreateUser = () => {
 
   return useMutation({
     mutationFn: async (newUser: Omit<User, 'id'>) => {
-      const { data } = await api.post<User>('/users', newUser)
+      const { data } = await api.post<User>('/api/users', newUser)
       return data
     },
     onSuccess: () => {
@@ -50,7 +50,7 @@ export const useUpdateUser = () => {
 
   return useMutation({
     mutationFn: async ({ id, ...updatedUser }: User) => {
-      const { data } = await api.put<User>(`/users/${id}`, updatedUser)
+      const { data } = await api.put<User>(`/api/users/${id}`, updatedUser)
       return data
     },
     onSuccess: (data) => {
@@ -65,7 +65,7 @@ export const useDeleteUser = () => {
 
   return useMutation({
     mutationFn: async (userId: string) => {
-      await api.delete(`/users/${userId}`)
+      await api.delete(`/api/users/${userId}`)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['users'] })

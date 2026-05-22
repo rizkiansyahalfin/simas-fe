@@ -38,7 +38,7 @@ export const useLogin = () => {
 
   return useMutation({
     mutationFn: async (credentials: LoginCredentials) => {
-      const { data } = await api.post<AuthResponse>('/auth/login', credentials)
+      const { data } = await api.post<AuthResponse>('/api/auth/login', credentials)
       return data
     },
     onSuccess: (data) => {
@@ -60,7 +60,7 @@ export const useRegister = () => {
 
   return useMutation({
     mutationFn: async (credentials: RegisterCredentials) => {
-      const { data } = await api.post<AuthResponse>('/auth/register', credentials)
+      const { data } = await api.post<AuthResponse>('/api/auth/register', credentials)
       return data
     },
     onSuccess: (data) => {

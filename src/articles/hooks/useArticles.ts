@@ -15,7 +15,7 @@ export const useArticles = () =>
   useQuery({
     queryKey: ['articles'],
     queryFn: async () => {
-      const { data } = await api.get<Article[]>('/articles')
+      const { data } = await api.get<Article[]>('/api/articles')
       return data
     },
   })
@@ -26,7 +26,7 @@ export const useCreateArticle = () => {
 
   return useMutation({
     mutationFn: async (payload: Omit<Article, 'id'>) => {
-      const { data } = await api.post('/articles', payload)
+      const { data } = await api.post('/api/articles', payload)
       return data
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ['articles'] }),
@@ -39,7 +39,7 @@ export const useUpdateArticle = () => {
 
   return useMutation({
     mutationFn: async (article: Article) => {
-      const { data } = await api.put(`/articles/${article.id}`, article)
+      const { data } = await api.put(`/api/articles/${article.id}`, article)
       return data
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ['articles'] }),
@@ -52,7 +52,7 @@ export const useDeleteArticle = () => {
 
   return useMutation({
     mutationFn: async (id: string) => {
-      await api.delete(`/articles/${id}`)
+      await api.delete(`/api/articles/${id}`)
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ['articles'] }),
   })
