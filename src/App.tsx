@@ -41,6 +41,7 @@ import MustahikPage from "./mustahik/pages/MustahikPage";
 import AdminGalleryPage from "./gallery/pages/AdminGalleryPage";
 import CampaignListPage from "./campaigns/pages/CampaignListPage";
 import CampaignDetailPage from "./campaigns/pages/CampaignDetailPage";
+import AdminCampaignManagementPage from "./campaigns/pages/AdminCampaignManagementPage";
 
 function App() {
 	const { isAuthenticated } = useAuthStore();
@@ -162,6 +163,17 @@ function App() {
 					<ProtectedRoute resource='donasi'>
 						<AdminLayout>
 							<DonasiMasukPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
+				path='/admin/campaigns'
+				element={
+					<ProtectedRoute resource='donasi'>
+						<AdminLayout>
+							<AdminCampaignManagementPage />
 						</AdminLayout>
 					</ProtectedRoute>
 				}
