@@ -12,6 +12,7 @@ import ArticleDetail from "@/pages/public/ArticleDetail";
 import Events from "@/pages/public/Events";
 import JadwalSholatPage from "@/pages/public/jadwalSholat";
 import DonationPage from "./publicDonation/DonationPage";
+import GalleryPage from "@/pages/public/GalleryPage";
 
 // Pages – Admin
 import DonasiMasukPage from "@/pages/admin/DonasiMasukPage";
@@ -73,6 +74,15 @@ function App() {
 					</PublicLayout>
 				}
 			/>
+
+			<Route
+             path='/galeri'
+             element={
+                 <PublicLayout>
+                     <GalleryPage />
+                 </PublicLayout>
+             }
+         />
 
 			<Route path='/berita' element={<PublicLayout>Berita Page</PublicLayout>} />
 
