@@ -1,196 +1,142 @@
-import { LayoutDashboard } from "lucide-react";
-import { Wallet } from "lucide-react";
-import { HeartHandshake } from "lucide-react";
-import { FileText } from "lucide-react";
-import { CalendarDays } from "lucide-react";
-import { Archive } from "lucide-react";
-import { Users } from "lucide-react";
-import { Settings } from "lucide-react";
-import { Bell } from "lucide-react";
-import { Menu } from "lucide-react";
+import { useState } from "react"
+import { Menu, X } from "lucide-react"
+import { Link, useLocation } from "react-router-dom"
+import { Button } from "@/components/ui/button"
 
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+const NAV_ITEMS = [
+  { title: "Beranda", path: "/" },
+  { title: "Donasi", path: "/donation" },
+  { title: "Agenda", path: "/agenda" },
+  { title: "Galeri", path: "/galeri" },
+  { title: "Artikel", path: "/artikel" },
+  { title: "Jadwal Sholat", path: "/jadwal-shalat" },
+  { title: "Campaigns", path: "/campaigns" },
+]
 
-import { canAccess } from "@/lib/rbac";
-import { useAuthStore } from "@/stores";
-import { useLocation, useNavigate } from "react-router-dom";
+export default function PublicLayout({ children }: { children?: React.ReactNode }) {
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const location = useLocation()
 
-const MENU_ITEMS = [
-  { title: "Dashboard", icon: LayoutDashboard, resource: "dashboard", path: "/admin" },
-  { title: "Keuangan", icon: Wallet, resource: "keuangan", path: "/admin/keuangan" },
-  { title: "Donasi", icon: HeartHandshake, resource: "donasi", path: "/admin/donasi" },
-  { title: "Artikel", icon: FileText, resource: "artikel", path: "/admin/artikel" },
-  { title: "Kegiatan", icon: CalendarDays, resource: "kegiatan", path: "/admin/kegiatan" },
-  { title: "Inventaris", icon: Archive, resource: "inventaris", path: "/admin/inventaris" },
-  { title: "Jamaah", icon: Users, resource: "jamaah", path: "/admin/jamaah" },
-  { title: "Pengaturan", icon: Settings, resource: "pengaturan", path: "/admin/pengaturan" },
-];
-
-function SidebarContent({
-  filteredMenu,
-  activePath,
-  onNavigate,
-}: {
-  filteredMenu: typeof MENU_ITEMS;
-  activePath: string;
-  onNavigate: (path: string) => void;
-}) {
   return (
-    <div className="flex flex-col h-full bg-white border-r">
-      <div className="h-16 flex items-center px-6 border-b shrink-0">
-        <button
-          type="button"
-          onClick={() => onNavigate("/admin")}
-          className="flex items-center rounded-md text-left transition-colors hover:text-simas-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-simas-primary/40"
-          aria-label="Ke dashboard admin"
-        >
-          <span className="text-2xl mr-2">🕌</span>
-          <span className="text-xl font-bold tracking-tight text-gray-900">SIMAS</span>
-        </button>
-      </div>
+    <div className="min-h-screen flex flex-col bg-white">
+      {/* Navbar */}
+      <header className="sticky top-0 z-50 w-full border-b border-emerald-100 bg-white/95 backdrop-blur-sm">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-8">
+          <Link to="/" className="flex items-center gap-2">
+            <span className="text-2xl">🕌</span>
+            <span className="text-xl font-bold tracking-tight text-gray-900">SIMAS</span>
+          </Link>
 
-      <nav className="flex-1 overflow-y-auto py-4">
-        <ul className="space-y-1 px-3">
-          {filteredMenu.map((item) => {
-            const isActive = activePath === item.path;
-            return (
-              <li key={item.title}>
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onNavigate(item.path);
-                  }}
-                  className={`flex items-center px-3 py-2.5 rounded-md transition-colors ${
+          {/* Desktop nav */}
+          <nav className="hidden md:flex items-center gap-1">
+            {NAV_ITEMS.map((item) => {
+              const isActive = location.pathname === item.path
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                     isActive
-                      ? "bg-emerald-50 text-simas-primary font-bold border-l-4 border-simas-primary"
+                      ? "bg-emerald-50 text-simas-primary"
                       : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                   }`}
                 >
-                  <item.icon
-                    className={`h-5 w-5 mr-3 ${isActive ? "text-simas-primary" : "text-gray-500"}`}
-                  />
                   {item.title}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-    </div>
-  );
-}
+                </Link>
+              )
+            })}
+          </nav>
 
-export default function AdminLayout({ children }: { children?: React.ReactNode }) {
-  const { user, role, logout } = useAuthStore();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const activePath = location.pathname;
-  const initials = user?.name
-    ? user.name
-        .split(" ")
-        .map((name) => name[0])
-        .join("")
-        .slice(0, 2)
-        .toUpperCase()
-    : "AD";
-
-  const filteredMenu = role ? MENU_ITEMS.filter((item) => canAccess(role, item.resource)) : [];
-  const pageTitle = filteredMenu.find((m) => m.path === activePath)?.title || "Dashboard";
-  const handleNavigate = (path: string) => navigate(path);
-
-  return (
-    <div className="fixed inset-0 overflow-auto flex bg-simas-bg-admin">
-      {/* Sidebar Desktop */}
-      <aside className="hidden md:flex md:w-64 shrink-0 flex-col h-full">
-        <SidebarContent filteredMenu={filteredMenu} activePath={activePath} onNavigate={handleNavigate} />
-      </aside>
-
-      {/* Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-auto">
-        {/* Topbar */}
-        <header className="h-16 bg-white border-b flex items-center justify-between px-4 sm:px-6 shrink-0 sticky top-0 z-40">
-          <div className="flex items-center gap-2">
-            {/* Mobile Menu */}
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="md:hidden">
-                  <Menu className="h-5 w-5" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="p-0 w-64">
-                <SheetTitle className="sr-only">Menu Navigasi</SheetTitle>
-                <SidebarContent
-                  filteredMenu={filteredMenu}
-                  activePath={activePath}
-                  onNavigate={handleNavigate}
-                />
-              </SheetContent>
-            </Sheet>
-
-            <h1 className="text-xl font-semibold text-gray-800" style={{ margin: 0 }}>
-              {pageTitle}
-            </h1>
-          </div>
-
-          <div className="flex items-center gap-3">
-            {/* Notifications */}
-            <Button variant="ghost" size="icon" className="relative">
-              <Bell className="h-5 w-5 text-gray-600" />
-              <span className="absolute top-2 right-2 h-2 w-2 bg-red-500 rounded-full border border-white" />
+          <div className="hidden md:flex items-center gap-3">
+            <Button asChild className="bg-simas-primary text-white hover:bg-emerald-700 rounded-xl">
+              <Link to="/login">Masuk</Link>
             </Button>
-
-            {/* User Menu */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button type="button" variant="ghost" className="flex items-center gap-2 px-2 hover:bg-gray-100">
-                  <Avatar className="h-8 w-8">
-                    <AvatarFallback className="text-white bg-simas-primary font-medium text-xs">
-                      {initials}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="hidden sm:block text-left">
-                    <p className="text-sm font-medium text-gray-700 leading-none">
-                      {user?.name ?? "Admin SIMAS"}
-                    </p>
-                    <p className="text-xs text-gray-500 mt-0.5 capitalize">{role ?? "admin"}</p>
-                  </div>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 mt-1">
-                <DropdownMenuLabel>Akun Saya</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Pengaturan Akun</DropdownMenuItem>
-                <DropdownMenuItem
-                  className="text-red-600 focus:bg-red-50 focus:text-red-700"
-                  onClick={() => logout({ redirectTo: "/login" })}
-                >
-                  Keluar
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
           </div>
-        </header>
 
-        {/* Main Content */}
-        <main className="flex-1 p-6">
-          {children ?? (
-            <div className="border-2 border-dashed border-gray-300 rounded-xl h-96 flex items-center justify-center text-gray-400">
-              Konten halaman "{pageTitle}" akan tampil di sini
+          {/* Mobile menu button */}
+          <button
+            type="button"
+            className="md:hidden p-2 text-gray-600 hover:text-gray-900"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+
+        {/* Mobile nav */}
+        {mobileOpen && (
+          <nav className="md:hidden border-t border-emerald-100 bg-white px-4 pb-4 pt-2 space-y-1">
+            {NAV_ITEMS.map((item) => {
+              const isActive = location.pathname === item.path
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setMobileOpen(false)}
+                  className={`block px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                    isActive
+                      ? "bg-emerald-50 text-simas-primary"
+                      : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                  }`}
+                >
+                  {item.title}
+                </Link>
+              )
+            })}
+            <div className="pt-2">
+              <Button asChild className="w-full bg-simas-primary text-white hover:bg-emerald-700 rounded-xl">
+                <Link to="/login" onClick={() => setMobileOpen(false)}>Masuk</Link>
+              </Button>
             </div>
-          )}
-        </main>
-      </div>
+          </nav>
+        )}
+      </header>
+
+      {/* Main content */}
+      <main className="flex-1">
+        {children}
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-simas-primary text-emerald-50">
+        <div className="container mx-auto px-4 md:px-8 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-2xl">🕌</span>
+                <span className="text-xl font-bold text-white">SIMAS</span>
+              </div>
+              <p className="text-sm text-emerald-200 leading-relaxed">
+                Sistem Informasi Manajemen Masjid. Memudahkan pengelolaan masjid secara digital dan transparan.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-white mb-3">Navigasi</h3>
+              <ul className="space-y-2">
+                {NAV_ITEMS.map((item) => (
+                  <li key={item.path}>
+                    <Link to={item.path} className="text-sm text-emerald-200 hover:text-white transition-colors">
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold text-white mb-3">Kontak</h3>
+              <ul className="space-y-2 text-sm text-emerald-200">
+                <li>Masjid Raya</li>
+                <li>Jl. Contoh No. 123</li>
+                <li>Email: info@simas-masjid.com</li>
+              </ul>
+            </div>
+          </div>
+          <div className="mt-8 pt-6 border-t border-emerald-600/40 text-center text-sm text-emerald-300">
+            &copy; {new Date().getFullYear()} SIMAS. All rights reserved.
+          </div>
+        </div>
+      </footer>
     </div>
-  );
+  )
 }
