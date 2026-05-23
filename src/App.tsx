@@ -31,6 +31,7 @@ import ZisManagement from "@/pages/admin/ZisManagement";
 import UserManagementPage from "./pages/admin/UserManagement";
 import DashboardPage from "@/pages/admin/DashboardPage";
 import AuditLogPage from "@/pages/admin/AuditLogPage";
+import ProfilePage from "@/pages/admin/ProfilePage";
 
 // Auth
 import Login from "@/pages/auth/Login";
@@ -236,6 +237,17 @@ function App() {
 					</ProtectedRoute>
 				}
 			/>
+
+			<Route
+                 path='/admin/profil'
+                 element={
+                     <ProtectedRoute>
+                         <AdminLayout>
+                             <ProfilePage />
+                         </AdminLayout>
+                     </ProtectedRoute>
+                 }
+             />
 
 			{/* ARTIKEL ADMIN */}
 			<Route
