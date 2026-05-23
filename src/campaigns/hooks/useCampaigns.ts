@@ -55,6 +55,30 @@ const campaigns: Campaign[] = [
     deadline:
       '2026-06-10',
   },
+  {
+    id: '3',
+
+    title:
+      'Pembangunan Ruang Belajar',
+
+    description:
+      'Membangun ruang belajar bagi anak-anak di lingkungan masjid.',
+
+    imageUrl:
+      'https://images.unsplash.com/photo-1498050108023-c5249f4df085',
+
+    collectedAmount:
+      22000000,
+
+    targetAmount:
+      22000000,
+
+    donorCount:
+      210,
+
+    deadline:
+      '2025-12-31',
+  },
 ]
 
 export function useCampaigns() {
