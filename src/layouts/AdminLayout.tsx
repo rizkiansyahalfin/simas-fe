@@ -32,6 +32,7 @@ const MENU_ITEMS = [
 	{ title: "Pengurus", icon: Users, resource: "pengurus", path: "/admin/pengurus" },
 	{ title: "Donasi", icon: HeartHandshake, resource: "donasi", path: "/admin/donasi" },
 	{ title: "Laporan", icon: FileSpreadsheet, resource: "laporan", path: "/admin/laporan" },
+	{ title: "Audit Log", icon: FileText, resource: "audit-log", path: "/admin/audit-log" },
 	{ title: "Artikel", icon: FileText, resource: "artikel", path: "/admin/artikel" },
 	{ title: "Kegiatan", icon: CalendarDays, resource: "kegiatan", path: "/admin/kegiatan" },
 	{ title: "Inventaris", icon: Archive, resource: "inventaris", path: "/admin/inventaris" },

@@ -30,6 +30,7 @@ import { ForbiddenPage, NotFoundPage, ServerErrorPage } from "@/pages/error/Erro
 import ZisManagement from "@/pages/admin/ZisManagement";
 import UserManagementPage from "./pages/admin/UserManagement";
 import DashboardPage from "@/pages/admin/DashboardPage";
+import AuditLogPage from "@/pages/admin/AuditLogPage";
 
 // Auth
 import Login from "@/pages/auth/Login";
@@ -349,6 +350,17 @@ function App() {
 					<ProtectedRoute resource='pengurus'>
 						<AdminLayout>
 							<UserManagementPage />
+						</AdminLayout>
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
+				path='/admin/audit-log'
+				element={
+					<ProtectedRoute resource='audit-log'>
+						<AdminLayout>
+							<AuditLogPage />
 						</AdminLayout>
 					</ProtectedRoute>
 				}
