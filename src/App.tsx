@@ -40,6 +40,7 @@ import CongregationPage from "./congregation/pages/CongregationPage";
 import MustahikPage from "./mustahik/pages/MustahikPage";
 import AdminGalleryPage from "./gallery/pages/AdminGalleryPage";
 import CampaignListPage from "./campaigns/pages/CampaignListPage";
+import CampaignHistoryPage from "./campaigns/pages/CampaignHistoryPage";
 import CampaignDetailPage from "./campaigns/pages/CampaignDetailPage";
 
 function App() {
@@ -118,14 +119,16 @@ function App() {
 				element={
 					<PublicLayout>
 						<CampaignListPage />
-					</PublicLayout>} />
-					
-			<Route 
-				path="/campaigns/:id" 
+					</PublicLayout>
+				} />
+
+			<Route
+				path="/campaigns/history"
 				element={
 					<PublicLayout>
-						<CampaignDetailPage />
-					</PublicLayout>} />
+						<CampaignHistoryPage />
+					</PublicLayout>
+				} />
 
 			{/* ── LOGIN ── */}
 			<Route
