@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
+import { Toaster } from "sonner";
 
 // Layouts
 import AdminLayout from "@/layouts/AdminLayout";
@@ -45,347 +46,350 @@ import CampaignHistoryPage from "./campaigns/pages/CampaignHistoryPage";
 import CampaignDetailPage from "./campaigns/pages/CampaignDetailPage";
 
 function App() {
-	const { isAuthenticated } = useAuthStore();
+    const { isAuthenticated } = useAuthStore();
 
-	return (
-		<Routes>
-			{/* ── PUBLIC ── */}
-			<Route
-				path='/'
-				element={
-					<PublicLayout>
-						<Home />
-					</PublicLayout>
-				}
-			/>
+    return (
+        <>
+            {/* Mesin Toast Sonner (muncul di kanan atas, pakai warna bawaan) */}
+            <Toaster position="top-right" richColors />
 
-			<Route
-				path='/donation'
-				element={
-					<PublicLayout>
-						<DonationPage />
-					</PublicLayout>
-				}
-			/>
+            <Routes>
+                {/* ── PUBLIC ── */}
+                <Route
+                    path='/'
+                    element={
+                        <PublicLayout>
+                            <Home />
+                        </PublicLayout>
+                    }
+                />
 
-			<Route
-				path='/agenda'
-				element={
-					<PublicLayout>
-						<Events />
-					</PublicLayout>
-				}
-			/>
+                <Route
+                    path='/donation'
+                    element={
+                        <PublicLayout>
+                            <DonationPage />
+                        </PublicLayout>
+                    }
+                />
 
-			<Route
-             path='/galeri'
-             element={
-                 <PublicLayout>
-                     <GalleryPage />
-                 </PublicLayout>
-             }
-         />
+                <Route
+                    path='/agenda'
+                    element={
+                        <PublicLayout>
+                            <Events />
+                        </PublicLayout>
+                    }
+                />
 
-			<Route path='/berita' element={<PublicLayout>Berita Page</PublicLayout>} />
+                <Route
+                 path='/galeri'
+                 element={
+                     <PublicLayout>
+                         <GalleryPage />
+                     </PublicLayout>
+                 }
+             />
 
-			<Route
-				path='/jadwal-shalat'
-				element={
-					<PublicLayout>
-						<JadwalSholatPage />
-					</PublicLayout>
-				}
-			/>
+                <Route path='/berita' element={<PublicLayout>Berita Page</PublicLayout>} />
 
-			<Route
-				path='/artikel'
-				element={
-					<PublicLayout>
-						<Articles />
-					</PublicLayout>
-				}
-			/>
+                <Route
+                    path='/jadwal-shalat'
+                    element={
+                        <PublicLayout>
+                            <JadwalSholatPage />
+                        </PublicLayout>
+                    }
+                />
 
-			<Route
-				path='/artikel/:id'
-				element={
-					<PublicLayout>
-						<ArticleDetail />
-					</PublicLayout>
-				}
-			/>
+                <Route
+                    path='/artikel'
+                    element={
+                        <PublicLayout>
+                            <Articles />
+                        </PublicLayout>
+                    }
+                />
 
-			<Route 
-				path="/campaigns" 
-				element={
-					<PublicLayout>
-						<CampaignListPage />
-					</PublicLayout>
-				} />
+                <Route
+                    path='/artikel/:id'
+                    element={
+                        <PublicLayout>
+                            <ArticleDetail />
+                        </PublicLayout>
+                    }
+                />
 
-			<Route
-				path="/campaigns/history"
-				element={
-					<PublicLayout>
-						<CampaignHistoryPage />
-					</PublicLayout>
-				} />
+                <Route 
+                    path="/campaigns" 
+                    element={
+                        <PublicLayout>
+                            <CampaignListPage />
+                        </PublicLayout>
+                    } />
 
-			{/* ── LOGIN ── */}
-			<Route
-				path='/login'
-				element={
-					isAuthenticated ? (
-						<Navigate to='/admin' replace />
-					) : (
-						<AuthLayout>
-							<Login />
-						</AuthLayout>
-					)
-				}
-			/>
+                <Route
+                    path="/campaigns/history"
+                    element={
+                        <PublicLayout>
+                            <CampaignHistoryPage />
+                        </PublicLayout>
+                    } />
 
-			<Route path='/403' element={<ForbiddenPage />} />
-			<Route path='/500' element={<ServerErrorPage />} />
+                {/* ── LOGIN ── */}
+                <Route
+                    path='/login'
+                    element={
+                        isAuthenticated ? (
+                            <Navigate to='/admin' replace />
+                        ) : (
+                            <AuthLayout>
+                                <Login />
+                            </AuthLayout>
+                        )
+                    }
+                />
 
-			{/* ── ADMIN (PROTECTED) ── */}
-			<Route
-				path='/admin'
-				element={
-					<ProtectedRoute resource='dashboard'>
-						<AdminLayout>
-							<DashboardPage />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
+                <Route path='/403' element={<ForbiddenPage />} />
+                <Route path='/500' element={<ServerErrorPage />} />
 
-			<Route
-				path='/admin/donasi'
-				element={
-					<ProtectedRoute resource='donasi'>
-						<AdminLayout>
-							<DonasiMasukPage />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
+                {/* ── ADMIN (PROTECTED) ── */}
+                <Route
+                    path='/admin'
+                    element={
+                        <ProtectedRoute resource='dashboard'>
+                            <AdminLayout>
+                                <DashboardPage />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
 
-			<Route
-				path='/admin/kas'
-				element={
-					<ProtectedRoute resource='keuangan'>
-						<AdminLayout>
-							<ManajemenKasPage />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
+                <Route
+                    path='/admin/donasi'
+                    element={
+                        <ProtectedRoute resource='donasi'>
+                            <AdminLayout>
+                                <DonasiMasukPage />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
 
-			<Route
-				path='/admin/pengaturan/jadwal-shalat'
-				element={
-					<ProtectedRoute resource='pengaturan'>
-						<AdminLayout>
-							<PrayerConfig />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
+                <Route
+                    path='/admin/kas'
+                    element={
+                        <ProtectedRoute resource='keuangan'>
+                            <AdminLayout>
+                                <ManajemenKasPage />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
 
-			<Route
-				path='/admin/pengaturan'
-				element={
-					<ProtectedRoute resource='profil-masjid'>
-						<AdminLayout>
-							<MosqueProfileSettings />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
+                <Route
+                    path='/admin/pengaturan/jadwal-shalat'
+                    element={
+                        <ProtectedRoute resource='pengaturan'>
+                            <AdminLayout>
+                                <PrayerConfig />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
 
-			<Route
-				path='/admin/verify-donasi'
-				element={
-					<ProtectedRoute resource='donasi'>
-						<AdminLayout>
-							<VerifyDonasi />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
+                <Route
+                    path='/admin/pengaturan'
+                    element={
+                        <ProtectedRoute resource='profil-masjid'>
+                            <AdminLayout>
+                                <MosqueProfileSettings />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
 
-			<Route
-				path='/admin/kegiatan'
-				element={
-					<ProtectedRoute>
-						<AdminLayout>
-							<JadwalSholatJumat />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
-			
-			<Route
-				path='/admin/laporan'
-				element={
-					<ProtectedRoute resource='laporan'>
-						<AdminLayout>
-							<LaporanPage />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
+                <Route
+                    path='/admin/verify-donasi'
+                    element={
+                        <ProtectedRoute resource='donasi'>
+                            <AdminLayout>
+                                <VerifyDonasi />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
 
-			{/* ARTIKEL ADMIN */}
-			<Route
-				path='/admin/artikel'
-				element={
-					<ProtectedRoute resource='artikel'>
-						<AdminLayout>
-							<div className='p-6'>Manajemen Artikel (Halaman dalam pengembangan)</div>
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
+                <Route
+                    path='/admin/kegiatan'
+                    element={
+                        <ProtectedRoute>
+                            <AdminLayout>
+                                <JadwalSholatJumat />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
+                
+                <Route
+                    path='/admin/laporan'
+                    element={
+                        <ProtectedRoute resource='laporan'>
+                            <AdminLayout>
+                                <LaporanPage />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
 
-			{/* INVENTARIS */}
-			<Route
-				path='/admin/inventaris'
-				element={
-					<ProtectedRoute resource='inventaris'>
-						<AdminLayout>
-							<InventoryListPage />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
-			<Route
-				path='/admin/inventaris/tambah'
-				element={
-					<ProtectedRoute resource='inventaris'>
-						<AdminLayout>
-							<InventoryForm />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
-			<Route
-				path='/admin/inventory-loans'
-				element={
-					<ProtectedRoute resource='inventaris'>
-						<AdminLayout>
-							<InventoryLoansPage />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
+                {/* ARTIKEL ADMIN */}
+                <Route
+                    path='/admin/artikel'
+                    element={
+                        <ProtectedRoute resource='artikel'>
+                            <AdminLayout>
+                                <div className='p-6'>Manajemen Artikel (Halaman dalam pengembangan)</div>
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
 
-			{/* JAMAAH */}
-			<Route
-				path='/admin/jamaah'
-				element={
-					<ProtectedRoute resource='jamaah'>
-						<AdminLayout>
-							<CongregationPage />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
-			<Route
-				path='/admin/congregation'
-				element={
-					<ProtectedRoute resource='jamaah'>
-						<AdminLayout>
-							<CongregationPage />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
-			<Route
-				path='/admin/mustahik'
-				element={
-					<ProtectedRoute resource='jamaah'>
-						<AdminLayout>
-							<MustahikPage />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
+                {/* INVENTARIS */}
+                <Route
+                    path='/admin/inventaris'
+                    element={
+                        <ProtectedRoute resource='inventaris'>
+                            <AdminLayout>
+                                <InventoryListPage />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path='/admin/inventaris/tambah'
+                    element={
+                        <ProtectedRoute resource='inventaris'>
+                            <AdminLayout>
+                                <InventoryForm />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path='/admin/inventory-loans'
+                    element={
+                        <ProtectedRoute resource='inventaris'>
+                            <AdminLayout>
+                                <InventoryLoansPage />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
 
-			{/* RUTE MANAJEMEN ZIS */}
-            <Route
-                path='/admin/zis'
-                element={
-                    <ProtectedRoute>
-                        <AdminLayout>
-                            <ZisManagement />
-                        </AdminLayout>
-                    </ProtectedRoute>
-                }
-            />
+                {/* JAMAAH */}
+                <Route
+                    path='/admin/jamaah'
+                    element={
+                        <ProtectedRoute resource='jamaah'>
+                            <AdminLayout>
+                                <CongregationPage />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path='/admin/congregation'
+                    element={
+                        <ProtectedRoute resource='jamaah'>
+                            <AdminLayout>
+                                <CongregationPage />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path='/admin/mustahik'
+                    element={
+                        <ProtectedRoute resource='jamaah'>
+                            <AdminLayout>
+                                <MustahikPage />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
 
-			<Route
-				path='/admin/zis/distribusi'
-				element={
-					<ProtectedRoute resource='keuangan'>
-						<AdminLayout>
-							<ZisDistributionForm />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
+                {/* RUTE MANAJEMEN ZIS */}
+                <Route
+                    path='/admin/zis'
+                    element={
+                        <ProtectedRoute>
+                            <AdminLayout>
+                                <ZisManagement />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
 
-			<Route
-				path='/admin/kegiatan'
-				element={
-					<ProtectedRoute resource='kegiatan'>
-						<AdminLayout>
-							<KegiatanPage />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
+                <Route
+                    path='/admin/zis/distribusi'
+                    element={
+                        <ProtectedRoute resource='keuangan'>
+                            <AdminLayout>
+                                <ZisDistributionForm />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
 
-			<Route
-				path='/admin/pengurus'
-				element={
-					<ProtectedRoute resource='pengurus'>
-						<AdminLayout>
-							<UserManagementPage />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
+                <Route
+                    path='/admin/kegiatan'
+                    element={
+                        <ProtectedRoute resource='kegiatan'>
+                            <AdminLayout>
+                                <KegiatanPage />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
 
-			<Route
-				path='/admin/audit-log'
-				element={
-					<ProtectedRoute resource='audit-log'>
-						<AdminLayout>
-							<AuditLogPage />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
+                <Route
+                    path='/admin/pengurus'
+                    element={
+                        <ProtectedRoute resource='pengurus'>
+                            <AdminLayout>
+                                <UserManagementPage />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
 
-			<Route
-				path='/admin/gallery'
-				element={
-					<ProtectedRoute resource='gallery'>
-						<AdminLayout>
-							<AdminGalleryPage />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
+                <Route
+                    path='/admin/audit-log'
+                    element={
+                        <ProtectedRoute resource='audit-log'>
+                            <AdminLayout>
+                                <AuditLogPage />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
 
-			
+                <Route
+                    path='/admin/gallery'
+                    element={
+                        <ProtectedRoute resource='gallery'>
+                            <AdminLayout>
+                                <AdminGalleryPage />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
 
-			{/* ── FALLBACK ── */}
-			<Route path='*' element={<NotFoundPage />} />
-		</Routes>
-	);
+                {/* ── FALLBACK ── */}
+                <Route path='*' element={<NotFoundPage />} />
+            </Routes>
+        </>
+    );
 }
 
 export default App;
