@@ -29,6 +29,9 @@ export const canAccess = (role: Role, resource: string) => {
     case 'profil-masjid':
       return false;
 
+    case 'audit-log':
+      return false;
+
     default:
       return false;
   }
