@@ -44,6 +44,7 @@ import AdminGalleryPage from "./gallery/pages/AdminGalleryPage";
 import CampaignListPage from "./campaigns/pages/CampaignListPage";
 import CampaignHistoryPage from "./campaigns/pages/CampaignHistoryPage";
 import CampaignDetailPage from "./campaigns/pages/CampaignDetailPage";
+import EventDetailPage from "./Events/pages/EventDetailPage";
 
 function App() {
     const { isAuthenticated } = useAuthStore();
@@ -135,6 +136,14 @@ function App() {
                             <CampaignHistoryPage />
                         </PublicLayout>
                     } />
+
+                <Route
+                    path="/events/:id"
+                    element={
+                        <PublicLayout>
+                            <EventDetailPage/>
+                        </PublicLayout>}>
+                </Route>
 
                 {/* ── LOGIN ── */}
                 <Route
