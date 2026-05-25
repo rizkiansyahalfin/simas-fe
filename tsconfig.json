@@ -5,14 +5,11 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-
-    "moduleResolution": "Bundler",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-
-    "ignoreDeprecations": "6.0"
+    "esModuleInterop": true
   },
-
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
