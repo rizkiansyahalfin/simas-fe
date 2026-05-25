@@ -14,6 +14,7 @@ import Events from "@/pages/public/Events";
 import JadwalSholatPage from "@/pages/public/jadwalSholat";
 import DonationPage from "./publicDonation/DonationPage";
 import GalleryPage from "@/pages/public/GalleryPage";
+import EventDetailPage from "@/pages/public/EventDetailPage";
 
 // Pages – Admin
 import DonasiMasukPage from "@/pages/admin/DonasiMasukPage";
@@ -78,6 +79,15 @@ function App() {
                     element={
                         <PublicLayout>
                             <Events />
+                        </PublicLayout>
+                    }
+                />
+
+                <Route
+             path='/agenda/:id'
+                    element={
+                        <PublicLayout>
+                            <EventDetailPage />
                         </PublicLayout>
                     }
                 />
