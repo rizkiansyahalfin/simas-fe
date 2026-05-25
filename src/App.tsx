@@ -14,7 +14,7 @@ import Events from "@/pages/public/Events";
 import JadwalSholatPage from "@/pages/public/jadwalSholat";
 import DonationPage from "./publicDonation/DonationPage";
 import GalleryPage from "@/pages/public/GalleryPage";
-import EventDetailPage from "@/pages/public/EventDetailPage";
+import PublicEventDetail from "@/pages/public/EventDetailPage";
 
 // Pages – Admin
 import DonasiMasukPage from "@/pages/admin/DonasiMasukPage";
@@ -45,6 +45,7 @@ import AdminGalleryPage from "./gallery/pages/AdminGalleryPage";
 import CampaignListPage from "./campaigns/pages/CampaignListPage";
 import CampaignHistoryPage from "./campaigns/pages/CampaignHistoryPage";
 import CampaignDetailPage from "./campaigns/pages/CampaignDetailPage";
+import EventDetailPage from "./Events/pages/EventDetailPage";
 
 function App() {
     const { isAuthenticated } = useAuthStore();
@@ -145,6 +146,14 @@ function App() {
                             <CampaignHistoryPage />
                         </PublicLayout>
                     } />
+
+                <Route
+                    path="/events/:id"
+                    element={
+                        <PublicLayout>
+                            <EventDetailPage/>
+                        </PublicLayout>}>
+                </Route>
 
                 {/* ── LOGIN ── */}
                 <Route
