@@ -96,6 +96,9 @@ declare module "lucide-react" {
   export const XCircle: LucideIcon
   export const XIcon: LucideIcon
   export const ZoomIn: LucideIcon
+  export const CalendarPlus: LucideIcon
+  export const Clock3: LucideIcon
+  export const CalendarX2: LucideIcon
 
   export function createLucideIcon(
     name: string,
