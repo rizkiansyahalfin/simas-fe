@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { Calendar } from "lucide-react";
 import { User } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Seo from "@/lib/Seo";
 
 // 1. Tambahkan property 'content', 'quote', dan 'subheading' agar tiap artikel punya isi beda
 const DUMMY_ARTICLES = [

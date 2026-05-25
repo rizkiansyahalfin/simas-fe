@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import { ZoomIn } from "lucide-react";
+import Seo from "@/lib/Seo";
 
 const DUMMY_GALLERY = [
   { id: 1, title: "Kajian Rutin Ahad Pagi", url: "https://images.unsplash.com/photo-1576057845347-160a2bd7152b?w=600&h=800&fit=crop" }, // Udah diganti
@@ -21,7 +22,13 @@ export default function GalleryPage() {
   const closeLightbox = () => setSelectedImage(null);
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-24 pb-16">
+    <>
+      <Seo
+        title="Galeri"
+        description="Lihat foto dokumentasi kegiatan, kajian, dan acara sosial di lingkungan masjid SIMAS."
+        image="https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=1200&q=80"
+      />
+      <div className="min-h-screen bg-gray-50 pt-24 pb-16">
       <div className="max-w-6xl mx-auto px-6 md:px-10">
         
         {/* Header Section */}
@@ -96,5 +103,6 @@ export default function GalleryPage() {
         </div>
       )}
     </div>
+    </>
   );
 }

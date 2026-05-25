@@ -3,10 +3,17 @@ import { ArrowRight } from "lucide-react";
 import { BookOpen } from "lucide-react";
 import { Users } from "lucide-react";
 import { Target } from "lucide-react";
+import Seo from "@/lib/Seo";
 
 export default function Home() {
   return (
-    <div className="w-full font-sans">
+    <>
+      <Seo
+        title="Beranda"
+        description="Portal SIMAS menghadirkan informasi kegiatan masjid, donasi, artikel, jadwal sholat, dan galeri secara digital."
+        image="https://images.unsplash.com/photo-1564769625905-50e93615e769?q=80&w=1200&auto=format&fit=crop"
+      />
+      <div className="w-full font-sans">
       {/* 1. HERO SECTION */}
       <section id="beranda" className="relative bg-simas-primary text-white py-24 md:py-36 overflow-hidden">
         {/* Dekorasi Background: Pola Grid dan Efek Glow */}
@@ -160,5 +167,6 @@ export default function Home() {
         </div>
       </section>
     </div>
+    </>
   );
 }

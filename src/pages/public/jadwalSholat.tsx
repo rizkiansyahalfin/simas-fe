@@ -1,6 +1,7 @@
 import { MapPin } from 'lucide-react'
 import { Clock } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import Seo from '@/lib/Seo'
 
 export default function JadwalSholatPage() {
   const [now, setNow] = useState(new Date())
@@ -35,7 +36,13 @@ export default function JadwalSholatPage() {
   const next = getNextPrayer()
 
   return (
-    <div className="space-y-6">
+    <>
+      <Seo
+        title="Jadwal Sholat"
+        description="Cek jadwal sholat dan waktu berikutnya di lingkungan masjid SIMAS dengan informasi yang mudah diakses."
+        image="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=1200&q=80"
+      />
+      <div className="space-y-6">
 
       {/* HEADER */}
       <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-emerald-600 to-emerald-800 p-6 text-white shadow-lg">
@@ -156,5 +163,6 @@ export default function JadwalSholatPage() {
       </div>
 
     </div>
+    </>
   )
 }
