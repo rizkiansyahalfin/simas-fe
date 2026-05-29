@@ -5,6 +5,7 @@ import { Save } from "lucide-react";
 import { HeartHandshake } from "lucide-react";
 import { FileText } from "lucide-react";
 import { LinkIcon } from "lucide-react";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,12 +32,22 @@ export default function ZisDistributionForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // 1. Validasi Error (Contoh: Tolak kalau nominal lebih dari 50 Juta)
+    if (Number(formData.nominal) > 50000000) {
+      toast.error("Gagal menyimpan, nominal terlalu besar!");
+      return; // Berhenti di sini, form nggak akan disimpen
+    }
+
     setIsLoading(true);
     
-    // Simulasi loading simpan data
+    // 2. Simulasi loading simpan data
     setTimeout(() => {
       setIsLoading(false);
-      alert("Data distribusi ZIS berhasil dicatat!");
+      
+      // Hapus alert jadul, ganti pakai toast Sonner
+      toast.success(`Berhasil! Dana ZIS untuk ${formData.mustahik} dicatat.`);
+      
       navigate(-1); 
     }, 1000);
   };
