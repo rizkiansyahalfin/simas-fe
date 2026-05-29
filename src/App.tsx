@@ -45,6 +45,7 @@ import CampaignListPage from "./campaigns/pages/CampaignListPage";
 import CampaignHistoryPage from "./campaigns/pages/CampaignHistoryPage";
 import CampaignDetailPage from "./campaigns/pages/CampaignDetailPage";
 import EventDetailPage from "./Events/pages/EventDetailPage";
+import CongregationDetailPage from "./congregation-detail/pages/CongregationDetailPage";
 
 function App() {
     const { isAuthenticated } = useAuthStore();
@@ -393,6 +394,18 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+                
+                <Route
+                    path="/admin/congregations/:id"
+                    element={
+                        <ProtectedRoute resource='congregationdetail'>
+                            <AdminLayout>
+                                <CongregationDetailPage />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
+
 
                 {/* ── FALLBACK ── */}
                 <Route path='*' element={<NotFoundPage />} />
