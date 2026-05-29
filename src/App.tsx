@@ -32,6 +32,7 @@ import ZisManagement from "@/pages/admin/ZisManagement";
 import UserManagementPage from "./pages/admin/UserManagement";
 import DashboardPage from "@/pages/admin/DashboardPage";
 import AuditLogPage from "@/pages/admin/AuditLogPage";
+import InventoryDetailPage from "@/pages/admin/InventoryDetailPage";
 
 // Auth
 import Login from "@/pages/auth/Login";
@@ -295,6 +296,17 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+
+                <Route
+                 path='/admin/inventaris/:id'
+                 element={
+                     <ProtectedRoute resource='inventaris'>
+                         <AdminLayout>
+                             <InventoryDetailPage />
+                         </AdminLayout>
+                     </ProtectedRoute>
+                 }
+             />
 
                 {/* JAMAAH */}
                 <Route
