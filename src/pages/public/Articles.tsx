@@ -3,6 +3,7 @@ import { Calendar } from "lucide-react";
 import { User } from "lucide-react";
 import { Newspaper } from "lucide-react";
 import { ArrowRight } from "lucide-react";
+import Seo from "@/lib/Seo";
 import { useState } from "react";
 import  ArticleSearchFilter  from "@/components/articles/ArticleSearchFilter";
 
@@ -42,7 +43,13 @@ export default function Articles() {
   const [category, setCategory] = useState("Semua");
   // Filter artikel berdasarkan search dan category
   return (
-    <div className="relative min-h-screen bg-slate-50/30 py-16 md:py-24 font-sans">
+    <>
+      <Seo
+        title="Artikel"
+        description="Baca artikel dan laporan kegiatan masjid untuk memperkuat ibadah, sosial, dan transparansi pengelolaan SIMAS."
+        image="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=1200&q=80"
+      />
+      <div className="relative min-h-screen bg-slate-50/30 py-16 md:py-24 font-sans">
       {/* Dekorasi Background Halus */}
       <div className="absolute top-0 left-1/2 w-full max-w-3xl h-64 bg-emerald-100/30 rounded-full blur-3xl -translate-x-1/2 -z-10"></div>
 
@@ -128,5 +135,6 @@ export default function Articles() {
         </div>
       </div>
     </div>
+    </>
   );
 }

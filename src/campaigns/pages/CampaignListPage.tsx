@@ -6,6 +6,8 @@ from '../components/CampaignGrid'
 import { useCampaigns }
 from '../hooks/useCampaigns'
 
+import Seo from '@/lib/Seo'
+
 export default function CampaignListPage() {
 
   const {
@@ -13,12 +15,18 @@ export default function CampaignListPage() {
   } = useCampaigns()
 
   return (
-    <div
-      className="
-        min-h-screen
-        bg-slate-50
-      "
-    >
+    <>
+      <Seo
+        title="Campaign Donasi"
+        description="Dukung kampanye donasi untuk kegiatan masjid, pembangunan, dan bantuan sosial melalui SIMAS."
+        image="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=1200&q=80"
+      />
+      <div
+        className="
+          min-h-screen
+          bg-slate-50
+        "
+      >
 
       <section
         className="
@@ -60,5 +68,6 @@ export default function CampaignListPage() {
       </section>
 
     </div>
+    </>
   )
 }

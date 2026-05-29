@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { MapPin, Clock, ChevronLeft, ChevronRight, Info } from 'lucide-react'
 import JumatWidget from '@/components/kegiatan/jumatWidget'
+import Seo from '@/lib/Seo'
 
 /* ─── Static prayer times (dummy — nanti dari API) ─── */
 const PRAYER_TIMES = [
@@ -86,7 +87,13 @@ export default function JadwalSholatPage() {
     d.getFullYear() === today.getFullYear()
 
   return (
-    <div className="space-y-6">
+    <>
+      <Seo
+        title="Jadwal Sholat"
+        description="Cek jadwal sholat dan waktu berikutnya di lingkungan masjid SIMAS dengan informasi yang mudah diakses."
+        image="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=1200&q=80"
+      />
+      <div className="space-y-6">
 
       {/* ── Header banner ── */}
       <div className="hero-banner p-6">
@@ -234,5 +241,6 @@ export default function JadwalSholatPage() {
       </div>
 
     </div>
+    </>
   )
 }

@@ -12,6 +12,8 @@ from '../components/CampaignProgress'
 import { useCampaigns }
 from '../hooks/useCampaigns'
 
+import Seo from '@/lib/Seo'
+
 export default function CampaignDetailPage() {
 
   const { id } =
@@ -29,19 +31,31 @@ export default function CampaignDetailPage() {
 
   if (!campaign) {
     return (
-      <div>
-        Campaign tidak ditemukan
-      </div>
+      <>
+        <Seo
+          title="Campaign Tidak Ditemukan"
+          description="Campaign donasi tidak ditemukan. Silakan kembali ke daftar campaign untuk mendukung program masjid."
+        />
+        <div>
+          Campaign tidak ditemukan
+        </div>
+      </>
     )
   }
 
   return (
-    <div
-      className="
-        min-h-screen
-        bg-slate-50
-      "
-    >
+    <>
+      <Seo
+        title={campaign.title}
+        description={campaign.description}
+        image={campaign.imageUrl}
+      />
+      <div
+        className="
+          min-h-screen
+          bg-slate-50
+        "
+      >
 
       <div
         className="
@@ -116,5 +130,6 @@ export default function CampaignDetailPage() {
       </div>
 
     </div>
+    </>
   )
 }

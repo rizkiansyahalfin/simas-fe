@@ -3,6 +3,7 @@ import { Clock } from "lucide-react";
 import { MapPin } from "lucide-react";
 import { User } from "lucide-react";
 import { ChevronRight } from "lucide-react";
+import Seo from "@/lib/Seo";
 
 // Data Dummy Agenda Kegiatan
 const DUMMY_EVENTS = [
@@ -43,7 +44,13 @@ const DUMMY_EVENTS = [
 
 export default function Events() {
   return (
-    <div className="relative min-h-screen bg-slate-50/50 py-16 md:py-24 overflow-hidden font-sans">
+    <>
+      <Seo
+        title="Agenda Kegiatan"
+        description="Lihat jadwal kajian, tabligh akbar, dan kegiatan masjid terbaru di SIMAS."
+        image="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=1200&q=80"
+      />
+      <div className="relative min-h-screen bg-slate-50/50 py-16 md:py-24 overflow-hidden font-sans">
       {/* Dekorasi Background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:32px_32px] opacity-30"></div>
       <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-100/40 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3"></div>
@@ -135,5 +142,6 @@ export default function Events() {
         </div>
       </div>
     </div>
+    </>
   );
 }
