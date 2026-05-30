@@ -1,52 +1,55 @@
 // src/features/congregation/components/CongregationFormDialog.tsx
 
+import { useState } from 'react'
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-
-import { Button }
-from '@/components/ui/button'
-
-import { Input }
-from '@/components/ui/input'
-
-import { Textarea }
-from '@/components/ui/textarea'
-
-import GenderRadioGroup
-from './GenderRadioGroup'
-
-import MustahikSection
-from './MustahikSection'
-
-import { useCongregationForm }
-from '../hooks/useCongregationForm'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { toast } from 'sonner'
+import GenderRadioGroup from './GenderRadioGroup'
+import MustahikSection from './MustahikSection'
+import { useCongregationForm } from '../hooks/useCongregationForm'
+import { validateForm, required } from '@/lib/validate'
 
 interface Props {
   open: boolean
-
-  onOpenChange: (
-    value: boolean
-  ) => void
+  onOpenChange: (value: boolean) => void
 }
 
 export default function CongregationFormDialog({
   open,
   onOpenChange,
 }: Props) {
-  const {
-    form,
-    updateField,
-    resetForm,
-  } = useCongregationForm()
+  const { form, updateField, resetForm } = useCongregationForm()
+  const [errors, setErrors] = useState<Record<string, string>>({})
 
-  function handleSubmit() {
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    const validation = validateForm(form, {
+      fullName: [required("Nama lengkap")],
+      nik: [required("NIK")],
+      address: [required("Alamat")],
+      phone: [required("Nomor HP")],
+      birthDate: [required("Tanggal lahir")],
+    })
+    if (Object.keys(validation).length > 0) {
+      setErrors(validation)
+      return
+    }
+    toast.success("Data jamaah berhasil disimpan.")
     resetForm()
-
+    setErrors({})
     onOpenChange(false)
+  }
+
+  function handleField(key: string, value: string) {
+    updateField(key as keyof typeof form, value as never)
+    if (errors[key]) setErrors((prev) => { const next = { ...prev }; delete next[key]; return next })
   }
 
   return (
@@ -62,168 +65,92 @@ export default function CongregationFormDialog({
           </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
 
-          {/* row */}
           <div className="grid grid-cols-2 gap-4">
 
             <div className="space-y-2">
-              <label>
-                Nama Lengkap
-              </label>
-
+              <label>Nama Lengkap</label>
               <Input
                 value={form.fullName}
-                onChange={(e) =>
-                  updateField(
-                    'fullName',
-                    e.target.value
-                  )
-                }
-                placeholder="
-                Contoh: Muhammad Ikhsan
-                "
+                onChange={(e) => handleField('fullName', e.target.value)}
+                placeholder="Contoh: Muhammad Ikhsan"
+                className={errors.fullName ? "border-red-400" : ""}
               />
+              {errors.fullName && <p className="text-sm text-red-500">{errors.fullName}</p>}
             </div>
 
             <div className="space-y-2">
-              <label>
-                NIK
-              </label>
-
+              <label>NIK</label>
               <Input
                 value={form.nik}
-                onChange={(e) =>
-                  updateField(
-                    'nik',
-                    e.target.value
-                  )
-                }
-                placeholder="
-                327xxxxxxxxxxxx
-                "
+                onChange={(e) => handleField('nik', e.target.value)}
+                placeholder="327xxxxxxxxxxxx"
+                className={errors.nik ? "border-red-400" : ""}
               />
+              {errors.nik && <p className="text-sm text-red-500">{errors.nik}</p>}
             </div>
 
           </div>
 
-          {/* alamat */}
           <div className="space-y-2">
-
-            <label>
-              Alamat Sesuai KTP
-            </label>
-
+            <label>Alamat Sesuai KTP</label>
             <Textarea
               rows={4}
               value={form.address}
-              onChange={(e) =>
-                updateField(
-                  'address',
-                  e.target.value
-                )
-              }
-              placeholder="
-              Jl. Raya Kebon Jeruk...
-              "
+              onChange={(e) => handleField('address', e.target.value)}
+              placeholder="Jl. Raya Kebon Jeruk..."
+              className={errors.address ? "border-red-400" : ""}
             />
-
+            {errors.address && <p className="text-sm text-red-500">{errors.address}</p>}
           </div>
 
-          {/* row */}
           <div className="grid grid-cols-2 gap-4">
 
             <div className="space-y-2">
-
-              <label>
-                Nomor HP / WhatsApp
-              </label>
-
+              <label>Nomor HP / WhatsApp</label>
               <Input
                 value={form.phone}
-                onChange={(e) =>
-                  updateField(
-                    'phone',
-                    e.target.value
-                  )
-                }
-                placeholder="
-                0812xxxx
-                "
+                onChange={(e) => handleField('phone', e.target.value)}
+                placeholder="0812xxxx"
+                className={errors.phone ? "border-red-400" : ""}
               />
-
+              {errors.phone && <p className="text-sm text-red-500">{errors.phone}</p>}
             </div>
 
             <div className="space-y-2">
-
-              <label>
-                Tanggal Lahir
-              </label>
-
+              <label>Tanggal Lahir</label>
               <Input
                 type="date"
                 value={form.birthDate}
-                onChange={(e) =>
-                  updateField(
-                    'birthDate',
-                    e.target.value
-                  )
-                }
+                onChange={(e) => handleField('birthDate', e.target.value)}
+                className={errors.birthDate ? "border-red-400" : ""}
               />
-
+              {errors.birthDate && <p className="text-sm text-red-500">{errors.birthDate}</p>}
             </div>
 
           </div>
 
-          {/* gender */}
           <div className="space-y-2">
-
-            <label>
-              Jenis Kelamin
-            </label>
-
+            <label>Jenis Kelamin</label>
             <GenderRadioGroup
               value={form.gender}
-              onChange={(value) =>
-                updateField(
-                  'gender',
-                  value
-                )
-              }
+              onChange={(value) => handleField('gender', value)}
             />
-
           </div>
 
-          {/* mustahik */}
-          <MustahikSection
-            form={form}
-            updateField={updateField}
-          />
+          <MustahikSection form={form} updateField={updateField as never} />
 
-          {/* button */}
-          <div
-            className="
-              flex justify-end
-              gap-3 pt-4
-            "
-          >
-            <Button
-              variant="secondary"
-              onClick={() =>
-                onOpenChange(false)
-              }
-            >
+          <div className="flex justify-end gap-3 pt-4">
+            <Button variant="secondary" onClick={() => onOpenChange(false)}>
               Batal
             </Button>
-
-            <Button
-              onClick={handleSubmit}
-            >
+            <Button type="submit">
               Simpan Data Jamaah
             </Button>
           </div>
 
-        </div>
+        </form>
 
       </DialogContent>
     </Dialog>

@@ -28,12 +28,21 @@ export default function DonationForm({ onSuccess }: Props) {
   const [bukti,     setBukti]     = useState<File | null>(null)
   const [loading,   setLoading]   = useState(false)
   const [showCat,   setShowCat]   = useState(false)
+  const [errors,    setErrors]    = useState<Record<string, string>>({})
   const fileRef = useRef<HTMLInputElement>(null)
 
   const finalNominal = customVal ? Number(customVal.replace(/\D/g, '')) : nominal
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    const newErrors: Record<string, string> = {}
+    if (!anonymous && !name.trim()) newErrors.name = 'Nama donatur wajib diisi.'
+    if (!finalNominal || finalNominal <= 0) newErrors.nominal = 'Pilih nominal donasi.'
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
+      return
+    }
+    setErrors({})
     setLoading(true)
     await new Promise(r => setTimeout(r, 1400))
     setLoading(false)
@@ -101,9 +110,10 @@ export default function DonationForm({ onSuccess }: Props) {
         {/* Nominal */}
         <div>
           <label className="jumat-label">Nominal Donasi</label>
+          {errors.nominal && <p className="text-sm text-red-500 mb-2">{errors.nominal}</p>}
           <div className="grid grid-cols-4 gap-2 mb-3">
             {PRESETS.map(p => (
-              <button key={p} type="button" onClick={() => { setNominal(p); setCustomVal('') }}
+              <button key={p} type="button" onClick={() => { setNominal(p); setCustomVal(''); if (errors.nominal) setErrors(p => { const n = { ...p }; delete n.nominal; return n }) }}
                 className={`preset-btn text-center ${!customVal && nominal === p ? 'selected' : ''}`}>
                 {fmt(p)}
               </button>
@@ -124,9 +134,10 @@ export default function DonationForm({ onSuccess }: Props) {
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="jumat-label">Nama Donatur</label>
-            <Input value={name} onChange={e => setName(e.target.value)}
+            <Input value={name} onChange={e => { setName(e.target.value); if (errors.name) setErrors(p => { const n = { ...p }; delete n.name; return n }) }}
               placeholder="Nama lengkap" disabled={anonymous}
-              className="jumat-input h-11"/>
+              className={`jumat-input h-11 ${errors.name ? 'border-red-400' : ''}`}/>
+            {errors.name && <p className="text-sm text-red-500 mt-1">{errors.name}</p>}
           </div>
           <div>
             <label className="jumat-label">No HP / WhatsApp</label>

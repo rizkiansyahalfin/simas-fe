@@ -8,19 +8,71 @@ import { ArrowUpCircle } from "lucide-react";
 import { Plus } from "lucide-react";
 import { X } from "lucide-react";
 import { Save } from "lucide-react";
+import { toast } from "sonner";
+import { validateForm, required, positiveNumber } from "@/lib/validate";
 
-// Data Dummy Transaksi ZIS
-const DUMMY_ZIS = [
-  { id: 1, date: "05 Mei 2026", type: "Pemasukan", category: "Infaq", amount: 1500000, desc: "Kotak Amal Jumat" },
-  { id: 2, date: "03 Mei 2026", type: "Penyaluran", category: "Sedekah", amount: 2000000, desc: "Bantuan Panti Asuhan Bantul" },
-  { id: 3, date: "01 Mei 2026", type: "Pemasukan", category: "Zakat Fitrah", amount: 5000000, desc: "Hamba Allah (Transfer BSI)" },
-];
+interface ZisForm {
+  type: string
+  category: string
+  amount: string
+  date: string
+  desc: string
+}
+
+interface ZisItem {
+  id: number
+  date: string
+  type: string
+  category: string
+  amount: number
+  desc: string
+}
+
+const INITIAL_FORM: ZisForm = { type: "Pemasukan", category: "Zakat Fitrah", amount: "", date: "", desc: "" }
+
+const CATEGORIES = ["Zakat Fitrah", "Zakat Maal", "Infaq", "Sedekah", "Wakaf"]
 
 export default function ZisManagement() {
   const [showForm, setShowForm] = useState(false);
-  const [transactionType, setTransactionType] = useState("Pemasukan");
+  const [items, setItems] = useState<ZisItem[]>([
+    { id: 1, date: "05 Mei 2026", type: "Pemasukan", category: "Infaq", amount: 1500000, desc: "Kotak Amal Jumat" },
+    { id: 2, date: "03 Mei 2026", type: "Penyaluran", category: "Sedekah", amount: 2000000, desc: "Bantuan Panti Asuhan Bantul" },
+    { id: 3, date: "01 Mei 2026", type: "Pemasukan", category: "Zakat Fitrah", amount: 5000000, desc: "Hamba Allah (Transfer BSI)" },
+  ]);
+  const [form, setForm] = useState<ZisForm>(INITIAL_FORM);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // Format Rupiah
+  function updateField(key: keyof ZisForm, value: string) {
+    setForm((prev) => ({ ...prev, [key]: value }))
+    if (errors[key]) setErrors((prev) => { const next = { ...prev }; delete next[key]; return next })
+  }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    const validation = validateForm(form, {
+      amount: [required("Nominal"), positiveNumber("Nominal")],
+      date: [required("Tanggal")],
+      desc: [required("Keterangan")],
+    })
+    if (Object.keys(validation).length > 0) {
+      setErrors(validation)
+      return
+    }
+    const newItem: ZisItem = {
+      id: Date.now(),
+      date: new Date(form.date).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }),
+      type: form.type,
+      category: form.category,
+      amount: Number(form.amount),
+      desc: form.desc,
+    }
+    setItems((prev) => [newItem, ...prev])
+    setForm(INITIAL_FORM)
+    setErrors({})
+    setShowForm(false)
+    toast.success("Transaksi ZIS berhasil disimpan.")
+  }
+
   const formatRupiah = (number: number) => {
     return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(number);
   };
@@ -104,19 +156,19 @@ export default function ZisManagement() {
             Form Transaksi Baru
           </h3>
           
-          <form className="space-y-8 relative z-10">
+          <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               
               <div className="space-y-3">
                 <Label className="text-slate-700 font-bold text-base">Jenis Transaksi</Label>
                 <div className="flex gap-4">
-                  <label className={`flex-1 flex items-center justify-center gap-2 cursor-pointer h-12 rounded-xl border-2 transition-all ${transactionType === 'Pemasukan' ? 'border-simas-primary bg-emerald-50 text-simas-primary' : 'border-slate-200 bg-slate-50 text-slate-500 hover:border-emerald-200'}`}>
-                    <input type="radio" name="type" value="Pemasukan" checked={transactionType === "Pemasukan"} onChange={(e) => setTransactionType(e.target.value)} className="hidden" />
+                  <label className={`flex-1 flex items-center justify-center gap-2 cursor-pointer h-12 rounded-xl border-2 transition-all ${form.type === 'Pemasukan' ? 'border-simas-primary bg-emerald-50 text-simas-primary' : 'border-slate-200 bg-slate-50 text-slate-500 hover:border-emerald-200'}`}>
+                    <input type="radio" name="type" value="Pemasukan" checked={form.type === "Pemasukan"} onChange={(e) => updateField("type", e.target.value)} className="hidden" />
                     <ArrowDownCircle className="h-5 w-5" />
                     <span className="text-sm font-bold">Pemasukan</span>
                   </label>
-                  <label className={`flex-1 flex items-center justify-center gap-2 cursor-pointer h-12 rounded-xl border-2 transition-all ${transactionType === 'Penyaluran' ? 'border-rose-500 bg-rose-50 text-rose-600' : 'border-slate-200 bg-slate-50 text-slate-500 hover:border-rose-200'}`}>
-                    <input type="radio" name="type" value="Penyaluran" checked={transactionType === "Penyaluran"} onChange={(e) => setTransactionType(e.target.value)} className="hidden" />
+                  <label className={`flex-1 flex items-center justify-center gap-2 cursor-pointer h-12 rounded-xl border-2 transition-all ${form.type === 'Penyaluran' ? 'border-rose-500 bg-rose-50 text-rose-600' : 'border-slate-200 bg-slate-50 text-slate-500 hover:border-rose-200'}`}>
+                    <input type="radio" name="type" value="Penyaluran" checked={form.type === "Penyaluran"} onChange={(e) => updateField("type", e.target.value)} className="hidden" />
                     <ArrowUpCircle className="h-5 w-5" />
                     <span className="text-sm font-bold">Penyaluran</span>
                   </label>
@@ -125,12 +177,8 @@ export default function ZisManagement() {
 
               <div className="space-y-3">
                 <Label htmlFor="category" className="text-slate-700 font-bold text-base">Kategori (ZIS)</Label>
-                <select id="category" className="flex h-12 w-full rounded-xl border-slate-200 bg-slate-50/50 px-4 text-base font-medium text-slate-700 border ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-simas-primary/20 focus-visible:border-simas-primary transition-all">
-                  <option>Zakat Fitrah</option>
-                  <option>Zakat Maal</option>
-                  <option>Infaq</option>
-                  <option>Sedekah</option>
-                  <option>Wakaf</option>
+                <select id="category" value={form.category} onChange={(e) => updateField("category", e.target.value)} className="flex h-12 w-full rounded-xl border-slate-200 bg-slate-50/50 px-4 text-base font-medium text-slate-700 border ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-simas-primary/20 focus-visible:border-simas-primary transition-all">
+                  {CATEGORIES.map((cat) => (<option key={cat}>{cat}</option>))}
                 </select>
               </div>
 
@@ -140,24 +188,27 @@ export default function ZisManagement() {
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                     <span className="text-slate-400 font-bold">Rp</span>
                   </div>
-                  <Input id="amount" type="number" placeholder="500000" className="h-12 pl-12 rounded-xl bg-slate-50/50 border-slate-200 focus-visible:ring-simas-primary/20 focus-visible:border-simas-primary transition-all text-base font-medium" required />
+                  <Input id="amount" type="number" placeholder="500000" value={form.amount} onChange={(e) => updateField("amount", e.target.value)} className={`h-12 pl-12 rounded-xl bg-slate-50/50 border-slate-200 focus-visible:ring-simas-primary/20 focus-visible:border-simas-primary transition-all text-base font-medium ${errors.amount ? "border-red-400 focus-visible:border-red-400 focus-visible:ring-red-200" : ""}`} />
                 </div>
+                {errors.amount && <p className="text-sm text-red-500 mt-1">{errors.amount}</p>}
               </div>
 
               <div className="space-y-3">
                 <Label htmlFor="date" className="text-slate-700 font-bold text-base">Tanggal</Label>
-                <Input id="date" type="date" className="h-12 rounded-xl bg-slate-50/50 border-slate-200 focus-visible:ring-simas-primary/20 focus-visible:border-simas-primary transition-all text-base font-medium" required />
+                <Input id="date" type="date" value={form.date} onChange={(e) => updateField("date", e.target.value)} className={`h-12 rounded-xl bg-slate-50/50 focus-visible:ring-simas-primary/20 focus-visible:border-simas-primary transition-all text-base font-medium ${errors.date ? "border-red-400 focus-visible:border-red-400 focus-visible:ring-red-200" : "border-slate-200"}`} />
+                {errors.date && <p className="text-sm text-red-500 mt-1">{errors.date}</p>}
               </div>
 
             </div>
 
             <div className="space-y-3">
               <Label htmlFor="desc" className="text-slate-700 font-bold text-base">Keterangan / Deskripsi</Label>
-              <Input id="desc" placeholder="Contoh: Hamba Allah via transfer BSI" className="h-12 rounded-xl bg-slate-50/50 border-slate-200 focus-visible:ring-simas-primary/20 focus-visible:border-simas-primary transition-all text-base font-medium" required />
+              <Input id="desc" placeholder="Contoh: Hamba Allah via transfer BSI" value={form.desc} onChange={(e) => updateField("desc", e.target.value)} className={`h-12 rounded-xl bg-slate-50/50 focus-visible:ring-simas-primary/20 focus-visible:border-simas-primary transition-all text-base font-medium ${errors.desc ? "border-red-400 focus-visible:border-red-400 focus-visible:ring-red-200" : "border-slate-200"}`} />
+              {errors.desc && <p className="text-sm text-red-500 mt-1">{errors.desc}</p>}
             </div>
 
             <div className="pt-4 flex justify-end">
-              <Button type="button" className="h-12 w-full md:w-auto bg-simas-primary hover:bg-emerald-700 text-white px-10 rounded-xl font-bold text-base shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 transition-all duration-200">
+              <Button type="submit" className="h-12 w-full md:w-auto bg-simas-primary hover:bg-emerald-700 text-white px-10 rounded-xl font-bold text-base shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 transition-all duration-200">
                 <Save className="mr-2.5 h-5 w-5" /> Simpan Data Transaksi
               </Button>
             </div>
@@ -182,14 +233,14 @@ export default function ZisManagement() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50 text-sm">
-              {DUMMY_ZIS.length === 0 ? (
+              {items.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="px-6 py-12 text-center text-slate-400">
                     Belum ada transaksi ZIS.
                   </td>
                 </tr>
               ) : (
-                DUMMY_ZIS.map((item) => (
+                items.map((item) => (
                   <tr key={item.id} className="hover:bg-slate-50/60 transition-colors group">
                     <td className="px-6 py-5 md:px-8 text-slate-600 font-medium whitespace-nowrap">{item.date}</td>
                     <td className="px-6 py-5">
