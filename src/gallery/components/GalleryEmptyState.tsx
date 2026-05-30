@@ -1,6 +1,6 @@
 // src/features/gallery/components/GalleryEmptyState.tsx
 
-import EmptyState from "@/skeleton/states/EmptyState";
+import EmptyState from "@/components/states/EmptyState";
 
 
 

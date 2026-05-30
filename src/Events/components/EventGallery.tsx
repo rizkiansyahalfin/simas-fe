@@ -1,5 +1,5 @@
 import { ImagePlus } from 'lucide-react'
-import type { EventPhoto } from '../eventTypes'
+import type { EventPhoto } from '../types/eventTypes'
 
 interface Props {
   photos: EventPhoto[]

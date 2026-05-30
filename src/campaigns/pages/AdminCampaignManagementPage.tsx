@@ -37,7 +37,7 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
-import { formatRupiah } from "@/utils/formatRupiah";
+import { formatRupiah } from "@/lib/formatRupiah";
 
 type CampaignStatus = "active" | "closed" | "archived";
 

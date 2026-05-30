@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ServerErrorPage } from "@/pages/error/ErrorPage";
+import { ServerErrorPage } from "@/components/error/ErrorPage";
 
 type ErrorBoundaryProps = {
 	children: React.ReactNode;

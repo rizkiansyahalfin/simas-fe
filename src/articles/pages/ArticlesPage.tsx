@@ -3,9 +3,9 @@ import {
   useArticles,
   useDeleteArticle,
 } from '../hooks/useArticles'
-import EmptyState from '@/skeleton/states/EmptyState'
-import ErrorState from '@/skeleton/states/ErrorState'
-import PageSectionSkeleton from '@/skeleton/states/PageSectionSkeleton'
+import EmptyState from '@/components/states/EmptyState'
+import ErrorState from '@/components/states/ErrorState'
+import PageSectionSkeleton from '@/components/states/PageSectionSkeleton'
 
 export default function ArticlesPage() {
   const {

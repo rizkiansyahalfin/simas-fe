@@ -2,7 +2,7 @@
 
 import { useState }
 from 'react'
-import type { GalleryPhoto } from '../galleryTypes'
+import type { GalleryPhoto } from '../types/galleryTypes'
 
 
 

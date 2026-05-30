@@ -1,7 +1,7 @@
 // src/features/congregation-detail/hooks/useCongregationDetail.ts
 
 import { useCallback, useMemo } from "react"
-import type { CongregationDetail } from '../congregationDetailTypes'
+import type { CongregationDetail } from '../types/congregationDetailTypes'
 
 
 

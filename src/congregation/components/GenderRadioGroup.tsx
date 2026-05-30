@@ -1,6 +1,6 @@
 // src/features/congregation/components/GenderRadioGroup.tsx
 
-import type { Gender } from "../typesCongregation"
+import type { Gender } from "../types/typesCongregation"
 
 
 interface Props {

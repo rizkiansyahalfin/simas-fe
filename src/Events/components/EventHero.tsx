@@ -1,6 +1,6 @@
 import { CalendarDays, CheckCircle2, Clock3, MapPin } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
-import type { EventDetail } from '../eventTypes'
+import type { EventDetail } from '../types/eventTypes'
 
 interface Props {
   event: EventDetail

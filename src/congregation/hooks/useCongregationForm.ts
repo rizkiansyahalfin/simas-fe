@@ -1,7 +1,7 @@
 // src/features/congregation/hooks/useCongregationForm.ts
 
 import { useState } from 'react'
-import type { Congregation } from '../typesCongregation'
+import type { Congregation } from '../types/typesCongregation'
 
 
 

@@ -4,7 +4,7 @@ export type ValidationRule<T> = {
 
 export type ValidationRules<T> = Partial<Record<keyof T, ValidationRule<string>[]>>
 
-export function validateForm<T extends Record<string, string>>(
+export function validateForm<T extends Record<string, unknown>>(
   formData: T,
   rules: ValidationRules<T>
 ): Record<string, string> {
@@ -12,9 +12,9 @@ export function validateForm<T extends Record<string, string>>(
 
   for (const [field, fieldRules] of Object.entries(rules)) {
     if (!fieldRules) continue
-    const value = formData[field] ?? ""
+    const value = String(formData[field] ?? "")
     for (const rule of fieldRules as ValidationRule<string>[]) {
-      const error = rule.validate(value, formData)
+      const error = rule.validate(value, formData as Record<string, string>)
       if (error) {
         errors[field] = error
         break

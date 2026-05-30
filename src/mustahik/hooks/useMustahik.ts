@@ -1,4 +1,4 @@
-import type { DistributionHistory, Mustahik } from "../mustahikTypes"
+import type { DistributionHistory, Mustahik } from "../types/mustahikTypes"
 
 
 export function useMustahik() {

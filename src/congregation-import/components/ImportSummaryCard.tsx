@@ -1,4 +1,4 @@
-import type { ImportSummary } from '../congregationImport'
+import type { ImportSummary } from '../types/congregationImport'
 
 interface ImportSummaryCardProps {
   summary: ImportSummary

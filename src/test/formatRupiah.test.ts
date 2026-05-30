@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { formatRupiah } from "@/utils/formatRupiah";
+import { formatRupiah } from "@/lib/formatRupiah";
 
 describe("formatRupiah", () => {
   it("formats whole numbers with IDR locale", () => {

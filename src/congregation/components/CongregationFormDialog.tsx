@@ -30,7 +30,7 @@ export default function CongregationFormDialog({
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    const validation = validateForm(form, {
+    const validation = validateForm(form as unknown as Record<string, unknown>, {
       fullName: [required("Nama lengkap")],
       nik: [required("NIK")],
       address: [required("Alamat")],

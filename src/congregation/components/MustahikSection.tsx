@@ -2,7 +2,7 @@
 
 import { Textarea }
 from '@/components/ui/textarea'
-import type { Congregation, MustahikCategory } from '../typesCongregation'
+import type { Congregation, MustahikCategory } from '../types/typesCongregation'
 
 
 

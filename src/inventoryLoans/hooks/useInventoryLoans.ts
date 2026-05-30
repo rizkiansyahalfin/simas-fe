@@ -1,7 +1,7 @@
 // src/features/inventory-loans/hooks/useInventoryLoans.ts
 
 import { useState } from 'react'
-import type { InventoryLoan } from '../typesInventoryLoans'
+import type { InventoryLoan } from '../types/typesInventoryLoans'
 
 
 

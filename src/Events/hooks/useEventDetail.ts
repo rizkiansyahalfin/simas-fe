@@ -2,7 +2,7 @@
 
 import { useMemo }
 from 'react'
-import type { EventDetail } from '../eventTypes'
+import type { EventDetail } from '../types/eventTypes'
 
 
 

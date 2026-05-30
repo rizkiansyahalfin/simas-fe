@@ -1,6 +1,6 @@
 // src/features/inventory-loans/components/LoanStatusBadge.tsx
 
-import type { LoanStatus } from "../typesInventoryLoans"
+import type { LoanStatus } from "../types/typesInventoryLoans"
 
 
 

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { validateForm, required, minLength, email, phone, positiveNumber, matchField } from "@/lib/validate";
+import { validateForm, required, minLength, email, positiveNumber, matchField } from "@/lib/validate";
 
 describe("required", () => {
   it("returns error for empty string", () => {

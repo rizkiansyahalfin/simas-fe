@@ -1,6 +1,6 @@
 // src/features/campaigns/components/CampaignGrid.tsx
 
-import type { Campaign } from '../campaignsTypes'
+import type { Campaign } from '../types/campaignsTypes'
 import CampaignCard
 from './CampaignCard'
 

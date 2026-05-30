@@ -3,13 +3,13 @@ import { useMemo, useState } from 'react'
 import {
   importCongregations,
   parseExcelFile,
-} from '../services/congregationImportService'
+} from '../utils/congregationImportService'
 
 import type {
   CongregationImportResponse,
   ImportRow,
   ImportSummary,
-} from '../congregationImport'
+} from '../types/congregationImport'
 
 export function useCongregationImport() {
   const [file, setFile] =

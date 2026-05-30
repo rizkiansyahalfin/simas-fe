@@ -1,4 +1,4 @@
-import type { ImportResult } from '../congregationImport'
+import type { ImportResult } from '../types/congregationImport'
 
 interface ImportResultTableProps {
   results: ImportResult[]

@@ -1,7 +1,7 @@
 // src/features/campaigns/hooks/useCampaigns.ts
 
 import { useMemo }from 'react'
-import type { Campaign } from '../campaignsTypes'
+import type { Campaign } from '../types/campaignsTypes'
 
 
 

@@ -18,7 +18,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import type { ZISHistory } from "../congregationDetailTypes"
+import type { ZISHistory } from "../types/congregationDetailTypes"
 
 
 

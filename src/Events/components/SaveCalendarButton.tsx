@@ -11,7 +11,7 @@ from '@/components/ui/button'
 import {
   generateICS,
 } from '../utils/generateICS'
-import type { EventDetail } from '../eventTypes'
+import type { EventDetail } from '../types/eventTypes'
 
 interface Props {
   event: EventDetail

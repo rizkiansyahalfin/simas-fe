@@ -1,7 +1,7 @@
-import { formatRupiah } from '@/utils/formatRupiah'
+import { formatRupiah } from '@/lib/formatRupiah'
 import { useMemo } from 'react'
 import { useCampaigns } from '../hooks/useCampaigns'
-import type { Campaign } from '../campaignsTypes'
+import type { Campaign } from '../types/campaignsTypes'
 
 function getCampaignStatus(campaign: Campaign) {
   const deadline = new Date(campaign.deadline)

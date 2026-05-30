@@ -5,7 +5,7 @@ import { Trash2 } from 'lucide-react'
 
 import { Button }
 from '@/components/ui/button'
-import type { GalleryPhoto } from '../galleryTypes'
+import type { GalleryPhoto } from '../types/galleryTypes'
 
 
 

@@ -1,4 +1,4 @@
-import type { ImportRow } from '../congregationImport'
+import type { ImportRow } from '../types/congregationImport'
 
 interface ImportPreviewTableProps {
   data: ImportRow[]

@@ -1,6 +1,6 @@
 
-import type { Mustahik } from '../mustahikTypes'
-import { maskNik } from '@/skeleton/lib/mask'
+import type { Mustahik } from '../types/mustahikTypes'
+import { maskNik } from '@/lib/mask'
 import MustahikStatusBadge from './MustahikStatusBadge'
 
 interface Props {

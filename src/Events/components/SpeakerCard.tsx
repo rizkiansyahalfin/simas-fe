@@ -1,7 +1,7 @@
 import { Mic } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Card } from '@/components/ui/card'
-import type { Speaker } from '../eventTypes'
+import type { Speaker } from '../types/eventTypes'
 
 interface Props {
   speaker: Speaker

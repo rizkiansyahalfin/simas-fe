@@ -1,6 +1,6 @@
 
 
-import type { DistributionHistory } from '../mustahikTypes'
+import type { DistributionHistory } from '../types/mustahikTypes'
 import DistributionStatusBadge from './DistributionStatusBadge'
 
 interface Props {

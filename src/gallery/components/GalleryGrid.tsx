@@ -1,6 +1,6 @@
 // src/features/gallery/components/GalleryGrid.tsx
 
-import type { GalleryPhoto } from '../galleryTypes'
+import type { GalleryPhoto } from '../types/galleryTypes'
 import GalleryCard
 from './GalleryCard'
 

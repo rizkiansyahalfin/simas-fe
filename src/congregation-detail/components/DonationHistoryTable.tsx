@@ -18,7 +18,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import type { DonationHistory } from "../congregationDetailTypes"
+import type { DonationHistory } from "../types/congregationDetailTypes"
 
 
 interface Props {

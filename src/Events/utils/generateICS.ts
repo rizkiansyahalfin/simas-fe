@@ -1,6 +1,6 @@
 // src/features/events/utils/generateICS.ts
 
-import type { EventDetail } from "../eventTypes"
+import type { EventDetail } from "../types/eventTypes"
 
 
 export function generateICS(

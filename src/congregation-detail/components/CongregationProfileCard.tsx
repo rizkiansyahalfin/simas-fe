@@ -14,7 +14,7 @@ import {
   CardContent,
 } from "@/components/ui/card"
 
-import type { CongregationDetail } from '../congregationDetailTypes'
+import type { CongregationDetail } from '../types/congregationDetailTypes'
 import RevealNikButton
 from './RevealNikButton'
 

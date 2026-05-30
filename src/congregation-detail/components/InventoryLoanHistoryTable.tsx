@@ -18,7 +18,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import type { InventoryLoanHistory } from "../congregationDetailTypes"
+import type { InventoryLoanHistory } from "../types/congregationDetailTypes"
 
 
 

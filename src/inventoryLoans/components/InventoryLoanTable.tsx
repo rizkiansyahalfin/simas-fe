@@ -1,7 +1,7 @@
 // InventoryLoanTable.tsx
 
-import type { InventoryLoan } from '../typesInventoryLoans'
-import EmptyState from '@/skeleton/states/EmptyState'
+import type { InventoryLoan } from '../types/typesInventoryLoans'
+import EmptyState from '@/components/states/EmptyState'
 import LoanStatusBadge from './LoanStatusBadge'
 
 

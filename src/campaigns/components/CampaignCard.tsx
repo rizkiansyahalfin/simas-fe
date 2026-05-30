@@ -11,7 +11,7 @@ from './CampaignCountdown'
 
 import DonorCountBadge
 from './DonorCountBadge'
-import type { Campaign } from '../campaignsTypes'
+import type { Campaign } from '../types/campaignsTypes'
 
 
 
