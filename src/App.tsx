@@ -47,6 +47,7 @@ import CampaignHistoryPage from "./campaigns/pages/CampaignHistoryPage";
 import CampaignDetailPage from "./campaigns/pages/CampaignDetailPage";
 import EventDetailPage from "./Events/pages/EventDetailPage";
 import CongregationDetailPage from "./congregation-detail/pages/CongregationDetailPage";
+import CongregationImportPage from "./congregation-import/pages/CongregationImportPage";
 
 function App() {
     const { isAuthenticated } = useAuthStore();
@@ -417,6 +418,18 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+
+                <Route
+                    path="/admin/congregations/import"
+                    element={
+                        <ProtectedRoute resource='congregationdetail'>
+                            <AdminLayout>
+                                <CongregationImportPage />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    }
+                />
+                
 
 
                 {/* ── FALLBACK ── */}
