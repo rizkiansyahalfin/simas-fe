@@ -32,6 +32,7 @@ import UserManagementPage from "./pages/admin/UserManagement";
 import DashboardPage from "@/pages/admin/DashboardPage";
 import AuditLogPage from "@/pages/admin/AuditLogPage";
 import InventoryDetailPage from "@/pages/admin/InventoryDetailPage";
+import ProfilePage from "@/pages/admin/ProfilePage";
 
 // Auth
 import Login from "@/pages/auth/Login";
@@ -44,13 +45,10 @@ import AdminGalleryPage from "./gallery/pages/AdminGalleryPage";
 import CampaignListPage from "./campaigns/pages/CampaignListPage";
 import CampaignHistoryPage from "./campaigns/pages/CampaignHistoryPage";
 import CampaignDetailPage from "./campaigns/pages/CampaignDetailPage";
-<<<<<<< HEAD
 import EventDetailPage from "./Events/pages/EventDetailPage";
 import CongregationDetailPage from "./congregation-detail/pages/CongregationDetailPage";
 import CongregationImportPage from "./congregation-import/pages/CongregationImportPage";
-=======
 import AdminCampaignManagementPage from "./campaigns/pages/AdminCampaignManagementPage";
->>>>>>> 1f81bf46cb1d849cda058d821ae7c35442b0d865
 
 function App() {
     const { isAuthenticated } = useAuthStore();
@@ -165,10 +163,9 @@ function App() {
                     }
                 />
 
-<<<<<<< HEAD
                 <Route path='/403' element={<ForbiddenPage />} />
                 <Route path='/500' element={<ServerErrorPage />} />
-=======
+
 			<Route
 				path='/admin/campaigns'
 				element={
@@ -179,18 +176,6 @@ function App() {
 					</ProtectedRoute>
 				}
 			/>
-
-			<Route
-				path='/admin/kas'
-				element={
-					<ProtectedRoute resource='keuangan'>
-						<AdminLayout>
-							<ManajemenKasPage />
-						</AdminLayout>
-					</ProtectedRoute>
-				}
-			/>
->>>>>>> 1f81bf46cb1d849cda058d821ae7c35442b0d865
 
                 {/* ── ADMIN (PROTECTED) ── */}
                 <Route
@@ -247,6 +232,17 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+
+			<Route
+                 path='/admin/profil'
+                 element={
+                     <ProtectedRoute>
+                         <AdminLayout>
+                             <ProfilePage />
+                         </AdminLayout>
+                     </ProtectedRoute>
+                 }
+             />
 
                 <Route
                     path='/admin/verify-donasi'
