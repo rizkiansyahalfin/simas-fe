@@ -44,7 +44,6 @@ import MustahikPage from "./mustahik/pages/MustahikPage";
 import AdminGalleryPage from "./gallery/pages/AdminGalleryPage";
 import CampaignListPage from "./campaigns/pages/CampaignListPage";
 import CampaignHistoryPage from "./campaigns/pages/CampaignHistoryPage";
-import CampaignDetailPage from "./campaigns/pages/CampaignDetailPage";
 import EventDetailPage from "./Events/pages/EventDetailPage";
 import CongregationDetailPage from "./congregation-detail/pages/CongregationDetailPage";
 import CongregationImportPage from "./congregation-import/pages/CongregationImportPage";

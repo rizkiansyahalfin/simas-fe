@@ -19,7 +19,7 @@ interface DataTableProps<T> {
   exportFilename?: string;
 }
 
-export default function DataTable<T extends Record<string, any>>({ 
+export default function DataTable<T extends Record<string, unknown>>({ 
   data, 
   columns, 
   title = "Data Table",
@@ -44,11 +44,11 @@ export default function DataTable<T extends Record<string, any>>({
 
   // --- 2. FITUR SORTING ---
   const sortedData = useMemo(() => {
-    let sortableItems = [...filteredData];
+    const sortableItems = [...filteredData];
     if (sortConfig !== null) {
       sortableItems.sort((a, b) => {
-        const aValue = a[sortConfig.key];
-        const bValue = b[sortConfig.key];
+        const aValue = String(a[sortConfig.key]);
+        const bValue = String(b[sortConfig.key]);
         if (aValue < bValue) return sortConfig.direction === "asc" ? -1 : 1;
         if (aValue > bValue) return sortConfig.direction === "asc" ? 1 : -1;
         return 0;

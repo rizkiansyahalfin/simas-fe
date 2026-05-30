@@ -1,17 +1,4 @@
 import { Link, useLocation } from "react-router-dom";
-<<<<<<< HEAD
-import { LayoutDashboard } from "lucide-react";
-import { Wallet } from "lucide-react";
-import { HeartHandshake } from "lucide-react";
-import { FileText } from "lucide-react";
-import { FileSpreadsheet } from "lucide-react";
-import { CalendarDays } from "lucide-react";
-import { Archive } from "lucide-react";
-import { Users } from "lucide-react";
-import { Settings } from "lucide-react";
-import { Bell } from "lucide-react";
-import { Menu } from "lucide-react";
-=======
 import {
 	LayoutDashboard,
 	Wallet,
@@ -23,10 +10,8 @@ import {
 	Archive,
 	Users,
 	Settings,
-	Bell,
 	Menu,
 } from "lucide-react";
->>>>>>> 1f81bf46cb1d849cda058d821ae7c35442b0d865
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";

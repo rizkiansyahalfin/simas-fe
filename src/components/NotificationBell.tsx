@@ -11,10 +11,8 @@ interface Notification {
   createdAt: string;
 }
 
-export default function NotificationBell() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [notifications, setNotifications] = useState<Notification[]>([
-    // Data dummy awal sebelum server ngirim data asli
+function createInitialNotifications(): Notification[] {
+  return [
     {
       id: "1",
       title: "Donasi Masuk",
@@ -29,9 +27,14 @@ export default function NotificationBell() {
       message: "Sajadah Karpet tersisa 2 barang",
       isRead: false,
       type: "warning",
-      createdAt: new Date(Date.now() - 3600000).toISOString(), // 1 jam lalu
+      createdAt: new Date(Date.now() - 3600000).toISOString(),
     }
-  ]);
+  ];
+}
+
+export default function NotificationBell() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [notifications, setNotifications] = useState<Notification[]>(createInitialNotifications);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 

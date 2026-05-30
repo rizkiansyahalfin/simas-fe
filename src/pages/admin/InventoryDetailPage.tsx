@@ -30,7 +30,7 @@ const MOCK_CONDITIONS = [
 ];
 
 export default function InventoryDetailPage() {
-  const { id } = useParams();
+  useParams();
   const navigate = useNavigate();
 
   return (
@@ -160,7 +160,7 @@ export default function InventoryDetailPage() {
               <Clock className="h-5 w-5 text-emerald-600" /> Riwayat Perubahan Kondisi
             </h3>
             <div className="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-200 before:to-transparent">
-              {MOCK_CONDITIONS.map((cond, index) => (
+              {MOCK_CONDITIONS.map((cond) => (
                 <div key={cond.id} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
                   <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-100 group-[.is-active]:bg-emerald-50 text-emerald-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                     <CheckCircle className="h-5 w-5" />
