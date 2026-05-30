@@ -22,7 +22,6 @@ import InventoryListPage from "@/pages/admin/InventoryListPage";
 import PrayerConfig from "@/pages/admin/PrayerConfig";
 import MosqueProfileSettings from "@/pages/admin/MosqueProfileSettings";
 import VerifyDonasi from "@/pages/admin/verifyDonasi";
-import JadwalSholatJumat from "@/pages/admin/JadwalSholatJumat"; 
 import InventoryForm from "@/pages/admin/InventoryForm";
 import LaporanPage from "@/pages/admin/LaporanPage";
 import ZisDistributionForm from "@/pages/admin/ZisDistributionForm";
@@ -225,17 +224,6 @@ function App() {
                         <ProtectedRoute resource='donasi'>
                             <AdminLayout>
                                 <VerifyDonasi />
-                            </AdminLayout>
-                        </ProtectedRoute>
-                    }
-                />
-
-                <Route
-                    path='/admin/kegiatan'
-                    element={
-                        <ProtectedRoute>
-                            <AdminLayout>
-                                <JadwalSholatJumat />
                             </AdminLayout>
                         </ProtectedRoute>
                     }
