@@ -1,53 +1,48 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "sonner";
 
-// Layouts
 import AdminLayout from "@/layouts/AdminLayout";
 import AuthLayout from "@/layouts/AuthLayout";
 import PublicLayout from "@/layouts/PublicLayout";
-
-// Pages – Publik
-import Home from "@/pages/public/Home";
-import Articles from "@/pages/public/Articles";
-import ArticleDetail from "@/pages/public/ArticleDetail";
-import Events from "@/pages/public/Events";
-import JadwalSholatPage from "@/pages/public/jadwalSholat";
-import DonationPage from "./publicDonation/DonationPage";
-import GalleryPage from "@/pages/public/GalleryPage";
-
-// Pages – Admin
-import DonasiMasukPage from "@/pages/admin/DonasiMasukPage";
-import ManajemenKasPage from "@/pages/admin/ManajemenKasPage";
-import InventoryListPage from "@/pages/admin/InventoryListPage";
-import PrayerConfig from "@/pages/admin/PrayerConfig";
-import MosqueProfileSettings from "@/pages/admin/MosqueProfileSettings";
-import VerifyDonasi from "@/pages/admin/verifyDonasi";
-import InventoryForm from "@/pages/admin/InventoryForm";
-import LaporanPage from "@/pages/admin/LaporanPage";
-import ZisDistributionForm from "@/pages/admin/ZisDistributionForm";
-import KegiatanPage from "@/pages/admin/KegiatanPage";
-import { ForbiddenPage, NotFoundPage, ServerErrorPage } from "@/pages/error/ErrorPage";
-import ZisManagement from "@/pages/admin/ZisManagement";
-import UserManagementPage from "./pages/admin/UserManagement";
-import DashboardPage from "@/pages/admin/DashboardPage";
-import AuditLogPage from "@/pages/admin/AuditLogPage";
-import InventoryDetailPage from "@/pages/admin/InventoryDetailPage";
-import ProfilePage from "@/pages/admin/ProfilePage";
-
-// Auth
-import Login from "@/pages/auth/Login";
 import { useAuthStore } from "@/stores";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
-import InventoryLoansPage from "./inventoryLoans/pages/InventoryLoansPage";
-import CongregationPage from "./congregation/pages/CongregationPage";
-import MustahikPage from "./mustahik/pages/MustahikPage";
-import AdminGalleryPage from "./gallery/pages/AdminGalleryPage";
-import CampaignListPage from "./campaigns/pages/CampaignListPage";
-import CampaignHistoryPage from "./campaigns/pages/CampaignHistoryPage";
-import EventDetailPage from "./Events/pages/EventDetailPage";
-import CongregationDetailPage from "./congregation-detail/pages/CongregationDetailPage";
-import CongregationImportPage from "./congregation-import/pages/CongregationImportPage";
-import AdminCampaignManagementPage from "./campaigns/pages/AdminCampaignManagementPage";
+
+const Home = lazy(() => import("@/pages/public/Home"));
+const Articles = lazy(() => import("@/pages/public/Articles"));
+const ArticleDetail = lazy(() => import("@/pages/public/ArticleDetail"));
+const Events = lazy(() => import("@/pages/public/Events"));
+const JadwalSholatPage = lazy(() => import("@/pages/public/jadwalSholat"));
+const DonationPage = lazy(() => import("./publicDonation/DonationPage"));
+const GalleryPage = lazy(() => import("@/pages/public/GalleryPage"));
+const DonasiMasukPage = lazy(() => import("@/pages/admin/DonasiMasukPage"));
+const ManajemenKasPage = lazy(() => import("@/pages/admin/ManajemenKasPage"));
+const InventoryListPage = lazy(() => import("@/pages/admin/InventoryListPage"));
+const PrayerConfig = lazy(() => import("@/pages/admin/PrayerConfig"));
+const MosqueProfileSettings = lazy(() => import("@/pages/admin/MosqueProfileSettings"));
+const VerifyDonasi = lazy(() => import("@/pages/admin/verifyDonasi"));
+const InventoryForm = lazy(() => import("@/pages/admin/InventoryForm"));
+const LaporanPage = lazy(() => import("@/pages/admin/LaporanPage"));
+const ZisDistributionForm = lazy(() => import("@/pages/admin/ZisDistributionForm"));
+const KegiatanPage = lazy(() => import("@/pages/admin/KegiatanPage"));
+const ZisManagement = lazy(() => import("@/pages/admin/ZisManagement"));
+const UserManagementPage = lazy(() => import("./pages/admin/UserManagement"));
+const DashboardPage = lazy(() => import("@/pages/admin/DashboardPage"));
+const AuditLogPage = lazy(() => import("@/pages/admin/AuditLogPage"));
+const InventoryDetailPage = lazy(() => import("@/pages/admin/InventoryDetailPage"));
+const ProfilePage = lazy(() => import("@/pages/admin/ProfilePage"));
+const Login = lazy(() => import("@/pages/auth/Login"));
+const InventoryLoansPage = lazy(() => import("./inventoryLoans/pages/InventoryLoansPage"));
+const CongregationPage = lazy(() => import("./congregation/pages/CongregationPage"));
+const MustahikPage = lazy(() => import("./mustahik/pages/MustahikPage"));
+const AdminGalleryPage = lazy(() => import("./gallery/pages/AdminGalleryPage"));
+const CampaignListPage = lazy(() => import("./campaigns/pages/CampaignListPage"));
+const CampaignHistoryPage = lazy(() => import("./campaigns/pages/CampaignHistoryPage"));
+const EventDetailPage = lazy(() => import("./Events/pages/EventDetailPage"));
+const CongregationDetailPage = lazy(() => import("./congregation-detail/pages/CongregationDetailPage"));
+const CongregationImportPage = lazy(() => import("./congregation-import/pages/CongregationImportPage"));
+const AdminCampaignManagementPage = lazy(() => import("./campaigns/pages/AdminCampaignManagementPage"));
+import { ForbiddenPage, NotFoundPage, ServerErrorPage } from "@/pages/error/ErrorPage";
 
 function App() {
     const { isAuthenticated } = useAuthStore();
@@ -57,6 +52,7 @@ function App() {
             {/* Mesin Toast Sonner (muncul di kanan atas, pakai warna bawaan) */}
             <Toaster position="top-right" richColors />
 
+            <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="animate-pulse text-slate-400">Memuat...</div></div>}>
             <Routes>
                 {/* ── PUBLIC ── */}
                 <Route
@@ -446,6 +442,7 @@ function App() {
                 {/* ── FALLBACK ── */}
                 <Route path='*' element={<NotFoundPage />} />
             </Routes>
+            </Suspense>
         </>
     );
 }

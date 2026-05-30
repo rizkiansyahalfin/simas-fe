@@ -30,18 +30,18 @@ interface AuthStore {
 }
 
 function getStoredToken(): string | null {
-  const token = localStorage.getItem('token')
+  const token = sessionStorage.getItem('token')
   if (!token || token === 'null' || token === 'undefined') return null
   return token
 }
 
 function getStoredUser(): AuthUser | null {
   try {
-    const raw = localStorage.getItem('user')
+    const raw = sessionStorage.getItem('user')
     if (!raw || raw === 'null' || raw === 'undefined') return null
 
     const user = JSON.parse(raw) as Partial<AuthUser>
-    const role = user.role ?? (localStorage.getItem('role') as Role | null)
+    const role = user.role ?? (sessionStorage.getItem('role') as Role | null)
     if (!user.id || !user.name || !user.email || !role) return null
 
     return { ...user, role } as AuthUser
@@ -51,15 +51,15 @@ function getStoredUser(): AuthUser | null {
 }
 
 function persistAuth(token: string, user: AuthUser) {
-  localStorage.setItem('token', token)
-  localStorage.setItem('user', JSON.stringify(user))
-  localStorage.setItem('role', user.role)
+  sessionStorage.setItem('token', token)
+  sessionStorage.setItem('user', JSON.stringify(user))
+  sessionStorage.setItem('role', user.role)
 }
 
 function clearAuthStorage() {
-  localStorage.removeItem('token')
-  localStorage.removeItem('user')
-  localStorage.removeItem('role')
+  sessionStorage.removeItem('token')
+  sessionStorage.removeItem('user')
+  sessionStorage.removeItem('role')
 }
 
 function redirectTo(path?: string) {

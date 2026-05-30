@@ -2,7 +2,6 @@ import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import api from '../lib/axios'
 import { useAuthStore } from '../stores'
-import type { Role } from '@/lib/rbac'
 
 interface LoginCredentials {
   email: string
@@ -33,11 +32,11 @@ interface AuthApiResponse {
   data: AuthResponse
 }
 
-function withDefaultRole(user: AuthUser) {
-  return {
-    ...user,
-    role: user.role ?? ('superadmin' as Role),
+function validateUserRole(user: AuthUser): AuthUser {
+  if (!user.role) {
+    throw new Error('Akun tidak memiliki role — hubungi administrator')
   }
+  return user
 }
 
 // POST - Login
@@ -53,7 +52,7 @@ export const useLogin = () => {
       setTimeout(() => {
         setAuth({
           token: payload.token,
-          user: withDefaultRole(payload.user),
+          user: validateUserRole(payload.user),
           redirectTo: '/admin',
         })
       }, 1200)
@@ -74,7 +73,7 @@ export const useRegister = () => {
       setTimeout(() => {
         setAuth({
           token: payload.token,
-          user: withDefaultRole(payload.user),
+          user: validateUserRole(payload.user),
           redirectTo: '/admin',
         })
       }, 1200)

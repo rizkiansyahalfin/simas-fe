@@ -41,7 +41,14 @@ const DUMMY_ARTICLES = [
 export default function Articles() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("Semua");
-  // Filter artikel berdasarkan search dan category
+
+  const filteredArticles = DUMMY_ARTICLES.filter((article) => {
+    const matchSearch = article.title.toLowerCase().includes(search.toLowerCase()) ||
+      article.excerpt.toLowerCase().includes(search.toLowerCase())
+    const matchCategory = category === "Semua" || article.category === category
+    return matchSearch && matchCategory
+  })
+
   return (
     <>
       <Seo
@@ -76,8 +83,13 @@ export default function Articles() {
         />
 
         {/* Grid Artikel */}
+        {filteredArticles.length === 0 ? (
+          <div className="text-center py-16 text-slate-400">
+            <p className="text-lg font-medium">Tidak ada artikel yang cocok dengan pencarian.</p>
+          </div>
+        ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
-          {DUMMY_ARTICLES.map((article) => (
+          {filteredArticles.map((article) => (
             <Link to={`/artikel/${article.id}`} key={article.id} className="group flex">
               <div className="bg-white rounded-4xl overflow-hidden shadow-[0_4px_20px_rgb(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_20px_40px_rgb(16,185,129,0.08)] hover:border-emerald-200 transition-all duration-500 hover:-translate-y-2 w-full flex flex-col">
 
@@ -133,6 +145,7 @@ export default function Articles() {
             </Link>
           ))}
         </div>
+        )}
       </div>
     </div>
     </>

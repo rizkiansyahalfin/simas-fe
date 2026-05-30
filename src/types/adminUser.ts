@@ -1,11 +1,11 @@
-export type Role = 'superadmin' | 'bendahara' | 'sekretaris' | 'operator'
+export type { Role } from '@/lib/rbac'
 export type UserStatus = 'aktif' | 'nonaktif'
 
 export interface AdminUser {
   id: string
   name: string
   email: string
-  role: Role
+  role: import('@/lib/rbac').Role
   status: UserStatus
   inisial: string
   avatarBg: string

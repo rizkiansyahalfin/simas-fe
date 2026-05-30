@@ -15,11 +15,13 @@ import { SEED, ROLE_CFG } from '@/data/userManagementSeed'
 
 
 const ROLE_TABS: { key: Role | 'semua'; label: string }[] = [
-  { key: 'semua',      label: 'Semua Pengguna' },
-  { key: 'superadmin', label: 'Superadmin' },
-  { key: 'bendahara',  label: 'Bendahara' },
-  { key: 'sekretaris', label: 'Sekretaris' },
-  { key: 'operator',   label: 'Operator' },
+  { key: 'semua',           label: 'Semua Pengguna' },
+  { key: 'superadmin',      label: 'Superadmin' },
+  { key: 'bendahara',       label: 'Bendahara' },
+  { key: 'sekretaris',      label: 'Sekretaris' },
+  { key: 'operator',        label: 'Operator' },
+  { key: 'admin kegiatan',  label: 'Admin Kegiatan' },
+  { key: 'admin inventaris', label: 'Admin Inventaris' },
 ]
 
 
@@ -45,11 +47,13 @@ export default function UserManagementPage() {
   const rows = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE)
 
   const counts = {
-    semua:      data.length,
-    superadmin: data.filter(d => d.role === 'superadmin').length,
-    bendahara:  data.filter(d => d.role === 'bendahara').length,
-    sekretaris: data.filter(d => d.role === 'sekretaris').length,
-    operator:   data.filter(d => d.role === 'operator').length,
+    semua:           data.length,
+    superadmin:      data.filter(d => d.role === 'superadmin').length,
+    bendahara:       data.filter(d => d.role === 'bendahara').length,
+    sekretaris:      data.filter(d => d.role === 'sekretaris').length,
+    operator:        data.filter(d => d.role === 'operator').length,
+    'admin kegiatan':  data.filter(d => d.role === 'admin kegiatan').length,
+    'admin inventaris': data.filter(d => d.role === 'admin inventaris').length,
   }
 
   const handleAdd = (user: AdminUser) => {

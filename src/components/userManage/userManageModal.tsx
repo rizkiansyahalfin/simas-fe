@@ -6,7 +6,8 @@ import { EyeOff } from 'lucide-react'
 import { RefreshCw } from 'lucide-react'
 import { Send } from 'lucide-react'
 import { Input } from '@/components/ui/input'
-import type { AdminUser, Role } from '@/types/adminUser'
+import type { AdminUser } from '@/types/adminUser'
+import type { Role } from '@/lib/rbac'
 import { ROLE_CFG } from '@/data/userManagementSeed'
 import Button from '@/components/ui/button'
 
@@ -23,16 +24,20 @@ function genPassword() {
 }
 
 const AVATAR_COLORS: Record<Role, string> = {
-  superadmin: 'bg-violet-600',
-  bendahara:  'bg-sky-600',
-  sekretaris: 'bg-emerald-600',
-  operator:   'bg-amber-600',
+  superadmin:      'bg-violet-600',
+  bendahara:       'bg-sky-600',
+  sekretaris:      'bg-emerald-600',
+  operator:        'bg-amber-600',
+  'admin kegiatan':  'bg-orange-600',
+  'admin inventaris': 'bg-cyan-600',
 }
 
 const ROLE_OPTIONS: { value: Role; label: string; desc: string }[] = [
-  { value: 'bendahara',  label: 'Bendahara',  desc: 'Keuangan, zakat, laporan dana' },
-  { value: 'sekretaris', label: 'Sekretaris', desc: 'Artikel, kegiatan, data jamaah' },
-  { value: 'operator',   label: 'Operator',   desc: 'Donasi, inventaris, jadwal' },
+  { value: 'bendahara',       label: 'Bendahara',       desc: 'Keuangan, zakat, laporan dana' },
+  { value: 'sekretaris',      label: 'Sekretaris',      desc: 'Artikel, kegiatan, data jamaah' },
+  { value: 'operator',        label: 'Operator',        desc: 'Donasi, inventaris, jadwal' },
+  { value: 'admin kegiatan',  label: 'Admin Kegiatan',  desc: 'Artikel, kegiatan, jadwal jumat' },
+  { value: 'admin inventaris', label: 'Admin Inventaris', desc: 'Manajemen inventaris' },
 ]
 
 /* ─── Props ─── */

@@ -44,8 +44,6 @@ export default function CongregationFormDialog({
   } = useCongregationForm()
 
   function handleSubmit() {
-    console.log(form)
-
     resetForm()
 
     onOpenChange(false)

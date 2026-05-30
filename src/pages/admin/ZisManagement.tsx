@@ -182,22 +182,30 @@ export default function ZisManagement() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50 text-sm">
-              {DUMMY_ZIS.map((item) => (
-                <tr key={item.id} className="hover:bg-slate-50/60 transition-colors group">
-                  <td className="px-6 py-5 md:px-8 text-slate-600 font-medium whitespace-nowrap">{item.date}</td>
-                  <td className="px-6 py-5">
-                    <span className={`px-3.5 py-1.5 rounded-full text-xs font-bold flex items-center w-max gap-1.5 border ${item.type === 'Pemasukan' ? 'bg-emerald-50 text-emerald-700 border-emerald-100' : 'bg-rose-50 text-rose-700 border-rose-100'}`}>
-                      {item.type === 'Pemasukan' ? <ArrowDownCircle className="h-3.5 w-3.5" /> : <ArrowUpCircle className="h-3.5 w-3.5" />}
-                      {item.type}
-                    </span>
-                  </td>
-                  <td className="px-6 py-5 font-bold text-slate-800">{item.category}</td>
-                  <td className="px-6 py-5 text-slate-500">{item.desc}</td>
-                  <td className={`px-6 py-5 md:px-8 text-right font-extrabold whitespace-nowrap text-base ${item.type === 'Pemasukan' ? 'text-emerald-600' : 'text-rose-600'}`}>
-                    {item.type === 'Pemasukan' ? '+' : '-'} {formatRupiah(item.amount)}
+              {DUMMY_ZIS.length === 0 ? (
+                <tr>
+                  <td colSpan={5} className="px-6 py-12 text-center text-slate-400">
+                    Belum ada transaksi ZIS.
                   </td>
                 </tr>
-              ))}
+              ) : (
+                DUMMY_ZIS.map((item) => (
+                  <tr key={item.id} className="hover:bg-slate-50/60 transition-colors group">
+                    <td className="px-6 py-5 md:px-8 text-slate-600 font-medium whitespace-nowrap">{item.date}</td>
+                    <td className="px-6 py-5">
+                      <span className={`px-3.5 py-1.5 rounded-full text-xs font-bold flex items-center w-max gap-1.5 border ${item.type === 'Pemasukan' ? 'bg-emerald-50 text-emerald-700 border-emerald-100' : 'bg-rose-50 text-rose-700 border-rose-100'}`}>
+                        {item.type === 'Pemasukan' ? <ArrowDownCircle className="h-3.5 w-3.5" /> : <ArrowUpCircle className="h-3.5 w-3.5" />}
+                        {item.type}
+                      </span>
+                    </td>
+                    <td className="px-6 py-5 font-bold text-slate-800">{item.category}</td>
+                    <td className="px-6 py-5 text-slate-500">{item.desc}</td>
+                    <td className={`px-6 py-5 md:px-8 text-right font-extrabold whitespace-nowrap text-base ${item.type === 'Pemasukan' ? 'text-emerald-600' : 'text-rose-600'}`}>
+                      {item.type === 'Pemasukan' ? '+' : '-'} {formatRupiah(item.amount)}
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

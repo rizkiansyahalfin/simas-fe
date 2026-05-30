@@ -214,36 +214,44 @@ export default function ManajemenKasPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {transactions.map((transaction) => (
-                  <tr key={transaction.id}>
-                    <td className="px-4 py-3 text-slate-600">
-                      {transaction.date}
-                    </td>
-                    <td className="px-4 py-3 font-medium text-slate-900">
-                      {transaction.description}
-                    </td>
-                    <td className="px-4 py-3">
-                      <Badge
-                        className={
-                          transaction.type === "pemasukan"
-                            ? "bg-emerald-100 text-emerald-700"
-                            : "bg-red-100 text-red-700"
-                        }
-                      >
-                        {transaction.type}
-                      </Badge>
-                    </td>
-                    <td
-                      className={`px-4 py-3 text-right font-semibold ${
-                        transaction.type === "pemasukan"
-                          ? "text-emerald-700"
-                          : "text-red-600"
-                      }`}
-                    >
-                      {currencyFormatter.format(transaction.amount)}
+                {transactions.length === 0 ? (
+                  <tr>
+                    <td colSpan={4} className="px-4 py-12 text-center text-slate-400">
+                      Belum ada transaksi kas.
                     </td>
                   </tr>
-                ))}
+                ) : (
+                  transactions.map((transaction) => (
+                    <tr key={transaction.id}>
+                      <td className="px-4 py-3 text-slate-600">
+                        {transaction.date}
+                      </td>
+                      <td className="px-4 py-3 font-medium text-slate-900">
+                        {transaction.description}
+                      </td>
+                      <td className="px-4 py-3">
+                        <Badge
+                          className={
+                            transaction.type === "pemasukan"
+                              ? "bg-emerald-100 text-emerald-700"
+                              : "bg-red-100 text-red-700"
+                          }
+                        >
+                          {transaction.type}
+                        </Badge>
+                      </td>
+                      <td
+                        className={`px-4 py-3 text-right font-semibold ${
+                          transaction.type === "pemasukan"
+                            ? "text-emerald-700"
+                            : "text-red-600"
+                        }`}
+                      >
+                        {currencyFormatter.format(transaction.amount)}
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
