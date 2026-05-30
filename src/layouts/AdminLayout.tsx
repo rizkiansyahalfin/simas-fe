@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+<<<<<<< HEAD
 import { LayoutDashboard } from "lucide-react";
 import { Wallet } from "lucide-react";
 import { HeartHandshake } from "lucide-react";
@@ -10,6 +11,22 @@ import { Users } from "lucide-react";
 import { Settings } from "lucide-react";
 import { Bell } from "lucide-react";
 import { Menu } from "lucide-react";
+=======
+import {
+	LayoutDashboard,
+	Wallet,
+	HeartHandshake,
+	Megaphone,
+	FileText,
+	FileSpreadsheet,
+	CalendarDays,
+	Archive,
+	Users,
+	Settings,
+	Bell,
+	Menu,
+} from "lucide-react";
+>>>>>>> 1f81bf46cb1d849cda058d821ae7c35442b0d865
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
@@ -32,6 +49,7 @@ const MENU_ITEMS = [
 	{ title: "Keuangan", icon: Wallet, resource: "keuangan", path: "/admin/kas" },
 	{ title: "Pengurus", icon: Users, resource: "pengurus", path: "/admin/pengurus" },
 	{ title: "Donasi", icon: HeartHandshake, resource: "donasi", path: "/admin/donasi" },
+	{ title: "Campaign", icon: Megaphone, resource: "donasi", path: "/admin/campaigns" },
 	{ title: "Laporan", icon: FileSpreadsheet, resource: "laporan", path: "/admin/laporan" },
 	{ title: "Audit Log", icon: FileText, resource: "audit-log", path: "/admin/audit-log" },
 	{ title: "Artikel", icon: FileText, resource: "artikel", path: "/admin/artikel" },
