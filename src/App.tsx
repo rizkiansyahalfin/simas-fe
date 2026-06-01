@@ -38,7 +38,7 @@ import InventoryDetailPage from "@/pages/admin/InventoryDetailPage";
 import Login from "@/pages/auth/Login";
 import { useAuthStore } from "@/stores";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
-import InventoryLoansPage from "./inventoryLoans/pages/InventoryLoansPage";
+import InventoryLoansPage from "@/pages/admin/InventoryLoansPage";
 import CongregationPage from "./congregation/pages/CongregationPage";
 import MustahikPage from "./mustahik/pages/MustahikPage";
 import AdminGalleryPage from "./gallery/pages/AdminGalleryPage";
