@@ -44,6 +44,7 @@ const EventDetailPage = lazy(() => import("./events/pages/EventDetailPage"));
 const CongregationDetailPage = lazy(() => import("./congregation-detail/pages/CongregationDetailPage"));
 const CongregationImportPage = lazy(() => import("./congregation-import/pages/CongregationImportPage"));
 const AdminCampaignManagementPage = lazy(() => import("./campaigns/pages/AdminCampaignManagementPage"));
+const AboutPage = lazy(() => import("./about/pages/AboutPages"));
 
 function App() {
     const { isAuthenticated } = useAuthStore();
@@ -144,6 +145,15 @@ function App() {
                             <EventDetailPage/>
                         </PublicLayout>}>
                 </Route>
+
+                <Route
+                    path="/about"
+                    element={
+                        <PublicLayout>
+                            <AboutPage />
+                        </PublicLayout>
+                    }
+                />
 
                 {/* ── LOGIN ── */}
                 <Route

@@ -11,6 +11,7 @@ const NAV_ITEMS = [
   { title: "Artikel", path: "/artikel" },
   { title: "Jadwal Sholat", path: "/jadwal-shalat" },
   { title: "Campaigns", path: "/campaigns" },
+  { title: "about", path: "/about" },
 ]
 
 export default function PublicLayout({ children }: { children?: React.ReactNode }) {
