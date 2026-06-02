@@ -46,9 +46,10 @@ const InventoryLoansPage = lazy(() => import("./inventoryLoans/pages/InventoryLo
 const CongregationPage = lazy(() => import("./congregation/pages/CongregationPage"));
 const MustahikPage = lazy(() => import("./mustahik/pages/MustahikPage"));
 const AdminGalleryPage = lazy(() => import("./gallery/pages/AdminGalleryPage"));
-const AdminCampaignManagementPage = lazy(() => import("./campaigns/pages/AdminCampaignManagementPage"));
 const CongregationDetailPage = lazy(() => import("./congregation-detail/pages/CongregationDetailPage"));
 const CongregationImportPage = lazy(() => import("./congregation-import/pages/CongregationImportPage"));
+const AdminCampaignManagementPage = lazy(() => import("./campaigns/pages/AdminCampaignManagementPage"));
+const AboutPage = lazy(() => import("./about/pages/AboutPages"));
 
 function App() {
 	const { isAuthenticated } = useAuthStore();
@@ -150,6 +151,14 @@ function App() {
 						element={
 							<PublicLayout>
 								<EventDetailPage />
+							</PublicLayout>
+						}
+					/>
+					<Route
+						path='/about'
+						element={
+							<PublicLayout>
+								<AboutPage />
 							</PublicLayout>
 						}
 					/>

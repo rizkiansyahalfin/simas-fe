@@ -875,4 +875,179 @@
            text-simas-primary hover:underline cursor-pointer;
   }
 
+  /* ══════════════════════════════════════
+     ABOUT PAGE
+     Paste di @layer components setelah
+     .article-category:hover { }
+     ══════════════════════════════════════ */
+
+  /* ── Section label (pill atas judul) ── */
+  .about-section-label {
+    @apply inline-flex items-center gap-2 bg-emerald-50 border border-emerald-100
+           text-simas-primary px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-wide;
+  }
+  .about-section-dot {
+    @apply size-2 rounded-full bg-simas-primary animate-pulse shrink-0;
+  }
+
+  /* ── Hero badge & outline btn ── */
+  .about-hero-badge {
+    @apply inline-block mb-5 px-4 py-1.5 rounded-full bg-white/15
+           border border-white/25 backdrop-blur-sm text-sm font-bold text-white tracking-wide;
+  }
+  .about-hero-outline-btn {
+    @apply inline-flex items-center gap-2 h-11 px-6 rounded-xl
+           font-bold text-sm text-white border-2 border-white/40
+           backdrop-blur-sm cursor-pointer transition-all
+           hover:bg-white/10 active:scale-95;
+  }
+
+  /* ── Stats bar ── */
+  .about-stat-item {
+    @apply flex flex-col items-center gap-2 text-center py-4;
+  }
+  .about-stat-icon {
+    @apply size-12 rounded-2xl bg-emerald-50 text-simas-primary-dark
+           flex items-center justify-center;
+  }
+
+  /* ── Profil image ── */
+  .about-img-frame {
+    @apply absolute -inset-4 bg-emerald-100/50 rounded-4xl -rotate-3
+           transition-transform hover:rotate-0 duration-500;
+  }
+  .about-img-card {
+    @apply relative w-full aspect-4/3 rounded-3xl overflow-hidden shadow-2xl
+           border border-gray-100;
+  }
+  .about-img {
+    @apply absolute inset-0 w-full h-full object-cover opacity-80
+           group-hover:scale-105 transition-transform duration-700;
+  }
+  .about-img-caption {
+    @apply absolute bottom-0 left-0 right-0 flex flex-col items-center
+           justify-end pb-6 translate-y-2 group-hover:translate-y-0
+           transition-transform duration-500;
+  }
+
+  /* ── Contact item ── */
+  .about-contact-item {
+    @apply flex items-start gap-3 p-3 rounded-xl bg-white border border-gray-100
+           hover:border-emerald-200 transition-colors;
+  }
+  .about-contact-icon {
+    @apply size-8 rounded-xl bg-emerald-50 text-simas-primary-dark
+           flex items-center justify-center shrink-0;
+  }
+
+  /* ── Timeline ── */
+  .about-timeline {
+    @apply relative max-w-3xl mx-auto;
+  }
+  .about-timeline::before {
+    content: '';
+    @apply absolute left-1/2 top-0 bottom-0 w-px bg-emerald-200 -translate-x-1/2;
+  }
+  .about-timeline-item {
+    @apply relative flex items-start gap-6 mb-10;
+  }
+  .about-timeline-left  { @apply flex-row; }
+  .about-timeline-right { @apply flex-row-reverse; }
+  .about-timeline-dot {
+    @apply absolute left-1/2 -translate-x-1/2 size-12 rounded-full
+           bg-simas-primary text-white flex items-center justify-center
+           shrink-0 z-10 shadow-lg;
+  }
+  .about-timeline-year {
+    @apply text-xs font-black leading-none text-center;
+  }
+  .about-timeline-card {
+    @apply w-[calc(50%-3rem)] bg-white rounded-2xl border border-gray-100
+           p-5 shadow-sm hover:shadow-md transition-shadow hover:border-emerald-200;
+  }
+
+  /* ── Visi Misi cards ── */
+  .about-vm-card {
+    @apply bg-white p-8 rounded-3xl border border-gray-100 shadow-sm
+           hover:border-emerald-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1;
+  }
+  .about-vm-icon {
+    @apply size-14 rounded-2xl flex items-center justify-center mb-6
+           group-hover:scale-110 transition-transform duration-300;
+  }
+  .about-vm-icon-green { @apply bg-emerald-100 text-simas-primary-dark; }
+  .about-vm-icon-amber { @apply bg-amber-100 text-amber-700; }
+  .about-vm-quote {
+    @apply bg-emerald-50 rounded-2xl p-4 border-l-4 border-simas-primary;
+  }
+  .about-misi-dot {
+    @apply size-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5;
+  }
+
+  /* ── Fasilitas card ── */
+  .about-fasilitas-card {
+    @apply bg-white rounded-2xl border border-gray-100 p-5 text-center
+           shadow-sm hover:shadow-md hover:border-emerald-200
+           transition-all hover:-translate-y-0.5;
+  }
+  .about-fasilitas-icon {
+    @apply size-12 rounded-2xl flex items-center justify-center mx-auto mb-3;
+  }
+
+  /* ── Program card ── */
+  .about-program-card {
+    @apply bg-white rounded-2xl border border-gray-100 p-5
+           shadow-sm hover:shadow-md hover:border-emerald-200
+           transition-all hover:-translate-y-0.5;
+  }
+
+  /* ── Program tags ── */
+  .about-tag-pendidikan {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-lg
+           text-xs font-bold bg-sky-100 text-sky-700 shrink-0;
+  }
+  .about-tag-sosial {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-lg
+           text-xs font-bold bg-pink-100 text-pink-700 shrink-0;
+  }
+  .about-tag-keuangan {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-lg
+           text-xs font-bold bg-amber-100 text-amber-700 shrink-0;
+  }
+
+  /* ── Pengurus card ── */
+  .about-pengurus-card {
+    @apply bg-white rounded-2xl border border-gray-100 p-5 flex flex-col items-center
+           text-center shadow-sm hover:shadow-md hover:border-emerald-200
+           transition-all hover:-translate-y-0.5;
+  }
+  .about-pengurus-avatar {
+    @apply size-16 rounded-2xl text-lg;
+  }
+
+  /* ── Jadwal row (lokasi sidebar) ── */
+  .about-sholat-row {
+    @apply flex items-center justify-between py-1.5
+           border-b border-gray-50 last:border-0;
+  }
+
+  /* ── Map ── */
+  .about-map-wrap {
+    @apply bg-white rounded-xl shadow-lg overflow-hidden flex flex-col;
+    min-height: 420px;
+  }
+  .about-map-iframe {
+    @apply w-full flex-1 border-0;
+    min-height: 340px;
+  }
+  .about-map-footer {
+    @apply flex items-center gap-2 px-4 py-3
+           border-t border-gray-100 bg-gray-50;
+  }
+
+  /* ── CTA badge ── */
+  .about-cta-badge {
+    @apply mx-auto w-fit border border-white/25 bg-white/20 text-white;
+  }
+
 }
