@@ -1,8 +1,96 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, type FormEvent } from 'react'
 import { Upload, X, Check, ChevronDown, Send, Heart } from 'lucide-react'
 import { Input } from '@/components/ui/input'
+import api from '@/lib/axios'
 
 type Category = 'INFAQ' | 'ZAKAT' | 'ANAK_YATIM' | 'RENOVASI'
+
+type MidtransResult = {
+  transaction_id?: string
+  order_id?: string
+  status_code?: string
+  status_message?: string
+}
+
+declare global {
+  interface Window {
+    snap?: {
+      pay: (token: string, callbacks: {
+        onSuccess?: (result: MidtransResult) => void
+        onPending?: (result: MidtransResult) => void
+        onError?: (result: MidtransResult) => void
+        onClose?: () => void
+      }) => void
+    }
+  }
+
+  interface ImportMetaEnv {
+    readonly VITE_MIDTRANS_CLIENT_KEY?: string
+  }
+}
+
+const SNAP_JS_URL = 'https://app.sandbox.midtrans.com/snap/snap.js'
+const SNAP_SCRIPT_ID = 'midtrans-snap-js'
+
+const loadSnapScript = async () => {
+  if (window.snap) return
+  const existing = document.getElementById(SNAP_SCRIPT_ID) as HTMLScriptElement | null
+  if (existing) {
+    await new Promise<void>((resolve, reject) => {
+      existing.addEventListener('load', () => resolve(), { once: true })
+      existing.addEventListener('error', () => reject(new Error('Gagal memuat Midtrans Snap.js')), { once: true })
+    })
+    return
+  }
+
+  await new Promise<void>((resolve, reject) => {
+    const script = document.createElement('script')
+    script.id = SNAP_SCRIPT_ID
+    script.src = SNAP_JS_URL
+    script.async = true
+    const clientKey = import.meta.env.VITE_MIDTRANS_CLIENT_KEY
+    if (clientKey) {
+      script.setAttribute('data-client-key', clientKey)
+    }
+    script.onload = () => resolve()
+    script.onerror = () => reject(new Error('Gagal memuat Midtrans Snap.js'))
+    document.body.appendChild(script)
+  })
+}
+
+const createSnapTransaction = async (payload: {
+  name: string
+  phone: string
+  nominal: number
+  category: Category
+  anonymous: boolean
+}) => {
+  const endpoints = [
+    '/public-donation/midtrans/snap',
+    '/donations/midtrans/snap',
+    '/donasi/midtrans/snap',
+    '/midtrans/snap',
+    '/snap-token',
+    '/public-donation/snap-token',
+  ]
+
+  for (const endpoint of endpoints) {
+    try {
+      const response = await api.post(endpoint, payload)
+      const token = (
+        response.data?.token ||
+        response.data?.transactionToken ||
+        response.data?.snapToken ||
+        response.data?.snap_token
+      ) as string | undefined
+      if (token) return token
+    } catch (error) {
+      // ignore and try next endpoint
+    }
+  }
+
+  return undefined
+}
 
 const CATEGORIES: { key: Category; label: string; desc: string; icon: string }[] = [
   { key: 'INFAQ',      label: 'Infaq Umum',   desc: 'Untuk kebutuhan masjid',   icon: '🕌' },
@@ -15,7 +103,7 @@ const PRESETS = [50000, 100000, 250000, 500000]
 const fmt = (n: number) => 'Rp ' + n.toLocaleString('id-ID')
 
 interface Props {
-  onSuccess: (data: { name: string; nominal: number; category: string; anonymous: boolean }) => void
+  onSuccess: (data: { name: string; nominal: number; category: string; anonymous: boolean; refId?: string }) => void
 }
 
 export default function DonationForm({ onSuccess }: Props) {
@@ -29,11 +117,12 @@ export default function DonationForm({ onSuccess }: Props) {
   const [loading,   setLoading]   = useState(false)
   const [showCat,   setShowCat]   = useState(false)
   const [errors,    setErrors]    = useState<Record<string, string>>({})
+  const [statusMessage, setStatusMessage] = useState('')
   const fileRef = useRef<HTMLInputElement>(null)
 
   const finalNominal = customVal ? Number(customVal.replace(/\D/g, '')) : nominal
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     const newErrors: Record<string, string> = {}
     if (!anonymous && !name.trim()) newErrors.name = 'Nama donatur wajib diisi.'
@@ -42,11 +131,57 @@ export default function DonationForm({ onSuccess }: Props) {
       setErrors(newErrors)
       return
     }
+
     setErrors({})
+    setStatusMessage('Menyiapkan pembayaran Midtrans...')
     setLoading(true)
-    await new Promise(r => setTimeout(r, 1400))
-    setLoading(false)
-    onSuccess({ name: anonymous ? 'Hamba Allah' : name, nominal: finalNominal, category, anonymous })
+
+    const donorName = anonymous ? 'Hamba Allah' : name.trim()
+    const donationPayload = {
+      name: donorName,
+      phone,
+      nominal: finalNominal,
+      category,
+      anonymous,
+    }
+
+    try {
+      await loadSnapScript()
+      const snapToken = await createSnapTransaction(donationPayload)
+      if (!snapToken) {
+        throw new Error('Token Midtrans Snap tidak tersedia. Pastikan backend merespons dengan snap token.')
+      }
+
+      setStatusMessage('Menampilkan popup pembayaran...')
+      window.snap?.pay(snapToken, {
+        onSuccess: (result) => {
+          setStatusMessage('Pembayaran berhasil. Terima kasih!')
+          setLoading(false)
+          onSuccess({ ...donationPayload, refId: result.order_id ?? result.transaction_id })
+        },
+        onPending: (result) => {
+          setStatusMessage('Pembayaran tertunda. Silakan selesaikan transaksi di halaman Midtrans.')
+          setLoading(false)
+          onSuccess({ ...donationPayload, refId: result.order_id ?? result.transaction_id })
+        },
+        onError: (result) => {
+          setStatusMessage(result.status_message || 'Pembayaran gagal. Silakan coba kembali.')
+          setLoading(false)
+          console.error('Midtrans error', result)
+        },
+        onClose: () => {
+          setStatusMessage('Popup pembayaran ditutup. Silakan coba kembali jika belum selesai.')
+          setLoading(false)
+        },
+      })
+    } catch (error) {
+      setLoading(false)
+      setStatusMessage(
+        error instanceof Error
+          ? error.message
+          : 'Terjadi kesalahan saat memproses pembayaran.'
+      )
+    }
   }
 
   const selectedCat = CATEGORIES.find(c => c.key === category)!
@@ -197,6 +332,12 @@ export default function DonationForm({ onSuccess }: Props) {
             Laporan penggunaan dana tersedia di halaman <strong>Transparansi Keuangan</strong>.
           </p>
         </div>
+
+        {statusMessage && (
+          <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
+            {statusMessage}
+          </div>
+        )}
 
         {/* Submit */}
         <button type="submit" disabled={loading || (!finalNominal)} className="btn-primary-full">
