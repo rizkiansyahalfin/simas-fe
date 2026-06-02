@@ -8,18 +8,21 @@ import PublicLayout from "@/layouts/PublicLayout";
 import { useAuthStore } from "@/stores";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { ForbiddenPage, NotFoundPage, ServerErrorPage } from "@/components/error/ErrorPage";
+import Events from "./Events/pages/PublicEventsPage";
+import EventDetailPage from "./Events/pages/EventDetailPage";
+import PaymentManagementPage from "./payments/pages/PaymentManagementPage";
 
 // ==================== PUBLIC PAGES ====================
 const Home = lazy(() => import("./home/pages/HomePage"));
 const Articles = lazy(() => import("./articles/pages/PublicArticlesPage"));
 const ArticleDetail = lazy(() => import("./articles/pages/PublicArticleDetailPage"));
-const Events = lazy(() => import("./events/pages/PublicEventsPage"));
+
 const JadwalSholatPage = lazy(() => import("./prayer/pages/JadwalSholatPage"));
 const DonationPage = lazy(() => import("./publicDonation/pages/DonationPage"));
 const GalleryPage = lazy(() => import("./gallery/pages/PublicGalleryPage"));
 const CampaignListPage = lazy(() => import("./campaigns/pages/CampaignListPage"));
 const CampaignHistoryPage = lazy(() => import("./campaigns/pages/CampaignHistoryPage"));
-const EventDetailPage = lazy(() => import("./events/pages/EventDetailPage"));
+
 
 // ==================== ADMIN PAGES ====================
 const DonasiMasukPage = lazy(() => import("./donations/pages/DonasiMasukPage"));
@@ -418,6 +421,16 @@ function App() {
 							<ProtectedRoute resource='congregationdetail'>
 								<AdminLayout>
 									<CongregationImportPage />
+								</AdminLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path='/admin/payments'
+						element={
+							<ProtectedRoute resource='payments'>
+								<AdminLayout>
+									<PaymentManagementPage />
 								</AdminLayout>
 							</ProtectedRoute>
 						}
