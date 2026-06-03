@@ -22,6 +22,7 @@ const DonationPage = lazy(() => import("./publicDonation/pages/DonationPage"));
 const GalleryPage = lazy(() => import("./gallery/pages/PublicGalleryPage"));
 const CampaignListPage = lazy(() => import("./campaigns/pages/CampaignListPage"));
 const CampaignHistoryPage = lazy(() => import("./campaigns/pages/CampaignHistoryPage"));
+import PaymentStatusPage from "@/payments/pages/PaymentStatusPage";
 
 
 // ==================== ADMIN PAGES ====================
@@ -162,6 +163,14 @@ function App() {
 							</PublicLayout>
 						}
 					/>
+					<Route
+                        path='/payment-status'
+                        element={
+                            <PublicLayout>
+                                <PaymentStatusPage />
+                            </PublicLayout>
+                        }
+/>
 
 					{/* LOGIN */}
 					<Route
