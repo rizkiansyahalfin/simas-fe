@@ -48,10 +48,10 @@ export default function EventTable({
     return (
         <>
             {/* Table */}
-            <Card className='overflow-hidden rounded-2xl border border-gray-200 shadow-sm'>
-                <div className='border-b px-6 py-4'>
+            <Card className='overflow-hidden rounded-2xl border border-gray-200 dark:border-slate-700 shadow-sm'>
+                <div className='border-b dark:border-slate-700 px-6 py-4'>
                     <h3
-                        className='text-lg font-semibold text-gray-800'
+                        className='text-lg font-semibold text-gray-800 dark:text-white'
                         style={{ margin: 0 }}
                     >
                         Daftar Kegiatan
@@ -60,25 +60,25 @@ export default function EventTable({
 
                 <div className='overflow-x-auto'>
                     <table className='w-full min-w-[850px] border-collapse'>
-                        <thead className='bg-gray-50'>
+                        <thead className='bg-gray-50 dark:bg-slate-800'>
                             <tr className='text-left'>
-                                <th className='px-6 py-4 text-sm font-semibold text-gray-600'>
+                                <th className='px-6 py-4 text-sm font-semibold text-gray-600 dark:text-slate-300'>
                                     Kegiatan
                                 </th>
 
-                                <th className='px-6 py-4 text-sm font-semibold text-gray-600'>
+                                <th className='px-6 py-4 text-sm font-semibold text-gray-600 dark:text-slate-300'>
                                     Tanggal
                                 </th>
 
-                                <th className='px-6 py-4 text-sm font-semibold text-gray-600'>
+                                <th className='px-6 py-4 text-sm font-semibold text-gray-600 dark:text-slate-300'>
                                     Lokasi
                                 </th>
 
-                                <th className='px-6 py-4 text-sm font-semibold text-gray-600'>
+                                <th className='px-6 py-4 text-sm font-semibold text-gray-600 dark:text-slate-300'>
                                     Status
                                 </th>
 
-                                <th className='px-6 py-4 text-sm font-semibold text-gray-600'>
+                                <th className='px-6 py-4 text-sm font-semibold text-gray-600 dark:text-slate-300'>
                                     Aksi
                                 </th>
                             </tr>
@@ -88,32 +88,32 @@ export default function EventTable({
                             {events.map((event) => (
                                 <tr
                                     key={event.id}
-                                    className='border-t hover:bg-gray-50 transition-colors'
+                                    className='border-t dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors'
                                 >
                                     <td className='px-6 py-4'>
                                         <div className='flex items-start gap-3'>
-                                            <div className='rounded-lg bg-emerald-50 p-2'>
-                                                <CalendarDays className='h-5 w-5 text-emerald-600' />
+                                            <div className='rounded-lg bg-emerald-50 dark:bg-emerald-900/30 p-2'>
+                                                <CalendarDays className='h-5 w-5 text-emerald-600 dark:text-emerald-400' />
                                             </div>
 
                                             <div>
-                                                <p className='font-semibold text-gray-800'>
+                                                <p className='font-semibold text-gray-800 dark:text-slate-200'>
                                                     {event.title}
                                                 </p>
 
-                                                <p className='mt-1 text-sm text-gray-500 line-clamp-1'>
+                                                <p className='mt-1 text-sm text-gray-500 dark:text-slate-400 line-clamp-1'>
                                                     {event.description}
                                                 </p>
                                             </div>
                                         </div>
                                     </td>
 
-                                    <td className='px-6 py-4 text-sm text-gray-600'>
+                                    <td className='px-6 py-4 text-sm text-gray-600 dark:text-slate-300'>
                                         {event.date}
                                     </td>
 
                                     <td className='px-6 py-4'>
-                                        <div className='flex items-center gap-2 text-sm text-gray-600'>
+                                        <div className='flex items-center gap-2 text-sm text-gray-600 dark:text-slate-300'>
                                             <MapPin className='h-4 w-4' />
                                             {event.location}
                                         </div>
@@ -135,7 +135,7 @@ export default function EventTable({
                                                         e.target.value as EventStatus
                                                     )
                                                 }
-                                                className='h-9 rounded-md border border-gray-300 bg-white px-2 text-sm outline-none focus:border-emerald-500'
+                                                className='h-9 rounded-md border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-2 text-sm outline-none focus:border-emerald-500 dark:text-white'
                                             >
                                                 {STATUS_OPTIONS.map((status) => (
                                                     <option
@@ -177,7 +177,7 @@ export default function EventTable({
                                 <tr>
                                     <td
                                         colSpan={5}
-                                        className='px-6 py-12 text-center text-sm text-gray-500'
+                                        className='px-6 py-12 text-center text-sm text-gray-500 dark:text-slate-400'
                                     >
                                         Belum ada kegiatan.
                                     </td>

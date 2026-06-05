@@ -143,36 +143,36 @@ export default function KegiatanPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2
-            className="text-2xl font-bold text-gray-900"
+            className="text-2xl font-bold text-gray-900 dark:text-white"
             style={{ margin: 0 }}
           >
             Manajemen Kegiatan
           </h2>
 
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-gray-500 dark:text-slate-400 mt-1">
             Kelola seluruh kegiatan masjid dari dashboard admin.
           </p>
         </div>
 
-        <Card className="px-5 py-3 shadow-sm border border-emerald-100 bg-emerald-50">
-          <p className="text-sm text-emerald-700">
+        <Card className="px-5 py-3 shadow-sm border border-emerald-100 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-900/20">
+          <p className="text-sm text-emerald-700 dark:text-emerald-400">
             Total Kegiatan
           </p>
 
-          <p className="text-2xl font-bold text-emerald-600">
+          <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-500">
             {totalEvents}
           </p>
         </Card>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 border-b border-gray-200 pb-3">
+      <div className="flex gap-2 border-b border-gray-200 dark:border-slate-700 pb-3">
         <button
           onClick={() => setActiveTab("events")}
           className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
             activeTab === "events"
               ? "bg-emerald-600 text-white"
-              : "text-gray-600 hover:bg-gray-100"
+              : "text-gray-600 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800"
           }`}
         >
           Kegiatan Masjid
@@ -183,7 +183,7 @@ export default function KegiatanPage() {
           className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
             activeTab === "jumat"
               ? "bg-emerald-600 text-white"
-              : "text-gray-600 hover:bg-gray-100"
+              : "text-gray-600 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800"
           }`}
         >
           Jadwal Jumat

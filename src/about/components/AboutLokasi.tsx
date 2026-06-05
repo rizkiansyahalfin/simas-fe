@@ -4,7 +4,7 @@ import { SectionHeader } from '../components/SectionHeader'
 
 export default function AboutLokasi() {
   return (
-<section id="lokasi" className="py-20 bg-simas-bg-public">
+<section id="lokasi" className="py-20 bg-simas-bg-public dark:bg-slate-950">
         <div className="container mx-auto px-4 md:px-8">
           <SectionHeader
             label="Lokasi"
@@ -17,10 +17,10 @@ export default function AboutLokasi() {
             {/* Info lokasi */}
             <div className="lg:w-72 shrink-0 space-y-4">
               <div className="card-sm p-5">
-                <h3 className="text-sm font-black text-gray-900 mb-3 flex items-center gap-2">
+                <h3 className="text-sm font-black text-gray-900 dark:text-white mb-3 flex items-center gap-2">
                   <MapPin className="size-4 text-simas-primary"/> Alamat Lengkap
                 </h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
+                <p className="text-sm text-gray-600 dark:text-slate-300 leading-relaxed">
                   Jl. Kebayoran Lama No. 12, RT 005/RW 003,<br/>
                   Kelurahan Kebayoran Lama Selatan,<br/>
                   Kecamatan Kebayoran Lama,<br/>
@@ -28,7 +28,7 @@ export default function AboutLokasi() {
                 </p>
               </div>
               <div className="card-sm p-5 space-y-3">
-                <h3 className="text-sm font-black text-gray-900 flex items-center gap-2">
+                <h3 className="text-sm font-black text-gray-900 dark:text-white flex items-center gap-2">
                   <Clock className="size-4 text-simas-primary"/> Jadwal Sholat
                 </h3>
                 {[
@@ -39,8 +39,8 @@ export default function AboutLokasi() {
                   { name: 'Isya',    time: '19:09' },
                 ].map(s => (
                   <div key={s.name} className="about-sholat-row">
-                    <span className="text-sm text-gray-600">{s.name}</span>
-                    <span className="text-sm font-black text-simas-primary-dark">{s.time}</span>
+                    <span className="text-sm text-gray-600 dark:text-slate-300">{s.name}</span>
+                    <span className="text-sm font-black text-simas-primary-dark dark:text-emerald-400">{s.time}</span>
                   </div>
                 ))}
                 <Link to="/jadwal-shalat" className="btn-outline-sm w-full justify-center mt-2">
@@ -48,11 +48,11 @@ export default function AboutLokasi() {
                 </Link>
               </div>
               <div className="card-sm p-5 space-y-2">
-                <h3 className="text-sm font-black text-gray-900 flex items-center gap-2">
+                <h3 className="text-sm font-black text-gray-900 dark:text-white flex items-center gap-2">
                   <Phone className="size-4 text-simas-primary"/> Kontak
                 </h3>
-                <p className="text-sm text-gray-600">+62 21-7234-5678</p>
-                <p className="text-sm text-gray-600">info@masjid-alikhlas.or.id</p>
+                <p className="text-sm text-gray-600 dark:text-slate-300">+62 21-7234-5678</p>
+                <p className="text-sm text-gray-600 dark:text-slate-300">info@masjid-alikhlas.or.id</p>
               </div>
             </div>
 
@@ -68,7 +68,7 @@ export default function AboutLokasi() {
               />
               <div className="about-map-footer">
                 <MapPin className="size-4 text-simas-primary shrink-0"/>
-                <span className="text-sm text-gray-600">Jl. Kebayoran Lama No. 12, Jakarta Selatan</span>
+                <span className="text-sm text-gray-600 dark:text-slate-300">Jl. Kebayoran Lama No. 12, Jakarta Selatan</span>
                 <a
                   href="https://maps.google.com/?q=Masjid+Al-Ikhlas+Jakarta+Selatan"
                   target="_blank"

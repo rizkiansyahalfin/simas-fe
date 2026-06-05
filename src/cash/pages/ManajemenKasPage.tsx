@@ -98,30 +98,30 @@ export default function ManajemenKasPage() {
   return (
     <section className="space-y-6">
       <div>
-        <h2 className="m-0 text-2xl font-semibold tracking-normal text-slate-900">
+        <h2 className="m-0 text-2xl font-semibold tracking-normal text-slate-900 dark:text-white">
           Manajemen Kas
         </h2>
-        <p className="mt-2 text-sm text-slate-500">
+        <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
           Catat transaksi pemasukan dan pengeluaran kas masjid.
         </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-lg border border-emerald-200 bg-white p-4 shadow-sm">
-          <p className="text-sm text-slate-500">Total Pemasukan</p>
-          <p className="mt-2 text-xl font-semibold text-emerald-700">
+        <div className="rounded-lg border border-emerald-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 shadow-sm">
+          <p className="text-sm text-slate-500 dark:text-slate-400">Total Pemasukan</p>
+          <p className="mt-2 text-xl font-semibold text-emerald-700 dark:text-emerald-400">
             {currencyFormatter.format(summary.income)}
           </p>
         </div>
-        <div className="rounded-lg border border-emerald-200 bg-white p-4 shadow-sm">
-          <p className="text-sm text-slate-500">Total Pengeluaran</p>
-          <p className="mt-2 text-xl font-semibold text-red-600">
+        <div className="rounded-lg border border-emerald-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 shadow-sm">
+          <p className="text-sm text-slate-500 dark:text-slate-400">Total Pengeluaran</p>
+          <p className="mt-2 text-xl font-semibold text-red-600 dark:text-red-400">
             {currencyFormatter.format(summary.expense)}
           </p>
         </div>
-        <div className="rounded-lg border border-emerald-200 bg-white p-4 shadow-sm">
-          <p className="text-sm text-slate-500">Saldo Akhir</p>
-          <p className="mt-2 text-xl font-semibold text-slate-900">
+        <div className="rounded-lg border border-emerald-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 shadow-sm">
+          <p className="text-sm text-slate-500 dark:text-slate-400">Saldo Akhir</p>
+          <p className="mt-2 text-xl font-semibold text-slate-900 dark:text-white">
             {currencyFormatter.format(summary.balance)}
           </p>
         </div>
@@ -129,14 +129,14 @@ export default function ManajemenKasPage() {
 
       <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
         <form
-          className="space-y-4 rounded-lg border border-emerald-200 bg-white p-5 shadow-sm"
+          className="space-y-4 rounded-lg border border-emerald-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm"
           onSubmit={handleSubmit}
         >
           <div>
-            <h3 className="m-0 text-lg font-semibold tracking-normal text-slate-900">
+            <h3 className="m-0 text-lg font-semibold tracking-normal text-slate-900 dark:text-white">
               Form Transaksi
             </h3>
-            <p className="mt-1 text-sm text-slate-500">
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
               Tambahkan data pemasukan atau pengeluaran.
             </p>
           </div>
@@ -148,6 +148,7 @@ export default function ManajemenKasPage() {
               onChange={(event) => setDate(event.target.value)}
               type="date"
               value={date}
+              className="dark:bg-slate-900 dark:border-slate-700 dark:text-white"
             />
           </div>
 
@@ -158,13 +159,14 @@ export default function ManajemenKasPage() {
               onChange={(event) => setDescription(event.target.value)}
               placeholder="Contoh: Infak Jumat"
               value={description}
+              className="dark:bg-slate-900 dark:border-slate-700 dark:text-white"
             />
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="transaction-type">Jenis Transaksi</Label>
             <select
-              className="h-8 w-full rounded-lg border border-input bg-white px-2.5 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+              className="h-8 w-full rounded-lg border border-input dark:border-slate-700 bg-white dark:bg-slate-900 dark:text-white px-2.5 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
               id="transaction-type"
               onChange={(event) =>
                 setType(event.target.value as TransactionType)
@@ -185,6 +187,7 @@ export default function ManajemenKasPage() {
               placeholder="Contoh: 500000"
               type="number"
               value={amount}
+              className="dark:bg-slate-900 dark:border-slate-700 dark:text-white"
             />
           </div>
 
@@ -193,19 +196,19 @@ export default function ManajemenKasPage() {
           </Button>
         </form>
 
-        <div className="overflow-hidden rounded-lg border border-emerald-200 bg-white shadow-sm">
-          <div className="border-b border-emerald-100 p-5">
-            <h3 className="m-0 text-lg font-semibold tracking-normal text-slate-900">
+        <div className="overflow-hidden rounded-lg border border-emerald-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm">
+          <div className="border-b border-emerald-100 dark:border-slate-700 p-5">
+            <h3 className="m-0 text-lg font-semibold tracking-normal text-slate-900 dark:text-white">
               Tabel Transaksi
             </h3>
-            <p className="mt-1 text-sm text-slate-500">
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
               Daftar transaksi kas terbaru.
             </p>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full min-w-[720px] text-left text-sm">
-              <thead className="bg-emerald-50 text-slate-600">
+              <thead className="bg-emerald-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
                 <tr>
                   <th className="px-4 py-3 font-medium">Tanggal</th>
                   <th className="px-4 py-3 font-medium">Keterangan</th>
@@ -213,20 +216,20 @@ export default function ManajemenKasPage() {
                   <th className="px-4 py-3 text-right font-medium">Nominal</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {transactions.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className="px-4 py-12 text-center text-slate-400">
+                    <td colSpan={4} className="px-4 py-12 text-center text-slate-400 dark:text-slate-500">
                       Belum ada transaksi kas.
                     </td>
                   </tr>
                 ) : (
                   transactions.map((transaction) => (
                     <tr key={transaction.id}>
-                      <td className="px-4 py-3 text-slate-600">
+                      <td className="px-4 py-3 text-slate-600 dark:text-slate-300">
                         {transaction.date}
                       </td>
-                      <td className="px-4 py-3 font-medium text-slate-900">
+                      <td className="px-4 py-3 font-medium text-slate-900 dark:text-slate-200">
                         {transaction.description}
                       </td>
                       <td className="px-4 py-3">
@@ -243,8 +246,8 @@ export default function ManajemenKasPage() {
                       <td
                         className={`px-4 py-3 text-right font-semibold ${
                           transaction.type === "pemasukan"
-                            ? "text-emerald-700"
-                            : "text-red-600"
+                            ? "text-emerald-700 dark:text-emerald-400"
+                            : "text-red-600 dark:text-red-400"
                         }`}
                       >
                         {currencyFormatter.format(transaction.amount)}

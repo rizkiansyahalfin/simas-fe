@@ -24,7 +24,7 @@ export default function CampaignListPage() {
       <div
         className="
           min-h-screen
-          bg-slate-50
+          bg-slate-50 dark:bg-slate-950
         "
       >
 
@@ -43,7 +43,7 @@ export default function CampaignListPage() {
 
           <h1
             className="
-              text-4xl font-bold
+              text-4xl font-bold text-slate-900 dark:text-white
             "
           >
             Campaign Donasi
@@ -51,7 +51,7 @@ export default function CampaignListPage() {
 
           <p
             className="
-              mt-4 text-muted-foreground
+              mt-4 text-slate-500 dark:text-slate-400
             "
           >
             Mari berkontribusi

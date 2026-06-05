@@ -3,7 +3,7 @@ import { SectionHeader } from '../components/SectionHeader'
 
 export default function AboutFacilities() {
   return (
-<section className="py-20 bg-white">
+<section className="py-20 bg-white dark:bg-slate-950">
         <div className="container mx-auto px-4 md:px-8">
           <SectionHeader
             label="Fasilitas"
@@ -16,8 +16,8 @@ export default function AboutFacilities() {
                 <div className={`about-fasilitas-icon ${bg} ${color}`}>
                   <Icon className="size-5"/>
                 </div>
-                <p className="text-sm font-bold text-gray-900">{label}</p>
-                <p className="text-xs text-gray-500 mt-0.5">{value}</p>
+                <p className="text-sm font-bold text-gray-900 dark:text-white">{label}</p>
+                <p className="text-xs text-gray-500 dark:text-slate-400 mt-0.5">{value}</p>
               </div>
             ))}
           </div>

@@ -253,10 +253,10 @@ export default function AdminCampaignManagementPage() {
 			<div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
 				<div>
 					<p className='text-sm font-semibold text-simas-primary'>Admin</p>
-					<h1 className='mt-1 text-2xl font-bold text-slate-900 sm:text-3xl'>
+					<h1 className='mt-1 text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl'>
 						Manajemen Campaign
 					</h1>
-					<p className='mt-2 max-w-2xl text-sm leading-6 text-slate-500'>
+					<p className='mt-2 max-w-2xl text-sm leading-6 text-slate-500 dark:text-slate-400'>
 						Buat, edit, pantau progress, tutup, dan arsipkan campaign donasi masjid.
 					</p>
 				</div>
@@ -274,13 +274,13 @@ export default function AdminCampaignManagementPage() {
 				<StatCard label='Diarsipkan' value={String(stats.archivedCount)} icon={Archive} />
 			</div>
 
-			<div className='rounded-2xl border border-slate-200 bg-white shadow-sm'>
-				<div className='flex items-center justify-between gap-3 border-b border-slate-100 px-5 py-4'>
+			<div className='rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm'>
+				<div className='flex items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 px-5 py-4'>
 					<div>
-						<h2 className='font-bold text-slate-900'>Daftar Campaign</h2>
-						<p className='text-sm text-slate-500'>Progress aktif diperbarui otomatis setiap beberapa detik.</p>
+						<h2 className='font-bold text-slate-900 dark:text-white'>Daftar Campaign</h2>
+						<p className='text-sm text-slate-500 dark:text-slate-400'>Progress aktif diperbarui otomatis setiap beberapa detik.</p>
 					</div>
-					<span className='inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700'>
+					<span className='inline-flex items-center gap-2 rounded-full bg-emerald-50 dark:bg-emerald-900/40 px-3 py-1 text-xs font-bold text-emerald-700 dark:text-emerald-400'>
 						<span className='size-2 rounded-full bg-emerald-500' />
 						Live
 					</span>
@@ -307,8 +307,8 @@ export default function AdminCampaignManagementPage() {
 											className='size-16 rounded-xl object-cover'
 										/>
 										<div className='min-w-0'>
-											<p className='font-bold text-slate-900'>{campaign.title}</p>
-											<p className='mt-1 line-clamp-2 text-sm text-slate-500'>
+											<p className='font-bold text-slate-900 dark:text-slate-200'>{campaign.title}</p>
+											<p className='mt-1 line-clamp-2 text-sm text-slate-500 dark:text-slate-400'>
 												{campaign.description}
 											</p>
 										</div>
@@ -323,7 +323,7 @@ export default function AdminCampaignManagementPage() {
 									</Badge>
 								</TableCell>
 								<TableCell>
-									<div className='flex items-center gap-2 text-sm text-slate-600'>
+									<div className='flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300'>
 										<CalendarDays className='size-4 text-simas-primary' />
 										{campaign.deadline}
 									</div>
@@ -395,12 +395,12 @@ function StatCard({
 	icon: LucideIcon;
 }) {
 	return (
-		<div className='rounded-2xl border border-slate-200 bg-white p-5 shadow-sm'>
-			<div className='mb-4 flex size-10 items-center justify-center rounded-xl bg-emerald-50 text-simas-primary'>
+		<div className='rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm'>
+			<div className='mb-4 flex size-10 items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-900/40 text-simas-primary'>
 				<Icon className='size-5' />
 			</div>
-			<p className='text-sm font-medium text-slate-500'>{label}</p>
-			<p className='mt-1 wrap-break-word text-xl font-bold text-slate-900'>{value}</p>
+			<p className='text-sm font-medium text-slate-500 dark:text-slate-400'>{label}</p>
+			<p className='mt-1 wrap-break-word text-xl font-bold text-slate-900 dark:text-white'>{value}</p>
 		</div>
 	);
 }
@@ -410,17 +410,17 @@ function CampaignProgressMeter({ campaign }: { campaign: ManagedCampaign }) {
 
 	return (
 		<div className='w-64 space-y-2'>
-			<div className='flex items-center justify-between text-xs font-semibold text-slate-500'>
+			<div className='flex items-center justify-between text-xs font-semibold text-slate-500 dark:text-slate-400'>
 				<span>{formatRupiah(campaign.collectedAmount)}</span>
 				<span>{Math.round(percentage)}%</span>
 			</div>
-			<div className='h-3 overflow-hidden rounded-full bg-slate-100'>
+			<div className='h-3 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800'>
 				<div
 					className='h-full rounded-full bg-simas-primary transition-all duration-700'
 					style={{ width: `${percentage}%` }}
 				/>
 			</div>
-			<p className='text-xs text-slate-500'>
+			<p className='text-xs text-slate-500 dark:text-slate-400'>
 				Target {formatRupiah(campaign.targetAmount)} dari {campaign.donorCount} donatur
 			</p>
 		</div>
@@ -462,7 +462,7 @@ function CampaignFormDialog({
 					<div className='grid gap-5 md:grid-cols-[240px_minmax(0,1fr)]'>
 						<div className='space-y-2'>
 							<Label>Thumbnail</Label>
-							<div className='rounded-xl border border-dashed border-slate-300 bg-slate-50 p-3'>
+							<div className='rounded-xl border border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 p-3'>
 								{form.imageUrl ? (
 									<div className='space-y-3'>
 										<img
@@ -484,7 +484,7 @@ function CampaignFormDialog({
 								) : (
 									<Label
 										htmlFor='campaign-thumbnail'
-										className='flex aspect-video cursor-pointer flex-col items-center justify-center gap-2 rounded-lg text-center text-slate-500'
+										className='flex aspect-video cursor-pointer flex-col items-center justify-center gap-2 rounded-lg text-center text-slate-500 dark:text-slate-400'
 									>
 										<ImagePlus className='size-8 text-simas-primary' />
 										<span className='text-sm font-semibold'>Upload thumbnail</span>
@@ -508,7 +508,7 @@ function CampaignFormDialog({
 									id='campaign-title'
 									value={form.title}
 									onChange={onChange("title")}
-									className='h-11 bg-slate-50'
+									className='h-11 bg-slate-50 dark:bg-slate-900 dark:border-slate-700 dark:text-white'
 									required
 								/>
 							</div>
@@ -519,7 +519,7 @@ function CampaignFormDialog({
 									id='campaign-description'
 									value={form.description}
 									onChange={onChange("description")}
-									className='min-h-28 resize-none bg-slate-50'
+									className='min-h-28 resize-none bg-slate-50 dark:bg-slate-900 dark:border-slate-700 dark:text-white'
 									required
 								/>
 							</div>
@@ -533,7 +533,7 @@ function CampaignFormDialog({
 										min='1'
 										value={form.targetAmount}
 										onChange={onChange("targetAmount")}
-										className='h-11 bg-slate-50'
+										className='h-11 bg-slate-50 dark:bg-slate-900 dark:border-slate-700 dark:text-white'
 										required
 									/>
 								</div>
@@ -546,7 +546,7 @@ function CampaignFormDialog({
 										min='0'
 										value={form.collectedAmount}
 										onChange={onChange("collectedAmount")}
-										className='h-11 bg-slate-50'
+										className='h-11 bg-slate-50 dark:bg-slate-900 dark:border-slate-700 dark:text-white'
 										required
 									/>
 								</div>
@@ -559,7 +559,7 @@ function CampaignFormDialog({
 										min='0'
 										value={form.donorCount}
 										onChange={onChange("donorCount")}
-										className='h-11 bg-slate-50'
+										className='h-11 bg-slate-50 dark:bg-slate-900 dark:border-slate-700 dark:text-white'
 										required
 									/>
 								</div>
@@ -571,7 +571,7 @@ function CampaignFormDialog({
 										type='date'
 										value={form.deadline}
 										onChange={onChange("deadline")}
-										className='h-11 bg-slate-50'
+										className='h-11 bg-slate-50 dark:bg-slate-900 dark:border-slate-700 dark:text-white'
 										required
 									/>
 								</div>
@@ -583,7 +583,7 @@ function CampaignFormDialog({
 									id='campaign-status'
 									value={form.status}
 									onChange={onChange("status")}
-									className='h-11 w-full rounded-lg border border-input bg-slate-50 px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50'
+									className='h-11 w-full rounded-lg border border-input dark:border-slate-700 bg-slate-50 dark:bg-slate-900 dark:text-white px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50'
 								>
 									<option value='active'>Aktif</option>
 									<option value='closed'>Ditutup</option>
