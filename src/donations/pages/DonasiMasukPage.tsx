@@ -63,8 +63,8 @@ export default function DonasiMasukPage() {
       header: "Metode", 
       accessorKey: "method",
       cell: (item) => (
-        <span className="font-semibold text-slate-700 flex items-center gap-2">
-          {item.method === "Midtrans" ? <CreditCard className="h-4 w-4 text-blue-500" /> : <Building className="h-4 w-4 text-emerald-600" />}
+        <span className="font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+          {item.method === "Midtrans" ? <CreditCard className="h-4 w-4 text-blue-500 dark:text-blue-400" /> : <Building className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />}
           {item.method}
         </span>
       )
@@ -72,16 +72,16 @@ export default function DonasiMasukPage() {
     { 
       header: "Nominal", 
       accessorKey: "amount",
-      cell: (item) => <span className="font-bold text-slate-800">{formatRupiah(item.amount)}</span>
+      cell: (item) => <span className="font-bold text-slate-800 dark:text-white">{formatRupiah(item.amount)}</span>
     },
     {
       header: "Status",
       accessorKey: "status",
       cell: (item) => (
         <Badge className={
-          item.status === "Berhasil" ? "bg-emerald-100 text-emerald-700" : 
-          item.status === "Menunggu" ? "bg-amber-100 text-amber-700" :
-          "bg-red-100 text-red-700"
+          item.status === "Berhasil" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400" : 
+          item.status === "Menunggu" ? "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400" :
+          "bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-400"
         }>
           {item.status}
         </Badge>
@@ -94,10 +94,10 @@ export default function DonasiMasukPage() {
       
       {/* Header Halaman */}
       <div>
-        <h1 className="text-3xl font-extrabold text-slate-800 tracking-tight mb-2">
+        <h1 className="text-3xl font-extrabold text-slate-800 dark:text-white tracking-tight mb-2">
           Dashboard Donasi
         </h1>
-        <p className="text-slate-500 font-medium text-sm sm:text-base">
+        <p className="text-slate-500 dark:text-slate-400 font-medium text-sm sm:text-base">
           Pantau seluruh donasi yang masuk, baik via transfer manual maupun otomatis (Midtrans).
         </p>
       </div>
@@ -105,40 +105,40 @@ export default function DonasiMasukPage() {
       {/* Kartu Rekapitulasi (Summary Cards) */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Card Total */}
-        <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden">
-          <div className="absolute -right-4 -top-4 w-24 h-24 bg-emerald-50 rounded-full opacity-50 blur-2xl"></div>
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden">
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-emerald-50 dark:bg-emerald-900/20 rounded-full opacity-50 blur-2xl"></div>
           <div className="flex justify-between items-start mb-4">
             <div>
-              <p className="text-sm font-bold text-slate-400 uppercase tracking-wider">Total Donasi (Berhasil)</p>
-              <h2 className="text-3xl font-extrabold text-slate-800 mt-2">{formatRupiah(totalKeseluruhan)}</h2>
+              <p className="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Total Donasi (Berhasil)</p>
+              <h2 className="text-3xl font-extrabold text-slate-800 dark:text-white mt-2">{formatRupiah(totalKeseluruhan)}</h2>
             </div>
-            <div className="p-3 bg-emerald-100 text-emerald-600 rounded-2xl">
+            <div className="p-3 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 rounded-2xl">
               <Wallet className="h-6 w-6" />
             </div>
           </div>
         </div>
 
         {/* Card Manual */}
-        <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
           <div className="flex justify-between items-start mb-4">
             <div>
-              <p className="text-sm font-bold text-slate-400 uppercase tracking-wider">Manual Transfer</p>
-              <h2 className="text-2xl font-extrabold text-slate-800 mt-2">{formatRupiah(totalManual)}</h2>
+              <p className="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Manual Transfer</p>
+              <h2 className="text-2xl font-extrabold text-slate-800 dark:text-white mt-2">{formatRupiah(totalManual)}</h2>
             </div>
-            <div className="p-3 bg-slate-100 text-slate-600 rounded-2xl">
+            <div className="p-3 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-2xl">
               <Building className="h-6 w-6" />
             </div>
           </div>
         </div>
 
         {/* Card Midtrans */}
-        <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
           <div className="flex justify-between items-start mb-4">
             <div>
-              <p className="text-sm font-bold text-slate-400 uppercase tracking-wider">Midtrans (Payment Gateway)</p>
-              <h2 className="text-2xl font-extrabold text-slate-800 mt-2">{formatRupiah(totalMidtrans)}</h2>
+              <p className="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Midtrans (Payment Gateway)</p>
+              <h2 className="text-2xl font-extrabold text-slate-800 dark:text-white mt-2">{formatRupiah(totalMidtrans)}</h2>
             </div>
-            <div className="p-3 bg-blue-50 text-blue-600 rounded-2xl">
+            <div className="p-3 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl">
               <CreditCard className="h-6 w-6" />
             </div>
           </div>
@@ -148,15 +148,15 @@ export default function DonasiMasukPage() {
       {/* Area Tabel Data */}
       <div className="space-y-4">
         {/* Custom Tabs */}
-        <div className="flex gap-2 border-b border-slate-200 pb-px">
+        <div className="flex gap-2 border-b border-slate-200 dark:border-slate-800 pb-px">
           {["Semua", "Manual Transfer", "Midtrans"].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab as any)}
               className={`px-6 py-3 font-bold text-sm rounded-t-xl transition-all ${
                 activeTab === tab 
-                  ? "bg-white text-emerald-700 border-t border-x border-slate-200 shadow-[0_-4px_6px_-2px_rgba(0,0,0,0.02)] -mb-px" 
-                  : "text-slate-500 hover:text-slate-700 hover:bg-slate-50 border-transparent border"
+                  ? "bg-white dark:bg-slate-900 text-emerald-700 dark:text-emerald-400 border-t border-x border-slate-200 dark:border-slate-800 shadow-[0_-4px_6px_-2px_rgba(0,0,0,0.02)] -mb-px" 
+                  : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 border-transparent border"
               }`}
             >
               {tab}

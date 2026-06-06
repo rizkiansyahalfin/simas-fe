@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Link, useLocation } from "react-router-dom"
 import { Button } from "@/components/ui/button"
+import { ThemeToggle } from "@/components/ThemeToggle"
 
 const NAV_ITEMS = [
   { title: "Beranda", path: "/" },
@@ -19,13 +20,13 @@ export default function PublicLayout({ children }: { children?: React.ReactNode 
   const location = useLocation()
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-slate-950 transition-colors">
       {/* Navbar */}
-      <header className="sticky top-0 z-50 w-full border-b border-emerald-100 bg-white/95 backdrop-blur-sm">
+      <header className="sticky top-0 z-50 w-full border-b border-emerald-100 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm transition-colors">
         <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-8">
           <Link to="/" className="flex items-center gap-2">
             <span className="text-2xl">🕌</span>
-            <span className="text-xl font-bold tracking-tight text-gray-900">SIMAS</span>
+            <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">SIMAS</span>
           </Link>
 
           {/* Desktop nav */}
@@ -38,8 +39,8 @@ export default function PublicLayout({ children }: { children?: React.ReactNode 
                   to={item.path}
                   className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                     isActive
-                      ? "bg-emerald-50 text-simas-primary"
-                      : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                      ? "bg-emerald-50 dark:bg-emerald-900/30 text-simas-primary"
+                      : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-gray-900 dark:hover:text-white"
                   }`}
                 >
                   {item.title}
@@ -49,25 +50,32 @@ export default function PublicLayout({ children }: { children?: React.ReactNode 
           </nav>
 
           <div className="hidden md:flex items-center gap-3">
+            {/* Theme Toggle Desktop */}
+            <ThemeToggle />
             <Button asChild className="bg-simas-primary text-white hover:bg-emerald-700 rounded-xl">
               <Link to="/login">Masuk</Link>
             </Button>
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            type="button"
-            className="md:hidden p-2 text-gray-600 hover:text-gray-900"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          {/* Mobile menu area */}
+          <div className="flex items-center gap-2 md:hidden">
+            {/* Theme Toggle Mobile */}
+            <ThemeToggle />
+            
+            <button
+              type="button"
+              className="p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile nav */}
         {mobileOpen && (
-          <nav className="md:hidden border-t border-emerald-100 bg-white px-4 pb-4 pt-2 space-y-1">
+          <nav className="md:hidden border-t border-emerald-100 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pb-4 pt-2 space-y-1 shadow-lg">
             {NAV_ITEMS.map((item) => {
               const isActive = location.pathname === item.path
               return (
@@ -77,8 +85,8 @@ export default function PublicLayout({ children }: { children?: React.ReactNode 
                   onClick={() => setMobileOpen(false)}
                   className={`block px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                     isActive
-                      ? "bg-emerald-50 text-simas-primary"
-                      : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                      ? "bg-emerald-50 dark:bg-emerald-900/30 text-simas-primary"
+                      : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-gray-900 dark:hover:text-white"
                   }`}
                 >
                   {item.title}
@@ -100,7 +108,7 @@ export default function PublicLayout({ children }: { children?: React.ReactNode 
       </main>
 
       {/* Footer */}
-      <footer className="bg-simas-primary text-emerald-50">
+      <footer className="bg-simas-primary text-emerald-50 dark:bg-slate-900 dark:border-t dark:border-slate-800 transition-colors">
         <div className="container mx-auto px-4 md:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
@@ -108,7 +116,7 @@ export default function PublicLayout({ children }: { children?: React.ReactNode 
                 <span className="text-2xl">🕌</span>
                 <span className="text-xl font-bold text-white">SIMAS</span>
               </div>
-              <p className="text-sm text-emerald-200 leading-relaxed">
+              <p className="text-sm text-emerald-200 dark:text-slate-400 leading-relaxed">
                 Sistem Informasi Manajemen Masjid. Memudahkan pengelolaan masjid secara digital dan transparan.
               </p>
             </div>
@@ -117,7 +125,7 @@ export default function PublicLayout({ children }: { children?: React.ReactNode 
               <ul className="space-y-2">
                 {NAV_ITEMS.map((item) => (
                   <li key={item.path}>
-                    <Link to={item.path} className="text-sm text-emerald-200 hover:text-white transition-colors">
+                    <Link to={item.path} className="text-sm text-emerald-200 dark:text-slate-400 hover:text-white dark:hover:text-white transition-colors">
                       {item.title}
                     </Link>
                   </li>
@@ -126,14 +134,14 @@ export default function PublicLayout({ children }: { children?: React.ReactNode 
             </div>
             <div>
               <h3 className="font-semibold text-white mb-3">Kontak</h3>
-              <ul className="space-y-2 text-sm text-emerald-200">
+              <ul className="space-y-2 text-sm text-emerald-200 dark:text-slate-400">
                 <li>Masjid Raya</li>
                 <li>Jl. Contoh No. 123</li>
                 <li>Email: info@simas-masjid.com</li>
               </ul>
             </div>
           </div>
-          <div className="mt-8 pt-6 border-t border-emerald-600/40 text-center text-sm text-emerald-300">
+          <div className="mt-8 pt-6 border-t border-emerald-600/40 dark:border-slate-800/80 text-center text-sm text-emerald-300 dark:text-slate-500">
             &copy; {new Date().getFullYear()} SIMAS. All rights reserved.
           </div>
         </div>

@@ -313,8 +313,8 @@ export default function AuditLogPage() {
 			<div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
 				<div>
 					<p className='text-sm font-semibold text-simas-primary'>Superadmin</p>
-					<h1 className='mt-1 text-2xl font-bold text-slate-900 sm:text-3xl'>Audit Log</h1>
-					<p className='mt-2 max-w-2xl text-sm leading-6 text-slate-500'>
+					<h1 className='mt-1 text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl'>Audit Log</h1>
+					<p className='mt-2 max-w-2xl text-sm leading-6 text-slate-500 dark:text-slate-400'>
 						Pantau aktivitas pengguna, filter log, lihat perubahan data before/after, dan export CSV.
 					</p>
 				</div>
@@ -324,7 +324,7 @@ export default function AuditLogPage() {
 				</Button>
 			</div>
 
-			<section className='rounded-2xl border border-slate-200 bg-white p-5 shadow-sm'>
+			<section className='rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm'>
 				<div className='grid gap-4 md:grid-cols-2 xl:grid-cols-5'>
 					<div className='space-y-2'>
 						<Label htmlFor='filter-user'>User</Label>
@@ -369,7 +369,7 @@ export default function AuditLogPage() {
 							type='date'
 							value={filters.startDate}
 							onChange={updateFilter("startDate")}
-							className='h-11 bg-slate-50'
+							className='h-11 bg-slate-50 dark:bg-slate-900 dark:border-slate-700 dark:text-white'
 						/>
 					</div>
 
@@ -380,14 +380,14 @@ export default function AuditLogPage() {
 							type='date'
 							value={filters.endDate}
 							onChange={updateFilter("endDate")}
-							className='h-11 bg-slate-50'
+							className='h-11 bg-slate-50 dark:bg-slate-900 dark:border-slate-700 dark:text-white'
 						/>
 					</div>
 				</div>
 
 				<div className='mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
-					<p className='text-sm text-slate-500'>
-						Menampilkan <span className='font-bold text-slate-800'>{filteredLogs.length}</span> log aktivitas.
+					<p className='text-sm text-slate-500 dark:text-slate-400'>
+						Menampilkan <span className='font-bold text-slate-800 dark:text-slate-200'>{filteredLogs.length}</span> log aktivitas.
 					</p>
 					<Button type='button' variant='outline' onClick={resetFilters}>
 						Reset Filter
@@ -395,14 +395,14 @@ export default function AuditLogPage() {
 				</div>
 			</section>
 
-			<section className='rounded-2xl border border-slate-200 bg-white shadow-sm'>
-				<div className='flex flex-col gap-3 border-b border-slate-100 px-5 py-4 sm:flex-row sm:items-center sm:justify-between'>
+			<section className='rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm'>
+				<div className='flex flex-col gap-3 border-b border-slate-100 dark:border-slate-800 px-5 py-4 sm:flex-row sm:items-center sm:justify-between'>
 					<div>
-						<h2 className='font-bold text-slate-900'>Log Aktivitas</h2>
-						<p className='text-sm text-slate-500'>Klik detail untuk melihat diff before/after.</p>
+						<h2 className='font-bold text-slate-900 dark:text-white'>Log Aktivitas</h2>
+						<p className='text-sm text-slate-500 dark:text-slate-400'>Klik detail untuk melihat diff before/after.</p>
 					</div>
 					<div className='flex items-center gap-2'>
-						<Label htmlFor='page-size' className='text-sm text-slate-500'>
+						<Label htmlFor='page-size' className='text-sm text-slate-500 dark:text-slate-400'>
 							Baris
 						</Label>
 						<SelectInput
@@ -439,7 +439,7 @@ export default function AuditLogPage() {
 						{pageLogs.length ? (
 							pageLogs.map((log) => (
 								<TableRow key={log.id}>
-									<TableCell className='whitespace-nowrap font-medium text-slate-800'>
+									<TableCell className='whitespace-nowrap font-medium text-slate-800 dark:text-slate-200'>
 										{formatDateTime(log.timestamp)}
 									</TableCell>
 									<TableCell>{log.user}</TableCell>
@@ -449,11 +449,11 @@ export default function AuditLogPage() {
 									<TableCell>{log.module}</TableCell>
 									<TableCell>
 										<div className='min-w-48'>
-											<p className='font-semibold text-slate-800'>{log.target}</p>
-											<p className='text-xs text-slate-400'>{log.id}</p>
+											<p className='font-semibold text-slate-800 dark:text-slate-200'>{log.target}</p>
+											<p className='text-xs text-slate-400 dark:text-slate-500'>{log.id}</p>
 										</div>
 									</TableCell>
-									<TableCell className='font-mono text-xs text-slate-500'>{log.ipAddress}</TableCell>
+									<TableCell className='font-mono text-xs text-slate-500 dark:text-slate-400'>{log.ipAddress}</TableCell>
 									<TableCell>
 										<div className='flex justify-end'>
 											<Button type='button' variant='outline' size='sm' onClick={() => setSelectedLog(log)}>
@@ -465,7 +465,7 @@ export default function AuditLogPage() {
 							))
 						) : (
 							<TableRow>
-								<TableCell colSpan={7} className='py-10 text-center text-slate-500'>
+								<TableCell colSpan={7} className='py-10 text-center text-slate-500 dark:text-slate-400'>
 									Tidak ada log yang cocok dengan filter.
 								</TableCell>
 							</TableRow>
@@ -473,8 +473,8 @@ export default function AuditLogPage() {
 					</TableBody>
 				</Table>
 
-				<div className='flex flex-col gap-3 border-t border-slate-100 px-5 py-4 sm:flex-row sm:items-center sm:justify-between'>
-					<p className='text-sm text-slate-500'>
+				<div className='flex flex-col gap-3 border-t border-slate-100 dark:border-slate-800 px-5 py-4 sm:flex-row sm:items-center sm:justify-between'>
+					<p className='text-sm text-slate-500 dark:text-slate-400'>
 						Halaman {currentPage} dari {totalPages}
 					</p>
 					<div className='flex gap-2'>
@@ -510,7 +510,7 @@ function SelectInput({
 	return (
 		<select
 			{...props}
-			className={`h-11 w-full rounded-lg border border-input bg-slate-50 px-3 text-sm outline-none transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 ${className}`}
+			className={`h-11 w-full rounded-lg border border-input dark:border-slate-700 bg-slate-50 dark:bg-slate-900 dark:text-white px-3 text-sm outline-none transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 ${className}`}
 		/>
 	);
 }
@@ -561,8 +561,8 @@ function DiffPanel({
 			: "border-emerald-100 bg-emerald-50 text-emerald-800";
 
 	return (
-		<div className='rounded-2xl border border-slate-200 bg-white p-4'>
-			<h3 className='mb-3 font-bold text-slate-900'>{title}</h3>
+		<div className='rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4'>
+			<h3 className='mb-3 font-bold text-slate-900 dark:text-white'>{title}</h3>
 			{keys.length ? (
 				<div className='space-y-2'>
 					{keys.map((key) => {
@@ -573,17 +573,17 @@ function DiffPanel({
 							<div
 								key={key}
 								className={`rounded-xl border p-3 text-sm ${
-									changed ? changedClass : "border-slate-100 bg-slate-50 text-slate-700"
+									changed ? changedClass : "border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
 								}`}
 							>
-								<p className='mb-1 text-xs font-bold uppercase text-slate-500'>{key}</p>
+								<p className='mb-1 text-xs font-bold uppercase text-slate-500 dark:text-slate-400'>{key}</p>
 								<p className='break-words font-mono'>{formatAuditValue(currentValue)}</p>
 							</div>
 						);
 					})}
 				</div>
 			) : (
-				<div className='rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm text-slate-500'>
+				<div className='rounded-xl border border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-4 text-sm text-slate-500 dark:text-slate-400'>
 					Tidak ada data.
 				</div>
 			)}
