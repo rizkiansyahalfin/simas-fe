@@ -13,6 +13,7 @@ interface LoanHistory {
   quantity: number;
   conditionReturned: "Baik" | "Rusak" | "Hilang" | "-";
   status: "Dipinjam" | "Dikembalikan";
+  [key: string]: unknown; // <-- INI SOLUSINYA: Mengizinkan interface ini dibaca sebagai Record<string, unknown>
 }
 
 // Data Dummy
@@ -108,7 +109,7 @@ export default function InventoryLoansPage() {
       <DataTable 
         title={`Tabel Peminjaman (${activeTab})`}
         exportFilename={`Laporan_Peminjaman_${activeTab}`}
-        columns={columns}
+        columns={columns as any} 
         data={filteredLoans}
       />
       
