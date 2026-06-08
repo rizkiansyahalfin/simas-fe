@@ -1,3 +1,7 @@
+import { useEffect } from "react";
+import {
+  useMosqueProfile,
+} from "../hooks/useMosqueProfile";
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { Building2 } from "lucide-react";
@@ -9,11 +13,13 @@ import { Phone } from "lucide-react";
 import { Save } from "lucide-react";
 import { Trash2 } from "lucide-react";
 import { UserRound } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { mosqueProfileService } from "../services/mosqueProfileService";
 
 interface MosqueProfileForm {
 	name: string;
@@ -24,6 +30,8 @@ interface MosqueProfileForm {
 	manager: string;
 	description: string;
 }
+
+
 
 const initialProfile: MosqueProfileForm = {
 	name: "Masjid Al-Ikhlas",
@@ -41,6 +49,38 @@ export default function MosqueProfileSettings() {
 	const [logoPreview, setLogoPreview] = useState<string>("");
 	const [qrisPreview, setQrisPreview] = useState<string>("");
 	const [isSaving, setIsSaving] = useState(false);
+	const [qrisFile, setQrisFile] = useState<File | null>(null);
+
+	const {
+		  data: profile,
+		  isLoading,
+		} = useMosqueProfile();
+
+	useEffect(() => {
+		  console.log("PROFILE DATA:");
+		  console.log(profile);
+		}, [profile]);
+
+	useEffect(() => {
+  		if (!profile) return;
+
+  		setForm({
+		  name: profile.name ?? "",
+		  address: profile.address ?? "",
+		  phone: profile.contactPhone ?? "",
+		  email: profile.contactEmail ?? "",
+		  website: profile.website ?? "",
+		  manager: profile.manager ?? "",
+		  description: profile.description ?? "",
+		});
+
+		  setQrisPreview(
+		    profile.qrisImageUrl ?? ""
+		  );
+
+		}, [profile]);
+
+	
 
 	const updateField =
 		(field: keyof MosqueProfileForm) =>
@@ -52,6 +92,9 @@ export default function MosqueProfileSettings() {
 		(target: "logo" | "qris") => (event: ChangeEvent<HTMLInputElement>) => {
 			const file = event.target.files?.[0];
 			if (!file) return;
+			if (target === "qris") {
+ 				 setQrisFile(file);
+				}
 
 			const reader = new FileReader();
 			reader.onload = () => {
@@ -65,16 +108,122 @@ export default function MosqueProfileSettings() {
 			reader.readAsDataURL(file);
 		};
 
-	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		setIsSaving(true);
+	
 
-		setTimeout(() => {
-			setIsSaving(false);
-			alert("Profil masjid berhasil disimpan.");
-		}, 800);
-	};
+	  const handleSubmit = async (
+  		event: FormEvent<HTMLFormElement>
+		) => {
+		
+		  event.preventDefault();
+		  try {
+		    setIsSaving(true);
+		
+		    const formData =
+		      new FormData();
+		    if (qrisFile) {
+		      formData.append(
+		        "qris",
+		        qrisFile
+		      );
+		    }
+		    formData.append(
+		      "name",
+		      form.name
+		    );
+		
+		    formData.append(
+		      "address",
+		      form.address
+		    );
+		
+		    formData.append(
+		      "phone",
+		      form.phone
+		    );
+		
+		    formData.append(
+		      "email",
+		      form.email
+		    );
+		
+		    formData.append(
+		      "website",
+		      form.website
+		    );
+		
+		    formData.append(
+		      "manager",
+		      form.manager
+		    );
+		
+		    formData.append(
+		      "description",
+		      form.description
+		    );
+		
+		    await mosqueProfileService
+		      .updateProfile(formData);
+		
+		    alert(
+		      "Profil masjid berhasil disimpan"
+		    );
+		
+		  } finally {
+		    setIsSaving(false);
+		  }
+		};
 
+		if (isLoading) {
+  	return (
+  	  <div className="mx-auto max-w-7xl space-y-6 animate-pulse">
+  	    {/* Header */}
+  	    <div className="space-y-3">
+  	      <div className="h-4 w-24 rounded bg-slate-200" />
+  	      <div className="h-8 w-72 rounded bg-slate-200" />
+  	      <div className="h-4 w-96 rounded bg-slate-200" />
+  	    </div>
+	
+  	    <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
+  	      {/* Form Skeleton */}
+  	      <div className="space-y-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+  	        <div className="h-6 w-48 rounded bg-slate-200" />
+	
+  	        <div className="grid gap-5 md:grid-cols-2">
+  	          {[...Array(8)].map((_, index) => (
+  	            <div
+  	              key={index}
+  	              className={`space-y-2 ${
+  	                index === 0 || index === 1 || index === 6
+  	                  ? "md:col-span-2"
+  	                  : ""
+  	              }`}
+  	            >
+  	              <div className="h-4 w-24 rounded bg-slate-200" />
+  	              <div className="h-11 rounded bg-slate-100" />
+  	            </div>
+  	          ))}
+  	        </div>
+  	      </div>
+			
+  	      {/* Preview Skeleton */}
+  	      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+  	        <div className="mb-6 h-6 w-40 rounded bg-slate-200" />
+			
+  	        <div className="space-y-4">
+  	          <div className="h-20 w-20 rounded-2xl bg-slate-200" />
+  	          <div className="h-6 w-48 rounded bg-slate-200" />
+  	          <div className="h-4 w-full rounded bg-slate-100" />
+  	          <div className="h-4 w-3/4 rounded bg-slate-100" />
+			
+  	          <div className="mt-6 h-64 rounded-xl bg-slate-100" />
+  	        </div>
+  	      </div>
+  	    </div>
+  	  </div>
+  	);
+}	
+		
+		
 	return (
 		<div className='mx-auto max-w-7xl space-y-6'>
 			<div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
