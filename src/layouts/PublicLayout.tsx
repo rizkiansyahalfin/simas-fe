@@ -1,7 +1,9 @@
 import { useState } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Download } from "lucide-react"
 import { Link, useLocation } from "react-router-dom"
 import { Button } from "@/components/ui/button"
+import { usePWAInstall } from "@/hooks/usePWAInstall"
+import { InstallBanner } from "@/components/InstallBanner"
 
 const NAV_ITEMS = [
   { title: "Beranda", path: "/" },
@@ -17,6 +19,9 @@ const NAV_ITEMS = [
 export default function PublicLayout({ children }: { children?: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
+  
+  // Destructure state dari hook PWA
+  const { isInstallable, showBanner, installApp, dismissPrompt } = usePWAInstall()
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
@@ -94,23 +99,38 @@ export default function PublicLayout({ children }: { children?: React.ReactNode 
         )}
       </header>
 
-      {/* Main content */}
-      <main className="flex-1">
+      {/* Main content - Ditambahkan padding bawah agar tidak tertutup banner PWA */}
+      <main className="flex-1 pb-16">
         {children}
       </main>
 
       {/* Footer */}
       <footer className="bg-simas-primary text-emerald-50">
         <div className="container mx-auto px-4 md:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
+          {/* Ubah grid ke 4 kolom agar deskripsi dan tombol install punya area lebih luas */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="md:col-span-2">
               <div className="flex items-center gap-2 mb-4">
                 <span className="text-2xl">🕌</span>
                 <span className="text-xl font-bold text-white">SIMAS</span>
               </div>
-              <p className="text-sm text-emerald-200 leading-relaxed">
+              <p className="text-sm text-emerald-200 leading-relaxed max-w-sm">
                 Sistem Informasi Manajemen Masjid. Memudahkan pengelolaan masjid secara digital dan transparan.
               </p>
+
+              {/* Tombol Install Manual di Footer */}
+              {isInstallable && (
+                <div className="mt-6">
+                  <Button 
+                    onClick={installApp} 
+                    variant="outline" 
+                    className="bg-transparent border-emerald-500/50 text-white hover:bg-emerald-800 hover:text-white rounded-xl"
+                  >
+                    <Download className="mr-2 h-4 w-4" /> 
+                    Install Aplikasi SIMAS
+                  </Button>
+                </div>
+              )}
             </div>
             <div>
               <h3 className="font-semibold text-white mb-3">Navigasi</h3>
@@ -138,6 +158,11 @@ export default function PublicLayout({ children }: { children?: React.ReactNode 
           </div>
         </div>
       </footer>
+
+      {/* Render Install Banner PWA */}
+      {showBanner && (
+        <InstallBanner onInstall={installApp} onDismiss={dismissPrompt} />
+      )}
     </div>
   )
 }

@@ -5,6 +5,7 @@ import DataTable, { type ColumnConfig } from "@/components/DataTable";
 
 // Tipe Data untuk Riwayat Peminjaman
 interface LoanHistory {
+  [key: string]: any; // Tambahan ini untuk fix error Record<string, unknown>
   id: string;
   itemName: string;
   borrower: string;
