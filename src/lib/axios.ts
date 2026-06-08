@@ -39,3 +39,10 @@ export const isRateLimited = (error: unknown): boolean =>
   (error as { response: { status: number } }).response.status === 429
 
 export default api
+
+console.log(
+  "BASE URL =",
+  import.meta.env.VITE_API_URL
+);
+
+console.log(import.meta.env)
