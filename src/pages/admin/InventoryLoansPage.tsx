@@ -3,7 +3,7 @@ import { PackageSearch } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import DataTable, { type ColumnConfig } from "@/components/DataTable";
 
-// Tipe Data untuk Riwayat Peminjaman
+// Tipe Data untuk Riwayat Peminjaman (Sudah kebal error TypeScript)
 interface LoanHistory {
   id: string;
   itemName: string;

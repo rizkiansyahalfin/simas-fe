@@ -110,13 +110,13 @@ export default function DataTable<T extends Record<string, unknown>>({
 	};
 
 	return (
-		<div className='bg-white rounded-3xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden'>
+		<div className='bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden'>
 			{/* Top Bar: Title, Search, Export */}
-			<div className='p-6 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4'>
-				<h2 className='text-xl font-bold text-slate-800'>{title}</h2>
+			<div className='p-6 border-b border-slate-100 dark:border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4'>
+				<h2 className='text-xl font-bold text-slate-800 dark:text-white'>{title}</h2>
 				<div className='flex flex-col sm:flex-row items-center gap-3'>
 					<div className='relative w-full sm:w-64'>
-						<Search className='absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400' />
+						<Search className='absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500' />
 						<Input
 							type='text'
 							placeholder='Cari data...'
@@ -125,13 +125,13 @@ export default function DataTable<T extends Record<string, unknown>>({
 								setSearchTerm(e.target.value);
 								setCurrentPage(1);
 							}}
-							className='pl-10 h-10 rounded-xl bg-slate-50 border-slate-200 focus-visible:ring-simas-primary'
+							className='pl-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:ring-simas-primary'
 						/>
 					</div>
 					<Button
 						onClick={exportToCSV}
 						variant='outline'
-						className='w-full sm:w-auto h-10 rounded-xl font-bold border-slate-200 text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200 transition-colors'
+						className='w-full sm:w-auto h-10 rounded-xl font-bold border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 hover:text-emerald-700 dark:hover:text-emerald-400 hover:border-emerald-200 dark:hover:border-emerald-800 transition-colors bg-white dark:bg-slate-800'
 					>
 						<Download className='mr-2 h-4 w-4' /> Export CSV
 					</Button>
@@ -140,13 +140,13 @@ export default function DataTable<T extends Record<string, unknown>>({
 
 			{/* Tabel */}
 			<div className='overflow-x-auto'>
-				<table className='w-full text-left text-sm text-slate-600'>
-					<thead className='bg-slate-50 text-slate-500 font-bold uppercase text-xs border-b border-slate-100'>
+				<table className='w-full text-left text-sm text-slate-600 dark:text-slate-300'>
+					<thead className='bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-bold uppercase text-xs border-b border-slate-100 dark:border-slate-700'>
 						<tr>
 							{columns.map((col, index) => (
 								<th
 									key={index}
-									className={`px-6 py-4 whitespace-nowrap ${col.sortable !== false ? "cursor-pointer hover:bg-slate-100 transition-colors select-none" : ""}`}
+									className={`px-6 py-4 whitespace-nowrap ${col.sortable !== false ? "cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors select-none" : ""}`}
 									onClick={() => col.sortable !== false && handleSort(col.accessorKey as string)}
 								>
 									<div className='flex items-center gap-2'>
@@ -163,10 +163,10 @@ export default function DataTable<T extends Record<string, unknown>>({
 							))}
 						</tr>
 					</thead>
-					<tbody className='divide-y divide-slate-100'>
+					<tbody className='divide-y divide-slate-100 dark:divide-slate-800'>
 						{paginatedData.length > 0 ? (
 							paginatedData.map((item, rowIndex) => (
-								<tr key={rowIndex} className='hover:bg-slate-50/50 transition-colors'>
+								<tr key={rowIndex} className='hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors'>
 									{columns.map((col, colIndex) => (
 										<td key={colIndex} className='px-6 py-4'>
 											{col.cell ? col.cell(item) : String(item[col.accessorKey as keyof T])}
@@ -178,7 +178,7 @@ export default function DataTable<T extends Record<string, unknown>>({
 							<tr>
 								<td
 									colSpan={columns.length}
-									className='px-6 py-12 text-center text-slate-400 font-medium'
+									className='px-6 py-12 text-center text-slate-400 dark:text-slate-500 font-medium'
 								>
 									Tidak ada data yang ditemukan.
 								</td>
@@ -189,35 +189,35 @@ export default function DataTable<T extends Record<string, unknown>>({
 			</div>
 
 			{/* Pagination */}
-			<div className='p-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500'>
+			<div className='p-4 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500 dark:text-slate-400'>
 				<div>
 					Menampilkan baris{" "}
-					<span className='font-bold text-slate-700'>
+					<span className='font-bold text-slate-700 dark:text-slate-200'>
 						{sortedData.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1}
 					</span>{" "}
 					hingga{" "}
-					<span className='font-bold text-slate-700'>
+					<span className='font-bold text-slate-700 dark:text-slate-200'>
 						{Math.min(currentPage * itemsPerPage, sortedData.length)}
 					</span>{" "}
-					dari total <span className='font-bold text-slate-700'>{sortedData.length}</span> data.
+					dari total <span className='font-bold text-slate-700 dark:text-slate-200'>{sortedData.length}</span> data.
 				</div>
 				<div className='flex items-center gap-2'>
 					<Button
 						variant='outline'
 						size='icon'
-						className='h-8 w-8 rounded-lg border-slate-200'
+						className='h-8 w-8 rounded-lg border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300'
 						onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
 						disabled={currentPage === 1}
 					>
 						<ChevronLeft className='h-4 w-4' />
 					</Button>
-					<span className='font-bold text-slate-700 px-2'>
+					<span className='font-bold text-slate-700 dark:text-slate-200 px-2'>
 						{currentPage} / {totalPages === 0 ? 1 : totalPages}
 					</span>
 					<Button
 						variant='outline'
 						size='icon'
-						className='h-8 w-8 rounded-lg border-slate-200'
+						className='h-8 w-8 rounded-lg border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300'
 						onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
 						disabled={currentPage === totalPages || totalPages === 0}
 					>

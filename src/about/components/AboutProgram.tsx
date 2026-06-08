@@ -4,7 +4,7 @@ import { SectionHeader } from '../components/SectionHeader'
 
 export default function AboutProgram() {
   return (
-<section className="py-20 bg-simas-bg-public">
+<section className="py-20 bg-simas-bg-public dark:bg-slate-950">
         <div className="container mx-auto px-4 md:px-8">
           <SectionHeader
             label="Program Unggulan"
@@ -16,10 +16,10 @@ export default function AboutProgram() {
               <div key={title} className="about-program-card">
                 <span className="text-3xl mb-3 block">{icon}</span>
                 <div className="flex items-start justify-between gap-2 mb-2">
-                  <h3 className="text-sm font-bold text-gray-900 leading-tight">{title}</h3>
+                  <h3 className="text-sm font-bold text-gray-900 dark:text-white leading-tight">{title}</h3>
                   <span className={TAG_COLOR[tag] ?? 'pill'}>{tag}</span>
                 </div>
-                <p className="text-xs text-gray-500 leading-relaxed">{desc}</p>
+                <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
