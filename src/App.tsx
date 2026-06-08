@@ -54,6 +54,9 @@ const CongregationImportPage = lazy(() => import("./congregation-import/pages/Co
 const AdminCampaignManagementPage = lazy(() => import("./campaigns/pages/AdminCampaignManagementPage"));
 const AboutPage = lazy(() => import("./about/pages/AboutPages"));
 
+
+const AttendanceSessionsPage = lazy(() => import("@/pages/admin/AttendanceSessionsPage"));
+
 function App() {
     const { isAuthenticated } = useAuthStore();
 
@@ -326,6 +329,19 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
+                    
+                    {/* === ROUTE BARU: ABSENSI === */}
+                    <Route
+                        path='/admin/attendance'
+                        element={
+                            <ProtectedRoute resource='kegiatan'>
+                                <AdminLayout>
+                                    <AttendanceSessionsPage />
+                                </AdminLayout>
+                            </ProtectedRoute>
+                        }
+                    />
+
                     <Route
                         path='/admin/inventaris/:id'
                         element={
