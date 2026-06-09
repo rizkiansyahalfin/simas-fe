@@ -2,6 +2,7 @@ import { useState, useRef, type FormEvent } from 'react'
 import { Upload, X, Check, ChevronDown, Send, Heart } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import api from '@/lib/axios'
+import { useTranslate } from "@/i18n/hooks/useTranslate"
 
 type Category = 'INFAQ' | 'ZAKAT' | 'ANAK_YATIM' | 'RENOVASI'
 
@@ -185,6 +186,7 @@ export default function DonationForm({ onSuccess }: Props) {
   }
 
   const selectedCat = CATEGORIES.find(c => c.key === category)!
+  const { t } = useTranslate()
 
   return (
     <form onSubmit={handleSubmit} className="card overflow-hidden">
@@ -200,9 +202,9 @@ export default function DonationForm({ onSuccess }: Props) {
         <div className="relative z-10 flex items-center gap-3">
           <div className="form-header-icon"><Heart className="size-4"/></div>
           <div>
-            <h2 className="font-bold text-gray-900 text-base">Form Donasi</h2>
+            <h2 className="font-bold text-gray-900 text-base">{t('donation.form.badge')}</h2>
             <p className="text-gray-400 text-xs mt-0.5">
-              "Perumpamaan orang yang menafkahkan hartanya di jalan Allah seperti sebutir biji..."
+              {t('donation.form.description')}
             </p>
           </div>
         </div>
@@ -212,7 +214,7 @@ export default function DonationForm({ onSuccess }: Props) {
 
         {/* Kategori */}
         <div>
-          <label className="jumat-label">Kategori Donasi</label>
+          <label className="jumat-label">{t('donation.form.categoryLabel')}</label>
           <div className="relative">
             <button type="button" onClick={() => setShowCat(v => !v)}
               className={`kat-trigger ${showCat ? 'open' : ''}`}>
@@ -244,7 +246,7 @@ export default function DonationForm({ onSuccess }: Props) {
 
         {/* Nominal */}
         <div>
-          <label className="jumat-label">Nominal Donasi</label>
+          <label className="jumat-label">{t('donation.form.amountLabel')}</label>
           {errors.nominal && <p className="text-sm text-red-500 mb-2">{errors.nominal}</p>}
           <div className="grid grid-cols-4 gap-2 mb-3">
             {PRESETS.map(p => (
@@ -268,14 +270,14 @@ export default function DonationForm({ onSuccess }: Props) {
         {/* Nama & HP */}
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="jumat-label">Nama Donatur</label>
+            <label className="jumat-label">{t('donation.form.nameLabel')}</label>
             <Input value={name} onChange={e => { setName(e.target.value); if (errors.name) setErrors(p => { const n = { ...p }; delete n.name; return n }) }}
               placeholder="Nama lengkap" disabled={anonymous}
               className={`jumat-input h-11 ${errors.name ? 'border-red-400' : ''}`}/>
             {errors.name && <p className="text-sm text-red-500 mt-1">{errors.name}</p>}
           </div>
           <div>
-            <label className="jumat-label">No HP / WhatsApp</label>
+            <label className="jumat-label">{t('donation.form.phoneLabel')}</label>
             <Input value={phone} onChange={e => setPhone(e.target.value)}
               placeholder="08xx-xxxx-xxxx"
               className="jumat-input h-11"/>
@@ -286,8 +288,8 @@ export default function DonationForm({ onSuccess }: Props) {
         <label className="jamaah-toggle-box cursor-pointer select-none">
           <Heart className="size-4 text-simas-accent shrink-0"/>
           <div className="flex-1">
-            <p className="text-sm font-semibold text-gray-800">Sembunyikan Nama</p>
-            <p className="text-xs text-gray-400">Donasi akan tercatat sebagai "Hamba Allah"</p>
+            <p className="text-sm font-semibold text-gray-800">{t('donation.form.anonymousLabel')}</p>
+            <p className="text-xs text-gray-400">{t('donation.form.anonymousDescription')}</p>
           </div>
           <button type="button" onClick={() => setAnonymous(v => !v)}
             className={`jamaah-toggle ${anonymous ? 'jamaah-toggle-on' : 'jamaah-toggle-off'}`}>
@@ -297,7 +299,7 @@ export default function DonationForm({ onSuccess }: Props) {
 
         {/* Upload */}
         <div>
-          <label className="jumat-label">Bukti Transfer</label>
+          <label className="jumat-label">{t('donation.form.proofLabel')}</label>
           <input title='upload bukti' ref={fileRef} type="file" accept="image/*,.pdf" className="hidden"
             onChange={e => setBukti(e.target.files?.[0] ?? null)}/>
           {bukti ? (

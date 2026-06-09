@@ -4,6 +4,7 @@ import { MapPin } from "lucide-react";
 import { User } from "lucide-react";
 import { ChevronRight } from "lucide-react";
 import Seo from "@/lib/Seo";
+import { useTranslate } from "@/i18n/hooks/useTranslate";
 
 // Data Dummy Agenda Kegiatan
 const DUMMY_EVENTS = [
@@ -43,11 +44,14 @@ const DUMMY_EVENTS = [
 ];
 
 export default function Events() {
+
+  const { t } = useTranslate()
+
   return (
     <>
       <Seo
-        title="Agenda Kegiatan"
-        description="Lihat jadwal kajian, tabligh akbar, dan kegiatan masjid terbaru di SIMAS."
+        title={t('agenda.seo.title')}
+        description={t('agenda.seo.description')}
         image="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=1200&q=80"
       />
       <div className="relative min-h-screen bg-slate-50/50 py-16 md:py-24 overflow-hidden font-sans">
@@ -60,11 +64,11 @@ export default function Events() {
         <div className="text-center mb-16 md:mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-100 text-simas-primary text-sm font-bold tracking-wide uppercase mb-4">
             <CalendarIcon className="w-4 h-4" />
-            Jadwal & Agenda
+            {t('agenda.title')}
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">Agenda Kegiatan</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">{t('agenda.badge')}</h1>
           <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto font-medium">
-            Ikuti berbagai kajian keislaman dan kegiatan sosial yang diselenggarakan di lingkungan masjid kita.
+            {t('agenda.subtitle')}
           </p>
         </div>
 
