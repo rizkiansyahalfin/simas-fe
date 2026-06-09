@@ -26,6 +26,8 @@ const GalleryPage = lazy(() => import("./gallery/pages/PublicGalleryPage"));
 const CampaignListPage = lazy(() => import("./campaigns/pages/CampaignListPage"));
 const CampaignHistoryPage = lazy(() => import("./campaigns/pages/CampaignHistoryPage"));
 import PaymentStatusPage from "@/payments/pages/PaymentStatusPage";
+import ForgotPasswordPage from "./auth/pages/ForgotPasswordPage";
+import ResetPasswordPage from "./auth/pages/ResetPasswordPage";
 
 // ==================== ADMIN PAGES ====================
 const DonasiMasukPage = lazy(() => import("./donations/pages/DonasiMasukPage"));
@@ -191,6 +193,25 @@ function App() {
                             )
                         }
                     />
+
+                    <Route
+                        path='/forgot-password'
+                        element={
+                            <PublicLayout>
+                                <ForgotPasswordPage />
+                            </PublicLayout>
+                        }
+                    />
+                    <Route
+                        path='/reset-password'
+                        element={
+                            <PublicLayout>
+                                <ResetPasswordPage />
+                            </PublicLayout>
+                        }
+                    />
+
+
 
                     {/* ERROR PAGES */}
                     <Route path='/403' element={<ForbiddenPage />} />
