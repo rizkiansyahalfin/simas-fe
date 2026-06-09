@@ -1,7 +1,9 @@
 import { Calendar, Heart, Shield } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { useTranslate } from '@/i18n/hooks/useTranslate'
 
 export default function AboutCta() {
+  const { t } = useTranslate()
   return (
 <section className="py-16 bg-white">
         <div className="container mx-auto px-4 md:px-8">
@@ -17,20 +19,20 @@ export default function AboutCta() {
             <div className="absolute -top-12 -right-12 size-56 rounded-full bg-white/10 blur-3xl pointer-events-none"/>
             <div className="relative z-10 text-center">
               <div className="badge badge-ok about-cta-badge">
-                <Shield className="size-3"/> Bersama Memakmurkan Masjid
+                <Shield className="size-3"/> {t('about.ctaBadge')}
               </div>
               <h2 className="text-3xl font-black text-white mt-4 mb-3">
-                Jadilah Bagian dari Keluarga Besar<br/>Masjid Al-Ikhlas
+                {t('about.ctaTitle')}<br/>{t('about.ctaTitleHighlight')}
               </h2>
               <p className="text-emerald-100 max-w-xl mx-auto mb-8 text-sm leading-relaxed">
-                Bergabunglah bersama kami dalam membangun masjid yang makmur, transparan, dan bermanfaat bagi seluruh umat.
+                {t('about.ctaDesc')}
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <Link to="/donation" className="btn-primary">
-                  <Heart className="size-4"/> Donasi Sekarang
+                  <Heart className="size-4"/> {t('about.ctaDonate')}
                 </Link>
                 <Link to="/jadwal-shalat" className="about-hero-outline-btn">
-                  <Calendar className="size-4"/> Jadwal Sholat
+                  <Calendar className="size-4"/> {t('about.ctaSchedule')}
                 </Link>
               </div>
             </div>

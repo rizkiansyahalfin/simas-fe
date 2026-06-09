@@ -1,14 +1,16 @@
 import { SectionHeader } from '../components/SectionHeader'
 import { PENGURUS } from '../data/masjidData'
+import { useTranslate } from '@/i18n/hooks/useTranslate'
 
 export default function AboutPengurus() {
+  const { t } = useTranslate()
     return (
       <section className="py-20 bg-white dark:bg-slate-950">
         <div className="container mx-auto px-4 md:px-8">
           <SectionHeader
-            label="Kepengurusan"
-            title="Takmir Masjid Al-Ikhlas"
-            sub="Tim pengurus yang berdedikasi dalam melayani dan mengelola masjid."
+            label={t('about.managementLabel')}
+            title={t('about.managementTitle')}
+            sub={t('about.managementSub')}
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
             {PENGURUS.map(p => (

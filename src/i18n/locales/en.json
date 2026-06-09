@@ -1,0 +1,123 @@
+{
+  "common": {
+    "language": "Language",
+    "english": "English",
+    "indonesian": "Indonesian",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  },
+  "nav": {
+    "home": "Home",
+    "donation": "Donation",
+    "agenda": "Agenda",
+    "gallery": "Gallery",
+    "articles": "Articles",
+    "prayerSchedule": "Prayer Schedule",
+    "campaigns": "Campaigns",
+    "about": "About",
+    "login": "Sign In",
+    "dashboard": "Dashboard",
+    "logout": "Logout"
+  },
+  "footer": {
+    "description": "Mosque Information Management System. Making mosque management easier digitally and transparently.",
+    "contact": "Contact",
+    "navigation": "Navigation",
+    "address": "Address",
+    "email": "Email",
+    "rights": "All rights reserved."
+  },
+  "home": {
+    "welcome": "Welcome",
+    "title": "Mosque Management System"
+  },
+  "about": {
+    "badge": "🕌 About Us",
+    "mosqueName": "Al-Ikhlas Mosque",
+    "tagline": "Pride of the Ummah",
+    "description": "Established since 1975, serving as a center for worship, education, and community empowerment.",
+    "donateNow": "Donate Now",
+    "viewLocation": "View Location",
+    "visionMissionLabel": "Vision & Mission",
+    "visionMissionTitle": "Our Direction & Goals",
+    "visionMissionSub": "The foundation that guides every step of our service to the Muslim community.",
+    "vision": "Vision",
+    "visionText": "To become an exemplary mosque that is prosperous and independent, and a center of civilization for the ummah that brings blessings to the universe.",
+    "mission": "Mission",
+    "missionItems": [
+      "Conducting obligatory and voluntary worship with comfort and devotion.",
+      "Providing comprehensive Islamic education for all levels.",
+      "Empowering the community's economy through transparent ZISWAF management.",
+      "Building a Quranic generation with noble character and broad insight."
+    ],
+    "profileLabel": "Mosque Profile",
+    "profileTitle": "Center of Civilization &",
+    "profileTitleHighlight": "Inspiration of the Ummah",
+    "profileDesc1": "Al-Ikhlas Mosque is a grand mosque located at Jl. Kebayoran Lama No. 12, South Jakarta. Established in 1975 with a spirit of mutual cooperation, this mosque has developed into a center for religious activities, education, and social services for the surrounding community.",
+    "profileDesc2": "With a building area of 2,400 m² on a 3,000 m² plot, the mosque can accommodate more than 1,200 worshippers. Various flagship programs have been consistently implemented, ranging from Islamic studies, Qur'an memorization, social assistance, to community economic empowerment through ZISWAF.",
+    "contactAddress": "Jl. Kebayoran Lama No. 12, South Jakarta",
+    "contactPhone": "+62 21-7234-5678",
+    "contactEmail": "info@masjid-alikhlas.or.id",
+    "contactTime": "Open 24 hours for worship",
+    "timelineLabel": "Our Journey",
+    "timelineTitle": "History of Al-Ikhlas Mosque",
+    "timelineSub": "Nearly five decades of dedicated service to the Muslim community.",
+    "timeline": [
+      { "year": "1975", "title": "Mosque Establishment", "desc": "Al-Ikhlas Mosque was established by local community leaders with spirit of mutual cooperation and community contribution." },
+      { "year": "1990", "title": "First Renovation", "desc": "The main building was expanded to accommodate the growing congregation up to 500 people." },
+      { "year": "2005", "title": "Tower Construction", "desc": "A 30-meter high tower was built as a landmark and symbol of Islamic grandeur in the area." },
+      { "year": "2015", "title": "Major Renovation", "desc": "Comprehensive renovation with modern-Islamic architecture, addition of library, classrooms, and modern facilities." },
+      { "year": "2024", "title": "SIMAS Digital System", "desc": "Implementation of digital mosque management system (SIMAS) for financial transparency and congregation services." }
+    ],
+    "facilitiesLabel": "Facilities",
+    "facilitiesTitle": "Infrastructure & Equipment",
+    "facilitiesSub": "We continue to improve facilities for the comfort of all worshippers.",
+    "facilities": [
+      { "label": "Capacity", "value": "1,200+ Worshippers" },
+      { "label": "Library", "value": "2,500+ Collections" },
+      { "label": "Free WiFi", "value": "All Areas" },
+      { "label": "Parking Area", "value": "200 Vehicles" },
+      { "label": "Ablution Place", "value": "80 Faucets" },
+      { "label": "Tahfidz Classes", "value": "12 Active Classes" }
+    ],
+    "programLabel": "Featured Programs",
+    "programTitle": "Activities & Services",
+    "programSub": "Programs that we consistently run for the benefit of the Muslim community.",
+    "programs": [
+      { "icon": "📖", "title": "Maghrib Study Circle", "desc": "Daily sessions led by scheduled instructors", "tag": "Routine" },
+      { "icon": "🎓", "title": "Qur'an Memorization", "desc": "Memorization program for children & adults", "tag": "Education" },
+      { "icon": "💰", "title": "Orphan Assistance", "desc": "Monthly for 150+ orphans under care", "tag": "Social" },
+      { "icon": "🩺", "title": "Free Health Clinic", "desc": "Every Saturday morning for congregation", "tag": "Social" },
+      { "icon": "📚", "title": "TPA & TPSA", "desc": "Islamic education for children", "tag": "Education" },
+      { "icon": "💼", "title": "Zakat Guidance", "desc": "Consultation & distribution of zakat", "tag": "Finance" }
+    ],
+    "stats": [
+      { "value": "49+", "label": "Years Established" },
+      { "value": "1,284", "label": "Registered Members" },
+      { "value": "156", "label": "Active Beneficiaries" },
+      { "value": "12", "label": "Active Programs" }
+    ],
+    "ctaBadge": "Together Empowering the Mosque",
+    "ctaTitle": "Become Part of the Big Family of",
+    "ctaTitleHighlight": "Al-Ikhlas Mosque",
+    "ctaDesc": "Join us in building a mosque that is prosperous, transparent, and beneficial for the entire Muslim community.",
+    "ctaDonate": "Donate Now",
+    "ctaSchedule": "Prayer Schedule",
+    "locationLabel": "Location",
+    "locationTitle": "Find Us",
+    "locationSub": "Al-Ikhlas Mosque is strategically located and easily accessible from various parts of the city.",
+    "locationFullAddress": "Jl. Kebayoran Lama No. 12, South Jakarta",
+    "prayerScheduleTitle": "Prayer Schedule",
+    "scheduleFullButton": "Full Schedule",
+    "managementLabel": "Management",
+    "managementTitle": "Al-Ikhlas Mosque Board",
+    "managementSub": "A dedicated team serving and managing the mosque."
+  }
+}
