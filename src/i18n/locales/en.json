@@ -36,7 +36,47 @@
   },
   "home": {
     "welcome": "Welcome",
-    "title": "Mosque Management System"
+    "title": "Mosque Management System",
+    "hero": {
+      "badge": "✨ Welcome to SIMAS Portal",
+      "title": "Welcome to Our Mosque",
+      "description": "Discover the latest news, events, and services at our mosque. Join us in building a prosperous and transparent mosque for the entire Muslim community.",
+      "donateButton": "Donate Now",
+      "scheduleButton": "Prayer Schedule"
+    },
+    "jadwalSholat": {
+        "title": "Today's Prayer Schedule",
+        "lihatSemua": "View All",
+        "location": "South Jakarta, DKI Jakarta"
+    },
+    "profilMasjid": {
+        "badge": "🕌 About Us",
+        "title": "Center of Civilization & Inspiration of the Ummah",
+        "description": "This mosque was established with a spirit of mutual cooperation to become a comfortable place of worship and a center for community character development.",
+        "capacityTitle": "Large Capacity",
+        "capacityDesc": "Comfortably accommodates up to 1,200+ worshippers.",
+        "programTitle": "Excellent Programs",
+        "programDesc": "Various religious studies and community empowerment."       
+    },
+   "visiMisi": {
+      "title": "Vision & Mission",
+      "subtitle": "Our main direction and goals in serving the community.",
+      "visionTitle": "Our Vision",
+      "visionText": "To become an exemplary mosque that is prosperous and independent, and a center of civilization for the ummah that brings blessings to the universe.",
+      "missionTitle": "Our Mission",
+      "missionItems": [
+        "Conducting obligatory and voluntary worship with comfort and devotion.",
+        "Providing comprehensive Islamic education for all levels.",
+        "Empowering the community's economy through transparent ZISWAF management."
+      ]
+    },
+    "cta": {
+      "title": "Join Us in Building a Prosperous Mosque",
+      "description": "Together we can create a mosque that is transparent, beneficial, and a source of pride for the entire Muslim community.",
+      "button": "Donate Now"
+    }
+    
+    
   },
   "about": {
     "badge": "🕌 About Us",
@@ -119,5 +159,49 @@
     "managementLabel": "Management",
     "managementTitle": "Al-Ikhlas Mosque Board",
     "managementSub": "A dedicated team serving and managing the mosque."
-  }
+  },
+  "prayer": {
+    "scheduleTitle": "Prayer Schedule",
+    "scheduleDescription": "Check prayer times and the next prayer in the SIMAS mosque area with easy-to-access information.",
+    "location": "South Jakarta, DKI Jakarta",
+    "nextPrayer": "Next Prayer",
+    "calculationMethod": "Calculation Method",
+    "kemenagMethod": "Kemenag RI (SIHAT)",
+    "todaySchedule": "Today's Schedule",
+    "nextLabel": "Next",
+    "monthlySchedule": "Monthly Schedule",
+    "dateLabel": "Date",
+    "previousMonth": "Previous Month",
+    "nextMonth": "Next Month",
+    "prayerNames": {
+      "subuh": "Fajr",
+      "dzuhur": "Dhuhr",
+      "ashar": "Asr",
+      "maghrib": "Maghrib",
+      "isya": "Isha"
+    },
+    "months": [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ],
+    "daysShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    "configTitle": "Location Configuration",
+    "configDescription": "Set the city name and mosque coordinates for automatic prayer time adjustment on the homepage.",
+    "cityLabel": "City / Regency Name",
+    "cityPlaceholder": "Example: South Jakarta",
+    "latitudeLabel": "Latitude (Latitude)",
+    "latitudeExample": "Example format: -7.7956",
+    "longitudeLabel": "Longitude (Longitude)",
+    "longitudeExample": "Example format: 110.3695",
+    "saveButton": "Save Configuration",
+    "savingButton": "Saving Data...",
+    "saveSuccess": "Prayer location configuration saved successfully!"
+  },
+    "jadwalSholatJumat": {
+        "title": "This Week's Friday Prayer Schedule",
+        "seeAll": "See All",
+        "sermonTheme": "Sermon Theme"
+    }
+
+
 }

@@ -1,5 +1,6 @@
 import { Mic, Users, Volume2, BookOpen, CalendarDays, ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { useTranslate } from '@/i18n/hooks/useTranslate'
 
 /* ─── Types ─── */
 export interface JadwalJumatData {
@@ -34,6 +35,8 @@ interface Props {
 export default function JumatWidget({ compact = false }: Props) {
   const j = JUMAT_PEKAN_INI
 
+  const { t } = useTranslate()
+
   if (compact) {
     /* ── Versi compact (untuk homepage) ── */
     return (
@@ -42,10 +45,10 @@ export default function JumatWidget({ compact = false }: Props) {
         <div className="jumat-widget-header">
           <div className="flex items-center gap-2">
             <CalendarDays className="size-4 text-white" />
-            <span className="text-sm font-bold text-white">Shalat Jum'at Pekan Ini</span>
+            <span className="text-sm font-bold text-white">{t('jadwalSholatJumat.title')}</span>
           </div>
           <Link to="/jadwal-shalat" className="jumat-widget-link">
-            Selengkapnya <ArrowRight className="size-3" />
+            {t('jadwalSholatJumat.seeAll')} <ArrowRight className="size-3" />
           </Link>
         </div>
 
@@ -69,7 +72,7 @@ export default function JumatWidget({ compact = false }: Props) {
 
           {j.tema && (
             <div className="jumat-tema-box mt-2">
-              <p className="jumat-role-label mb-0.5">Tema Khutbah</p>
+              <p className="jumat-role-label mb-0.5">{t('jadwalSholatJumat.sermonTheme')}</p>
               <p className="text-sm text-gray-700 italic">"{j.tema}"</p>
             </div>
           )}
@@ -98,7 +101,7 @@ export default function JumatWidget({ compact = false }: Props) {
           <div className="flex items-center gap-2 mb-1">
             <CalendarDays className="size-4 text-emerald-300" />
             <p className="text-xs font-bold text-emerald-300 uppercase tracking-widest">
-              Shalat Jum'at Pekan Ini
+              {t('jadwalSholatJumat.title')}
             </p>
           </div>
           <p className="text-lg font-black text-white mb-4">{j.tanggal}</p>
@@ -123,7 +126,7 @@ export default function JumatWidget({ compact = false }: Props) {
           <div className="jumat-widget-tema">
             <div className="flex items-center gap-2 mb-2">
               <BookOpen className="size-4 text-simas-accent" />
-              <p className="text-xs font-bold text-simas-accent uppercase tracking-wider">Tema Khutbah</p>
+              <p className="text-xs font-bold text-simas-accent uppercase tracking-wider">{t('jadwalSholatJumat.sermonTheme')}</p>
             </div>
             <p className="text-base font-bold text-gray-800 italic leading-snug">
               "{j.tema}"

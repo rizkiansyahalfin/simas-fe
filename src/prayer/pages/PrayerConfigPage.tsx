@@ -5,8 +5,11 @@ import { Label } from "@/components/ui/label";
 import { MapPin } from "lucide-react";
 import { Save } from "lucide-react";
 import { Globe } from "lucide-react";
+import { useTranslate } from "@/i18n/hooks/useTranslate";
 
 export default function PrayerConfig() {
+	const { t } = useTranslate()
+
 	// State dummy untuk koordinat, nanti bisa disambungin ke API
 	const [city, setCity] = useState("Yogyakarta");
 	const [lat, setLat] = useState("-7.7956");
@@ -19,7 +22,7 @@ export default function PrayerConfig() {
 		// Simulasi loading simpan data ke database
 		setTimeout(() => {
 			setIsLoading(false);
-			alert("Konfigurasi lokasi shalat berhasil disimpan!");
+			alert(t('prayer.saveSuccess'));
 		}, 1000);
 	};
 
@@ -32,11 +35,10 @@ export default function PrayerConfig() {
 				</div>
 				<div>
 					<h1 className='text-3xl sm:text-4xl font-extrabold text-slate-800 dark:text-white tracking-tight mb-2'>
-						Konfigurasi Lokasi
+						{t('prayer.configTitle')}
 					</h1>
 					<p className='text-slate-500 dark:text-slate-400 font-medium max-w-xl text-sm sm:text-base leading-relaxed'>
-						Atur nama kota dan titik koordinat masjid untuk penyesuaian jadwal shalat otomatis di halaman
-						depan.
+						{t('prayer.configDescription')}
 					</p>
 				</div>
 			</div>
@@ -50,7 +52,7 @@ export default function PrayerConfig() {
 					{/* Input Nama Kota */}
 					<div className='space-y-3'>
 						<Label htmlFor='city' className='text-slate-700 dark:text-slate-300 font-bold text-base'>
-							Nama Kota / Kabupaten
+							{t('prayer.cityLabel')}
 						</Label>
 						<div className='relative max-w-md'>
 							<div className='absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none'>
@@ -60,7 +62,7 @@ export default function PrayerConfig() {
 								id='city'
 								value={city}
 								onChange={(e) => setCity(e.target.value)}
-								placeholder='Contoh: Jakarta Selatan'
+								placeholder={t('prayer.cityPlaceholder')}
 								className='h-12 pl-11 rounded-xl bg-slate-50/50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 focus-visible:ring-simas-primary/20 focus-visible:border-simas-primary transition-all text-base text-slate-800 dark:text-white font-medium'
 								required
 							/>
@@ -73,7 +75,7 @@ export default function PrayerConfig() {
 					<div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
 						<div className='space-y-3'>
 							<Label htmlFor='lat' className='text-slate-700 dark:text-slate-300 font-bold text-base'>
-								Latitude (Garis Lintang)
+								{t('prayer.latitudeLabel')}
 							</Label>
 							<Input
 								id='lat'
@@ -85,13 +87,13 @@ export default function PrayerConfig() {
 							/>
 							<p className='text-sm font-medium text-slate-400 dark:text-slate-500 flex items-center gap-1.5 mt-1.5'>
 								<span className='w-1.5 h-1.5 rounded-full bg-slate-300'></span>
-								Contoh format: -7.7956
+								{t('prayer.latitudeExample')}
 							</p>
 						</div>
 
 						<div className='space-y-3'>
 							<Label htmlFor='lng' className='text-slate-700 dark:text-slate-300 font-bold text-base'>
-								Longitude (Garis Bujur)
+								{t('prayer.longitudeLabel')}
 							</Label>
 							<Input
 								id='lng'
@@ -103,7 +105,7 @@ export default function PrayerConfig() {
 							/>
 							<p className='text-sm font-medium text-slate-400 dark:text-slate-500 flex items-center gap-1.5 mt-1.5'>
 								<span className='w-1.5 h-1.5 rounded-full bg-slate-300'></span>
-								Contoh format: 110.3695
+								{t('prayer.longitudeExample')}
 							</p>
 						</div>
 					</div>
@@ -116,7 +118,7 @@ export default function PrayerConfig() {
 							disabled={isLoading}
 						>
 							<Save className='mr-2.5 h-5 w-5' />
-							{isLoading ? "Menyimpan Data..." : "Simpan Pengaturan"}
+							{isLoading ? t('prayer.savingButton') : t('prayer.saveButton')}
 						</Button>
 					</div>
 				</form>
