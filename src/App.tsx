@@ -26,6 +26,8 @@ const GalleryPage = lazy(() => import("./gallery/pages/PublicGalleryPage"));
 const CampaignListPage = lazy(() => import("./campaigns/pages/CampaignListPage"));
 const CampaignHistoryPage = lazy(() => import("./campaigns/pages/CampaignHistoryPage"));
 import PaymentStatusPage from "@/payments/pages/PaymentStatusPage";
+import ForgotPasswordPage from "./auth/pages/ForgotPasswordPage";
+import ResetPasswordPage from "./auth/pages/ResetPasswordPage";
 
 // ==================== ADMIN PAGES ====================
 const DonasiMasukPage = lazy(() => import("./donations/pages/DonasiMasukPage"));
@@ -53,6 +55,9 @@ const CongregationDetailPage = lazy(() => import("./congregation-detail/pages/Co
 const CongregationImportPage = lazy(() => import("./congregation-import/pages/CongregationImportPage"));
 const AdminCampaignManagementPage = lazy(() => import("./campaigns/pages/AdminCampaignManagementPage"));
 const AboutPage = lazy(() => import("./about/pages/AboutPages"));
+
+
+const AttendanceSessionsPage = lazy(() => import("@/pages/admin/AttendanceSessionsPage"));
 
 function App() {
     const { isAuthenticated } = useAuthStore();
@@ -188,6 +193,25 @@ function App() {
                             )
                         }
                     />
+
+                    <Route
+                        path='/forgot-password'
+                        element={
+                            <PublicLayout>
+                                <ForgotPasswordPage />
+                            </PublicLayout>
+                        }
+                    />
+                    <Route
+                        path='/reset-password'
+                        element={
+                            <PublicLayout>
+                                <ResetPasswordPage />
+                            </PublicLayout>
+                        }
+                    />
+
+
 
                     {/* ERROR PAGES */}
                     <Route path='/403' element={<ForbiddenPage />} />
@@ -326,6 +350,19 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
+                    
+                    {/* === ROUTE BARU: ABSENSI === */}
+                    <Route
+                        path='/admin/attendance'
+                        element={
+                            <ProtectedRoute resource='kegiatan'>
+                                <AdminLayout>
+                                    <AttendanceSessionsPage />
+                                </AdminLayout>
+                            </ProtectedRoute>
+                        }
+                    />
+
                     <Route
                         path='/admin/inventaris/:id'
                         element={
