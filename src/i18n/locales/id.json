@@ -1,0 +1,362 @@
+{
+    "common": {
+        "language": "Bahasa",
+        "english": "English",
+        "indonesian": "Indonesia",
+        "save": "Simpan",
+        "cancel": "Batal",
+        "delete": "Hapus",
+        "edit": "Ubah",
+        "add": "Tambah",
+        "close": "Tutup",
+        "loading": "Memuat...",
+        "error": "Error",
+        "success": "Berhasil"
+    },
+    "nav": {
+        "home": "Beranda",
+        "donation": "Donasi",
+        "agenda": "Agenda",
+        "gallery": "Galeri",
+        "articles": "Artikel",
+        "prayerSchedule": "Jadwal Sholat",
+        "campaigns": "Campaigns",
+        "about": "Tentang",
+        "login": "Masuk",
+        "dashboard": "Dashboard",
+        "logout": "Keluar"
+    },
+    "footer": {
+        "description": "Sistem Informasi Manajemen Masjid. Memudahkan pengelolaan masjid secara digital dan transparan.",
+        "contact": "Kontak",
+        "navigation": "Navigasi",
+        "address": "Alamat",
+        "email": "Email",
+        "rights": "Semua hak dilindungi."
+    },
+    "home": {
+        "welcome": "Selamat Datang",
+        "title": "Sistem Manajemen Masjid",
+        "hero": {
+            "badge": "✨ Selamat Datang di Portal SIMAS",
+            "title": "Selamat Datang di Masjid Kami",
+            "description": "Temukan berita, acara, dan layanan terbaru di masjid kami. Bergabunglah dalam membangun masjid yang makmur dan transparan untuk seluruh umat Muslim.",
+            "donateButton": "Donasi Sekarang",
+            "scheduleButton": "Jadwal Sholat"
+        },
+        "jadwalSholat": {
+            "title": "Jadwal Sholat Hari Ini",
+            "lihatSemua": "Lihat Semua",
+            "location": "Jakarta Selatan, DKI Jakarta"
+        },
+        "profilMasjid": {
+            "badge": "🕌 Tentang Kami",
+            "title": "Pusat Peradaban & Inspirasi Umat",
+            "description": "Masjid ini didirikan dengan semangat gotong royong untuk menjadi rumah ibadah yang nyaman serta pusat",
+            "capacityTitle": "Kapasitas Besar",
+            "capacityDesc": "Menampung lebih dari 1.200+ jamaah dengan nyaman.",
+            "programTitle": "Program Unggulan",
+            "programDesc": "Berbagai kajian rutin dan pemberdayaan umat ekonomi."
+        },
+        "visiMisi": {
+            "title": "Visi & Misi",
+            "subtitle": "Arah dan tujuan utama kami dalam berkhidmat melayani umat.",
+            "visionTitle": "Visi Kami",
+            "visionText": "Menjadi masjid teladan yang makmur, mandiri, dan menjadi pusat peradaban umat yang membawa rahmat bagi alam semesta.",
+            "missionTitle": "Misi Kami",
+            "missionItems": [
+                "Menyelenggarakan ibadah fardhu dan sunnah dengan nyaman dan khusyuk.",
+                "Menyelenggarakan pendidikan agama Islam secara terpadu.",
+                "Memberdayakan ekonomi umat melalui pengelolaan ZISWAF yang transparan."
+            ]
+        },
+        "cta": {
+            "title": "Salurkan Kebaikan Anda",
+            "description": "Setiap donasi Anda dikelola secara transparan untuk kemaslahatan umat dan kemakmuran masjid.",
+            "button": "Donasi Sekarang"
+        }
+    },
+    "about": {
+        "badge": "🕌 Tentang Kami",
+        "mosqueName": "Masjid Al-Ikhlas",
+        "tagline": "Kebanggaan Umat",
+        "description": "Berdiri sejak 1975, menjadi pusat ibadah, pendidikan, dan pemberdayaan masyarakat.",
+        "donateNow": "Donasi Sekarang",
+        "viewLocation": "Lihat Lokasi",
+        "visionMissionLabel": "Visi & Misi",
+        "visionMissionTitle": "Arah & Tujuan Kami",
+        "visionMissionSub": "Landasan yang mengarahkan setiap langkah pelayanan kami kepada umat.",
+        "vision": "Visi",
+        "visionText": "Menjadi masjid teladan yang makmur, mandiri, dan menjadi pusat peradaban umat yang membawa rahmat bagi alam semesta.",
+        "mission": "Misi",
+        "missionItems": [
+            "Menyelenggarakan ibadah fardhu dan sunnah dengan nyaman dan khusyuk.",
+            "Menyelenggarakan pendidikan agama Islam secara terpadu untuk semua kalangan.",
+            "Memberdayakan ekonomi umat melalui pengelolaan ZISWAF yang transparan.",
+            "Membangun generasi Qurani yang berakhlak mulia dan berwawasan luas."
+        ],
+        "profileLabel": "Profil Masjid",
+        "profileTitle": "Pusat Peradaban &",
+        "profileTitleHighlight": "Inspirasi Umat",
+        "profileDesc1": "Masjid Al-Ikhlas adalah masjid jami' yang terletak di Jl. Kebayoran Lama No. 12, Jakarta Selatan. Didirikan pada tahun 1975 dengan semangat gotong royong, masjid ini telah berkembang menjadi pusat kegiatan keagamaan, pendidikan, dan sosial bagi masyarakat sekitar.",
+        "profileDesc2": "Dengan luas bangunan 2.400 m² di atas lahan 3.000 m², masjid ini mampu menampung lebih dari 1.200 jamaah. Berbagai program unggulan telah dijalankan secara konsisten, mulai dari kajian ilmu, tahfidz Al-Quran, santunan sosial, hingga pemberdayaan ekonomi umat melalui ZISWAF.",
+        "contactAddress": "Jl. Kebayoran Lama No. 12, Jakarta Selatan",
+        "contactPhone": "+62 21-7234-5678",
+        "contactEmail": "info@masjid-alikhlas.or.id",
+        "contactTime": "Buka 24 jam untuk ibadah",
+        "timelineLabel": "Perjalanan Kami",
+        "timelineTitle": "Sejarah Masjid Al-Ikhlas",
+        "timelineSub": "Hampir lima dekade melayani umat dengan penuh dedikasi dan keikhlasan.",
+        "timeline": [
+            {
+                "year": "1975",
+                "title": "Pendirian Masjid",
+                "desc": "Masjid Al-Ikhlas didirikan oleh para tokoh masyarakat setempat dengan semangat gotong royong dan swadaya umat."
+            },
+            {
+                "year": "1990",
+                "title": "Renovasi Pertama",
+                "desc": "Dilakukan perluasan bangunan utama untuk menampung jamaah yang semakin bertambah hingga kapasitas 500 orang."
+            },
+            {
+                "year": "2005",
+                "title": "Pembangunan Menara",
+                "desc": "Pembangunan menara setinggi 30 meter sebagai landmark kawasan dan simbol keagungan Islam di wilayah ini."
+            },
+            {
+                "year": "2015",
+                "title": "Renovasi Besar",
+                "desc": "Renovasi menyeluruh dengan arsitektur modern-islami, penambahan perpustakaan, ruang kelas, dan fasilitas modern."
+            },
+            {
+                "year": "2024",
+                "title": "Sistem Digital SIMAS",
+                "desc": "Implementasi sistem manajemen masjid digital (SIMAS) untuk transparansi keuangan dan pelayanan jamaah."
+            }
+        ],
+        "facilitiesLabel": "Fasilitas",
+        "facilitiesTitle": "Sarana & Prasarana",
+        "facilitiesSub": "Kami terus meningkatkan fasilitas demi kenyamanan seluruh jamaah.",
+        "facilities": [
+            {
+                "label": "Kapasitas",
+                "value": "1.200+ Jamaah"
+            },
+            {
+                "label": "Perpustakaan",
+                "value": "2.500+ Koleksi"
+            },
+            {
+                "label": "WiFi Gratis",
+                "value": "Seluruh Area"
+            },
+            {
+                "label": "Area Parkir",
+                "value": "200 Kendaraan"
+            },
+            {
+                "label": "Tempat Wudhu",
+                "value": "80 Keran"
+            },
+            {
+                "label": "Kelas Tahfidz",
+                "value": "12 Kelas Aktif"
+            }
+        ],
+        "programLabel": "Program Unggulan",
+        "programTitle": "Kegiatan & Layanan",
+        "programSub": "Program-program yang kami jalankan secara konsisten untuk kemaslahatan umat.",
+        "programs": [
+            {
+                "icon": "📖",
+                "title": "Kajian Ba'da Maghrib",
+                "desc": "Setiap hari, dipimpin ustadz terjadwal",
+                "tag": "Rutin"
+            },
+            {
+                "icon": "🎓",
+                "title": "Tahfidz Al-Quran",
+                "desc": "Program hafalan untuk anak & dewasa",
+                "tag": "Pendidikan"
+            },
+            {
+                "icon": "💰",
+                "title": "Santunan Anak Yatim",
+                "desc": "Bulanan untuk 150+ anak yatim binaan",
+                "tag": "Sosial"
+            },
+            {
+                "icon": "🩺",
+                "title": "Klinik Kesehatan Gratis",
+                "desc": "Setiap Sabtu pagi untuk jamaah",
+                "tag": "Sosial"
+            },
+            {
+                "icon": "📚",
+                "title": "TPA & TPSA",
+                "desc": "Pendidikan agama untuk anak-anak",
+                "tag": "Pendidikan"
+            },
+            {
+                "icon": "💼",
+                "title": "Bimbingan Zakat",
+                "desc": "Konsultasi & penyaluran zakat maal",
+                "tag": "Keuangan"
+            }
+        ],
+        "stats": [
+            {
+                "value": "49+",
+                "label": "Tahun Berdiri"
+            },
+            {
+                "value": "1.284",
+                "label": "Jamaah Terdaftar"
+            },
+            {
+                "value": "156",
+                "label": "Mustahik Aktif"
+            },
+            {
+                "value": "12",
+                "label": "Program Aktif"
+            }
+        ],
+        "ctaBadge": "Bersama Memakmurkan Masjid",
+        "ctaTitle": "Jadilah Bagian dari Keluarga Besar",
+        "ctaTitleHighlight": "Masjid Al-Ikhlas",
+        "ctaDesc": "Bergabunglah bersama kami dalam membangun masjid yang makmur, transparan, dan bermanfaat bagi seluruh umat.",
+        "ctaDonate": "Donasi Sekarang",
+        "ctaSchedule": "Jadwal Sholat",
+        "locationLabel": "Lokasi",
+        "locationTitle": "Temukan Kami",
+        "locationSub": "Masjid Al-Ikhlas berlokasi strategis dan mudah dijangkau dari berbagai penjuru kota.",
+        "locationFullAddress": "Jl. Kebayoran Lama No. 12, Jakarta Selatan",
+        "prayerScheduleTitle": "Jadwal Sholat",
+        "scheduleFullButton": "Jadwal Lengkap",
+        "managementLabel": "Kepengurusan",
+        "managementTitle": "Takmir Masjid Al-Ikhlas",
+        "managementSub": "Tim pengurus yang berdedikasi dalam melayani dan mengelola masjid."
+    },
+    "prayer": {
+        "scheduleTitle": "Jadwal Sholat",
+        "scheduleDescription": "Cek jadwal sholat dan waktu berikutnya di lingkungan masjid SIMAS dengan informasi yang mudah diakses.",
+        "location": "Jakarta Selatan, DKI Jakarta",
+        "nextPrayer": "Sholat Berikutnya",
+        "calculationMethod": "Metode Perhitungan",
+        "kemenagMethod": "Kemenag RI (SIHAT)",
+        "todaySchedule": "Jadwal Hari Ini",
+        "nextLabel": "Berikutnya",
+        "monthlySchedule": "Jadwal Bulanan",
+        "dateLabel": "Tanggal",
+        "previousMonth": "Bulan Sebelumnya",
+        "nextMonth": "Bulan Berikutnya",
+        "prayerNames": {
+            "subuh": "Subuh",
+            "dzuhur": "Dzuhur",
+            "ashar": "Ashar",
+            "maghrib": "Maghrib",
+            "isya": "Isya"
+        },
+        "months": [
+            "Januari",
+            "Februari",
+            "Maret",
+            "April",
+            "Mei",
+            "Juni",
+            "Juli",
+            "Agustus",
+            "September",
+            "Oktober",
+            "November",
+            "Desember"
+        ],
+        "daysShort": [
+            "Min",
+            "Sen",
+            "Sel",
+            "Rab",
+            "Kam",
+            "Jum",
+            "Sab"
+        ],
+        "configTitle": "Konfigurasi Lokasi",
+        "configDescription": "Atur nama kota dan titik koordinat masjid untuk penyesuaian jadwal shalat otomatis di halaman depan.",
+        "cityLabel": "Nama Kota / Kabupaten",
+        "cityPlaceholder": "Contoh: Jakarta Selatan",
+        "latitudeLabel": "Latitude (Garis Lintang)",
+        "latitudeExample": "Contoh format: -7.7956",
+        "longitudeLabel": "Longitude (Garis Bujur)",
+        "longitudeExample": "Contoh format: 110.3695",
+        "saveButton": "Simpan Pengaturan",
+        "savingButton": "Menyimpan Data...",
+        "saveSuccess": "Konfigurasi lokasi shalat berhasil disimpan!"
+    },
+    "jadwalSholatJumat": {
+        "title": "Shalat Jum'at Pekan Ini",
+        "seeAll": "Lihat Semua",
+        "sermonTheme": "Tema Khutbah"
+    },
+    "agenda": {
+        "seo": {
+            "title": "Agenda Kegiatan",
+            "description": "Lihat jadwal kajian, tabligh akbar, dan kegiatan masjid terbaru di SIMAS."
+        },
+        "badge": "Jadwal & Agenda",
+        "title": "Agenda Kegiatan",
+        "subtitle": "Ikuti berbagai kajian keislaman dan kegiatan sosial yang diselenggarakan di lingkungan masjid kita."
+    },
+    "gallery": {
+        "seo": {
+            "title": "Galeri Foto",
+            "description": "Lihat foto dokumentasi kegiatan, kajian, dan acara sosial di lingkungan masjid SIMAS."
+        },
+        "badge": "Galeri Foto",
+        "title": "Dokumentasi Kegiatan",
+        "subtitle": "Temukan momen-momen berharga dari berbagai kegiatan, kajian, dan acara sosial yang telah kami abadikan di masjid SIMAS."
+    },
+    "articles": {
+        "seo": {
+            "title": "Artikel & Berita",
+            "description": "Baca artikel dan laporan kegiatan masjid untuk memperkuat ibadah, sosial, dan transparansi pengelolaan SIMAS."
+        },
+        "badge": "Berita & Artikel",
+        "title": "Informasi & Inspirasi",
+        "subtitle": "Pusat Informasi terbaru, inspirasi islami, dan laporan kegiatan seputar masjid untuk memperkuat ibadah, sosial, dan transparansi pengelolaan SIMAS.",
+        "noResults": "Tidak ada artikel yang cocok dengan pencarian.",
+        "readMore": "Baca selengkapnya"
+    },
+    "donation": {
+        "seo": {
+            "title": "Donasi untuk Masjid",
+            "description": "Bantu kegiatan masjid dan program sosial dengan donasi mudah melalui SIMAS."
+        },
+        "badge": "Program Donasi",
+        "hero": {
+            "preTitle": "Bersedekah adalah",
+            "title": "Investasi Terbaik",
+            "description": "Setiap rupiah dikelola secara transparan dan amanah untuk kemaslahatan umat dan kemakmuran masjid."
+        },
+        "form": {
+            "badge": "Salurkan Kebaikan Anda",
+            "description": "Setiap donasi Anda dikelola secara transparan untuk kemaslahatan umat dan kemakmuran masjid.",
+            "categoryLabel": "Kategori Donasi",
+            "amountLabel": "Nominal Donasi",
+            "nameLabel": "Nama Donatur",
+            "phoneLabel": "No HP / WhatsApp",
+            "anonymousLabel": "Sembunyikan Nama",
+            "anonymousDescription": "Donasi akan tercatat sebagai \"Hamba Allah\"",
+            "proofLabel": "Bukti Transfer",
+            "proofDescription": "Unggah bukti transfer untuk mempercepat proses verifikasi.",
+            "submitButton": "Donasi Sekarang"
+        },
+        "thankYou": {
+            "share": "Bagikan kebaikan ini",
+            "motivation": "Motivasi Berdonasi",
+            "donateAgain": "Donasi Lagi",
+            "home": "Kembali ke Beranda",
+            "transparency": "Lihat laporan penggunaan dana"
+        }
+    }
+}

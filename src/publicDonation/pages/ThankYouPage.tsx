@@ -1,6 +1,7 @@
 import { CheckCircle2, Heart, Share2, Home, ArrowRight, Copy, Check } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { useTranslate } from '@/i18n/hooks/useTranslate'
 
 /* ─── Types ─── */
 export interface DonationSummary {
@@ -27,12 +28,13 @@ const CAT_LABELS: Record<string, string> = {
 
 function CopyRefBtn({ refId }: { refId: string }) {
     const [ok, setOk] = useState(false)
+    const { t } = useTranslate()
     return (
         <button
             onClick={() => { navigator.clipboard.writeText(refId); setOk(true); setTimeout(() => setOk(false), 2000) }}
             className={`copy-btn ${ok ? 'copied' : ''}`}
         >
-            {ok ? <><Check className="size-3" /> Tersalin</> : <><Copy className="size-3" /> Salin</>}
+            {ok ? <><Check className="size-3" /> {t('donation.form.copied')}</> : <><Copy className="size-3" /> {t('donation.form.copy')}</>}
         </button>
     )
 }
@@ -41,7 +43,9 @@ export default function ThankYouPage({ summary, onDonateAgain }: Props) {
     const { name, nominal, category, refId } = summary
     const generatedRefId = useState(() => `DON-${Date.now().toString().slice(-8)}`)[0]
     const finalRefId = refId ?? generatedRefId
+    const { t } = useTranslate()
     const shareText = `Alhamdulillah, saya baru saja berdonasi ${fmt(nominal)} untuk ${CAT_LABELS[category] ?? category} di Masjid Al-Ikhlas melalui SIMAS. Mari berbagi kebaikan! 🕌`
+    
 
     const SHARE_LINKS = [
         {
@@ -92,9 +96,9 @@ export default function ThankYouPage({ summary, onDonateAgain }: Props) {
                         <Heart className="size-3 text-emerald-600 fill-emerald-600" /> Jazakallahu Khairan
                     </div>
 
-                    <h1 className="ty-title">Donasi Berhasil Dikirim!</h1>
+                    <h1 className="ty-title">{t('donation.thankYou.title')}</h1>
                     <p className="ty-subtitle">
-                        Terima kasih atas kebaikan hati Anda. Tim bendahara akan memverifikasi dalam <strong>1×24 jam</strong>.
+                        {t('donation.thankYou.subtitle')}
                     </p>
                 </div>
 
@@ -112,22 +116,22 @@ export default function ThankYouPage({ summary, onDonateAgain }: Props) {
 
                     <div className="ty-summary-body">
                         <div className="ty-summary-row">
-                            <span className="ty-summary-label">Donatur</span>
+                            <span className="ty-summary-label">{t('donation.form.nameLabel')}</span>
                             <span className="ty-summary-value">{name}</span>
                         </div>
                         <div className="ty-summary-divider" />
                         <div className="ty-summary-row">
-                            <span className="ty-summary-label">Kategori</span>
+                            <span className="ty-summary-label">{t('donation.form.categoryLabel')}</span>
                             <span className="pill">{CAT_LABELS[category] ?? category}</span>
                         </div>
                         <div className="ty-summary-divider" />
                         <div className="ty-summary-row">
-                            <span className="ty-summary-label">Nominal</span>
+                            <span className="ty-summary-label">{t('donation.form.amountLabel')}</span>
                             <span className="ty-summary-nominal">{fmt(nominal)}</span>
                         </div>
                         <div className="ty-summary-divider" />
                         <div className="ty-summary-row">
-                            <span className="ty-summary-label">Status</span>
+                            <span className="ty-summary-label">{t('donation.form.statusLabel')}</span>
                             <span className="badge badge-waiting">
                                 <span className="badge-dot dot-waiting" /> Menunggu Verifikasi
                             </span>
@@ -139,7 +143,7 @@ export default function ThankYouPage({ summary, onDonateAgain }: Props) {
                 <div className="ty-share-section">
                     <div className="flex items-center gap-2 mb-3">
                         <Share2 className="size-4 text-gray-400" />
-                        <p className="text-sm font-bold text-gray-700">Bagikan kebaikan ini</p>
+                        <p className="text-sm font-bold text-gray-700">{t('donation.thankYou.share')}</p>
                     </div>
                     <div className="flex gap-3">
                         {SHARE_LINKS.map(s => (
@@ -158,7 +162,7 @@ export default function ThankYouPage({ summary, onDonateAgain }: Props) {
                         <Heart className="size-4 text-amber-600" />
                     </div>
                     <div>
-                        <p className="text-xs font-bold text-simas-accent uppercase tracking-wider mb-1">Motivasi Berdonasi</p>
+                        <p className="text-xs font-bold text-simas-accent uppercase tracking-wider mb-1">{t('donation.thankYou.motivation')}</p>
                         <p className="text-xs text-amber-800 italic leading-relaxed">
                             "Perumpamaan orang-orang yang menafkahkan hartanya di jalan Allah adalah serupa dengan sebutir benih yang menumbuhkan tujuh bulir, pada tiap-tiap bulir seratus biji." <strong>(QS. Al-Baqarah: 261)</strong>
                         </p>
@@ -168,13 +172,13 @@ export default function ThankYouPage({ summary, onDonateAgain }: Props) {
                 {/* ── Actions ── */}
                 <div className="ty-actions">
                     <button onClick={onDonateAgain} className="btn-primary-full">
-                        <Heart className="size-4" /> Donasi Lagi
+                        <Heart className="size-4" /> {t('donation.thankYou.donateAgain')}
                     </button>
                     <Link to="/" className="ty-home-btn">
-                        <Home className="size-4" /> Kembali ke Beranda
+                        <Home className="size-4" /> {t('donation.thankYou.home')}
                     </Link>
                     <Link to="/transparansi" className="ty-link">
-                        Lihat laporan penggunaan dana <ArrowRight className="size-3" />
+                        {t('donation.thankYou.transparency')} <ArrowRight className="size-3" />
                     </Link>
                 </div>
 

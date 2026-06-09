@@ -5,6 +5,7 @@ import { Heart, TrendingUp, Users, Shield } from 'lucide-react'
 import DonationForm from './DonationForm'
 import DonationMethod from './DonationMethode'
 import ThankYouPage, { type DonationSummary } from './ThankYouPage'
+import { useTranslate } from "@/i18n/hooks/useTranslate";
 
 const STATS = [
   { icon: TrendingUp, label: 'Terkumpul Bulan Ini', value: 'Rp 128,8 Jt', iconWrap: 'icon-wrap-green' },
@@ -14,6 +15,7 @@ const STATS = [
 
 export default function DonationPage() {
   const [summary, setSummary] = useState<DonationSummary | null>(null)
+  const { t } = useTranslate();
 
   if (summary) {
     return (
@@ -27,8 +29,8 @@ export default function DonationPage() {
   return (
     <>
       <Seo
-        title="Donasi"
-        description="Bantu kegiatan masjid dan program sosial dengan donasi mudah melalui SIMAS."
+        title={t('donation.seo.title')}
+        description={t('donation.seo.description')} 
         image="https://images.unsplash.com/photo-1495710853257-34eb5f031c58?w=1200&q=80"
       />
 
@@ -66,20 +68,19 @@ export default function DonationPage() {
               <div className="flex-1">
                 <div className="badge badge-ok don-hero-badge">
                   <Heart className="size-3 fill-white text-white" />
-                  Program Donasi SIMAS 2025
+                  {t('donation.badge')}
                 </div>
 
                 <h1 className="text-3xl font-black text-white mt-3 mb-2 leading-tight">
-                  Bersedekah adalah
+                  {t('donation.hero.preTitle')}
                   <br />
                   <span className="text-emerald-300">
-                    Investasi Terbaik
+                    {t('donation.hero.title')}
                   </span>
                 </h1>
 
                 <p className="text-emerald-100 text-sm max-w-md leading-relaxed">
-                  Setiap rupiah dikelola secara transparan dan amanah
-                  untuk kemaslahatan umat dan kemakmuran masjid.
+                  {t('donation.hero.description')}
                 </p>
               </div>
 

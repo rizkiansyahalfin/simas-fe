@@ -2,6 +2,7 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import { ZoomIn } from "lucide-react";
 import Seo from "@/lib/Seo";
+import { useTranslate } from "@/i18n/hooks/useTranslate";
 
 const DUMMY_GALLERY = [
   { id: 1, title: "Kajian Rutin Ahad Pagi", url: "https://images.unsplash.com/photo-1576057845347-160a2bd7152b?w=600&h=800&fit=crop" }, // Udah diganti
@@ -17,6 +18,7 @@ const DUMMY_GALLERY = [
 export default function GalleryPage() {
   // State untuk nyimpen foto mana yang lagi di-klik buat Lightbox
   const [selectedImage, setSelectedImage] = useState<{ url: string; title: string } | null>(null);
+  const { t } = useTranslate()
 
   // Fungsi tutup Lightbox
   const closeLightbox = () => setSelectedImage(null);
@@ -24,8 +26,8 @@ export default function GalleryPage() {
   return (
     <>
       <Seo
-        title="Galeri"
-        description="Lihat foto dokumentasi kegiatan, kajian, dan acara sosial di lingkungan masjid SIMAS."
+        title={t('gallery.seo.title')}
+        description={t('gallery.seo.description')}
         image="https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=1200&q=80"
       />
       <div className="min-h-screen bg-gray-50 pt-24 pb-16">
@@ -33,9 +35,9 @@ export default function GalleryPage() {
         
         {/* Header Section */}
         <div className="mb-10 text-center md:text-left">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Galeri Kegiatan</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('gallery.title')}</h1>
           <p className="text-lg text-gray-600 max-w-2xl">
-            Dokumentasi berbagai aktivitas, kajian, dan kegiatan sosial yang diselenggarakan oleh masjid kita.
+            {t('gallery.description')}
           </p>
         </div>
 

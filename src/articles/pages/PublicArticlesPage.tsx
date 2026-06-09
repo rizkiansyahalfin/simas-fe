@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import Seo from "@/lib/Seo";
 import { useState } from "react";
 import  ArticleSearchFilter  from "@/articles/components/ArticleSearchFilter";
+import { useTranslate } from "@/i18n/hooks/useTranslate";
 
 // Data dummy sementara
 const DUMMY_ARTICLES = [
@@ -41,6 +42,7 @@ const DUMMY_ARTICLES = [
 export default function Articles() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("Semua");
+  const { t } = useTranslate()
 
   const filteredArticles = DUMMY_ARTICLES.filter((article) => {
     const matchSearch = article.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -52,8 +54,8 @@ export default function Articles() {
   return (
     <>
       <Seo
-        title="Artikel"
-        description="Baca artikel dan laporan kegiatan masjid untuk memperkuat ibadah, sosial, dan transparansi pengelolaan SIMAS."
+        title={t('articles.seo.title')}
+        description={t('articles.seo.description')}
         image="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=1200&q=80"
       />
       <div className="relative min-h-screen bg-slate-50/30 py-16 md:py-24 font-sans">
@@ -66,11 +68,11 @@ export default function Articles() {
         <div className="mb-14 text-center md:text-left flex flex-col md:items-start items-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-100 text-simas-primary text-sm font-bold tracking-wide uppercase mb-5">
             <Newspaper className="w-4 h-4" />
-            Pusat Informasi
+            {t('articles.badge')}
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">Berita & Artikel</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">{t('articles.title')}</h1>
           <p className="text-lg md:text-xl text-gray-500 font-medium max-w-2xl">
-            Informasi terbaru, inspirasi islami, dan laporan kegiatan seputar masjid.
+            {t('articles.subtitle')}
           </p>
         </div>
 
@@ -85,7 +87,7 @@ export default function Articles() {
         {/* Grid Artikel */}
         {filteredArticles.length === 0 ? (
           <div className="text-center py-16 text-slate-400">
-            <p className="text-lg font-medium">Tidak ada artikel yang cocok dengan pencarian.</p>
+            <p className="text-lg font-medium">{t('articles.noResults')}</p>
           </div>
         ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
@@ -136,7 +138,7 @@ export default function Articles() {
 
                   {/* Link Baca Selengkapnya */}
                   <div className="mt-auto pt-4 border-t border-gray-50 flex items-center text-simas-primary font-bold text-sm group-hover:text-emerald-700 transition-colors">
-                    Baca selengkapnya
+                    {t('articles.readMore')}
                     <ArrowRight className="ml-1.5 w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-300" />
                   </div>
 
