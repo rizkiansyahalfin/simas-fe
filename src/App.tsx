@@ -28,6 +28,7 @@ const CampaignHistoryPage = lazy(() => import("./campaigns/pages/CampaignHistory
 import PaymentStatusPage from "@/payments/pages/PaymentStatusPage";
 import ForgotPasswordPage from "./auth/pages/ForgotPasswordPage";
 import ResetPasswordPage from "./auth/pages/ResetPasswordPage";
+import BackupPage from "./backup/pages/BackupPage";
 
 // ==================== ADMIN PAGES ====================
 const DonasiMasukPage = lazy(() => import("./donations/pages/DonasiMasukPage"));
@@ -489,6 +490,17 @@ function App() {
                             <ProtectedRoute resource='payments'>
                                 <AdminLayout>
                                     <PaymentManagementPage />
+                                </AdminLayout>
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
+                        path='/backup'
+                        element={
+                            <ProtectedRoute resource='backup'>
+                                <AdminLayout>
+                                    <BackupPage />
                                 </AdminLayout>
                             </ProtectedRoute>
                         }
