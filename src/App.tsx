@@ -59,6 +59,7 @@ const AboutPage = lazy(() => import("./about/pages/AboutPages"));
 
 
 const AttendanceSessionsPage = lazy(() => import("@/pages/admin/AttendanceSessionsPage"));
+const AttendanceScanPage = lazy(() => import("@/pages/admin/AttendanceScanPage"));
 
 function App() {
     const { isAuthenticated } = useAuthStore();
@@ -364,6 +365,17 @@ function App() {
                         }
                     />
 
+                    <Route
+                        path='/admin/attendance/scan'
+                        element={
+                            <ProtectedRoute resource='kegiatan'>
+                                <AdminLayout>
+                                    <AttendanceScanPage />
+                                </AdminLayout>
+                            </ProtectedRoute>
+                        }
+                    />
+                    
                     <Route
                         path='/admin/inventaris/:id'
                         element={
