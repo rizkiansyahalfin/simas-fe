@@ -29,6 +29,7 @@ import PaymentStatusPage from "@/payments/pages/PaymentStatusPage";
 import ForgotPasswordPage from "./auth/pages/ForgotPasswordPage";
 import ResetPasswordPage from "./auth/pages/ResetPasswordPage";
 import BackupPage from "./backup/pages/BackupPage";
+import AttendanceReportPage from "./attendance-report/pages/AttendanceReportPage";
 
 // ==================== ADMIN PAGES ====================
 const DonasiMasukPage = lazy(() => import("./donations/pages/DonasiMasukPage"));
@@ -501,6 +502,17 @@ function App() {
                             <ProtectedRoute resource='backup'>
                                 <AdminLayout>
                                     <BackupPage />
+                                </AdminLayout>
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
+                        path='/attendance/report'
+                        element={
+                            <ProtectedRoute resource='attendancereport'>
+                                <AdminLayout>
+                                    <AttendanceReportPage/>
                                 </AdminLayout>
                             </ProtectedRoute>
                         }
