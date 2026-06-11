@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { CalendarClock, Plus, CheckCircle2, Eye, X } from "lucide-react";
+import { useNavigate } from "react-router-dom"; // Tambahan import navigasi
+import { CalendarClock, Plus, CheckCircle2, Eye, X, QrCode } from "lucide-react"; // Tambah QrCode icon
 import { Badge } from "@/components/ui/badge";
 import DataTable, { type ColumnConfig } from "@/components/DataTable";
 
-// 1. Tipe Data dengan Index Signature (biar aman di DataTable lu)
+// 1. Tipe Data dengan Index Signature
 interface AttendanceSession {
   [key: string]: any;
   id: string;
@@ -25,6 +26,7 @@ const INITIAL_SESSIONS: AttendanceSession[] = [
 export default function AttendanceSessionsPage() {
   const [sessions, setSessions] = useState<AttendanceSession[]>(INITIAL_SESSIONS);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate(); // Inisialisasi navigasi
   
   // State untuk form tambah sesi
   const [formData, setFormData] = useState({ title: "", type: "Shalat" });
@@ -85,19 +87,33 @@ export default function AttendanceSessionsPage() {
       cell: (item) => (
         <div className="flex items-center gap-2">
           {item.status === "Aktif" && (
+            <>
+              {/* Tombol Mulai Absen (Navigasi ke halaman Scanner) */}
+              <button 
+                onClick={() => navigate('/admin/attendance/scan')}
+                className="px-3 py-1.5 text-xs font-semibold bg-emerald-100 text-emerald-700 hover:bg-emerald-200 rounded-lg flex items-center gap-1 transition-colors"
+              >
+                <QrCode className="size-3.5" /> Mulai Absen
+              </button>
+              
+              {/* Tombol Tutup Sesi */}
+              <button 
+                onClick={() => handleCloseSession(item.id)}
+                className="px-3 py-1.5 text-xs font-semibold bg-amber-100 text-amber-700 hover:bg-amber-200 rounded-lg flex items-center gap-1 transition-colors"
+              >
+                <CheckCircle2 className="size-3.5" /> Tutup
+              </button>
+            </>
+          )}
+          
+          {item.status === "Ditutup" && (
             <button 
-              onClick={() => handleCloseSession(item.id)}
-              className="px-3 py-1.5 text-xs font-semibold bg-amber-100 text-amber-700 hover:bg-amber-200 rounded-lg flex items-center gap-1 transition-colors"
+              onClick={() => alert(`Navigasi ke halaman rekap ${item.id} belum dibuat`)}
+              className="px-3 py-1.5 text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-lg flex items-center gap-1 transition-colors"
             >
-              <CheckCircle2 className="size-3.5" /> Tutup Sesi
+              <Eye className="size-3.5" /> Rekap
             </button>
           )}
-          <button 
-            onClick={() => alert(`Navigasi ke halaman rekap ${item.id} belum dibuat`)}
-            className="px-3 py-1.5 text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-lg flex items-center gap-1 transition-colors"
-          >
-            <Eye className="size-3.5" /> Rekap
-          </button>
         </div>
       )
     }

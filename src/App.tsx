@@ -57,9 +57,11 @@ const CongregationDetailPage = lazy(() => import("./congregation-detail/pages/Co
 const CongregationImportPage = lazy(() => import("./congregation-import/pages/CongregationImportPage"));
 const AdminCampaignManagementPage = lazy(() => import("./campaigns/pages/AdminCampaignManagementPage"));
 const AboutPage = lazy(() => import("./about/pages/AboutPages"));
+const TwoFactorSetupPage = lazy(() => import("@/pages/admin/TwoFactorSetupPage"));
 
 
 const AttendanceSessionsPage = lazy(() => import("@/pages/admin/AttendanceSessionsPage"));
+const AttendanceScanPage = lazy(() => import("@/pages/admin/AttendanceScanPage"));
 
 function App() {
     const { isAuthenticated } = useAuthStore();
@@ -282,16 +284,27 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
-                    <Route
-                        path='/admin/profil'
-                        element={
-                            <ProtectedRoute resource='user-profile'>
-                                <AdminLayout>
-                                    <ProfilePage />
-                                </AdminLayout>
-                            </ProtectedRoute>
-                        }
-                    />
+                  <Route
+    path='/admin/profil'
+    element={
+        <ProtectedRoute resource='user-profile'>
+            <AdminLayout>
+                <ProfilePage />
+            </AdminLayout>
+        </ProtectedRoute>
+    }
+/>
+
+<Route
+    path='/admin/2fa-setup'
+    element={
+        <ProtectedRoute resource='user-profile'>
+            <AdminLayout>
+                <TwoFactorSetupPage />
+            </AdminLayout>
+        </ProtectedRoute>
+    }
+/>
                     <Route
                         path='/admin/verify-donasi'
                         element={
@@ -365,6 +378,17 @@ function App() {
                         }
                     />
 
+                    <Route
+                        path='/admin/attendance/scan'
+                        element={
+                            <ProtectedRoute resource='kegiatan'>
+                                <AdminLayout>
+                                    <AttendanceScanPage />
+                                </AdminLayout>
+                            </ProtectedRoute>
+                        }
+                    />
+                    
                     <Route
                         path='/admin/inventaris/:id'
                         element={
