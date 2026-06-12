@@ -3,6 +3,7 @@ import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { VitePWA } from "vite-plugin-pwa";
+import { visualizer } from "rollup-plugin-visualizer"; // <-- 1. Tambahan Import Visualizer
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -48,6 +49,13 @@ export default defineConfig({
                 navigateFallback: "/offline.html",
             },
         }),
+        // <-- 2. Tambahan Plugin Visualizer
+        visualizer({
+            open: true, // Otomatis buka tab browser baru setelah build
+            filename: "bundle-analysis.html",
+            gzipSize: true,
+            brotliSize: true,
+        }) as any,
     ],
     resolve: {
         alias: {
