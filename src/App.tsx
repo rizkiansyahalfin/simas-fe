@@ -19,6 +19,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 const Home = lazy(() => import("./home/pages/HomePage"));
 const Articles = lazy(() => import("./articles/pages/PublicArticlesPage"));
 const ArticleDetail = lazy(() => import("./articles/pages/PublicArticleDetailPage"));
+const ChangelogPage = lazy(() => import("@/changelog/pages/ChangelogPage"));
 
 const JadwalSholatPage = lazy(() => import("./prayer/pages/JadwalSholatPage"));
 const DonationPage = lazy(() => import("./publicDonation/pages/DonationPage"));
@@ -30,6 +31,7 @@ import ForgotPasswordPage from "./auth/pages/ForgotPasswordPage";
 import ResetPasswordPage from "./auth/pages/ResetPasswordPage";
 import BackupPage from "./backup/pages/BackupPage";
 import AttendanceReportPage from "./attendance-report/pages/AttendanceReportPage";
+
 
 // ==================== ADMIN PAGES ====================
 const DonasiMasukPage = lazy(() => import("./donations/pages/DonasiMasukPage"));
@@ -116,6 +118,14 @@ function App() {
                         element={
                             <PublicLayout>
                                 <div>Berita Page</div>
+                            </PublicLayout>
+                        }
+                    />
+                    <Route
+                        path='/changelog'
+                        element={
+                            <PublicLayout>
+                                <ChangelogPage />
                             </PublicLayout>
                         }
                     />
@@ -365,6 +375,16 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
+                    <Route
+    path='/admin/changelog'
+    element={
+        <ProtectedRoute resource='dashboard'>
+            <AdminLayout>
+                <ChangelogPage />
+            </AdminLayout>
+        </ProtectedRoute>
+    }
+/>
                     
                     {/* === ROUTE BARU: ABSENSI === */}
                     <Route

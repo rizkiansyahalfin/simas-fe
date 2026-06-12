@@ -12,6 +12,7 @@ import {
     Users,
     Settings,
     Menu,
+    GitCommit,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -41,10 +42,12 @@ const MENU_ITEMS = [
     { title: "Audit Log", icon: FileText, resource: "audit-log", path: "/admin/audit-log" },
     { title: "Artikel", icon: FileText, resource: "artikel", path: "/admin/artikel" },
     { title: "Kegiatan", icon: CalendarDays, resource: "kegiatan", path: "/admin/kegiatan" },
-    { title: "Sesi Absensi", icon: CalendarClock, resource: "kegiatan", path: "/admin/attendance" }, // <-- Tambahan menu Sesi Absensi
+    { title: "Sesi Absensi", icon: CalendarClock, resource: "kegiatan", path: "/admin/attendance" },
     { title: "Inventaris", icon: Archive, resource: "inventaris", path: "/admin/inventaris" },
     { title: "Jamaah", icon: Users, resource: "jamaah", path: "/admin/jamaah" },
+    { title: "Changelog", icon: GitCommit, resource: "dashboard", path: "/admin/changelog" },
     { title: "Pengaturan", icon: Settings, resource: "profil-masjid", path: "/admin/pengaturan" },
+    
 ];
 
 function SidebarContent({
