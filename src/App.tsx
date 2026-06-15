@@ -12,6 +12,7 @@ import Events from "./Events/pages/PublicEventsPage";
 import EventDetailPage from "./Events/pages/EventDetailPage";
 import PaymentManagementPage from "./payments/pages/PaymentManagementPage";
 
+
 // === TAMBAHAN IMPORT THEME PROVIDER ===
 import { ThemeProvider } from "@/components/ThemeProvider";
 
@@ -62,6 +63,7 @@ const TwoFactorSetupPage = lazy(() => import("@/pages/admin/TwoFactorSetupPage")
 
 const AttendanceSessionsPage = lazy(() => import("@/pages/admin/AttendanceSessionsPage"));
 const AttendanceScanPage = lazy(() => import("@/pages/admin/AttendanceScanPage"));
+const HelpCenterPage = lazy(() => import("@/help/pages/HelpCenterPage"));
 
 function App() {
     const { isAuthenticated } = useAuthStore();
@@ -519,6 +521,16 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
+                    <Route
+                        path='/admin/help-center'
+                        element={
+                            <ProtectedRoute resource='dashboard'>
+                                <AdminLayout>
+                                    <HelpCenterPage />
+            </AdminLayout>
+        </ProtectedRoute>
+    }
+/>
 
                     <Route
                         path='/backup'
