@@ -1,15 +1,18 @@
 import { useState, useCallback } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Download } from "lucide-react"
 import { Link, useLocation } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/ThemeToggle"
 import { LanguageSwitcher } from "@/components/LanguageSwitcher"
 import { useTranslate } from "@/i18n/hooks/useTranslate"
+import { usePWAInstall } from "@/hooks/usePWAInstall"
+import { InstallBanner } from "@/components/InstallBanner"
 
 export default function PublicLayout({ children }: { children?: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
   const { t, navItems } = useTranslate()
+  const { isInstallable, showBanner, installApp, dismissPrompt } = usePWAInstall()
 
   const closeMobileMenu = useCallback(() => setMobileOpen(false), [])
   const toggleMobileMenu = useCallback(() => setMobileOpen(prev => !prev), [])
@@ -95,24 +98,38 @@ export default function PublicLayout({ children }: { children?: React.ReactNode 
         )}
       </header>
 
-      {/* Main Content */}
-      <main className="flex-1 bg-white dark:bg-slate-950">
+      {/* Main Content - padding bawah agar tidak tertutup banner PWA */}
+      <main className="flex-1 bg-white dark:bg-slate-950 pb-16">
         {children}
       </main>
 
       {/* Footer */}
       <footer className="bg-simas-primary text-emerald-50 dark:bg-slate-900 dark:border-t dark:border-slate-800 transition-colors">
         <div className="container mx-auto px-4 md:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             {/* Brand Section */}
-            <div>
+            <div className="md:col-span-2">
               <div className="flex items-center gap-2 mb-4">
                 <span className="text-2xl">🕌</span>
                 <span className="text-xl font-bold text-white">SIMAS</span>
               </div>
-              <p className="text-sm text-emerald-200 dark:text-slate-400 leading-relaxed">
+              <p className="text-sm text-emerald-200 dark:text-slate-400 leading-relaxed max-w-sm">
                 {t('footer.description')}
               </p>
+
+              {/* Tombol Install Manual di Footer */}
+              {isInstallable && (
+                <div className="mt-6">
+                  <Button 
+                    onClick={installApp} 
+                    variant="outline" 
+                    className="bg-transparent border-emerald-500/50 text-white hover:bg-emerald-800 hover:text-white rounded-xl"
+                  >
+                    <Download className="mr-2 h-4 w-4" /> 
+                    Install Aplikasi SIMAS
+                  </Button>
+                </div>
+              )}
             </div>
 
             {/* Navigation Links */}
@@ -154,6 +171,11 @@ export default function PublicLayout({ children }: { children?: React.ReactNode 
           </div>
         </div>
       </footer>
+
+      {/* Render Install Banner PWA */}
+      {showBanner && (
+        <InstallBanner onInstall={installApp} onDismiss={dismissPrompt} />
+      )}
     </div>
   )
 }
