@@ -3,6 +3,8 @@ import { ArrowRight, BookOpen, Users, Target, CalendarDays, Heart } from "lucide
 import { Link } from "react-router-dom"
 import JumatWidget from "@/activities/components/jumatWidget"
 import { useTranslate } from "@/i18n/hooks/useTranslate"
+// 1. TAMBAHAN IMPORT OPTIMIZED IMAGE
+import { OptimizedImage } from "@/components/OptimizedImage"
 
 export default function Home() {
 
@@ -122,7 +124,8 @@ export default function Home() {
             <div className="w-full lg:w-1/2 relative">
               <div className="absolute -inset-4 md:-inset-6 bg-emerald-100/60 dark:bg-emerald-900/20 rounded-4xl -rotate-3 transition-transform hover:rotate-0 duration-500" />
               <div className="relative w-full aspect-4/3 bg-gray-50 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl group">
-                <img
+                {/* 2. UBAH TAG IMG MENJADI OPTIMIZEDIMAGE */}
+                <OptimizedImage
                   src="https://images.unsplash.com/photo-1564769625905-50e93615e769?q=80&w=1000&auto=format&fit=crop"
                   alt="Profil Masjid"
                   className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700"

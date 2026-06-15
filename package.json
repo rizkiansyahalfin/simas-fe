@@ -1,3 +1,4 @@
+//package.json
 {
   "name": "simas-fe",
   "private": true,
@@ -71,6 +72,7 @@
     "globals": "^17.5.0",
     "jsdom": "^29.1.1",
     "postcss": "^8.5.13",
+    "rollup-plugin-visualizer": "^7.0.1",
     "tailwindcss": "^4.2.4",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.2",
