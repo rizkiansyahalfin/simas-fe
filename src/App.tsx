@@ -19,6 +19,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 const Home = lazy(() => import("./home/pages/HomePage"));
 const Articles = lazy(() => import("./articles/pages/PublicArticlesPage"));
 const ArticleDetail = lazy(() => import("./articles/pages/PublicArticleDetailPage"));
+const ChangelogPage = lazy(() => import("@/changelog/pages/ChangelogPage"));
 
 const JadwalSholatPage = lazy(() => import("./prayer/pages/JadwalSholatPage"));
 const DonationPage = lazy(() => import("./publicDonation/pages/DonationPage"));
@@ -29,6 +30,8 @@ import PaymentStatusPage from "@/payments/pages/PaymentStatusPage";
 import ForgotPasswordPage from "./auth/pages/ForgotPasswordPage";
 import ResetPasswordPage from "./auth/pages/ResetPasswordPage";
 import BackupPage from "./backup/pages/BackupPage";
+import AttendanceReportPage from "./attendance-report/pages/AttendanceReportPage";
+
 
 // ==================== ADMIN PAGES ====================
 const DonasiMasukPage = lazy(() => import("./donations/pages/DonasiMasukPage"));
@@ -56,9 +59,11 @@ const CongregationDetailPage = lazy(() => import("./congregation-detail/pages/Co
 const CongregationImportPage = lazy(() => import("./congregation-import/pages/CongregationImportPage"));
 const AdminCampaignManagementPage = lazy(() => import("./campaigns/pages/AdminCampaignManagementPage"));
 const AboutPage = lazy(() => import("./about/pages/AboutPages"));
+const TwoFactorSetupPage = lazy(() => import("@/pages/admin/TwoFactorSetupPage"));
 
 
 const AttendanceSessionsPage = lazy(() => import("@/pages/admin/AttendanceSessionsPage"));
+const AttendanceScanPage = lazy(() => import("@/pages/admin/AttendanceScanPage"));
 
 function App() {
     const { isAuthenticated } = useAuthStore();
@@ -113,6 +118,14 @@ function App() {
                         element={
                             <PublicLayout>
                                 <div>Berita Page</div>
+                            </PublicLayout>
+                        }
+                    />
+                    <Route
+                        path='/changelog'
+                        element={
+                            <PublicLayout>
+                                <ChangelogPage />
                             </PublicLayout>
                         }
                     />
@@ -281,16 +294,27 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
-                    <Route
-                        path='/admin/profil'
-                        element={
-                            <ProtectedRoute resource='user-profile'>
-                                <AdminLayout>
-                                    <ProfilePage />
-                                </AdminLayout>
-                            </ProtectedRoute>
-                        }
-                    />
+                  <Route
+    path='/admin/profil'
+    element={
+        <ProtectedRoute resource='user-profile'>
+            <AdminLayout>
+                <ProfilePage />
+            </AdminLayout>
+        </ProtectedRoute>
+    }
+/>
+
+<Route
+    path='/admin/2fa-setup'
+    element={
+        <ProtectedRoute resource='user-profile'>
+            <AdminLayout>
+                <TwoFactorSetupPage />
+            </AdminLayout>
+        </ProtectedRoute>
+    }
+/>
                     <Route
                         path='/admin/verify-donasi'
                         element={
@@ -351,6 +375,16 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
+                    <Route
+    path='/admin/changelog'
+    element={
+        <ProtectedRoute resource='dashboard'>
+            <AdminLayout>
+                <ChangelogPage />
+            </AdminLayout>
+        </ProtectedRoute>
+    }
+/>
                     
                     {/* === ROUTE BARU: ABSENSI === */}
                     <Route
@@ -364,6 +398,17 @@ function App() {
                         }
                     />
 
+                    <Route
+                        path='/admin/attendance/scan'
+                        element={
+                            <ProtectedRoute resource='kegiatan'>
+                                <AdminLayout>
+                                    <AttendanceScanPage />
+                                </AdminLayout>
+                            </ProtectedRoute>
+                        }
+                    />
+                    
                     <Route
                         path='/admin/inventaris/:id'
                         element={
@@ -501,6 +546,17 @@ function App() {
                             <ProtectedRoute resource='backup'>
                                 <AdminLayout>
                                     <BackupPage />
+                                </AdminLayout>
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
+                        path='/attendance/report'
+                        element={
+                            <ProtectedRoute resource='attendancereport'>
+                                <AdminLayout>
+                                    <AttendanceReportPage/>
                                 </AdminLayout>
                             </ProtectedRoute>
                         }
