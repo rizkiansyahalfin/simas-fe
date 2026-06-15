@@ -77,10 +77,10 @@ export default function InventoryListPage() {
       
       {/* Header Info */}
       <div>
-        <h2 className="m-0 text-3xl font-bold tracking-tight text-slate-900">
+        <h2 className="m-0 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
           Daftar Inventaris
         </h2>
-        <p className="mt-2 text-base text-slate-500">
+        <p className="mt-2 text-base text-slate-500 dark:text-slate-400">
           Pantau aset masjid berdasarkan kategori, lokasi, dan kondisi terbaru.
         </p>
       </div>
@@ -89,12 +89,12 @@ export default function InventoryListPage() {
       <div className="grid gap-4 md:grid-cols-3">
         {summaryConditions.map((condition) => (
           <div
-            className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm"
+            className="rounded-2xl border border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 shadow-sm"
             key={condition}
           >
-            <p className="text-sm font-bold text-slate-400 uppercase tracking-wider">Kondisi {condition}</p>
-            <p className={`mt-2 text-3xl font-extrabold ${condition === 'Baik' ? 'text-emerald-600' : condition === 'Rusak' ? 'text-red-500' : 'text-amber-500'}`}>
-              {conditionSummary[condition]} <span className="text-lg font-medium text-slate-500">aset</span>
+            <p className="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Kondisi {condition}</p>
+            <p className={`mt-2 text-3xl font-extrabold ${condition === 'Baik' ? 'text-emerald-600 dark:text-emerald-400' : condition === 'Rusak' ? 'text-red-500 dark:text-red-400' : 'text-amber-500 dark:text-amber-400'}`}>
+              {conditionSummary[condition]} <span className="text-lg font-medium text-slate-500 dark:text-slate-400">aset</span>
             </p>
           </div>
         ))}
@@ -105,7 +105,7 @@ export default function InventoryListPage() {
         <div className="flex justify-end">
           <select
             aria-label="Filter kondisi"
-            className="h-10 min-w-[200px] rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-600 outline-none focus-visible:border-emerald-500 focus-visible:ring-1 focus-visible:ring-emerald-500 shadow-sm cursor-pointer"
+            className="h-10 min-w-[200px] rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 text-sm font-medium text-slate-600 dark:text-white outline-none focus-visible:border-emerald-500 focus-visible:ring-1 focus-visible:ring-emerald-500 shadow-sm cursor-pointer"
             onChange={(event) =>
               setConditionFilter(event.target.value as ConditionFilter)
             }

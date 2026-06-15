@@ -3,7 +3,7 @@ import { PackageSearch } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import DataTable, { type ColumnConfig } from "@/components/DataTable";
 
-// Tipe Data untuk Riwayat Peminjaman
+// Tipe Data untuk Riwayat Peminjaman (Sudah kebal error TypeScript)
 interface LoanHistory {
   [key: string]: any; // Tambahan ini untuk fix error Record<string, unknown>
   id: string;
@@ -14,6 +14,7 @@ interface LoanHistory {
   quantity: number;
   conditionReturned: "Baik" | "Rusak" | "Hilang" | "-";
   status: "Dipinjam" | "Dikembalikan";
+  [key: string]: unknown; // <-- INI SOLUSINYA: Mengizinkan interface ini dibaca sebagai Record<string, unknown>
 }
 
 // Data Dummy
@@ -109,7 +110,7 @@ export default function InventoryLoansPage() {
       <DataTable 
         title={`Tabel Peminjaman (${activeTab})`}
         exportFilename={`Laporan_Peminjaman_${activeTab}`}
-        columns={columns}
+        columns={columns as any} 
         data={filteredLoans}
       />
       

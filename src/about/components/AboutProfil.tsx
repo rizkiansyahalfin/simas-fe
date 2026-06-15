@@ -1,9 +1,11 @@
 import { MapPin, Phone, Mail, Clock } from 'lucide-react'
 import { SectionLabel } from '../pages/AboutPages'
+import { useTranslate } from '@/i18n/hooks/useTranslate'
 
 export default function AboutProfil() {
+  const { t } = useTranslate()
     return (
-<section className="py-20 bg-simas-bg-public">
+<section className="py-20 bg-simas-bg-public dark:bg-slate-950">
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-14">
 
@@ -27,29 +29,29 @@ export default function AboutProfil() {
 
             {/* Teks */}
             <div className="w-full lg:w-7/12 space-y-6">
-              <SectionLabel>Profil Masjid</SectionLabel>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">
-                Pusat Peradaban &<br/>
-                <span className="text-simas-primary">Inspirasi Umat</span>
+              <SectionLabel>{t('about.profileLabel')}</SectionLabel>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white leading-tight">
+                {t('about.profileTitle')}<br/>
+                <span className="text-simas-primary">{t('about.profileTitleHighlight')}</span>
               </h2>
-              <p className="text-gray-600 leading-relaxed">
-                Masjid Al-Ikhlas adalah masjid jami' yang terletak di Jl. Kebayoran Lama No. 12, Jakarta Selatan. Didirikan pada tahun 1975 dengan semangat gotong royong, masjid ini telah berkembang menjadi pusat kegiatan keagamaan, pendidikan, dan sosial bagi masyarakat sekitar.
+              <p className="text-gray-600 dark:text-slate-300 leading-relaxed">
+                {t('about.profileDesc1')}
               </p>
-              <p className="text-gray-600 leading-relaxed">
-                Dengan luas bangunan 2.400 m² di atas lahan 3.000 m², masjid ini mampu menampung lebih dari 1.200 jamaah. Berbagai program unggulan telah dijalankan secara konsisten, mulai dari kajian ilmu, tahfidz Al-Quran, santunan sosial, hingga pemberdayaan ekonomi umat melalui ZISWAF.
+              <p className="text-gray-600 dark:text-slate-300 leading-relaxed">
+                {t('about.profileDesc2')}
               </p>
 
               {/* Info kontak */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
-                  { Icon: MapPin,   text: 'Jl. Kebayoran Lama No. 12, Jakarta Selatan' },
-                  { Icon: Phone,    text: '+62 21-7234-5678' },
-                  { Icon: Mail,     text: 'info@masjid-alikhlas.or.id' },
-                  { Icon: Clock,    text: 'Buka 24 jam untuk ibadah' },
+                  { Icon: MapPin, text: t('about.contactAddress') },
+                  { Icon: Phone, text: t('about.contactPhone') },
+                  { Icon: Mail, text: t('about.contactEmail') },
+                  { Icon: Clock, text: t('about.contactTime') },
                 ].map(({ Icon, text }) => (
                   <div key={text} className="about-contact-item">
                     <div className="about-contact-icon"><Icon className="size-4"/></div>
-                    <span className="text-sm text-gray-700">{text}</span>
+                    <span className="text-sm text-gray-700 dark:text-slate-200">{text}</span>
                   </div>
                 ))}
               </div>

@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "@fontsource-variable/geist";
 
+@custom-variant dark (&:is(.dark *));
+
 /* ═══════════════════════════════════════════
    DESIGN TOKENS
    ═══════════════════════════════════════════ */
@@ -9,31 +11,31 @@
   --font-heading: 'Geist Variable', system-ui, sans-serif;
 
   /* Brand Colors */
-  --color-simas-primary:      #10b981;
-  --color-simas-primary-dark: #059669;
-  --color-simas-primary-deep: #047857;
-  --color-simas-accent:       #b45309;
-  --color-simas-accent-light: #fef3c7;
+  --color-simas-primary:      var(--simas-primary);
+  --color-simas-primary-dark: var(--simas-primary-dark);
+  --color-simas-primary-deep: var(--simas-primary-deep);
+  --color-simas-accent:       var(--simas-accent);
+  --color-simas-accent-light: var(--simas-accent-light);
 
   /* UI Base Colors (Shadcn/ui style) */
-  --color-background: #f8fafc;
-  --color-foreground: #0f172a;
-  --color-card: #ffffff;
-  --color-card-foreground: #0f172a;
-  --color-primary: #10b981;
-  --color-primary-foreground: #ffffff;
-  --color-secondary: #f1f5f9;
-  --color-secondary-foreground: #0f172a;
-  --color-muted: #f1f5f9;
-  --color-muted-foreground: #64748b;
-  --color-border: #e2e8f0;
-  --color-input: #cbd5e1;
-  --color-ring: #10b981;
-  --color-destructive: #dc2626;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
 
   /* Surfaces */
-  --color-simas-bg-admin:  #f8fafc;
-  --color-simas-bg-public: #f0fdf4;
+  --color-simas-bg-admin:  var(--simas-bg-admin);
+  --color-simas-bg-public: var(--simas-bg-public);
 
   /* Radius */
   --radius-simas-admin: 0.75rem;
@@ -56,6 +58,56 @@
    BASE
    ═══════════════════════════════════════════ */
 @layer base {
+  :root {
+    --background: #f8fafc;
+    --foreground: #0f172a;
+    --card: #ffffff;
+    --card-foreground: #0f172a;
+    --primary: #10b981;
+    --primary-foreground: #ffffff;
+    --secondary: #f1f5f9;
+    --secondary-foreground: #0f172a;
+    --muted: #f1f5f9;
+    --muted-foreground: #64748b;
+    --border: #e2e8f0;
+    --input: #cbd5e1;
+    --ring: #10b981;
+    --destructive: #dc2626;
+
+    --simas-bg-admin: #f8fafc;
+    --simas-bg-public: #f0fdf4;
+    --simas-primary: #10b981;
+    --simas-primary-dark: #059669;
+    --simas-primary-deep: #047857;
+    --simas-accent: #b45309;
+    --simas-accent-light: #fef3c7;
+  }
+
+  .dark {
+    --background: #020617; /* slate-950 */
+    --foreground: #f8fafc; /* slate-50 */
+    --card: #0f172a; /* slate-900 */
+    --card-foreground: #f8fafc; /* slate-50 */
+    --primary: #10b981;
+    --primary-foreground: #020617; /* slate-950 */
+    --secondary: #1e293b; /* slate-800 */
+    --secondary-foreground: #f8fafc; /* slate-50 */
+    --muted: #1e293b; /* slate-800 */
+    --muted-foreground: #94a3b8; /* slate-400 */
+    --border: #1e293b; /* slate-800 */
+    --input: #1e293b; /* slate-800 */
+    --ring: #10b981;
+    --destructive: #7f1d1d; /* red-900 */
+
+    --simas-bg-admin: #020617; /* slate-950 */
+    --simas-bg-public: #022c22; /* emerald-950 */
+    --simas-primary: #10b981;
+    --simas-primary-dark: #059669;
+    --simas-primary-deep: #047857;
+    --simas-accent: #f59e0b; /* amber-500 */
+    --simas-accent-light: #78350f; /* amber-900 */
+  }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   html {
@@ -65,7 +117,7 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  body { @apply bg-white text-gray-900; }
+  body { @apply bg-background text-foreground transition-colors duration-200; }
 
   h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; }
 
@@ -1050,4 +1102,109 @@
     @apply mx-auto w-fit border border-white/25 bg-white/20 text-white;
   }
 
+}
+
+/* ═══════════════════════════════════════════
+   DARK MODE OVERRIDES (OPTION A)
+   ═══════════════════════════════════════════ */
+@layer components {
+  /* Global Utility Overrides */
+  .dark .bg-white { @apply !bg-slate-900 !border-slate-800; }
+  .dark .bg-gray-50 { @apply !bg-slate-800 !text-slate-100 !border-slate-700; }
+  .dark .bg-gray-100 { @apply !bg-slate-800 !text-slate-200 !border-slate-700; }
+  .dark .bg-slate-100 { @apply !bg-slate-800; }
+  .dark .bg-slate-200 { @apply !bg-slate-700; }
+  
+  .dark .text-gray-900 { @apply !text-white; }
+  .dark .text-gray-800 { @apply !text-slate-100; }
+  .dark .text-gray-700 { @apply !text-slate-200; }
+  .dark .text-gray-600 { @apply !text-slate-300; }
+  .dark .text-gray-500 { @apply !text-slate-400; }
+  .dark .text-slate-600 { @apply !text-slate-300; }
+  
+  .dark .border-gray-50 { @apply !border-slate-800; }
+  .dark .border-gray-100 { @apply !border-slate-800; }
+  .dark .border-gray-200 { @apply !border-slate-700; }
+  .dark .border-gray-300 { @apply !border-slate-600; }
+
+  /* Specific Components Overrides */
+  .dark .card, .dark .card-sm { @apply !bg-slate-900 !border-slate-800; }
+  .dark .card-inner { @apply !bg-slate-800; }
+  .dark .tbl-header, .dark .um-tbl-header { @apply !bg-slate-800 !border-slate-700; }
+  .dark .tbl-row, .dark .um-tbl-row { @apply !border-slate-800 hover:!bg-slate-800/50; }
+  .dark .form-header { @apply !border-slate-800; background: linear-gradient(135deg, #0f172a, #1e293b) !important; }
+  .dark .preset-btn { @apply !bg-slate-800 !text-slate-300 !border-transparent hover:!border-simas-primary hover:!bg-emerald-900/30; }
+  .dark .kat-trigger { @apply !bg-slate-800 hover:!border-emerald-800; }
+  .dark .kat-trigger.open { @apply !bg-slate-900 !border-simas-primary; }
+  .dark .upload-area { @apply !bg-slate-800 !border-slate-700 hover:!border-simas-primary hover:!bg-emerald-900/30; }
+  .dark .bank-card { @apply !border-slate-700 hover:!border-emerald-800; }
+  .dark .stat-card { @apply !bg-slate-900 !border-slate-800; }
+  .dark .filter-group { @apply !bg-slate-800 !border-slate-700; }
+  .dark .page-btn { @apply !bg-slate-800 !border-slate-700 !text-slate-300 hover:!bg-slate-700; }
+  .dark .um-input { @apply !bg-slate-800 !border-slate-700 focus:!bg-slate-900 focus:!border-simas-primary focus:!ring-emerald-900/50; }
+  .dark .um-select-trigger { @apply !bg-slate-800 !border-slate-700; }
+  .dark .um-select-trigger.open { @apply !bg-slate-900 !border-simas-primary !ring-emerald-900/50; }
+  .dark .um-select-menu { @apply !bg-slate-900 !border-slate-800; }
+  .dark .um-select-item:hover { @apply !bg-slate-800; }
+  .dark .um-select-item-active { @apply !bg-emerald-900/30; }
+  .dark .um-modal, .dark .jumat-modal, .dark .jumat-confirm { @apply !bg-slate-900; }
+  .dark .slide-panel { @apply !bg-slate-900; }
+  .dark .sholat-card { @apply !bg-slate-900 !border-slate-800 hover:!border-emerald-800; }
+  .dark .sholat-card-sm { @apply !bg-emerald-950/30 !border-emerald-900 hover:!border-emerald-700; }
+  .dark .sholat-card-sm .sholat-card-name { @apply !text-emerald-400; }
+  .dark .sholat-card-sm .sholat-card-time { @apply !text-emerald-50; }
+  .dark .sholat-thead-row { @apply !bg-slate-800 !border-slate-700; }
+  .dark .sholat-tr { @apply !border-slate-800 hover:!bg-emerald-900/20; }
+  .dark .sholat-tr-today { @apply !bg-emerald-900/30 hover:!bg-emerald-900/40; }
+  .dark .sholat-tr-jumat { @apply !bg-amber-900/20 hover:!bg-amber-900/30; }
+  .dark .sholat-td { @apply !text-slate-300; }
+  .dark .sholat-date { @apply !text-slate-200; }
+  .dark .jumat-card { @apply !bg-slate-900 !border-slate-800; }
+  .dark .jumat-card-date { @apply !text-white; }
+  .dark .jumat-add-card { @apply !bg-slate-800 !border-slate-700 hover:!bg-emerald-900/20 hover:!border-simas-primary; }
+  .dark .jumat-bulan-btn { @apply !bg-slate-800 !border-slate-700 !text-slate-200 hover:!border-simas-primary; }
+  .dark .article-search { @apply !bg-slate-900 !border-slate-800 !text-slate-200; box-shadow: inset 0 2px 6px rgb(0 0 0 / 0.3) !important; }
+  .dark .article-search:focus { @apply !border-emerald-700 !ring-emerald-900/50; }
+  .dark .article-category { @apply !bg-slate-900 !border-slate-800 !text-slate-200 hover:!border-emerald-700; }
+  .dark .jamaah-toggle-box { @apply !bg-slate-800 !border-slate-700; }
+  .dark .jamaah-toggle-box-active { @apply !bg-amber-950/30 !border-amber-900; }
+  .dark .jamaah-toggle-off { @apply !bg-slate-600; }
+  .dark .ty-share-section { @apply !bg-slate-900 !border-slate-800; }
+  .dark .ty-home-btn { @apply !bg-slate-800 !border-slate-700 !text-slate-200 hover:!border-simas-primary; }
+  .dark .about-contact-item { @apply !bg-slate-900 !border-slate-800 hover:!border-emerald-800; }
+  .dark .about-timeline-card { @apply !bg-slate-900 !border-slate-800 hover:!border-emerald-800; }
+  .dark .about-vm-card { @apply !bg-slate-900 !border-slate-800 hover:!border-emerald-800; }
+  .dark .about-fasilitas-card { @apply !bg-slate-900 !border-slate-800 hover:!border-emerald-800; }
+  .dark .about-program-card { @apply !bg-slate-900 !border-slate-800 hover:!border-emerald-800; }
+  .dark .about-pengurus-card { @apply !bg-slate-900 !border-slate-800 hover:!border-emerald-800; }
+  .dark .about-map-wrap { @apply !bg-slate-900; }
+  .dark .about-map-footer { @apply !bg-slate-800 !border-slate-700; }
+  .dark .qris-card { @apply !bg-slate-900 !border-emerald-900; }
+  
+  /* Additional Colors Overrides */
+  .dark .bg-emerald-50 { @apply !bg-emerald-950/30; }
+  .dark .bg-emerald-100 { @apply !bg-emerald-900/40; }
+  .dark .text-emerald-700 { @apply !text-emerald-400; }
+  .dark .text-emerald-900 { @apply !text-emerald-300; }
+  .dark .bg-amber-50 { @apply !bg-amber-950/30; }
+  .dark .bg-amber-100 { @apply !bg-amber-900/40; }
+  .dark .text-amber-600 { @apply !text-amber-400; }
+  .dark .text-amber-700 { @apply !text-amber-300; }
+  .dark .bg-sky-50 { @apply !bg-sky-950/30; }
+  .dark .bg-sky-100 { @apply !bg-sky-900/40; }
+  .dark .text-sky-600 { @apply !text-sky-400; }
+  .dark .text-sky-700 { @apply !text-sky-300; }
+  .dark .bg-violet-50 { @apply !bg-violet-950/30; }
+  .dark .bg-violet-100 { @apply !bg-violet-900/40; }
+  .dark .text-violet-600 { @apply !text-violet-400; }
+  .dark .text-violet-700 { @apply !text-violet-300; }
+  .dark .bg-red-50 { @apply !bg-red-950/30; }
+  .dark .bg-red-100 { @apply !bg-red-900/40; }
+  .dark .text-red-500 { @apply !text-red-400; }
+  .dark .text-red-600 { @apply !text-red-300; }
+  .dark .border-emerald-100 { @apply !border-emerald-900; }
+  .dark .border-emerald-200 { @apply !border-emerald-800; }
+  .dark .border-amber-100 { @apply !border-amber-900; }
+  .dark .border-amber-200 { @apply !border-amber-800; }
+  .dark .border-red-200 { @apply !border-red-900; }
 }
