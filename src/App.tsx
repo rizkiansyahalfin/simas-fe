@@ -41,7 +41,7 @@ const PrayerConfig = lazy(() => import("./prayer/pages/PrayerConfigPage"));
 const MosqueProfileSettings = lazy(() => import("./mosque-profile/pages/MosqueProfileSettingsPage"));
 const VerifyDonasi = lazy(() => import("./donations/pages/VerifyDonasiPage"));
 const InventoryForm = lazy(() => import("./inventory/pages/InventoryFormPage"));
-const LaporanPage = lazy(() => import("./reports/pages/LaporanPage"));
+const LaporanPage = lazy(() => import("./reports/pages/ReportsPage."));
 const ZisDistributionForm = lazy(() => import("./zis/pages/ZisDistributionFormPage"));
 const KegiatanPage = lazy(() => import("./activities/pages/KegiatanPage"));
 const ZisManagement = lazy(() => import("./zis/pages/ZisManagementPage"));
