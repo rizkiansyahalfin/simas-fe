@@ -20,6 +20,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 const Home = lazy(() => import("./home/pages/HomePage"));
 const Articles = lazy(() => import("./articles/pages/PublicArticlesPage"));
 const ArticleDetail = lazy(() => import("./articles/pages/PublicArticleDetailPage"));
+const ChangelogPage = lazy(() => import("@/changelog/pages/ChangelogPage"));
 
 const JadwalSholatPage = lazy(() => import("./prayer/pages/JadwalSholatPage"));
 const DonationPage = lazy(() => import("./publicDonation/pages/DonationPage"));
@@ -32,6 +33,7 @@ import ResetPasswordPage from "./auth/pages/ResetPasswordPage";
 import BackupPage from "./backup/pages/BackupPage";
 import AttendanceReportPage from "./attendance-report/pages/AttendanceReportPage";
 
+
 // ==================== ADMIN PAGES ====================
 const DonasiMasukPage = lazy(() => import("./donations/pages/DonasiMasukPage"));
 const ManajemenKasPage = lazy(() => import("./cash/pages/ManajemenKasPage"));
@@ -40,7 +42,7 @@ const PrayerConfig = lazy(() => import("./prayer/pages/PrayerConfigPage"));
 const MosqueProfileSettings = lazy(() => import("./mosque-profile/pages/MosqueProfileSettingsPage"));
 const VerifyDonasi = lazy(() => import("./donations/pages/VerifyDonasiPage"));
 const InventoryForm = lazy(() => import("./inventory/pages/InventoryFormPage"));
-const LaporanPage = lazy(() => import("./reports/pages/LaporanPage"));
+const LaporanPage = lazy(() => import("./reports/pages/ReportsPage."));
 const ZisDistributionForm = lazy(() => import("./zis/pages/ZisDistributionFormPage"));
 const KegiatanPage = lazy(() => import("./activities/pages/KegiatanPage"));
 const ZisManagement = lazy(() => import("./zis/pages/ZisManagementPage"));
@@ -118,6 +120,14 @@ function App() {
                         element={
                             <PublicLayout>
                                 <div>Berita Page</div>
+                            </PublicLayout>
+                        }
+                    />
+                    <Route
+                        path='/changelog'
+                        element={
+                            <PublicLayout>
+                                <ChangelogPage />
                             </PublicLayout>
                         }
                     />
@@ -367,6 +377,16 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
+                    <Route
+    path='/admin/changelog'
+    element={
+        <ProtectedRoute resource='dashboard'>
+            <AdminLayout>
+                <ChangelogPage />
+            </AdminLayout>
+        </ProtectedRoute>
+    }
+/>
                     
                     {/* === ROUTE BARU: ABSENSI === */}
                     <Route

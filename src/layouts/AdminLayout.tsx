@@ -13,6 +13,7 @@ import {
     Settings,
     Menu,
     HelpCircle,
+    GitCommit,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -46,6 +47,7 @@ const MENU_ITEMS = [
     { title: "Inventaris", icon: Archive, resource: "inventaris", path: "/admin/inventaris" },
     { title: "Jamaah", icon: Users, resource: "jamaah", path: "/admin/jamaah" },
     { title: "Pusat Bantuan", icon: HelpCircle, resource: "dashboard", path: "/admin/help-center" },
+    { title: "Changelog", icon: GitCommit, resource: "dashboard", path: "/admin/changelog" },
     { title: "Pengaturan", icon: Settings, resource: "profil-masjid", path: "/admin/pengaturan" },
     
 ];

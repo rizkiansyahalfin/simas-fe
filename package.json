@@ -1,3 +1,5 @@
+
+
 {
   "name": "simas-fe",
   "private": true,
@@ -32,6 +34,7 @@
     "axios": "^1.15.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "date-fns": "^4.4.0",
     "file-saver": "^2.0.5",
     "html5-qrcode": "^2.3.8",
     "i18next": "^26.3.1",
@@ -71,6 +74,7 @@
     "globals": "^17.5.0",
     "jsdom": "^29.1.1",
     "postcss": "^8.5.13",
+    "rollup-plugin-visualizer": "^7.0.1",
     "tailwindcss": "^4.2.4",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.2",
