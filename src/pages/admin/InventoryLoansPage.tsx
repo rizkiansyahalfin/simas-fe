@@ -14,7 +14,6 @@ interface LoanHistory {
   quantity: number;
   conditionReturned: "Baik" | "Rusak" | "Hilang" | "-";
   status: "Dipinjam" | "Dikembalikan";
-  [key: string]: unknown; // <-- INI SOLUSINYA: Mengizinkan interface ini dibaca sebagai Record<string, unknown>
 }
 
 // Data Dummy

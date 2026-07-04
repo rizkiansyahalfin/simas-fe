@@ -8,8 +8,8 @@ import PublicLayout from "@/layouts/PublicLayout";
 import { useAuthStore } from "@/stores";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { ForbiddenPage, NotFoundPage, ServerErrorPage } from "@/components/error/ErrorPage";
-import Events from "./Events/pages/PublicEventsPage";
-import EventDetailPage from "./Events/pages/EventDetailPage";
+import Events from "./events/pages/PublicEventsPage";
+import EventDetailPage from "./events/pages/EventDetailPage";
 import PaymentManagementPage from "./payments/pages/PaymentManagementPage";
 
 
