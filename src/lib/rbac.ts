@@ -1,30 +1,37 @@
-export type Role = 'superadmin' | 'bendahara' | 'admin kegiatan' | 'admin inventaris';
+export type Role = 'superadmin' | 'bendahara' | 'sekretaris' | 'operator' | 'admin kegiatan' | 'admin inventaris';
 
 export const canAccess = (role: Role, resource: string) => {
-  // Superadmin melihat semua menu
   if (role === 'superadmin') return true;
 
   switch (resource) {
-    // Bendahara: Keuangan, Donasi, Laporan
     case 'keuangan':
     case 'donasi':
     case 'laporan':
-      return role === 'bendahara';
+      return role === 'bendahara' || role === 'operator';
 
-    // Admin Kegiatan: Artikel, Kegiatan, Jadwal Jumat
     case 'artikel':
     case 'kegiatan':
     case 'jadwal-jumat':
-      return role === 'admin kegiatan';
+      return role === 'admin kegiatan' || role === 'sekretaris';
 
-    // Admin Inventaris: Inventaris
     case 'inventaris':
-      return role === 'admin inventaris';
+      return role === 'admin inventaris' || role === 'operator';
 
-    // Dashboard bisa diakses semua role yang udah login
+    case 'jamaah':
+    case 'congregationdetail':
+      return role === 'sekretaris' || role === 'admin kegiatan';
+
+    case 'gallery':
+    case 'pengurus':
+      return role === 'sekretaris';
+
     case 'dashboard':
-    case 'pengaturan': // Asumsi semua role bisa buka Pengaturan Akun mereka sendiri
+    case 'pengaturan':
+    case 'profil-masjid':
       return true;
+
+    case 'audit-log':
+      return false;
 
     default:
       return false;

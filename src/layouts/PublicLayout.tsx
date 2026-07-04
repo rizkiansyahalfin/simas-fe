@@ -1,74 +1,181 @@
-import type { ReactNode } from "react"
-import { Link } from "react-router-dom"
+import { useState, useCallback } from "react"
+import { Menu, X, Download } from "lucide-react"
+import { Link, useLocation } from "react-router-dom"
+import { Button } from "@/components/ui/button"
+import { ThemeToggle } from "@/components/ThemeToggle"
+import { LanguageSwitcher } from "@/components/LanguageSwitcher"
+import { useTranslate } from "@/i18n/hooks/useTranslate"
+import { usePWAInstall } from "@/hooks/usePWAInstall"
+import { InstallBanner } from "@/components/InstallBanner"
 
-interface PublicLayoutProps {
-  children?: ReactNode
-}
+export default function PublicLayout({ children }: { children?: React.ReactNode }) {
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const location = useLocation()
+  const { t, navItems } = useTranslate()
+  const { isInstallable, showBanner, installApp, dismissPrompt } = usePWAInstall()
 
-export default function PublicLayout({ children }: PublicLayoutProps) {
+  const closeMobileMenu = useCallback(() => setMobileOpen(false), [])
+  const toggleMobileMenu = useCallback(() => setMobileOpen(prev => !prev), [])
+
+  const isNavActive = useCallback((path: string) => location.pathname === path, [location.pathname])
+
+  const navLinkClass = (isActive: boolean) => {
+    const baseClass = "px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+    return isActive
+      ? `${baseClass} bg-emerald-50 dark:bg-emerald-900/30 text-simas-primary font-semibold`
+      : `${baseClass} text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-gray-900 dark:hover:text-white`
+  }
+
   return (
-    /*
-     * `fixed inset-0 overflow-auto` → keluar dari constraint #root (width: 1126px)
-     * sehingga PublicLayout selalu full-screen, sama seperti AdminLayout & Login.
-     */
-    <div className="fixed inset-0 overflow-auto flex flex-col bg-emerald-50 text-slate-900">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-slate-950 transition-colors">
+      {/* Navbar */}
+      <header className="sticky top-0 z-50 w-full border-b border-emerald-100 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm transition-colors">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-8">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <span className="text-2xl">🕌</span>
+            <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">SIMAS</span>
+          </Link>
 
-      {/* ── Header ── */}
-     <header className="shadow-sm bg-white">
-  <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-1">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={navLinkClass(isNavActive(item.path))}
+              >
+                {item.title}
+              </Link>
+            ))}
+          </nav>
 
-    {/* Logo */}
-    <div className="flex items-center gap-8">
-      <span className="text-lg font-bold text-emerald-700">
-        SIMAS
-      </span>
-
-      {/* Menu */}
-      <nav className="hidden md:flex items-center gap-6 text-sm ">
-        <Link to="/berita" className="text-gray-600 hover:text-emerald-600">
-          Berita
-        </Link>
-        <Link to="/jadwal-shalat" className="text-gray-600 hover:text-emerald-600">
-          Jadwal Shalat
-        </Link>
-        <Link to="/donasi" className="text-gray-600 hover:text-emerald-600">
-          Donasi
-        </Link>
-        <Link to="/transparansi" className="text-gray-600 hover:text-emerald-600">
-          Transparansi Keuangan
-        </Link>
-      </nav>
-    </div>
-
-    {/* Login Button */}
-    <Link
-      to="/login"
-      className="flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-emerald-700 transition"
-    >
-      ➜ Masuk Pengurus
-    </Link>
-
-  </div>
-</header>
-
-      {/* ── Main ── */}
-      <main className="flex-1 mx-auto w-full max-w-7xl px-6 py-8">
-        {children ?? (
-          <div className="rounded-lg border border-emerald-200 bg-white p-6 shadow-sm">
-            <h1 className="text-2xl font-semibold tracking-normal" style={{ margin: 0 }}>
-              Selamat Datang di SIMAS
-            </h1>
-            <p className="mt-2 text-sm text-slate-500">
-              Sistem Manajemen Masjid — pilih menu di atas untuk mulai.
-            </p>
+          {/* Desktop Actions */}
+          <div className="hidden md:flex items-center gap-2">
+            <ThemeToggle />
+            <LanguageSwitcher />
+            <Button asChild className="bg-simas-primary text-white hover:bg-emerald-700 rounded-lg font-medium">
+              <Link to="/login">{t('nav.login')}</Link>
+            </Button>
           </div>
+
+          {/* Mobile Menu Button */}
+          <div className="flex items-center gap-1 md:hidden">
+            <ThemeToggle />
+            <LanguageSwitcher />
+            <button
+              type="button"
+              onClick={toggleMobileMenu}
+              className="p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            >
+              {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        {mobileOpen && (
+          <nav className="md:hidden border-t border-emerald-100 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-lg">
+            <div className="container mx-auto px-4 py-3 space-y-1">
+              {navItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={closeMobileMenu}
+                  className={`block ${navLinkClass(isNavActive(item.path))}`}
+                >
+                  {item.title}
+                </Link>
+              ))}
+              <div className="pt-3 border-t border-gray-100 dark:border-slate-700 mt-3">
+                <Button asChild className="w-full bg-simas-primary text-white hover:bg-emerald-700 rounded-lg font-medium">
+                  <Link to="/login" onClick={closeMobileMenu}>{t('nav.login')}</Link>
+                </Button>
+              </div>
+            </div>
+          </nav>
         )}
+      </header>
+
+      {/* Main Content - padding bawah agar tidak tertutup banner PWA */}
+      <main className="flex-1 bg-white dark:bg-slate-950 pb-16">
+        {children}
       </main>
 
-      {/* ── Footer ── */}
-      <footer className="shrink-0 border-t border-emerald-200 bg-white py-4 text-center text-sm text-slate-500">
-        &copy; {new Date().getFullYear()} SIMAS Masjid
+      {/* Footer */}
+      <footer className="bg-simas-primary text-emerald-50 dark:bg-slate-900 dark:border-t dark:border-slate-800 transition-colors">
+        <div className="container mx-auto px-4 md:px-8 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            {/* Brand Section */}
+            <div className="md:col-span-2">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-2xl">🕌</span>
+                <span className="text-xl font-bold text-white">SIMAS</span>
+              </div>
+              <p className="text-sm text-emerald-200 dark:text-slate-400 leading-relaxed max-w-sm">
+                {t('footer.description')}
+              </p>
+
+              {/* Tombol Install Manual di Footer */}
+              {isInstallable && (
+                <div className="mt-6">
+                  <Button 
+                    onClick={installApp} 
+                    variant="outline" 
+                    className="bg-transparent border-emerald-500/50 text-white hover:bg-emerald-800 hover:text-white rounded-xl"
+                  >
+                    <Download className="mr-2 h-4 w-4" /> 
+                    Install Aplikasi SIMAS
+                  </Button>
+                </div>
+              )}
+            </div>
+
+            {/* Navigation Links */}
+            <div>
+              <h3 className="font-semibold text-white mb-4">{t('footer.navigation')}</h3>
+              <ul className="space-y-2">
+                {navItems.map((item) => (
+                  <li key={item.path}>
+                    <Link 
+                      to={item.path} 
+                      className="text-sm text-emerald-200 dark:text-slate-400 hover:text-white dark:hover:text-emerald-300 transition-colors duration-200"
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact Section */}
+            <div>
+              <h3 className="font-semibold text-white mb-4">{t('footer.contact')}</h3>
+              <ul className="space-y-2 text-sm text-emerald-200 dark:text-slate-400">
+                <li className="flex items-start gap-2">
+                  <span>📍</span>
+                  <span>{t('footer.address')}: Jl. Contoh No. 123</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span>✉️</span>
+                  <span>{t('footer.email')}: info@simas-masjid.com</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Footer Bottom */}
+          <div className="border-t border-emerald-600/40 dark:border-slate-800/80 pt-6 text-center text-sm text-emerald-300 dark:text-slate-500">
+            &copy; {new Date().getFullYear()} SIMAS. {t('footer.rights')}
+          </div>
+        </div>
       </footer>
+
+      {/* Render Install Banner PWA */}
+      {showBanner && (
+        <InstallBanner onInstall={installApp} onDismiss={dismissPrompt} />
+      )}
     </div>
   )
 }
